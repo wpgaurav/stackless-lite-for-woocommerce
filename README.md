@@ -6,6 +6,8 @@ Seventeen free WooCommerce store tools in one plugin: wishlist, saved carts, bac
 
 It runs on core WooCommerce alone, works with the Cart and Checkout blocks and the classic checkout, and supports HPOS.
 
+**[Product page](https://gauravtiwari.org/product/stackless-lite-for-woocommerce/)** · [Download the latest ZIP](https://gauravtiwari.org/wp-json/gt-plugin-updates/v1/plugins/stackless-lite-for-woocommerce/download) · [Documentation](https://gauravtiwari.org/docs/stackless-for-woocommerce/) · [Upgrade to Stackless for WooCommerce](https://gauravtiwari.org/product/stackless-for-woocommerce/)
+
 **Latest version:** 1.7.0 · **Requires:** WordPress 6.7+, WooCommerce 9.9+, PHP 7.4+ · **License:** GPL-2.0-or-later
 
 ## Modules
@@ -32,7 +34,7 @@ It runs on core WooCommerce alone, works with the Cart and Checkout blocks and t
 
 ## Install
 
-1. Download `stackless-lite-<version>.zip` from the [latest release](https://github.com/wpgaurav/stackless-lite-for-woocommerce/releases/latest). Use the release ZIP, not GitHub's "Download ZIP" button: the plugin folder must be named `stackless-lite` for updates to work.
+1. Download `stackless-lite-<version>.zip` from the [latest release](https://github.com/wpgaurav/stackless-lite-for-woocommerce/releases/latest) or the [product page](https://gauravtiwari.org/product/stackless-lite-for-woocommerce/). Use the release ZIP, not GitHub's "Download ZIP" button: the plugin folder must be named `stackless-lite` for updates to work.
 2. In WordPress, go to Plugins → Add New → Upload Plugin, upload the ZIP and activate it.
 3. Open **Stackless → Dashboard** and switch on the modules you need. Configure them under **Stackless → Settings**.
 

@@ -54,6 +54,13 @@ Stackless (the full plugin) adds subscriptions, Stripe, PayPal, Polar, Paddle an
 
 Stackless Lite sends no usage data and has no tracking. To offer updates it asks gauravtiwari.org about the latest Stackless Lite release about twice a day, with the standard WordPress request that every update check makes. Back-in-stock alerts and wishlists store the email addresses and products customers give them in your own database.
 
+= Links =
+
+* [Product page and free download](https://gauravtiwari.org/product/stackless-lite-for-woocommerce/)
+* [Documentation](https://gauravtiwari.org/docs/stackless-for-woocommerce/)
+* [Source code on GitHub](https://github.com/wpgaurav/stackless-lite-for-woocommerce)
+* [Stackless for WooCommerce](https://gauravtiwari.org/product/stackless-for-woocommerce/), the full plugin
+
 == Installation ==
 
 1. Make sure WooCommerce is installed and active.

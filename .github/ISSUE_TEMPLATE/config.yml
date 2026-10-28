@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Stackless Lite for WooCommerce
+    url: https://gauravtiwari.org/product/stackless-lite-for-woocommerce/
+    about: Product page with the free download and an overview of every module.
   - name: Documentation
     url: https://gauravtiwari.org/docs/stackless-for-woocommerce/
     about: Setup guides for every module.
