@@ -378,7 +378,7 @@ class Module extends \Stackless\Core\Module
         } elseif (!$product->is_type('simple')) {
             return ['ok' => false, 'message' => __('Choose the product options first.', 'stackless-lite'), 'redirect' => $link];
         }
-        $passed = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, 1, $variation_id, $attributes);
+        $passed = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, 1, $variation_id, $attributes); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce's own hook, fired the way WooCommerce does.
         if (!$passed) {
             $notices = wc_get_notices('error');
             wc_clear_notices();
@@ -611,7 +611,7 @@ class Module extends \Stackless\Core\Module
     {
         $this->enqueue();
         if (!defined('DONOTCACHEPAGE')) {
-            define('DONOTCACHEPAGE', true);
+            define('DONOTCACHEPAGE', true); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- the shared signal page-cache plugins read.
         }
         $share = isset($_GET['wishlist']) ? sanitize_text_field(wp_unslash($_GET['wishlist'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification -- read-only view.
         if ($share !== '') {

@@ -2,6 +2,8 @@
 
 namespace Stackless\Modules\ExternalProduct;
 
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- click counts live in a custom table and change on every outbound click, so they are read fresh.
+
 defined('ABSPATH') || exit;
 
 /**
@@ -35,8 +37,8 @@ final class Clicks
         global $wpdb;
         $table = self::table();
         $now = gmdate('Y-m-d H:i:s');
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name is our own prefix.
-        $wpdb->query($wpdb->prepare("INSERT INTO {$table} (product_id, clicks, last_click_gmt) VALUES (%d, 1, %s) ON DUPLICATE KEY UPDATE clicks = clicks + 1, last_click_gmt = %s", $productId, $now, $now));
+       
+        $wpdb->query($wpdb->prepare("INSERT INTO %i (product_id, clicks, last_click_gmt) VALUES (%d, 1, %s) ON DUPLICATE KEY UPDATE clicks = clicks + 1, last_click_gmt = %s", $table, $productId, $now, $now));
     }
 
     /** @return array{clicks: int, last: string} */
@@ -44,8 +46,8 @@ final class Clicks
     {
         global $wpdb;
         $table = self::table();
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name is our own prefix.
-        $row = $wpdb->get_row($wpdb->prepare("SELECT clicks, last_click_gmt FROM {$table} WHERE product_id = %d", $productId), ARRAY_A);
+       
+        $row = $wpdb->get_row($wpdb->prepare("SELECT clicks, last_click_gmt FROM %i WHERE product_id = %d", $table, $productId), ARRAY_A);
         return [
             'clicks' => is_array($row) ? (int) $row['clicks'] : 0,
             'last' => is_array($row) ? (string) $row['last_click_gmt'] : '',
@@ -65,8 +67,8 @@ final class Clicks
         }
         $table = self::table();
         $placeholders = implode(',', array_fill(0, count($productIds), '%d'));
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- table name is ours, placeholders built above.
-        $rows = $wpdb->get_results($wpdb->prepare("SELECT product_id, clicks FROM {$table} WHERE product_id IN ({$placeholders})", $productIds), ARRAY_A);
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- $placeholders holds only %d placeholders.
+        $rows = $wpdb->get_results($wpdb->prepare("SELECT product_id, clicks FROM %i WHERE product_id IN ({$placeholders})", $table, ...$productIds), ARRAY_A);
         $map = [];
         foreach ((array) $rows as $row) {
             $map[(int) $row['product_id']] = (int) $row['clicks'];

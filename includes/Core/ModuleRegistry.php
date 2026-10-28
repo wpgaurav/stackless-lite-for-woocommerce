@@ -8,8 +8,18 @@ final class ModuleRegistry
 {
     public const OPTION = 'stackless_enabled_modules';
 
+    /**
+     * Every module id an edition has shipped while the enabled list existed. A default-on module
+     * that is not in it is new to this site (Stackless replacing Lite, or a new default module),
+     * so it is switched on once instead of staying off because the list was saved without it.
+     */
+    public const KNOWN_OPTION = 'stackless_known_modules';
+
     /** @var array<string, Module> */
     private $modules = [];
+
+    /** @var bool */
+    private $adopted = false;
 
     /** @var array<string, string> module id => reason it did not boot */
     private $blocked = [];
@@ -54,8 +64,57 @@ final class ModuleRegistry
                     $stored[] = $id;
                 }
             }
+        } elseif (!$this->adopted) {
+            $this->adopted = true;
+            $stored = $this->adoptNewDefaults($stored);
         }
         return array_values(array_intersect($stored, array_keys($this->modules)));
+    }
+
+    /**
+     * Switch on default-on modules this site has never seen and record every module of this build
+     * as known. Without a known list (saved before 1.7.1) a module counts as seen unless it is
+     * default-on, missing from the list and has no stored data.
+     *
+     * @param array<int, mixed> $stored
+     * @return array<int, string>
+     */
+    private function adoptNewDefaults(array $stored): array
+    {
+        $stored = array_values(array_filter(array_map('strval', $stored)));
+        $known = get_option(self::KNOWN_OPTION, null);
+        if (!is_array($known)) {
+            $known = [];
+            foreach ($this->modules as $id => $module) {
+                if (!$module->enabledByDefault() || in_array($id, $stored, true) || $module->hasStoredData()) {
+                    $known[] = $id;
+                }
+            }
+        }
+        $known = array_values(array_filter(array_map('strval', $known)));
+
+        $adopt = [];
+        foreach ($this->modules as $id => $module) {
+            if ($module->enabledByDefault() && !in_array($id, $known, true) && !in_array($id, $stored, true)) {
+                $adopt[] = $id;
+            }
+        }
+        if ($adopt) {
+            $stored = array_merge($stored, $adopt);
+            update_option(self::OPTION, $stored);
+        }
+        $this->rememberKnown($known);
+        return $stored;
+    }
+
+    /** @param array<int, string> $known */
+    private function rememberKnown(array $known): void
+    {
+        $all = array_values(array_unique(array_merge($known, array_keys($this->modules))));
+        $current = get_option(self::KNOWN_OPTION, null);
+        if (!is_array($current) || array_diff($all, $current) || array_diff($current, $all)) {
+            update_option(self::KNOWN_OPTION, $all);
+        }
     }
 
     public function isEnabled(string $id): bool
@@ -79,6 +138,8 @@ final class ModuleRegistry
         $stored = get_option(self::OPTION, null);
         $foreign = is_array($stored) ? array_diff(array_filter(array_map('strval', $stored)), $known) : [];
         update_option(self::OPTION, array_values(array_unique(array_merge(array_intersect($ids, $known), $foreign))));
+        $seen = get_option(self::KNOWN_OPTION, null);
+        $this->rememberKnown(is_array($seen) ? array_values(array_filter(array_map('strval', $seen))) : []);
     }
 
     /**

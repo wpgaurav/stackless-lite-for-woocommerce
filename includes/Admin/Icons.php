@@ -12,6 +12,12 @@ final class Icons
 
     /** Module id => icon. Modules not listed fall back to their group icon. */
     public const MODULES = [
+        'stripe_gateway' => 'brand-stripe',
+        'paypal_gateway' => 'brand-paypal',
+        'polar_gateway' => 'bolt',
+        'paddle_gateway' => 'credit-card',
+        'dodo_gateway' => 'wallet',
+        'gateway_tools' => 'copy',
         'checkout_enhancements' => 'checkbox',
         'extra_enhancements' => 'wand',
         'buy_links' => 'link',

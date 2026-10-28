@@ -63,7 +63,7 @@ final class AdminScreen
         $counts = $this->repo->statusCounts();
         $report = $this->repo->report($search, $status, $page, self::PER_PAGE);
 
-        echo '<div class="wrap stackless-stock-alerts"><h1 class="wp-heading-inline">' . esc_html__('Back-in-stock alerts', 'stackless-lite') . '</h1> ' . \Stackless\Admin\Documentation::link('back_in_stock', '', 'page-title-action') . '<hr class="wp-header-end">';
+        echo '<div class="wrap stackless-stock-alerts"><h1 class="wp-heading-inline">' . esc_html__('Back-in-stock alerts', 'stackless-lite') . '</h1> ' . wp_kses_post(\Stackless\Admin\Documentation::link('back_in_stock', '', 'page-title-action')) . '<hr class="wp-header-end">';
         echo '<p class="stackless-stock-intro">' . esc_html__('Confirmed demand, notification progress and mail failures for each product or variation. Alert emails are separate from marketing lists.', 'stackless-lite') . '</p>';
         if ($queued !== null) {
             /* translators: %d: number of products */

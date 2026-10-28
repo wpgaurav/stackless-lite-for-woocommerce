@@ -154,7 +154,9 @@ class Module extends \Stackless\Core\Module
         if (!isset($list[$key]) || !function_exists('WC') || !WC()->cart) {
             return ['ok' => false, 'added' => 0, 'skipped' => []];
         }
+        $before = null;
         if ($replace) {
+            $before = ['contents' => WC()->cart->get_cart_contents(), 'coupons' => WC()->cart->get_applied_coupons()];
             WC()->cart->empty_cart();
         }
         $added = 0;
@@ -167,7 +169,7 @@ class Module extends \Stackless\Core\Module
                 continue;
             }
             $qty = wc_stock_amount($line['quantity']);
-            $passed = apply_filters('woocommerce_add_to_cart_validation', true, $line['product_id'], $qty, $line['variation_id'], $line['variation'], $line['data']);
+            $passed = apply_filters('woocommerce_add_to_cart_validation', true, $line['product_id'], $qty, $line['variation_id'], $line['variation'], $line['data']); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce's own hook, fired the way WooCommerce does.
             $key_added = false;
             if ($passed) {
                 try {
@@ -181,6 +183,12 @@ class Module extends \Stackless\Core\Module
             } else {
                 $skipped[] = $name;
             }
+        }
+        if (!$added && $before && $before['contents']) {
+            // Nothing could be restored: keep the cart the customer had instead of an empty one.
+            WC()->cart->set_cart_contents($before['contents']);
+            WC()->cart->set_applied_coupons($before['coupons']);
+            WC()->cart->calculate_totals();
         }
         // Validation notices are summarised below instead of shown one by one.
         wc_clear_notices();
@@ -358,7 +366,7 @@ class Module extends \Stackless\Core\Module
     public function shortcode($atts = []): string
     {
         if (!defined('DONOTCACHEPAGE')) {
-            define('DONOTCACHEPAGE', true);
+            define('DONOTCACHEPAGE', true); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- the shared signal page-cache plugins read.
         }
         return $this->render(false);
     }

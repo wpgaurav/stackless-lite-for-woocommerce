@@ -33,6 +33,16 @@ abstract class Module
         return false;
     }
 
+    /**
+     * Whether this site already holds data for the module. A default-on module that is missing
+     * from an enabled list saved before the registry tracked known modules is switched on only
+     * when this says no, so a deliberate "off" on a configured module is kept.
+     */
+    public function hasStoredData(): bool
+    {
+        return true;
+    }
+
     /** Other module ids that must be enabled for this one to boot. */
     public function dependencies(): array
     {

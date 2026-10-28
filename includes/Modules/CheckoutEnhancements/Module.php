@@ -230,7 +230,7 @@ final class Module extends \Stackless\Core\Module
     private function postedAnswers(): array
     {
         // Nonce: WooCommerce verified woocommerce-process-checkout-nonce before these checkout hooks run.
-        $posted = isset($_POST['stackless_consent']) && is_array($_POST['stackless_consent']) ? wp_unslash($_POST['stackless_consent']) : []; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        $posted = isset($_POST['stackless_consent']) && is_array($_POST['stackless_consent']) ? map_deep(wp_unslash($_POST['stackless_consent']), 'sanitize_text_field') : []; // phpcs:ignore WordPress.Security.NonceVerification.Missing
         $answers = [];
         foreach ($posted as $id => $value) {
             $answers[sanitize_key((string) $id)] = ConsentRules::isTicked(is_scalar($value) ? (string) $value : '');
@@ -389,7 +389,7 @@ final class Module extends \Stackless\Core\Module
         if (in_array($ajax, ['update_order_review', 'checkout'], true)) {
             return 'classic';
         }
-        $route = isset($_GET['rest_route']) ? (string) wp_unslash($_GET['rest_route']) : '';
+        $route = isset($_GET['rest_route']) ? sanitize_text_field(wp_unslash($_GET['rest_route'])) : '';
         // phpcs:enable
         $uri = isset($_SERVER['REQUEST_URI']) ? (string) wp_unslash($_SERVER['REQUEST_URI']) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
         $path = $route . ' ' . $uri;

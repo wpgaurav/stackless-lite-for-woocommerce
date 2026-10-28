@@ -1,20 +1,20 @@
 === Stackless Lite for WooCommerce ===
 Contributors: gauravtiwari
-Tags: woocommerce, wishlist, back in stock, quantity limits, checkout
+Tags: woocommerce, stripe, paypal, wishlist, back in stock
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Seventeen free WooCommerce store tools in one plugin: wishlist, saved carts, back-in-stock alerts, quantity limits, buy links, pay what you like and more.
+23 free WooCommerce modules: Stripe, PayPal, Polar, Paddle and Dodo Payments, wishlists, saved carts, back-in-stock alerts and more.
 
 == Description ==
 
-Most WooCommerce stores collect a small plugin for every little job: one for the wishlist, one for back-in-stock emails, one for min/max quantities, one for the "Only 3 left" label. Stackless Lite puts seventeen of those jobs into one plugin that runs on core WooCommerce alone.
+Most WooCommerce stores collect a small plugin for every little job: one for the wishlist, one for back-in-stock emails, one for min/max quantities, one for the "Only 3 left" label. Stackless Lite puts those jobs, and five payment gateways, into one plugin that runs on core WooCommerce alone.
 
 Switch on only what you use from Stackless → Dashboard. A switched-off module loads no code.
 
@@ -46,13 +46,50 @@ Every module that touches the cart or checkout works with the Cart and Checkout 
 * **Buy Links:** shareable links that fill the cart and open checkout, with coupons, multiple products and tamper-proof signatures, plus an optional Buy now button.
 * **Pay What You Like:** buyers choose what to pay, at or above a minimum, with a suggested amount, quick amounts and an optional maximum. The amount is checked on the server.
 
+= Payments =
+
+* **Stripe:** cards, Apple Pay, Google Pay, Link and local payment methods, with refunds from the order screen.
+* **PayPal:** PayPal Smart Buttons and Pay Later at checkout, with refunds.
+* **Polar:** Polar as a merchant of record, with hosted checkout and sales tax and VAT handled for you.
+* **Paddle:** Paddle Billing as a merchant of record, with a checkout that handles sales tax and VAT for you.
+* **Dodo Payments:** Dodo Payments as a merchant of record, with hosted checkout and sales tax, VAT and GST handled for you.
+* **Payment Gateway Tools:** take payments with more than one Polar, Paddle or Dodo Payments account.
+
+The email for failed live payments in Extra Enhancements watches these gateways.
+
 = Need more? =
 
-Stackless (the full plugin) adds subscriptions, Stripe, PayPal, Polar, Paddle and Dodo Payments gateways, software licensing, multi-currency, invoices and quotes, order bumps, product add-ons, delivery slots and more. The Dashboard lists those modules with a short description of each; nothing in Lite is locked, time-limited or reduced.
+Stackless (the full plugin) adds subscriptions with automatic renewals and saved payment methods, software licensing, multi-currency, invoices and quotes, order bumps, product add-ons, delivery slots and more. The Dashboard lists those modules with a short description of each; nothing in Lite is locked, time-limited or reduced.
 
 = Privacy =
 
-Stackless Lite sends no usage data and has no tracking. To offer updates it asks gauravtiwari.org about the latest Stackless Lite release about twice a day, with the standard WordPress request that every update check makes. Back-in-stock alerts and wishlists store the email addresses and products customers give them in your own database.
+Stackless Lite sends no usage data and has no tracking.
+To offer updates it asks gauravtiwari.org about the latest Stackless Lite release about twice a day, with the standard WordPress request that every update check makes.
+Back-in-stock alerts and wishlists store the email addresses and products customers give them in your own database.
+
+== External services ==
+
+The payment modules connect to the payment provider you switch on, and only that one. Nothing is sent until you add your API keys and a customer pays with that provider.
+
+= Stripe =
+
+When a customer pays with Stripe, the checkout loads Stripe.js from js.stripe.com so card details go straight to Stripe and never reach your server. Your site sends the order amount, currency, order ID, and the customer's name and email to the Stripe API (api.stripe.com) to create the payment, and Stripe sends payment events back to your site's webhook. Stripe's [Services Agreement](https://stripe.com/legal/ssa) and [Privacy Policy](https://stripe.com/privacy) apply.
+
+= PayPal =
+
+When a customer pays with PayPal, the checkout loads the PayPal JavaScript SDK from www.paypal.com and your site creates and captures the order through the PayPal API (api-m.paypal.com, or the sandbox in test mode), sending the order amount, currency, a description of the purchase and the order ID. PayPal sends payment events back to your site's webhook. PayPal's [User Agreement](https://www.paypal.com/us/legalhub/useragreement-full) and [Privacy Statement](https://www.paypal.com/us/legalhub/privacy-full) apply.
+
+= Polar =
+
+When a customer pays with Polar, your site creates a checkout through the Polar API (api.polar.sh, or sandbox-api.polar.sh in test mode), sending the products, amount, currency, order ID and the customer's email, and sends the customer to Polar's hosted checkout. Polar sends payment events back to your site's webhook. Polar's [Terms of Service](https://polar.sh/legal/terms) and [Privacy Policy](https://polar.sh/legal/privacy) apply.
+
+= Paddle =
+
+When a customer pays with Paddle, the pay page loads Paddle.js from cdn.paddle.com and your site creates a transaction through the Paddle API (api.paddle.com, or sandbox-api.paddle.com in test mode), sending the products, amount, currency, order ID and the customer's email. Paddle sends payment events back to your site's webhook. Paddle's [Terms](https://www.paddle.com/legal/terms) and [Privacy Policy](https://www.paddle.com/legal/privacy) apply.
+
+= Dodo Payments =
+
+When a customer pays with Dodo Payments, your site creates a checkout through the Dodo Payments API (live.dodopayments.com, or test.dodopayments.com in test mode), sending the products, amount, currency, order ID and the customer's name and email, and sends the customer to Dodo's hosted checkout. Dodo Payments sends payment events back to your site's webhook. Dodo Payments' [Terms of Use](https://dodopayments.com/legal/terms-of-use) and [Privacy Policy](https://dodopayments.com/legal/privacy-policy) apply.
 
 = Links =
 
@@ -105,5 +142,17 @@ Through the normal WordPress update screens, from gauravtiwari.org. No license k
 
 == Changelog ==
 
+= 1.7.1 =
+* New: Stripe, PayPal, Polar, Paddle and Dodo Payments gateways and Payment Gateway Tools are now part of Stackless Lite.
+* New: each payment gateway's settings have buttons that open the provider's API key page for live and test mode. Saving Stripe, PayPal or Paddle keys on a live HTTPS site creates the webhook and saves its signing secret or ID for you.
+* New: activating Stackless switches off Stackless Lite, keeps all of its settings and data, and turns on Stackless updates.
+* Fixed: when a payment webhook and the customer's return arrived at the same moment, an order could be completed twice and send duplicate emails.
+* Fixed: PayPal never captures a second payment for an order another tab already paid.
+* Fixed: a Paddle payment that used a Paddle discount code no longer counts as paying the full order, and the Paddle checkout no longer shows a discount field.
+* Fixed: Hide Price Until Login no longer lets Store API price filters reveal hidden prices.
+* Fixed: a Buy link or a Saved Carts "Replace" that cannot add anything keeps the shopper's cart.
+* Fixed: a shared wishlist shows who saved it again.
+* Changed: passes WordPress Plugin Check.
+
 = 1.7.0 =
-* First public release of Stackless Lite for WooCommerce: seventeen free modules from Stackless, with the same settings and data, so an upgrade to Stackless keeps everything.
+* First public release.

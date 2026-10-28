@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stackless Lite for WooCommerce 1.7.0\n"
+"Project-Id-Version: Stackless Lite for WooCommerce 1.7.1\n"
 "Report-Msgid-Bugs-To: https://github.com/wpgaurav/stackless-lite-for-woocommerce/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-28T03:12:49+00:00\n"
+"POT-Creation-Date: 2026-10-28T14:39:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: stackless-lite\n"
@@ -39,13 +39,14 @@ msgstr ""
 msgid "https://gauravtiwari.org"
 msgstr ""
 
-#: includes/Admin/Documentation.php:52
+#: includes/Admin/Documentation.php:57
 #: includes/Modules/ProductEnhancements/Fields.php:53
 msgid "Documentation"
 msgstr ""
 
-#: includes/Admin/Documentation.php:58
+#: includes/Admin/Documentation.php:63
 #: includes/Admin/SettingsPage.php:267
+#: includes/Core/WebhookSetup.php:51
 #: includes/Lite/Upgrade.php:54
 #: includes/Lite/Upgrade.php:70
 #: includes/Lite/Upgrade.php:158
@@ -61,6 +62,7 @@ msgstr ""
 #: includes/Admin/SettingsPage.php:76
 #: includes/Admin/SettingsPage.php:77
 #: includes/Admin/SettingsPage.php:295
+#: includes/Modules/GatewayTools/Module.php:88
 msgid "Stackless"
 msgstr ""
 
@@ -126,36 +128,39 @@ msgstr ""
 
 #: includes/Admin/SettingsPage.php:200
 #: includes/Lite/ProCatalog.php:20
-#: includes/Lite/ProCatalog.php:40
+#: includes/Lite/ProCatalog.php:39
 msgid "Subscriptions"
 msgstr ""
 
 #: includes/Admin/SettingsPage.php:201
-#: includes/Lite/ProCatalog.php:21
+#: includes/Modules/PayPalGateway/Gateway.php:144
 msgid "Payments"
 msgstr ""
 
 #: includes/Admin/SettingsPage.php:202
-#: includes/Lite/ProCatalog.php:22
+#: includes/Lite/ProCatalog.php:21
 #: includes/Modules/BuyLinks/Admin.php:75
 #: includes/Modules/BuyLinks/Module.php:59
 #: includes/Modules/ExtraEnhancements/Module.php:68
 #: includes/Modules/ExtraEnhancements/ProductCheckout.php:212
+#: includes/Modules/StripeGateway/Admin.php:197
+#: includes/Modules/StripeGateway/Module.php:148
+#: includes/Modules/StripeGateway/Module.php:193
 msgid "Checkout"
 msgstr ""
 
 #: includes/Admin/SettingsPage.php:203
-#: includes/Lite/ProCatalog.php:23
+#: includes/Lite/ProCatalog.php:22
 msgid "Sales & invoices"
 msgstr ""
 
 #: includes/Admin/SettingsPage.php:204
-#: includes/Lite/ProCatalog.php:24
+#: includes/Lite/ProCatalog.php:23
 msgid "Currency"
 msgstr ""
 
 #: includes/Admin/SettingsPage.php:205
-#: includes/Lite/ProCatalog.php:25
+#: includes/Lite/ProCatalog.php:24
 msgid "Access & licensing"
 msgstr ""
 
@@ -164,12 +169,12 @@ msgid "Catalog"
 msgstr ""
 
 #: includes/Admin/SettingsPage.php:207
-#: includes/Lite/ProCatalog.php:26
+#: includes/Lite/ProCatalog.php:25
 msgid "Store tools"
 msgstr ""
 
 #: includes/Admin/SettingsPage.php:208
-#: includes/Lite/ProCatalog.php:27
+#: includes/Lite/ProCatalog.php:26
 #: includes/Modules/WooCommerceOptimizer/Module.php:59
 msgid "Admin"
 msgstr ""
@@ -246,11 +251,11 @@ msgstr ""
 msgid "Turn on the License & Updates module on the Dashboard to manage your license."
 msgstr ""
 
-#: includes/Core/Installer.php:262
+#: includes/Core/Installer.php:263
 msgid "Stackless could not finish setting up these modules:"
 msgstr ""
 
-#: includes/Core/Installer.php:268
+#: includes/Core/Installer.php:269
 msgid "Setup will retry on the next page load. See WooCommerce → Status → Logs (stackless-*)."
 msgstr ""
 
@@ -335,18 +340,18 @@ msgid "STACKLESS_LIVE_STORE in wp-config.php decides whether this site is the li
 msgstr ""
 
 #. translators: %s: plugin name
-#: includes/Core/ModuleRegistry.php:130
+#: includes/Core/ModuleRegistry.php:191
 #, php-format
 msgid "Paused because %s is active and does the same job."
 msgstr ""
 
 #. translators: %s: module title
-#: includes/Core/ModuleRegistry.php:138
+#: includes/Core/ModuleRegistry.php:199
 #, php-format
 msgid "Needs the %s module enabled."
 msgstr ""
 
-#: includes/Core/ModuleRegistry.php:147
+#: includes/Core/ModuleRegistry.php:208
 msgid "Failed to start. See WooCommerce → Status → Logs (stackless-*)."
 msgstr ""
 
@@ -360,532 +365,410 @@ msgstr ""
 msgid "Stackless for WooCommerce needs WooCommerce installed and active."
 msgstr ""
 
+#: includes/Core/WebhookSetup.php:60
+msgid "This site is not reachable over public HTTPS, so the webhook was not created automatically. Add it by hand once the site is live."
+msgstr ""
+
 #: includes/functions.php:103
 #: includes/functions.php:137
 #: includes/functions.php:147
 msgid "Subscriptions module is not active."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:43
+#: includes/Lite/ProCatalog.php:42
 msgid "Recurring billing on simple and variable products, with automatic or invoiced renewals and a customer portal."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:45
+#: includes/Lite/ProCatalog.php:44
 msgid "Daily, weekly, monthly or yearly plans with free trials, signup fees and fixed-length terms"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:46
+#: includes/Lite/ProCatalog.php:45
 msgid "Mixed carts: several subscriptions and one-time products in one checkout"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:47
+#: includes/Lite/ProCatalog.php:46
 msgid "Renewals charge a saved payment method, or email the customer a pay link with any gateway"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:48
+#: includes/Lite/ProCatalog.php:47
 msgid "Failed-payment retries on your schedule, plan switching with proration and recurring coupons"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:49
+#: includes/Lite/ProCatalog.php:48
 msgid "Customers cancel, reactivate, switch plans and change their card from My Account"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:50
+#: includes/Lite/ProCatalog.php:49
 msgid "Ten subscription emails, admin list and edit screens, and an MRR and churn widget"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:55
-msgid "Stripe"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:58
-msgid "Cards, Apple Pay, Google Pay, Link and local payment methods through the Stripe Payment Element."
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:60
-msgid "3D Secure, saved cards and express checkout buttons"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:61
-msgid "Automatic off-session subscription renewals"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:62
-msgid "Refunds from the order screen and signed webhooks"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:63
-#: includes/Lite/ProCatalog.php:172
-#: includes/Lite/ProCatalog.php:283
-msgid "Works on the Checkout block and the classic checkout"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:68
-msgid "PayPal"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:71
-msgid "PayPal Smart Buttons and Pay Later on the block and classic checkout, through PayPal’s REST APIs."
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:73
-msgid "Smart Buttons and Pay Later messaging"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:74
-msgid "Saved PayPal accounts that renew subscriptions automatically"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:75
-msgid "Refunds from WooCommerce"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:80
-msgid "Polar"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:83
-msgid "Polar as a merchant of record: hosted checkout with sales tax and VAT handled for you."
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:85
-#: includes/Lite/ProCatalog.php:97
-msgid "One-time orders and pay links"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:86
-msgid "Single-product subscriptions with free trials that Polar renews"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:87
-msgid "Payments, renewals, refunds and cancellations sync both ways through signed webhooks"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:92
-msgid "Paddle"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:95
-msgid "Paddle Billing as a merchant of record, with an overlay checkout and sales tax and VAT handled for you."
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:98
-msgid "Subscriptions that Paddle renews, with signup fees, free trials and one-time items in the same cart"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:99
-msgid "Customers update their card through Paddle from My Account"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:100
-msgid "Two-way sync of payments, renewals, refunds and cancellations"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:105
-msgid "Dodo Payments"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:108
-msgid "Dodo Payments as a merchant of record: hosted checkout with sales tax, VAT and GST handled for you."
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:110
-msgid "Cards, UPI, wallets and local payment methods"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:111
-msgid "One-time orders in any currency Dodo supports, and pay links"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:112
-msgid "Single-product subscriptions with free trials that Dodo renews"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:113
-msgid "Two-way sync through signed webhooks"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:118
-msgid "Payment Gateway Tools"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:121
-msgid "Run Polar, Paddle or Dodo Payments with a second account."
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:123
-msgid "Duplicate a hosted gateway: each copy has its own keys, webhook URL, badge and orders"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:124
-msgid "Rename or remove copies at any time"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:125
-msgid "A Stackless label on its gateways in payment settings and order screens"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:130
+#: includes/Lite/ProCatalog.php:54
 msgid "Checkout Builder"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:133
+#: includes/Lite/ProCatalog.php:57
 msgid "Five ready-made checkout layouts in your colours, previewed and switched on without an editor."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:135
+#: includes/Lite/ProCatalog.php:59
 msgid "Five layouts for the Checkout block and the classic checkout"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:136
+#: includes/Lite/ProCatalog.php:60
 msgid "Your brand colours, with a live preview before you switch"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:141
+#: includes/Lite/ProCatalog.php:65
 msgid "On-page Checkout"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:144
+#: includes/Lite/ProCatalog.php:68
 msgid "Plan cards and your checkout on any page, so buyers choose and pay without leaving it."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:146
+#: includes/Lite/ProCatalog.php:70
 msgid "A block and a shortcode for any page"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:147
+#: includes/Lite/ProCatalog.php:71
 msgid "Each plan gets its own cart, so the store cart is left alone"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:148
+#: includes/Lite/ProCatalog.php:72
 msgid "After payment the whole page moves to the receipt"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:153
+#: includes/Lite/ProCatalog.php:77
 msgid "Modal Checkout"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:156
+#: includes/Lite/ProCatalog.php:80
 msgid "Buy buttons and checkout links open your checkout in a modal on the same page."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:158
+#: includes/Lite/ProCatalog.php:82
 msgid "Turn it on with a class, a link hash, or for every Add to cart and checkout link"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:159
+#: includes/Lite/ProCatalog.php:83
 msgid "Classes that limit the payment methods a modal offers, enforced on the server"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:164
+#: includes/Lite/ProCatalog.php:88
 msgid "Order Bumps"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:167
+#: includes/Lite/ProCatalog.php:91
 msgid "One-click add-on offers at checkout."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:169
+#: includes/Lite/ProCatalog.php:93
 msgid "Shown by cart rules such as products, categories and cart total"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:170
+#: includes/Lite/ProCatalog.php:94
 msgid "Discounted prices calculated on the server"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:171
+#: includes/Lite/ProCatalog.php:95
 msgid "Take rates per bump"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:177
+#: includes/Lite/ProCatalog.php:96
+#: includes/Lite/ProCatalog.php:207
+msgid "Works on the Checkout block and the classic checkout"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:101
 msgid "Custom Invoices"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:180
+#: includes/Lite/ProCatalog.php:104
 msgid "Invoice customers for products or custom items with a branded invoice and a secure pay link."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:182
+#: includes/Lite/ProCatalog.php:106
 msgid "Numbered, printable invoices in six layouts"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:183
+#: includes/Lite/ProCatalog.php:107
 msgid "Recurring invoices, deposits with automatic balance invoices and due-date reminders"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:184
+#: includes/Lite/ProCatalog.php:108
 msgid "A library of reusable invoice-only items and remembered customer details"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:185
+#: includes/Lite/ProCatalog.php:109
 msgid "VAT and company registration numbers on the invoice"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:190
+#: includes/Lite/ProCatalog.php:114
 msgid "Request a Quote"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:193
+#: includes/Lite/ProCatalog.php:117
 msgid "Customers ask for a quote from any page or product, and accept your proposal online."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:195
+#: includes/Lite/ProCatalog.php:119
 msgid "A quote form for any page or product"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:196
+#: includes/Lite/ProCatalog.php:120
 msgid "Reply with a proposal the customer accepts online"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:197
+#: includes/Lite/ProCatalog.php:121
 msgid "Accepting issues the invoice and takes the customer to payment"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:202
+#: includes/Lite/ProCatalog.php:126
 msgid "Coupon Affiliates"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:205
+#: includes/Lite/ProCatalog.php:129
 msgid "Customers and partners earn a commission on every paid order that uses their coupon."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:207
+#: includes/Lite/ProCatalog.php:131
 msgid "Personal codes from My Account, or any coupon you assign"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:208
+#: includes/Lite/ProCatalog.php:132
 msgid "A refund hold and automatic reversal on refunds and cancellations"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:209
+#: includes/Lite/ProCatalog.php:133
 msgid "Manual payouts with CSV export"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:214
+#: includes/Lite/ProCatalog.php:138
 msgid "Multi-Currency Checkout"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:217
+#: includes/Lite/ProCatalog.php:141
 msgid "Sell in several currencies with one settlement currency per cart and order."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:219
+#: includes/Lite/ProCatalog.php:143
 msgid "Exact prices per product and per variation in each currency"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:220
+#: includes/Lite/ProCatalog.php:144
 msgid "Manual or Frankfurter exchange rates, with markup and rounding"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:221
+#: includes/Lite/ProCatalog.php:145
 msgid "Rules for products without a price in the shopper’s currency"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:222
+#: includes/Lite/ProCatalog.php:146
 msgid "Subscription renewals keep the currency they started in"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:227
+#: includes/Lite/ProCatalog.php:151
 msgid "Storefront Currency Selector"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:230
+#: includes/Lite/ProCatalog.php:154
 msgid "Let shoppers pick their currency."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:232
+#: includes/Lite/ProCatalog.php:156
 msgid "A shortcode, a block, or a selector above the checkout payment methods"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:233
+#: includes/Lite/ProCatalog.php:157
 msgid "Switching reprices the cart on the server"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:238
+#: includes/Lite/ProCatalog.php:162
 msgid "Currency-Aware Payment Gateways"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:241
+#: includes/Lite/ProCatalog.php:165
 msgid "Choose which payment gateways handle each currency."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:243
+#: includes/Lite/ProCatalog.php:167
 msgid "Pick the gateways, and the one shown first, per currency"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:244
+#: includes/Lite/ProCatalog.php:168
 msgid "Unsupported gateways are removed at checkout and rejected on the server"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:249
+#: includes/Lite/ProCatalog.php:173
 msgid "Software Licensing"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:252
+#: includes/Lite/ProCatalog.php:176
 msgid "Sell plugins and themes with license keys and automatic updates from your own store."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:254
+#: includes/Lite/ProCatalog.php:178
 msgid "License keys per order item or subscription"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:255
+#: includes/Lite/ProCatalog.php:179
 msgid "Site activation limits that customers manage from My Account"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:256
+#: includes/Lite/ProCatalog.php:180
 msgid "A license API to validate, activate and deactivate"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:257
+#: includes/Lite/ProCatalog.php:181
 msgid "An update server for your plugins and themes"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:262
+#: includes/Lite/ProCatalog.php:186
 msgid "Page Access"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:265
+#: includes/Lite/ProCatalog.php:189
 msgid "Unlock chosen pages for customers who buy a product."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:267
+#: includes/Lite/ProCatalog.php:191
 msgid "Published pages show an access notice to everyone else"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:268
+#: includes/Lite/ProCatalog.php:192
 msgid "Private pages stay hidden from everyone except buyers"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:269
+#: includes/Lite/ProCatalog.php:193
 msgid "Subscriptions keep access while they are active"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:270
+#: includes/Lite/ProCatalog.php:194
 msgid "A My pages tab in My Account"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:275
+#: includes/Lite/ProCatalog.php:199
 msgid "Fields & Paid Add-ons"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:278
+#: includes/Lite/ProCatalog.php:202
 msgid "Product add-ons with prices, and checkout fields with optional fees."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:280
+#: includes/Lite/ProCatalog.php:204
 msgid "Checkbox, dropdown, text and number add-ons"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:281
+#: includes/Lite/ProCatalog.php:205
 msgid "Per-item or one-off add-on prices"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:282
+#: includes/Lite/ProCatalog.php:206
 msgid "Collapsible checkout fields with optional fees"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:288
+#: includes/Lite/ProCatalog.php:212
 msgid "Delivery & Pickup Slots"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:291
+#: includes/Lite/ProCatalog.php:215
 msgid "Customers pick a delivery or pickup time at checkout."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:293
+#: includes/Lite/ProCatalog.php:217
 msgid "Weekly time windows with a capacity per slot"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:294
+#: includes/Lite/ProCatalog.php:218
 msgid "Lead time and closed dates"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:295
+#: includes/Lite/ProCatalog.php:219
 msgid "Availability per shipping method"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:300
+#: includes/Lite/ProCatalog.php:224
 msgid "Webhooks and REST API"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:303
+#: includes/Lite/ProCatalog.php:227
 msgid "Connect your store to Zapier, Make, n8n or your own code."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:305
+#: includes/Lite/ProCatalog.php:229
 msgid "Subscription and license events in WooCommerce webhooks"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:306
+#: includes/Lite/ProCatalog.php:230
 msgid "A subscriptions REST API that works with WooCommerce REST API keys"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:311
+#: includes/Lite/ProCatalog.php:235
 msgid "FluentCRM"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:314
+#: includes/Lite/ProCatalog.php:238
 msgid "Connect subscriptions, licenses, invoices and quotes to FluentCRM."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:316
+#: includes/Lite/ProCatalog.php:240
 msgid "Automation triggers for subscriptions, renewals, licenses, invoices and quotes"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:317
+#: includes/Lite/ProCatalog.php:241
 msgid "Tags and lists that follow subscription status"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:318
+#: includes/Lite/ProCatalog.php:242
 msgid "Smart codes for emails"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:319
+#: includes/Lite/ProCatalog.php:243
 msgid "Subscriptions and licenses on each contact’s profile"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:324
+#: includes/Lite/ProCatalog.php:248
 msgid "AI Agents"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:327
+#: includes/Lite/ProCatalog.php:251
 msgid "Let Claude, ChatGPT, Cursor and other agents run your store through the free Site Agent plugin."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:329
+#: includes/Lite/ProCatalog.php:253
 msgid "Sales reports, orders, invoices, quotes, subscriptions and license keys"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:330
+#: includes/Lite/ProCatalog.php:254
 msgid "Stock alerts, product details and page access"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:331
+#: includes/Lite/ProCatalog.php:255
 msgid "Agents work as a WordPress user you choose"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:332
+#: includes/Lite/ProCatalog.php:256
 msgid "They ask you before anything reaches a customer"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:337
+#: includes/Lite/ProCatalog.php:261
 msgid "Woo Redesign"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:340
+#: includes/Lite/ProCatalog.php:264
 msgid "A cleaner WooCommerce admin in the same look as the Stackless screens."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:342
+#: includes/Lite/ProCatalog.php:266
 msgid "Orders, products, coupons, settings, status and analytics restyled"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:343
+#: includes/Lite/ProCatalog.php:267
 msgid "Pick the areas, the accent colour and the table density"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:344
+#: includes/Lite/ProCatalog.php:268
 msgid "Nothing changes on your storefront"
 msgstr ""
 
@@ -908,7 +791,7 @@ msgid "In Stackless"
 msgstr ""
 
 #: includes/Lite/Upgrade.php:80
-msgid "Stackless is the full plugin: everything in Lite plus subscriptions, payment gateways, licensing, multi-currency, invoices and more. It uses the same settings and data, so upgrading keeps everything you set up here."
+msgid "Stackless is the full plugin: everything in Lite plus subscriptions with automatic renewals, software licensing, multi-currency, invoices and more. It uses the same settings and data, so upgrading keeps everything you set up here."
 msgstr ""
 
 #. translators: %s: module name
@@ -1035,6 +918,7 @@ msgstr ""
 
 #: includes/Modules/BackInStock/AdminScreen.php:94
 #: includes/Modules/BackInStock/Module.php:598
+#: includes/Modules/StripeGateway/Admin.php:194
 msgid "Status"
 msgstr ""
 
@@ -1048,7 +932,7 @@ msgstr ""
 
 #: includes/Modules/BackInStock/AdminScreen.php:105
 #: includes/Modules/BackInStock/Module.php:596
-#: includes/Modules/CheckoutEnhancements/Admin.php:158
+#: includes/Modules/CheckoutEnhancements/Admin.php:159
 #: includes/Modules/Wishlist/Module.php:796
 msgid "Product"
 msgstr ""
@@ -1131,7 +1015,7 @@ msgid "Something went wrong. Please try again."
 msgstr ""
 
 #: includes/Modules/BackInStock/Module.php:262
-#: includes/Modules/SavedCarts/Module.php:217
+#: includes/Modules/SavedCarts/Module.php:225
 #: includes/Modules/Wishlist/Module.php:411
 msgid "Your session expired. Please try again."
 msgstr ""
@@ -1334,6 +1218,7 @@ msgstr ""
 
 #: includes/Modules/BuyLinks/Admin.php:75
 #: includes/Modules/BuyLinks/Module.php:59
+#: includes/Modules/StripeGateway/Module.php:192
 msgid "Cart"
 msgstr ""
 
@@ -1372,6 +1257,7 @@ msgstr ""
 
 #: includes/Modules/BuyLinks/Admin.php:113
 #: includes/Modules/ExternalProduct/Module.php:328
+#: includes/Modules/PolarGateway/Catalog.php:386
 msgid "Product not found."
 msgstr ""
 
@@ -1472,7 +1358,7 @@ msgid "Button text"
 msgstr ""
 
 #: includes/Modules/BuyLinks/Module.php:70
-#: includes/Modules/BuyLinks/Module.php:276
+#: includes/Modules/BuyLinks/Module.php:284
 msgid "Buy now"
 msgstr ""
 
@@ -1496,20 +1382,20 @@ msgstr ""
 msgid "This buy link does not include any products."
 msgstr ""
 
-#: includes/Modules/BuyLinks/Module.php:175
+#: includes/Modules/BuyLinks/Module.php:183
 msgid "Some products in this link could not be read and were skipped."
 msgstr ""
 
 #. translators: %d: product ID
-#: includes/Modules/BuyLinks/Module.php:218
-#: includes/Modules/BuyLinks/Module.php:234
+#: includes/Modules/BuyLinks/Module.php:226
+#: includes/Modules/BuyLinks/Module.php:242
 #, php-format
 msgid "Product #%d from this link is not available."
 msgstr ""
 
 #. translators: %s: product name
-#: includes/Modules/BuyLinks/Module.php:223
-#: includes/Modules/BuyLinks/Module.php:241
+#: includes/Modules/BuyLinks/Module.php:231
+#: includes/Modules/BuyLinks/Module.php:249
 #, php-format
 msgid "Choose the options for \"%s\" to add it to your cart."
 msgstr ""
@@ -1710,93 +1596,94 @@ msgstr ""
 msgid "Refund policy"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:92
+#: includes/Modules/CheckoutEnhancements/Admin.php:93
 msgid "Remove this consent? Orders already placed keep their record."
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:93
+#: includes/Modules/CheckoutEnhancements/Admin.php:94
 msgid "Choose a payment methods image"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:94
+#: includes/Modules/CheckoutEnhancements/Admin.php:95
 msgid "Use this image"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:120
+#: includes/Modules/CheckoutEnhancements/Admin.php:121
 msgid "No consent checkboxes yet. Add one with the buttons below."
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:121
+#: includes/Modules/CheckoutEnhancements/Admin.php:122
 msgid "Add a consent checkbox"
 msgstr ""
 
 #. translators: %d: maximum number of consent checkboxes
-#: includes/Modules/CheckoutEnhancements/Admin.php:127
+#: includes/Modules/CheckoutEnhancements/Admin.php:128
 #, php-format
 msgid "Up to %d checkboxes. The suggested wording is a starting point; check it against your own policies and local law, especially the EU digital content waiver. Links in the wording show as plain text on the Checkout block."
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:141
+#: includes/Modules/CheckoutEnhancements/Admin.php:142
 msgid "Required"
 msgstr ""
 
 #. translators: %d: wording version number
-#: includes/Modules/CheckoutEnhancements/Admin.php:144
+#: includes/Modules/CheckoutEnhancements/Admin.php:145
 #, php-format
 msgid "Wording v%d"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:150
+#: includes/Modules/CheckoutEnhancements/Admin.php:151
+#: includes/Modules/StripeGateway/Admin.php:235
 msgid "Type"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:154
+#: includes/Modules/CheckoutEnhancements/Admin.php:155
 msgid "Show for"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:159
+#: includes/Modules/CheckoutEnhancements/Admin.php:160
 msgid "Search for a product"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:164
+#: includes/Modules/CheckoutEnhancements/Admin.php:165
 msgid "Checkbox text"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:165
+#: includes/Modules/CheckoutEnhancements/Admin.php:166
 msgid "Links, bold and italic are allowed on the classic checkout, for example <a href=\"/privacy-policy/\">privacy policy</a>. Changing the text starts a new wording version."
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:166
+#: includes/Modules/CheckoutEnhancements/Admin.php:167
 msgid "Customer must tick this to place the order"
 msgstr ""
 
 #. translators: %s: product name
-#: includes/Modules/CheckoutEnhancements/Admin.php:167
+#: includes/Modules/CheckoutEnhancements/Admin.php:168
 #: templates/saved_carts/account.php:84
 #: templates/wishlist/list.php:69
 msgid "Remove"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:177
+#: includes/Modules/CheckoutEnhancements/Admin.php:178
 msgid "Choose image"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:178
+#: includes/Modules/CheckoutEnhancements/Admin.php:179
 msgid "Remove image"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:188
+#: includes/Modules/CheckoutEnhancements/Admin.php:189
 #: includes/Modules/CheckoutEnhancements/Module.php:317
 #: includes/Modules/CheckoutEnhancements/Module.php:341
 msgid "Checkout consents"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:200
+#: includes/Modules/CheckoutEnhancements/Admin.php:201
 msgid "No consent checkboxes were shown for this order."
 msgstr ""
 
 #. translators: 1: Accepted or Not accepted, 2: consent wording, 3: wording version
-#: includes/Modules/CheckoutEnhancements/Admin.php:209
+#: includes/Modules/CheckoutEnhancements/Admin.php:210
 #: includes/Modules/CheckoutEnhancements/Module.php:315
 #: includes/Modules/CheckoutEnhancements/Module.php:371
 #: templates/checkout_enhancements/order-consents.php:23
@@ -1804,20 +1691,20 @@ msgid "Accepted"
 msgstr ""
 
 #. translators: 1: Accepted or Not accepted, 2: consent wording, 3: wording version
-#: includes/Modules/CheckoutEnhancements/Admin.php:209
+#: includes/Modules/CheckoutEnhancements/Admin.php:210
 #: includes/Modules/CheckoutEnhancements/Module.php:315
 #: includes/Modules/CheckoutEnhancements/Module.php:371
 #: templates/checkout_enhancements/order-consents.php:23
 msgid "Not accepted"
 msgstr ""
 
-#: includes/Modules/CheckoutEnhancements/Admin.php:210
+#: includes/Modules/CheckoutEnhancements/Admin.php:211
 #: templates/checkout_enhancements/consents.php:20
 msgid "required"
 msgstr ""
 
 #. translators: 1: wording version, 2: date and time
-#: includes/Modules/CheckoutEnhancements/Admin.php:213
+#: includes/Modules/CheckoutEnhancements/Admin.php:214
 #, php-format
 msgid "Wording v%1$d · %2$s"
 msgstr ""
@@ -2130,6 +2017,498 @@ msgstr ""
 msgid "Shown on the product page when this variation is selected."
 msgstr ""
 
+#: includes/Modules/DodoGateway/Api.php:56
+msgid "Dodo Payments is not connected for test mode. Add a test API key in WooCommerce → Settings → Payments → Dodo Payments."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Api.php:57
+msgid "Dodo Payments is not connected. Add a live API key in WooCommerce → Settings → Payments → Dodo Payments."
+msgstr ""
+
+#. translators: %s: transport error
+#: includes/Modules/DodoGateway/Api.php:83
+#, php-format
+msgid "Could not reach Dodo Payments: %s"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Api.php:100
+msgid "Dodo Payments rejected the test mode API key. Create the key with Test Mode switched on in the Dodo dashboard; a live key does not work here."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Api.php:101
+msgid "Dodo Payments rejected the live API key. Check that it was created in live mode and has not been deleted."
+msgstr ""
+
+#. translators: %s: Dodo Payments error message
+#: includes/Modules/DodoGateway/Api.php:106
+#, php-format
+msgid "Dodo Payments: %s"
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: includes/Modules/DodoGateway/Api.php:108
+#, php-format
+msgid "Dodo Payments returned an unexpected error (HTTP %d)."
+msgstr ""
+
+#: includes/Modules/DodoGateway/BlocksSupport.php:56
+#: templates/dodo_gateway/payment-fields.php:21
+msgid "Test mode: no real payment will be taken."
+msgstr ""
+
+#. translators: %s: store name
+#: includes/Modules/DodoGateway/Catalog.php:70
+#: includes/Modules/PolarGateway/Catalog.php:61
+#, php-format
+msgid "%s order"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Catalog.php:166
+msgid "Dodo Payments did not return a product for this checkout."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Catalog.php:179
+msgid "Purchase"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Checkout.php:39
+#: includes/Modules/PaddleGateway/Checkout.php:50
+#: includes/Modules/PolarGateway/Checkout.php:39
+msgid "The subscription for this order is not ready yet. Please try again in a moment."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Checkout.php:52
+msgid "Dodo Payments cannot bill this subscription schedule. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Checkout.php:57
+msgid "Dodo Payments needs a recurring amount above zero."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Checkout.php:65
+msgid "Dodo Payments charges the same amount on every billing cycle, so it cannot take a signup fee or a different first payment. Remove the signup fee or first-payment discount, or choose another payment method."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/DodoGateway/Checkout.php:92
+#, php-format
+msgid "Dodo Payments cannot charge in %s. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Checkout.php:100
+msgid "Dodo Payments needs an amount greater than zero to start a checkout."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Checkout.php:133
+msgid "Dodo Payments did not return a checkout page."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Checkout.php:300
+#: includes/Modules/DodoGateway/Sync.php:113
+msgid "Your payment did not go through. Please try again or choose another payment method."
+msgstr ""
+
+#. translators: %d: copy number, starting at 2
+#: includes/Modules/DodoGateway/Copies.php:60
+#: includes/Modules/GatewayTools/Copies.php:118
+#: includes/Modules/PaddleGateway/Copies.php:60
+#: includes/Modules/PolarGateway/Copies.php:60
+#, php-format
+msgid "Copy %d"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Copies.php:67
+#: includes/Modules/DodoGateway/Module.php:18
+#: includes/Modules/DodoGateway/Module.php:42
+msgid "Dodo Payments"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Eligibility.php:52
+msgid "Dodo Payments can bill one subscription per checkout. Buy each subscription separately or choose another payment method."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Eligibility.php:54
+msgid "Dodo Payments can bill a subscription only when it is the only item in the cart. Buy other items separately or choose another payment method."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:79
+msgid "Dodo Payments (Stackless)"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:80
+msgid "Sell digital products and subscriptions through Dodo Payments, a merchant of record that handles sales tax, VAT and GST for you. Buyers pay by card, UPI, Apple Pay, Google Pay and local methods on Dodo’s secure checkout."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:109
+#: includes/Modules/PaddleGateway/Gateway.php:96
+#: includes/Modules/PayPalGateway/Gateway.php:72
+#: includes/Modules/PolarGateway/Gateway.php:102
+msgid "Enable"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:111
+msgid "Accept payments with Dodo Payments"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:115
+#: includes/Modules/PaddleGateway/Gateway.php:102
+#: includes/Modules/PayPalGateway/Gateway.php:78
+#: includes/Modules/PolarGateway/Gateway.php:108
+#: includes/Modules/StripeGateway/Module.php:149
+msgid "Title"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:117
+msgid "Card, UPI, Apple Pay or Google Pay (Dodo Payments)"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:120
+#: includes/Modules/PaddleGateway/Gateway.php:107
+#: includes/Modules/PayPalGateway/Gateway.php:85
+#: includes/Modules/PolarGateway/Gateway.php:113
+#: includes/Modules/StripeGateway/Module.php:150
+msgid "Description"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:122
+msgid "You’ll finish paying on Dodo Payments’ secure checkout. Dodo adds any sales tax, VAT or GST for your location before you pay."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:125
+#: includes/Modules/DodoGateway/Gateway.php:140
+#: includes/Modules/StripeGateway/Module.php:139
+msgid "Test mode"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:127
+msgid "Use Dodo Payments test mode (no real money moves)"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:131
+#: includes/Modules/PaddleGateway/Gateway.php:118
+#: includes/Modules/PolarGateway/Gateway.php:124
+#: includes/Modules/StripeGateway/Admin.php:45
+msgid "Live"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:133
+msgid "Open Dodo Payments"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:134
+msgid "In Developer → API Keys, create a key with Write access and paste it below."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:142
+msgid "Test and live keys are separate: switch the Dodo dashboard to Test Mode to create the test key and the test webhook."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:147
+msgid "Test API key"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:147
+#: includes/Modules/PaddleGateway/Gateway.php:125
+msgid "Live API key"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:154
+msgid "Test webhook secret"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:154
+#: includes/Modules/PolarGateway/Gateway.php:137
+msgid "Live webhook secret"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:163
+#: includes/Modules/PayPalGateway/Gateway.php:139
+#: includes/Modules/PolarGateway/Gateway.php:161
+msgid "Webhook"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:168
+#: includes/Modules/PaddleGateway/Gateway.php:172
+#: includes/Modules/PolarGateway/Gateway.php:166
+msgid "Prices and tax"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:172
+msgid "Add tax on top of my prices (Dodo default)"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:173
+#: includes/Modules/PaddleGateway/Gateway.php:178
+#: includes/Modules/PolarGateway/Gateway.php:172
+msgid "My prices already include tax"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:175
+msgid "Dodo Payments is the merchant of record and calculates sales tax, VAT and GST itself. Turn off WooCommerce tax for products sold through Dodo so buyers are not taxed twice."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:178
+#: includes/Modules/PaddleGateway/Gateway.php:183
+msgid "Tax category"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:182
+msgid "Digital products"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:183
+#: includes/Modules/PaddleGateway/Gateway.php:192
+msgid "Software as a service"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:184
+msgid "E-books"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:185
+msgid "Education and courses"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:187
+msgid "Dodo uses this category to pick the tax rate for each buyer’s country."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:190
+#: includes/Modules/PaddleGateway/Gateway.php:200
+#: includes/Modules/PolarGateway/Gateway.php:177
+msgid "Good to know"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:192
+msgid "Dodo bills the same amount every cycle, so subscriptions with a signup fee or a different first payment cannot use Dodo. Free trials work. A subscription must be the only item in the cart. One-time carts of any size work and show in Dodo as one store order. Products are created in your Dodo catalog automatically: one per product for one-time sales, one per plan and price for subscriptions. Dodo runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:198
+#: includes/Modules/PaddleGateway/Gateway.php:205
+#: includes/Modules/PolarGateway/Gateway.php:182
+msgid "Copies"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:204
+#: includes/Modules/PaddleGateway/Gateway.php:210
+#: includes/Modules/PayPalGateway/Gateway.php:215
+#: includes/Modules/PolarGateway/Gateway.php:187
+#: includes/Modules/StripeGateway/Module.php:212
+msgid "Debug log"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:206
+msgid "Log Dodo Payments activity to WooCommerce → Status → Logs (stackless-dodo_gateway). Keys are never logged."
+msgstr ""
+
+#. translators: %s: Dodo Payments business name
+#. translators: %s: Polar organization name
+#: includes/Modules/DodoGateway/Gateway.php:219
+#: includes/Modules/PolarGateway/Gateway.php:205
+#, php-format
+msgid "Connected to %s."
+msgstr ""
+
+#. translators: 1: webhook URL, 2: event names
+#: includes/Modules/DodoGateway/Gateway.php:231
+#, php-format
+msgid "In Dodo Payments, open Developer → Webhooks, choose Add endpoint and paste this URL (switch to Test Mode first to add the test endpoint): %1$s Select these events, then copy the signing secret from the endpoint’s Overview tab into the webhook secret field for the same mode: %2$s Webhooks confirm payments when a buyer closes the tab before returning, record renewals, and bring refunds and cancellations made in Dodo into WooCommerce."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:280
+msgid "Dodo Payments is enabled but has no API key for the selected mode."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:283
+msgid "Add the Dodo Payments webhook secret. Payments, renewals and refunds stay in sync through the webhook."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:379
+msgid "Dodo Payments did not return a business for this API key."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:451
+#: includes/Modules/DodoGateway/Gateway.php:489
+#: includes/Modules/PaddleGateway/Gateway.php:467
+#: includes/Modules/PaddleGateway/Gateway.php:506
+#: includes/Modules/PayPalGateway/Ajax.php:117
+#: includes/Modules/PayPalGateway/Gateway.php:499
+#: includes/Modules/PayPalGateway/Gateway.php:538
+#: includes/Modules/PayPalGateway/Payments.php:256
+#: includes/Modules/PayPalGateway/Payments.php:532
+#: includes/Modules/PayPalGateway/Payments.php:683
+#: includes/Modules/PolarGateway/Gateway.php:438
+#: includes/Modules/PolarGateway/Gateway.php:477
+#: includes/Modules/StripeGateway/Gateway.php:199
+#: includes/Modules/StripeGateway/Gateway.php:506
+msgid "Order not found."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:462
+msgid "Dodo Payments could not start the checkout. Please try again or choose another payment method."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/DodoGateway/Gateway.php:466
+#, php-format
+msgid "Dodo Payments checkout could not start: %s"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:493
+#: includes/Modules/PaddleGateway/Refunds.php:37
+#: includes/Modules/PayPalGateway/Payments.php:789
+#: includes/Modules/PolarGateway/Gateway.php:481
+msgid "Enter a refund amount above zero."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:497
+msgid "This order has no Dodo Payments payment to refund."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:515
+msgid "Dodo Payments can only refund this order in full from WooCommerce. Make the partial refund in the Dodo Payments dashboard."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:530
+msgid "Dodo Payments could not process this refund. Check the payment in your Dodo Payments dashboard."
+msgstr ""
+
+#. translators: 1: amount, 2: Dodo refund id, 3: status
+#: includes/Modules/DodoGateway/Gateway.php:535
+#, php-format
+msgid "Refunded %1$s through Dodo Payments (refund %2$s, %3$s)."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:567
+msgid "Dodo Payments bills this subscription itself. This order is marked paid when Dodo reports the renewal charge."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:568
+msgid "Waiting for Dodo Payments to charge the renewal."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:602
+msgid "Dodo Payments subscription set to stop at the next billing date."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Gateway.php:603
+msgid "Dodo Payments subscription cancelled immediately."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Module.php:23
+msgid "Dodo Payments as a merchant of record: hosted checkout with sales tax, VAT and GST handled for you, cards, UPI, wallets and local methods, one-time orders in any currency Dodo supports, pay links, and single-product subscriptions with free trials that Dodo renews. Payments, renewals, refunds and cancellations sync both ways through signed webhooks."
+msgstr ""
+
+#. translators: 1: link to the gateway settings, 2: webhook URL
+#: includes/Modules/DodoGateway/Module.php:45
+#, php-format
+msgid "API keys, webhook secrets and tax settings live with the other payment methods: %1$s. Webhook URL for Dodo Payments: %2$s"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Module.php:46
+msgid "WooCommerce → Settings → Payments → Dodo Payments"
+msgstr ""
+
+#: includes/Modules/DodoGateway/Module.php:107
+msgid "Whether Dodo Payments can take this cart."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Module.php:113
+msgid "Why Dodo Payments cannot take this cart, when it cannot."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Sync.php:95
+msgid "No Dodo Payments checkout was started for this order."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Sync.php:109
+msgid "This Dodo Payments payment belongs to a different order."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Sync.php:116
+msgid "Dodo Payments has not completed this payment yet. It will be confirmed automatically."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Sync.php:130
+msgid "Dodo Payments has not completed this checkout yet. It will be confirmed automatically."
+msgstr ""
+
+#. translators: 1: expected currency, 2: charged currency
+#: includes/Modules/DodoGateway/Sync.php:212
+#, php-format
+msgid "Dodo Payments charged in %2$s but the order is in %1$s. Check the payment in Dodo before fulfilling."
+msgstr ""
+
+#. translators: 1: amount Dodo charged, 2: order total
+#: includes/Modules/DodoGateway/Sync.php:226
+#, php-format
+msgid "Dodo Payments charged %1$s but the order total is %2$s. Check the payment in Dodo before fulfilling."
+msgstr ""
+
+#. translators: 1: Dodo payment id, 2: total charged including tax
+#: includes/Modules/DodoGateway/Sync.php:244
+#, php-format
+msgid "Dodo Payments payment %1$s succeeded (%2$s charged including tax)."
+msgstr ""
+
+#. translators: %s: Dodo subscription id
+#: includes/Modules/DodoGateway/Sync.php:273
+#, php-format
+msgid "Dodo Payments subscription %s started its free trial."
+msgstr ""
+
+#. translators: 1: renewal currency, 2: charged currency
+#: includes/Modules/DodoGateway/Sync.php:379
+#, php-format
+msgid "Dodo Payments charged this renewal in %2$s but the subscription bills in %1$s. Check it in Dodo."
+msgstr ""
+
+#. translators: 1: amount Dodo charged, 2: renewal total
+#: includes/Modules/DodoGateway/Sync.php:389
+#, php-format
+msgid "Dodo Payments charged %1$s including tax for this renewal; the WooCommerce renewal total is %2$s."
+msgstr ""
+
+#. translators: %s: Dodo payment id
+#: includes/Modules/DodoGateway/Sync.php:395
+#, php-format
+msgid "Dodo Payments charged this renewal (payment %s)."
+msgstr ""
+
+#. translators: %s: Dodo refund id
+#: includes/Modules/DodoGateway/Sync.php:435
+#, php-format
+msgid "Dodo Payments could not complete refund %s. The WooCommerce refund recorded for it did not reach the customer; refund another way or correct the order."
+msgstr ""
+
+#: includes/Modules/DodoGateway/Sync.php:454
+msgid "Dodo Payments reported a refund in a different currency. Record it manually."
+msgstr ""
+
+#. translators: %s: Dodo refund id
+#: includes/Modules/DodoGateway/Sync.php:467
+#, php-format
+msgid "Refunded in Dodo Payments (%s)"
+msgstr ""
+
+#. translators: 1: dispute event, 2: Dodo dispute id
+#: includes/Modules/DodoGateway/Sync.php:489
+#, php-format
+msgid "Dodo Payments reported %1$s (dispute %2$s). Review it in the Dodo Payments dashboard."
+msgstr ""
+
+#. translators: %s: reason given in Dodo
+#: includes/Modules/DodoGateway/Sync.php:558
+#, php-format
+msgid "Cancelled in Dodo Payments: %s"
+msgstr ""
+
+#. translators: %s: Dodo subscription status
+#: includes/Modules/DodoGateway/Sync.php:560
+#, php-format
+msgid "Dodo Payments subscription is now %s."
+msgstr ""
+
 #: includes/Modules/ExternalProduct/Module.php:33
 msgid "External Product Extras"
 msgstr ""
@@ -2262,22 +2641,22 @@ msgstr ""
 msgid "Too many order attempts from your connection. Please try again in an hour, or contact us for help."
 msgstr ""
 
-#: includes/Modules/ExtraEnhancements/InternalEmails.php:149
+#: includes/Modules/ExtraEnhancements/InternalEmails.php:150
 msgid "no account was created"
 msgstr ""
 
-#: includes/Modules/ExtraEnhancements/InternalEmails.php:150
+#: includes/Modules/ExtraEnhancements/InternalEmails.php:151
 msgid "integrations did not run"
 msgstr ""
 
 #. translators: %s: what was skipped, e.g. "no account was created and integrations did not run"
-#: includes/Modules/ExtraEnhancements/InternalEmails.php:156
+#: includes/Modules/ExtraEnhancements/InternalEmails.php:157
 #, php-format
 msgid "Internal email: this address is on the Extra Enhancements internal list, so %s."
 msgstr ""
 
 #. translators: %s: what was skipped, e.g. "no account was created and integrations did not run"
-#: includes/Modules/ExtraEnhancements/InternalEmails.php:156
+#: includes/Modules/ExtraEnhancements/InternalEmails.php:157
 msgid " and "
 msgstr ""
 
@@ -2512,6 +2891,105 @@ msgstr ""
 msgid "Shown instead of the price when this product costs nothing. Leave blank to use the store setting."
 msgstr ""
 
+#: includes/Modules/GatewayTools/Copies.php:139
+msgid "Only Stackless’s hosted gateways (Polar, Paddle and Dodo Payments) can be duplicated, and only while their module is on."
+msgstr ""
+
+#. translators: %d: maximum number of copies
+#: includes/Modules/GatewayTools/Copies.php:145
+#, php-format
+msgid "A gateway can have at most %d copies."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Copies.php:160
+#: includes/Modules/GatewayTools/Copies.php:178
+msgid "That gateway copy no longer exists."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Copies.php:181
+msgid "This copy has orders or subscriptions, so it stays to keep their refunds and renewals working. Switch it off in its settings instead."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:24
+msgid "Payment Gateway Tools"
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:29
+msgid "Duplicate the Polar, Paddle and Dodo Payments gateways to take payments with a second account, each copy with its own keys, webhook URL, badge and orders. Marks every gateway Stackless adds with a Stackless label in WooCommerce’s payment settings and order screens."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:91
+msgid "Added by Stackless for WooCommerce."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:92
+msgid "A copy with its own account and settings."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:93
+msgid "Badge label for the new copy (optional, for example “EU account”). It starts switched off; connect it from its settings."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:94
+msgid "Badge label for this copy. Leave it empty to show “Copy N”."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:95
+msgid "Remove this copy and its saved settings? This only works while it has no orders or subscriptions."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:96
+msgid "That did not work. Reload the page and try again."
+msgstr ""
+
+#. translators: 1: gateway name, 2: link to the original gateway
+#: includes/Modules/GatewayTools/Module.php:160
+#, php-format
+msgid "This is a copy of %1$s with its own account, keys, webhook URL and orders. %2$s"
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:162
+msgid "Open the original"
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:164
+msgid "Rename badge"
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:166
+msgid "Has orders, so it cannot be removed. Switch it off instead."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:167
+msgid "Remove copy"
+msgstr ""
+
+#. translators: %s: gateway name
+#: includes/Modules/GatewayTools/Module.php:173
+#, php-format
+msgid "Take payments with a second %s account: each copy has its own keys, webhook URL, badge and orders, and starts switched off."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:178
+msgid "Manage"
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:179
+msgid "Rename"
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:182
+msgid "Duplicate this gateway"
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:190
+msgid "You are not allowed to change payment gateways."
+msgstr ""
+
+#: includes/Modules/GatewayTools/Module.php:207
+msgid "Unknown action."
+msgstr ""
+
 #: includes/Modules/HidePriceUntilLogin/Module.php:39
 msgid "Hide Price Until Login"
 msgstr ""
@@ -2569,8 +3047,8 @@ msgid "Price text"
 msgstr ""
 
 #: includes/Modules/HidePriceUntilLogin/Module.php:77
-#: includes/Modules/HidePriceUntilLogin/Module.php:218
 #: includes/Modules/HidePriceUntilLogin/Module.php:219
+#: includes/Modules/HidePriceUntilLogin/Module.php:220
 msgid "Log in to see prices"
 msgstr ""
 
@@ -2595,9 +3073,9 @@ msgid "WordPress login screen"
 msgstr ""
 
 #: includes/Modules/HidePriceUntilLogin/Module.php:83
-#: includes/Modules/HidePriceUntilLogin/Module.php:251
-#: includes/Modules/HidePriceUntilLogin/Module.php:453
-#: includes/Modules/HidePriceUntilLogin/Module.php:477
+#: includes/Modules/HidePriceUntilLogin/Module.php:252
+#: includes/Modules/HidePriceUntilLogin/Module.php:498
+#: includes/Modules/HidePriceUntilLogin/Module.php:522
 msgid "Log in to buy"
 msgstr ""
 
@@ -2605,28 +3083,1151 @@ msgstr ""
 msgid "Replaces the add to cart button on hidden products. Leave blank to remove the button."
 msgstr ""
 
-#: includes/Modules/HidePriceUntilLogin/Module.php:433
+#: includes/Modules/HidePriceUntilLogin/Module.php:478
 msgid "Please log in to buy this product."
 msgstr ""
 
-#: includes/Modules/HidePriceUntilLogin/Module.php:560
+#: includes/Modules/HidePriceUntilLogin/Module.php:605
 msgid "Hide price until login"
 msgstr ""
 
-#: includes/Modules/HidePriceUntilLogin/Module.php:562
+#: includes/Modules/HidePriceUntilLogin/Module.php:607
 msgid "Follow the store setting"
 msgstr ""
 
-#: includes/Modules/HidePriceUntilLogin/Module.php:563
+#: includes/Modules/HidePriceUntilLogin/Module.php:608
 msgid "Always hide from guests"
 msgstr ""
 
-#: includes/Modules/HidePriceUntilLogin/Module.php:564
+#: includes/Modules/HidePriceUntilLogin/Module.php:609
 msgid "Never hide"
 msgstr ""
 
-#: includes/Modules/HidePriceUntilLogin/Module.php:567
+#: includes/Modules/HidePriceUntilLogin/Module.php:612
 msgid "Guests see the login text instead of the price and cannot buy until they log in."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Api.php:59
+msgid "Paddle is not connected for the sandbox. Add a sandbox API key in WooCommerce → Settings → Payments → Paddle."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Api.php:60
+msgid "Paddle is not connected. Add a live API key in WooCommerce → Settings → Payments → Paddle."
+msgstr ""
+
+#. translators: %s: transport error
+#: includes/Modules/PaddleGateway/Api.php:87
+#, php-format
+msgid "Could not reach Paddle: %s"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Api.php:123
+msgid "Paddle rejected the API key. Check that it belongs to this environment (live or sandbox) and has not been revoked."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Api.php:126
+msgid "The Paddle API key is missing a required permission."
+msgstr ""
+
+#. translators: %s: Paddle error message
+#: includes/Modules/PaddleGateway/Api.php:130
+#, php-format
+msgid "Paddle: %s"
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: includes/Modules/PaddleGateway/Api.php:132
+#, php-format
+msgid "Paddle returned an unexpected error (HTTP %d)."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Api.php:141
+msgid "The live Paddle API key field holds a sandbox key."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Api.php:142
+msgid "The sandbox Paddle API key field holds a live key."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Api.php:146
+msgid "The live Paddle client-side token field holds a sandbox token."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Api.php:147
+msgid "The sandbox Paddle client-side token field holds a live token."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/BlocksSupport.php:57
+#: includes/Modules/PolarGateway/BlocksSupport.php:56
+#: templates/paddle_gateway/payment-fields.php:21
+#: templates/polar_gateway/payment-fields.php:21
+msgid "Sandbox mode: no real payment will be taken."
+msgstr ""
+
+#. translators: %s: order number
+#: includes/Modules/PaddleGateway/Checkout.php:38
+#: templates/saved_carts/account.php:102
+#, php-format
+msgid "Order #%s"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:59
+msgid "Paddle cannot bill this subscription schedule. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:82
+msgid "Paddle charges at least one full billing cycle on the first payment, so it cannot take a first-payment discount. Remove the discount or choose another payment method."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:84
+msgid "Paddle cannot charge a signup fee or other items during a free trial. Buy them separately or choose another payment method."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:86
+msgid "Paddle needs an amount greater than zero to start a checkout."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:107
+#: includes/Modules/StripeGateway/Express.php:508
+msgid "Shipping"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:126
+msgid "Subscription"
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/PaddleGateway/Checkout.php:140
+#, php-format
+msgid "Paddle cannot charge in %s. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:157
+msgid "Paddle did not return a transaction."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:285
+msgid "Paddle could not open the payment method update. Please try again later."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:304
+msgid "Paddle is missing its client-side token. Please choose another payment method."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Checkout.php:310
+msgid "Paddle checkout could not load. Check your connection and try again."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Copies.php:67
+#: includes/Modules/PaddleGateway/Module.php:19
+#: includes/Modules/PaddleGateway/Module.php:43
+msgid "Paddle"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Eligibility.php:41
+msgid "Paddle can bill one subscription schedule per checkout. Buy subscriptions with different billing schedules separately or choose another payment method."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:74
+msgid "Paddle (Stackless)"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:75
+msgid "Sell digital products and subscriptions through Paddle Billing, a merchant of record that handles sales tax and VAT for you. Buyers pay by card, PayPal, Apple Pay or Google Pay in Paddle’s secure checkout."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:98
+msgid "Accept payments with Paddle"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:104
+msgid "Card, PayPal, Apple Pay or Google Pay (Paddle)"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:109
+msgid "You’ll finish paying in Paddle’s secure checkout. Paddle adds any sales tax or VAT for your location before you pay."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:112
+#: includes/Modules/PaddleGateway/Gateway.php:143
+#: includes/Modules/PayPalGateway/Gateway.php:90
+#: includes/Modules/PolarGateway/Gateway.php:118
+#: includes/Modules/PolarGateway/Gateway.php:143
+msgid "Sandbox"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:114
+msgid "Use the Paddle sandbox (no real money moves)"
+msgstr ""
+
+#. translators: %s: list of API key permissions
+#: includes/Modules/PaddleGateway/Gateway.php:121
+#: includes/Modules/StripeGateway/Module.php:132
+msgid "Get live keys"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:122
+#, php-format
+msgid "Create an API key with these permissions: %s. Then create a client-side token on the same screen. With the notification permissions, the webhook and its secret key are set up for you when you save."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:131
+msgid "Live client-side token"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:137
+msgid "Live webhook secret key"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:145
+msgid "Get sandbox keys"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:146
+msgid "Same permissions, created in the Paddle sandbox."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:149
+msgid "Sandbox API key"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:155
+msgid "Sandbox client-side token"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:161
+msgid "Sandbox webhook secret key"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:167
+msgid "Checkout page and webhook"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:176
+msgid "Use my Paddle account setting"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:177
+#: includes/Modules/PolarGateway/Gateway.php:171
+msgid "Add tax on top of my prices"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:180
+msgid "Paddle is the merchant of record and calculates sales tax and VAT itself. Turn off WooCommerce tax for products sold through Paddle so buyers are not taxed twice."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:187
+msgid "Standard digital goods (approved for every account)"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:188
+msgid "Digital goods"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:189
+msgid "Ebooks"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:190
+msgid "Implementation services"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:191
+msgid "Professional services"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:193
+msgid "Software programming services"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:194
+msgid "Training services"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:195
+msgid "Website hosting"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:197
+msgid "Paddle uses the tax category to pick tax rates. Any category other than Standard must be approved for your Paddle account first, or checkouts fail."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:202
+msgid "Paddle bills one subscription schedule per checkout. One-time items, a signup fee or first shipping can share the checkout with it; Paddle charges them once. Free trials work when the first payment is zero. A first payment smaller than a full cycle (a first-payment discount) cannot use Paddle. Paddle runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:212
+msgid "Log Paddle activity to WooCommerce → Status → Logs (stackless-paddle_gateway). Keys are never logged."
+msgstr ""
+
+#. translators: 1: store domain, 2: store URL, 3: webhook URL, 4: event names
+#: includes/Modules/PaddleGateway/Gateway.php:235
+#, php-format
+msgid "1. In Paddle → Settings → Website approval, add %1$s and wait for approval. 2. In Paddle → Checkout → Checkout configuration, set the default payment link to %2$s (Stackless sends its own checkout page with every payment; Paddle only needs an approved default). 3. Saving an API key with the notification permissions adds the webhook for you. Otherwise, in Paddle → Developer tools → Notifications, add a destination with this URL: %3$s Select these events, then copy the secret key into the matching webhook secret field above: %4$s Webhooks confirm payments when a buyer closes the tab before returning, record renewals, and bring refunds and cancellations made in Paddle into WooCommerce."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:277
+msgid "Paddle is enabled but the selected environment needs both an API key and a client-side token."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:280
+msgid "Add the Paddle webhook secret key. Payments, renewals and refunds stay in sync through the webhook."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:296
+#: includes/Modules/PayPalGateway/Gateway.php:285
+msgid "sandbox"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:296
+#: includes/Modules/PayPalGateway/Gateway.php:285
+msgid "live"
+msgstr ""
+
+#. translators: 1: sandbox or live, 2: Paddle error message
+#: includes/Modules/PaddleGateway/Gateway.php:318
+#, php-format
+msgid "Creating the %1$s Paddle webhook failed: %2$s Add it by hand (see Checkout page and webhook below), or give the API key the notification permissions."
+msgstr ""
+
+#. translators: %s: sandbox or live
+#: includes/Modules/PaddleGateway/Gateway.php:328
+#, php-format
+msgid "Paddle %s webhook connected and its secret key saved."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:479
+msgid "Paddle could not start the checkout. Please try again or choose another payment method."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/PaddleGateway/Gateway.php:483
+#, php-format
+msgid "Paddle checkout could not start: %s"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:535
+msgid "Paddle bills this subscription itself. This order is marked paid when Paddle reports the renewal charge."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:536
+msgid "Waiting for Paddle to charge the renewal."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:573
+msgid "Paddle subscription set to end at the close of the paid period."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Gateway.php:574
+msgid "Paddle subscription canceled immediately."
+msgstr ""
+
+#. translators: %s: order label such as "Order #123"
+#: includes/Modules/PaddleGateway/Items.php:129
+#, php-format
+msgid "%s: signup fee and one-time items"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Module.php:24
+msgid "Paddle Billing as a merchant of record: an overlay checkout with sales tax and VAT handled for you, one-time orders, pay links, and subscriptions (with signup fees, free trials and one-time items in the same cart) that Paddle renews. Payments, renewals, refunds and cancellations sync both ways through signed webhooks."
+msgstr ""
+
+#. translators: 1: link to the gateway settings, 2: webhook URL
+#: includes/Modules/PaddleGateway/Module.php:46
+#, php-format
+msgid "API keys, client-side tokens, webhook secrets and tax behavior live with the other payment methods: %1$s. Webhook URL for Paddle: %2$s"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Module.php:47
+msgid "WooCommerce → Settings → Payments → Paddle"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Module.php:111
+msgid "Whether Paddle can take this cart."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Module.php:117
+msgid "Why Paddle cannot take this cart, when it cannot."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Module.php:177
+msgid "Update payment method"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Refunds.php:33
+msgid "This payment has no Paddle transaction to refund."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Refunds.php:46
+msgid "Paddle can refund this payment once it has finished processing. Try again in a few minutes."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Refunds.php:73
+msgid "This refund is more than Paddle has left to refund on the payment."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Refunds.php:87
+msgid "Another refund on this order is still being processed. Try again in a moment."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Refunds.php:94
+msgid "Paddle rejected this refund. Check the transaction in your Paddle dashboard."
+msgstr ""
+
+#. translators: 1: amount, 2: Paddle adjustment id, 3: status
+#: includes/Modules/PaddleGateway/Refunds.php:98
+#, php-format
+msgid "Refunded %1$s through Paddle (adjustment %2$s, %3$s)."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Refunds.php:101
+msgid "waiting for Paddle approval"
+msgstr ""
+
+#. translators: 1: Paddle adjustment action, 2: adjustment id
+#: includes/Modules/PaddleGateway/Refunds.php:206
+#, php-format
+msgid "Paddle reported a %1$s (adjustment %2$s). Review it in Paddle."
+msgstr ""
+
+#. translators: 1: adjustment id, 2: status
+#: includes/Modules/PaddleGateway/Refunds.php:224
+#, php-format
+msgid "Paddle %2$s refund %1$s. The WooCommerce refund recorded for it did not reach the customer; delete it or refund another way."
+msgstr ""
+
+#. translators: %s: Paddle adjustment id
+#: includes/Modules/PaddleGateway/Refunds.php:236
+#, php-format
+msgid "Paddle approved refund %s."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Refunds.php:248
+msgid "Paddle reported a refund in a different currency. Record it manually."
+msgstr ""
+
+#. translators: %s: Paddle adjustment id
+#: includes/Modules/PaddleGateway/Refunds.php:263
+#, php-format
+msgid "Refunded in Paddle (%s)"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Sync.php:93
+msgid "This Paddle transaction belongs to a different order."
+msgstr ""
+
+#. translators: %s: Paddle transaction status
+#: includes/Modules/PaddleGateway/Sync.php:97
+#, php-format
+msgid "The Paddle transaction is %s, not paid yet. It will be confirmed automatically."
+msgstr ""
+
+#. translators: 1: expected currency, 2: charged currency
+#: includes/Modules/PaddleGateway/Sync.php:162
+#, php-format
+msgid "Paddle charged in %2$s but the order is in %1$s. Check the payment in Paddle."
+msgstr ""
+
+#. translators: 1: amount Paddle charged, 2: order total
+#: includes/Modules/PaddleGateway/Sync.php:175
+#, php-format
+msgid "Paddle charged %1$s but the order total is %2$s. Check the payment in Paddle before fulfilling."
+msgstr ""
+
+#. translators: 1: Paddle transaction id, 2: total charged including tax
+#: includes/Modules/PaddleGateway/Sync.php:191
+#, php-format
+msgid "Paddle transaction %1$s paid (%2$s charged including tax)."
+msgstr ""
+
+#. translators: %s: Paddle subscription id
+#: includes/Modules/PaddleGateway/Sync.php:215
+#, php-format
+msgid "Paddle subscription %s started its free trial."
+msgstr ""
+
+#. translators: 1: Paddle transaction id, 2: decline reason code
+#: includes/Modules/PaddleGateway/Sync.php:285
+#, php-format
+msgid "Paddle could not take a payment for transaction %1$s (%2$s)."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Sync.php:287
+#: includes/Modules/PayPalGateway/Payments.php:405
+msgid "no reason given"
+msgstr ""
+
+#. translators: 1: renewal currency, 2: charged currency
+#: includes/Modules/PaddleGateway/Sync.php:360
+#, php-format
+msgid "Paddle charged this renewal in %2$s but the subscription bills in %1$s. Check it in Paddle."
+msgstr ""
+
+#. translators: 1: amount Paddle charged, 2: renewal total
+#: includes/Modules/PaddleGateway/Sync.php:370
+#, php-format
+msgid "Paddle charged %1$s for this renewal; the WooCommerce renewal total is %2$s."
+msgstr ""
+
+#. translators: %s: Paddle transaction id
+#: includes/Modules/PaddleGateway/Sync.php:376
+#, php-format
+msgid "Paddle charged this renewal (transaction %s)."
+msgstr ""
+
+#. translators: %s: Paddle subscription status
+#: includes/Modules/PaddleGateway/Sync.php:450
+#, php-format
+msgid "Paddle subscription is now %s."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Sync.php:452
+msgid "Paddle subscription is set to end at the close of the paid period."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Ajax.php:55
+msgid "This order needs a payment, not just a saved account."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Ajax.php:60
+#: includes/Modules/PayPalGateway/Payments.php:584
+msgid "Log in to save a PayPal account."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Ajax.php:67
+#: includes/Modules/PayPalGateway/Payments.php:84
+#: includes/Modules/StripeGateway/Express.php:181
+msgid "Your cart is empty."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Ajax.php:71
+msgid "This cart needs a payment, not just a saved account."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Ajax.php:86
+msgid "Your session expired. Refresh the page and try again."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Ajax.php:90
+msgid "PayPal is not available."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Ajax.php:121
+msgid "Log in to the account that placed this order to pay for it."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Api.php:63
+msgid "PayPal is not connected. Add the client ID and secret in WooCommerce → Settings → Payments → PayPal."
+msgstr ""
+
+#. translators: %s: transport error
+#: includes/Modules/PayPalGateway/Api.php:87
+#: includes/Modules/PayPalGateway/Api.php:142
+#, php-format
+msgid "Could not reach PayPal: %s"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Api.php:93
+msgid "PayPal rejected the client ID or secret. Check that they belong to this environment (live or sandbox)."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Api.php:194
+msgid "PayPal rejected the API credentials."
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: includes/Modules/PayPalGateway/Api.php:198
+#, php-format
+msgid "PayPal returned an unexpected error (HTTP %d)."
+msgstr ""
+
+#. translators: %s: PayPal error description
+#: includes/Modules/PayPalGateway/Api.php:201
+#, php-format
+msgid "PayPal: %s"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:49
+msgid "PayPal (Stackless)"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:50
+msgid "PayPal Smart Buttons, Pay Later and saved PayPal accounts for automatic subscription renewals. Talks to PayPal directly; no other PayPal plugin needed."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:74
+msgid "Accept payments with PayPal"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:80
+#: includes/Modules/PayPalGateway/Module.php:18
+#: includes/Modules/PayPalGateway/Module.php:42
+#: includes/Modules/PayPalGateway/PaymentToken.php:42
+#: includes/Modules/PayPalGateway/PaymentToken.php:110
+#: includes/Modules/StripeGateway/Tokens.php:296
+msgid "PayPal"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:82
+msgid "Shown to buyers at checkout."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:87
+msgid "Pay with your PayPal account, Pay Later, or a card through PayPal."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:92
+msgid "Use the PayPal sandbox (no real money moves)"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:96
+msgid "Live credentials"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:98
+msgid "Get live credentials"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:99
+msgid "Open your app (or create one) and copy its Client ID and Secret. Turn on the Vault feature for subscriptions. The webhook is created for you when you save."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:102
+msgid "Client ID"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:107
+msgid "Secret"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:112
+msgid "Webhook ID"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:115
+msgid "Filled in automatically when you save the credentials. Otherwise, the ID PayPal shows after you add the webhook below to the live app."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:118
+msgid "Sandbox credentials"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:120
+msgid "Get sandbox credentials"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:121
+msgid "Same steps in the sandbox app."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:124
+msgid "Sandbox client ID"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:129
+msgid "Sandbox secret"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:134
+msgid "Sandbox webhook ID"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:148
+msgid "Payment action"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:152
+msgid "Capture immediately"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:153
+msgid "Authorize only (capture when the order moves to Processing or Completed)"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:155
+msgid "Subscription orders are always captured immediately."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:158
+msgid "Brand name"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:161
+msgid "Shown on PayPal. Defaults to the site name."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:164
+msgid "Invoice prefix"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:167
+msgid "PayPal rejects repeated invoice numbers, so use a unique prefix per store on the same PayPal account."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:170
+msgid "Buttons"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:174
+msgid "Layout"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:177
+msgid "Vertical"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:177
+msgid "Horizontal"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:180
+msgid "Color"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:184
+msgid "Gold"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:185
+msgid "Blue"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:186
+msgid "Silver"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:187
+msgid "White"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:188
+msgid "Black"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:192
+msgid "Shape"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:195
+msgid "Rectangle"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:195
+msgid "Pill"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:195
+msgid "Sharp"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:198
+msgid "Label"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:203
+msgid "PayPal Checkout"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:204
+msgid "Buy Now"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:205
+msgid "Pay with PayPal"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:209
+msgid "Pay Later messaging"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:211
+msgid "Show Pay Later offers under the buttons where PayPal supports them"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:217
+msgid "Log API activity to WooCommerce → Status → Logs (stackless-paypal_gateway). Secrets are never logged."
+msgstr ""
+
+#. translators: 1: webhook URL, 2: list of event names
+#: includes/Modules/PayPalGateway/Gateway.php:233
+#, php-format
+msgid "Saving the credentials adds this webhook to the PayPal app for you. On a site PayPal cannot reach yet, or when that fails, add this URL as a webhook in each PayPal app (live and sandbox): %1$s Subscribe to: %2$s Then paste the webhook ID above."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:261
+msgid "PayPal is enabled but the client ID or secret for the selected environment is empty."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:269
+msgid "Add the PayPal webhook ID. Without it, refunds made in PayPal, delayed payments and saved-account changes will not reach WooCommerce."
+msgstr ""
+
+#. translators: 1: sandbox or live, 2: PayPal error message
+#: includes/Modules/PayPalGateway/Gateway.php:305
+#, php-format
+msgid "Creating the %1$s PayPal webhook failed: %2$s"
+msgstr ""
+
+#. translators: %s: sandbox or live
+#: includes/Modules/PayPalGateway/Gateway.php:315
+#, php-format
+msgid "PayPal %s webhook connected."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:511
+msgid "PayPal could not take this payment. Please try again or choose another payment method."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:515
+#: includes/Modules/PayPalGateway/Payments.php:221
+#: includes/Modules/PayPalGateway/Payments.php:644
+msgid "PayPal could not take this payment."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Gateway.php:571
+msgid "PayPal renewal hit an unexpected error before it could be confirmed."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Module.php:23
+msgid "PayPal Smart Buttons and Pay Later on the block and classic checkout, refunds, and saved PayPal accounts that renew subscriptions automatically. Uses PayPal’s REST APIs directly."
+msgstr ""
+
+#. translators: 1: link to the gateway settings, 2: webhook URL
+#: includes/Modules/PayPalGateway/Module.php:45
+#, php-format
+msgid "Credentials, button style and Pay Later live with the other payment methods: %1$s. Webhook URL for your PayPal apps: %2$s"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Module.php:46
+msgid "WooCommerce → Settings → Payments → PayPal"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Module.php:106
+msgid "Whether checkout must save the PayPal account for automatic renewals."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Module.php:179
+msgid "PayPal could not start. Please try again or choose another payment method."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Module.php:180
+msgid "PayPal approved. Place your order to finish."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Module.php:181
+msgid "Your PayPal account will be saved for future payments."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Module.php:182
+msgid "PayPal is not available for this currency."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Module.php:183
+msgid "You closed PayPal before finishing. Use the button again when you are ready."
+msgstr ""
+
+#. translators: %s: site name
+#: includes/Modules/PayPalGateway/OrderBuilder.php:89
+#, php-format
+msgid "Subscription renewal – %s"
+msgstr ""
+
+#. translators: %s: store name
+#: includes/Modules/PayPalGateway/OrderBuilder.php:115
+#, php-format
+msgid "Future payments to %s"
+msgstr ""
+
+#. translators: %s: store name
+#: includes/Modules/PayPalGateway/OrderBuilder.php:239
+#, php-format
+msgid "Order from %s"
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/PayPalGateway/Payments.php:90
+#: includes/Modules/PayPalGateway/Payments.php:127
+#, php-format
+msgid "PayPal cannot take payments in %s."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:95
+#: includes/Modules/PayPalGateway/Payments.php:130
+msgid "Nothing to pay today. Use the PayPal button again to save your account for future payments."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:107
+#: includes/Modules/PayPalGateway/Payments.php:143
+msgid "PayPal did not return an order."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:123
+msgid "This order does not need payment."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:166
+msgid "PayPal did not return a setup token."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/PayPalGateway/Payments.php:185
+#, php-format
+msgid "PayPal cannot take payments in %s. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:200
+#: includes/Modules/PayPalGateway/Payments.php:217
+msgid "Your PayPal session expired. Please use the PayPal button again."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:210
+#: includes/Modules/PayPalGateway/Payments.php:238
+msgid "PayPal did not return an approval link."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:267
+msgid "This order can no longer be paid. Nothing was charged."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:280
+msgid "This PayPal payment belongs to a different order. Please use the PayPal button again."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:288
+msgid "PayPal has not approved this payment yet. Please finish in the PayPal window."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:292
+msgid "The order currency changed after PayPal approved the payment. Please use the PayPal button again."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:300
+msgid "Your order total changed after PayPal approved the payment. Please use the PayPal button again."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:321
+msgid "PayPal declined that funding source. Please use the PayPal button again and pick another way to pay."
+msgstr ""
+
+#. translators: %s: PayPal error
+#: includes/Modules/PayPalGateway/Payments.php:325
+#, php-format
+msgid "PayPal payment failed: %s"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:335
+#: includes/Modules/PayPalGateway/Payments.php:548
+msgid "This order is already being processed. Refresh the page in a moment."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:348
+msgid "PayPal returned a payment for a different order."
+msgstr ""
+
+#. translators: %s: PayPal capture id
+#: includes/Modules/PayPalGateway/Payments.php:373
+#, php-format
+msgid "PayPal declined the payment (capture %s)."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:377
+#: includes/Modules/PayPalGateway/Payments.php:433
+msgid "PayPal declined the payment. Please try another way to pay."
+msgstr ""
+
+#. translators: 1: amount PayPal captured, 2: order total
+#: includes/Modules/PayPalGateway/Payments.php:383
+#, php-format
+msgid "PayPal captured %1$s but the order total is %2$s. Check the payment in PayPal before fulfilling."
+msgstr ""
+
+#. translators: 1: capture id, 2: PayPal reason code
+#: includes/Modules/PayPalGateway/Payments.php:403
+#, php-format
+msgid "PayPal payment %1$s is pending (%2$s). The order updates when PayPal confirms it."
+msgstr ""
+
+#. translators: %s: capture id
+#: includes/Modules/PayPalGateway/Payments.php:413
+#, php-format
+msgid "PayPal payment captured (%s)."
+msgstr ""
+
+#. translators: 1: authorization id, 2: status
+#: includes/Modules/PayPalGateway/Payments.php:431
+#, php-format
+msgid "PayPal authorization %1$s is %2$s."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:436
+msgid "The PayPal authorization amount does not match the order total. Check it in PayPal before capturing."
+msgstr ""
+
+#. translators: %s: authorization id
+#: includes/Modules/PayPalGateway/Payments.php:443
+#, php-format
+msgid "PayPal payment authorized (%s). Change the order to Processing or Completed to capture it."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:450
+msgid "PayPal did not report a payment for this order."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:464
+msgid "PayPal is still saving the buyer’s account for renewals; it will be attached when PayPal confirms it."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:519
+msgid "PayPal account saved for automatic renewals."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/PayPalGateway/Payments.php:539
+#, php-format
+msgid "Saving the PayPal account failed: %s"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:563
+msgid "PayPal has not approved saving this account yet. Please finish in the PayPal window."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:572
+msgid "PayPal did not return a saved payment token."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:587
+msgid "Use the PayPal button to connect your account first."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:618
+#: includes/Modules/PayPalGateway/Payments.php:628
+msgid "This PayPal approval does not match the order."
+msgstr ""
+
+#. translators: %s: currency
+#: includes/Modules/PayPalGateway/Payments.php:668
+#, php-format
+msgid "PayPal cannot charge in %s."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:677
+msgid "The saved PayPal account belongs to the other PayPal environment (sandbox vs live). Ask the customer to update their payment method."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:719
+msgid "PayPal needs the customer to approve this payment, so it cannot be charged automatically."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:730
+msgid "Another process is already charging this renewal."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:756
+msgid "The saved PayPal account belongs to a different customer."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:766
+msgid "No saved PayPal account for this subscription."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/Modules/PayPalGateway/Payments.php:778
+#, php-format
+msgid "PayPal renewal payment failed: %s"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:794
+msgid "This payment was only authorized, not captured. Cancel the order to void the authorization instead."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:799
+msgid "This order has no PayPal payment to refund."
+msgstr ""
+
+#. translators: %s: refund status
+#: includes/Modules/PayPalGateway/Payments.php:820
+#, php-format
+msgid "PayPal did not complete the refund (status: %s)."
+msgstr ""
+
+#. translators: 1: amount, 2: refund id, 3: status
+#: includes/Modules/PayPalGateway/Payments.php:825
+#, php-format
+msgid "Refunded %1$s through PayPal (refund %2$s, %3$s)."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/PayPalGateway/Payments.php:867
+#, php-format
+msgid "Capturing the PayPal authorization failed: %s"
+msgstr ""
+
+#. translators: 1: capture id, 2: status
+#: includes/Modules/PayPalGateway/Payments.php:881
+#, php-format
+msgid "PayPal authorization captured (%1$s, %2$s)."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/PayPalGateway/Payments.php:897
+#, php-format
+msgid "Voiding the PayPal authorization failed: %s"
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Payments.php:902
+msgid "PayPal authorization voided."
+msgstr ""
+
+#. translators: %s: PayPal account email
+#: includes/Modules/PayPalGateway/PaymentToken.php:40
+#, php-format
+msgid "PayPal (%s)"
+msgstr ""
+
+#. translators: 1: captured amount, 2: order total
+#: includes/Modules/PayPalGateway/Webhook.php:262
+#, php-format
+msgid "PayPal reported a capture of %1$s but the order total is %2$s. Check it in PayPal before fulfilling."
+msgstr ""
+
+#. translators: %s: capture id
+#: includes/Modules/PayPalGateway/Webhook.php:272
+#, php-format
+msgid "PayPal confirmed the payment (%s)."
+msgstr ""
+
+#. translators: %s: PayPal reason code
+#: includes/Modules/PayPalGateway/Webhook.php:292
+#, php-format
+msgid "PayPal payment is pending (%s)."
+msgstr ""
+
+#. translators: %s: capture id
+#: includes/Modules/PayPalGateway/Webhook.php:306
+#, php-format
+msgid "PayPal reported capture %s as denied after it was marked paid. Check it in PayPal."
+msgstr ""
+
+#. translators: %s: capture id
+#: includes/Modules/PayPalGateway/Webhook.php:310
+#, php-format
+msgid "PayPal denied the payment (%s)."
+msgstr ""
+
+#: includes/Modules/PayPalGateway/Webhook.php:346
+msgid "PayPal reported a refund in a different currency. Record it manually."
+msgstr ""
+
+#. translators: %s: PayPal refund id
+#: includes/Modules/PayPalGateway/Webhook.php:359
+#, php-format
+msgid "Refunded in PayPal (%s)"
+msgstr ""
+
+#. translators: %s: capture id
+#: includes/Modules/PayPalGateway/Webhook.php:378
+#, php-format
+msgid "PayPal reversed payment %s (chargeback or buyer dispute). Review it in PayPal."
 msgstr ""
 
 #. translators: %s: minimum price
@@ -2765,6 +4366,7 @@ msgstr ""
 #: includes/Modules/PayWhatYouLike/Module.php:61
 #: includes/Modules/SoldCount/Module.php:62
 #: includes/Modules/StockUrgency/Module.php:55
+#: includes/Modules/StripeGateway/Module.php:191
 #: includes/Modules/Wishlist/Module.php:99
 msgid "Product pages"
 msgstr ""
@@ -2783,7 +4385,7 @@ msgstr ""
 
 #: includes/Modules/PayWhatYouLike/ProductSettings.php:123
 #: includes/Modules/ProductEnhancements/Admin.php:71
-#: includes/Modules/ServiceProducts/Module.php:165
+#: includes/Modules/ServiceProducts/Module.php:167
 msgid "How this works"
 msgstr ""
 
@@ -2923,6 +4525,404 @@ msgstr ""
 msgid "Your price"
 msgstr ""
 
+#: includes/Modules/PolarGateway/Api.php:59
+msgid "Polar is not connected for the sandbox. Add a sandbox access token in WooCommerce → Settings → Payments → Polar."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Api.php:60
+msgid "Polar is not connected. Add a live access token in WooCommerce → Settings → Payments → Polar."
+msgstr ""
+
+#. translators: %s: transport error
+#: includes/Modules/PolarGateway/Api.php:86
+#, php-format
+msgid "Could not reach Polar: %s"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Api.php:114
+msgid "Polar rejected the access token. Check that it belongs to this environment (live or sandbox) and has not been revoked."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Api.php:117
+msgid "The Polar access token is missing a required scope."
+msgstr ""
+
+#. translators: %s: Polar error message
+#: includes/Modules/PolarGateway/Api.php:121
+#, php-format
+msgid "Polar: %s"
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: includes/Modules/PolarGateway/Api.php:123
+#, php-format
+msgid "Polar returned an unexpected error (HTTP %d)."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:213
+msgid "Polar did not return a product."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:227
+msgid "purchase"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:273
+msgid "Creating in Polar…"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:274
+msgid "Created. Save the product to keep the link."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:275
+msgid "Polar could not create the product."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:276
+msgid "Save the product first so it has a price."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:284
+msgid "One-time"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:285
+msgid "Daily"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:286
+msgid "Weekly"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:287
+msgid "Monthly"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:288
+msgid "Every 3 months"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:289
+msgid "Every 6 months"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:290
+msgid "Yearly"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:299
+msgid "Polar product (live)"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:299
+msgid "Polar product (sandbox)"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:302
+msgid "Automatic"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:303
+msgid "Create in Polar"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:306
+msgid "Polar billing"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:311
+msgid "Leave empty and Polar products are created automatically on first sale. A linked product must use the same billing schedule as this product; prices always come from WooCommerce."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:375
+msgid "You are not allowed to edit products."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:390
+msgid "Give the product a price above zero first."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:395
+msgid "Add the Polar access token for this environment first."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Catalog.php:399
+msgid "Polar does not support the store currency."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Checkout.php:52
+msgid "Polar cannot bill this subscription schedule. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Checkout.php:57
+msgid "Polar needs a recurring amount above zero."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Checkout.php:63
+msgid "Polar charges the same amount on every billing cycle, so it cannot take a signup fee or a different first payment. Remove the signup fee or first-payment discount, or choose another payment method."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/PolarGateway/Checkout.php:90
+#, php-format
+msgid "Polar cannot charge in %s. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Checkout.php:98
+msgid "Polar needs an amount greater than zero to start a checkout."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Checkout.php:131
+msgid "Polar did not return a checkout page."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Copies.php:67
+#: includes/Modules/PolarGateway/Module.php:18
+#: includes/Modules/PolarGateway/Module.php:42
+msgid "Polar"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Eligibility.php:52
+msgid "Polar can bill one subscription per checkout. Buy each subscription separately or choose another payment method."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Eligibility.php:54
+msgid "Polar can bill a subscription only when it is the only item in the cart. Buy other items separately or choose another payment method."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:69
+msgid "Polar (Stackless)"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:70
+msgid "Sell digital products and subscriptions through Polar, a merchant of record that handles sales tax and VAT for you. Buyers pay by card, Apple Pay or Google Pay on Polar’s secure checkout."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:104
+msgid "Accept payments with Polar"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:110
+msgid "Card, Apple Pay or Google Pay (Polar)"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:115
+msgid "You’ll finish paying on Polar’s secure checkout. Polar adds any sales tax or VAT for your location before you pay."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:120
+msgid "Use the Polar sandbox (no real money moves)"
+msgstr ""
+
+#. translators: %s: list of token scopes
+#: includes/Modules/PolarGateway/Gateway.php:127
+msgid "Get live token"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:128
+#, php-format
+msgid "In Settings → General → Developers, create an organization access token with these scopes: %s"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:131
+msgid "Live access token"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:145
+msgid "Get sandbox token"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:146
+msgid "Same scopes, created in the Polar sandbox."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:149
+msgid "Sandbox access token"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:155
+msgid "Sandbox webhook secret"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:170
+msgid "Follow the buyer’s country (Polar default)"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:174
+msgid "Polar is the merchant of record and calculates sales tax and VAT itself. Turn off WooCommerce tax for products sold through Polar so buyers are not taxed twice."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:179
+msgid "Polar sells one product per checkout. One-time carts of any size work and show in Polar as one store order. A subscription must be the only item in the cart, and Polar bills the same amount every cycle, so subscriptions with a signup fee or a different first payment cannot use Polar. Free trials work. Polar runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:189
+msgid "Log Polar activity to WooCommerce → Status → Logs (stackless-polar_gateway). Tokens are never logged."
+msgstr ""
+
+#. translators: 1: webhook URL, 2: event names
+#: includes/Modules/PolarGateway/Gateway.php:217
+#, php-format
+msgid "In Polar (live and sandbox), open Settings → Webhooks, add an endpoint with this URL and the Raw format: %1$s Select these events, then copy the endpoint secret into the matching webhook secret field above: %2$s Webhooks confirm payments when a buyer closes the tab before returning, record renewals, and bring refunds and cancellations made in Polar into WooCommerce."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:258
+msgid "Polar is enabled but has no access token for the selected environment."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:261
+msgid "Add the Polar webhook secret. Payments, renewals and refunds stay in sync through the webhook."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:336
+msgid "Polar did not return an organization for this access token."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:450
+msgid "Polar could not start the checkout. Please try again or choose another payment method."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/PolarGateway/Gateway.php:454
+#, php-format
+msgid "Polar checkout could not start: %s"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:485
+msgid "This payment has no Polar order to refund."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:506
+msgid "Polar could not process this refund. Check the order in your Polar dashboard."
+msgstr ""
+
+#. translators: 1: amount, 2: Polar refund id, 3: status
+#: includes/Modules/PolarGateway/Gateway.php:511
+#, php-format
+msgid "Refunded %1$s through Polar (refund %2$s, %3$s)."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:543
+msgid "Polar bills this subscription itself. This order is marked paid when Polar reports the renewal charge."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:544
+msgid "Waiting for Polar to charge the renewal."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:578
+msgid "Polar subscription set to end at the close of the paid period."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Gateway.php:579
+msgid "Polar subscription revoked immediately."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Module.php:23
+msgid "Polar as a merchant of record: hosted checkout with sales tax and VAT handled for you, one-time orders, pay links, and single-product subscriptions with free trials that Polar renews. Payments, renewals, refunds and cancellations sync both ways through signed webhooks."
+msgstr ""
+
+#. translators: 1: link to the gateway settings, 2: webhook URL
+#: includes/Modules/PolarGateway/Module.php:45
+#, php-format
+msgid "Access tokens, webhook secrets and tax behavior live with the other payment methods: %1$s. Webhook URL for Polar: %2$s"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Module.php:46
+msgid "WooCommerce → Settings → Payments → Polar"
+msgstr ""
+
+#: includes/Modules/PolarGateway/Module.php:110
+msgid "Whether Polar can take this cart."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Module.php:116
+msgid "Why Polar cannot take this cart, when it cannot."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Sync.php:92
+msgid "This Polar checkout belongs to a different order."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Sync.php:97
+msgid "Polar is still processing this payment. It will be confirmed automatically."
+msgstr ""
+
+#. translators: %s: Polar checkout status
+#: includes/Modules/PolarGateway/Sync.php:99
+#, php-format
+msgid "The Polar checkout is %s, not paid."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Sync.php:122
+msgid "Polar has not created the order for this checkout yet. It will be confirmed automatically."
+msgstr ""
+
+#. translators: 1: expected currency, 2: charged currency
+#: includes/Modules/PolarGateway/Sync.php:178
+#, php-format
+msgid "Polar charged in %2$s but the order is in %1$s. Check the payment in Polar."
+msgstr ""
+
+#. translators: 1: amount Polar charged, 2: order total
+#: includes/Modules/PolarGateway/Sync.php:192
+#, php-format
+msgid "Polar charged %1$s but the order total is %2$s. Check the payment in Polar before fulfilling."
+msgstr ""
+
+#. translators: 1: Polar order id, 2: total charged including tax
+#: includes/Modules/PolarGateway/Sync.php:210
+#, php-format
+msgid "Polar order %1$s paid (%2$s charged including tax)."
+msgstr ""
+
+#. translators: %s: Polar subscription id
+#: includes/Modules/PolarGateway/Sync.php:234
+#, php-format
+msgid "Polar subscription %s started its free trial."
+msgstr ""
+
+#. translators: 1: renewal currency, 2: charged currency
+#: includes/Modules/PolarGateway/Sync.php:336
+#, php-format
+msgid "Polar charged this renewal in %2$s but the subscription bills in %1$s. Check it in Polar."
+msgstr ""
+
+#. translators: 1: amount Polar charged, 2: renewal total
+#: includes/Modules/PolarGateway/Sync.php:346
+#, php-format
+msgid "Polar charged %1$s for this renewal; the WooCommerce renewal total is %2$s."
+msgstr ""
+
+#. translators: %s: Polar order id
+#: includes/Modules/PolarGateway/Sync.php:352
+#, php-format
+msgid "Polar charged this renewal (order %s)."
+msgstr ""
+
+#: includes/Modules/PolarGateway/Sync.php:398
+msgid "Polar reported a refund in a different currency. Record it manually."
+msgstr ""
+
+#. translators: %s: Polar refund id
+#: includes/Modules/PolarGateway/Sync.php:410
+#, php-format
+msgid "Refunded in Polar (%s)"
+msgstr ""
+
+#. translators: %s: reason given in Polar
+#: includes/Modules/PolarGateway/Sync.php:501
+#, php-format
+msgid "Canceled in Polar: %s"
+msgstr ""
+
+#. translators: %s: Polar subscription status
+#: includes/Modules/PolarGateway/Sync.php:503
+#, php-format
+msgid "Polar subscription is now %s."
+msgstr ""
+
 #: includes/Modules/ProductEnhancements/Admin.php:77
 msgid "Product type"
 msgstr ""
@@ -2964,21 +4964,21 @@ msgid "Not set"
 msgstr ""
 
 #. translators: %s: validation message
-#: includes/Modules/ProductEnhancements/Admin.php:179
+#: includes/Modules/ProductEnhancements/Admin.php:178
 #, php-format
 msgid "Product details: %s"
 msgstr ""
 
-#: includes/Modules/ProductEnhancements/Admin.php:204
+#: includes/Modules/ProductEnhancements/Admin.php:203
 msgid "Product details for this variation"
 msgstr ""
 
-#: includes/Modules/ProductEnhancements/Admin.php:205
+#: includes/Modules/ProductEnhancements/Admin.php:204
 msgid "Leave blank to use the product's value. The field list follows the product type set in the Details tab; update the product after changing it."
 msgstr ""
 
 #. translators: 1: variation ID, 2: validation message
-#: includes/Modules/ProductEnhancements/Admin.php:252
+#: includes/Modules/ProductEnhancements/Admin.php:251
 #, php-format
 msgid "Variation #%1$d details: %2$s"
 msgstr ""
@@ -3197,6 +5197,7 @@ msgid "Intermediate"
 msgstr ""
 
 #: includes/Modules/ProductEnhancements/Fields.php:57
+#: includes/Modules/StripeGateway/Module.php:211
 msgid "Advanced"
 msgstr ""
 
@@ -3543,49 +5544,49 @@ msgstr ""
 msgid "Cart saved. Find it any time under Saved carts."
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:164
+#: includes/Modules/SavedCarts/Module.php:166
 msgid "A product that is no longer available"
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:212
+#: includes/Modules/SavedCarts/Module.php:220
 msgid "Sign in to manage saved carts."
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:234
+#: includes/Modules/SavedCarts/Module.php:242
 msgid "Saved cart removed."
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:234
+#: includes/Modules/SavedCarts/Module.php:242
 msgid "That saved cart was not found."
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:241
+#: includes/Modules/SavedCarts/Module.php:249
 msgid "None of these products can be bought right now."
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:245
+#: includes/Modules/SavedCarts/Module.php:253
 msgid "Your saved cart is back. Current prices apply; check any product options before paying."
 msgstr ""
 
 #. translators: %s: product names
-#: includes/Modules/SavedCarts/Module.php:248
+#: includes/Modules/SavedCarts/Module.php:256
 #, php-format
 msgid "Not added: %s"
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:330
-#: includes/Modules/SavedCarts/Module.php:349
-#: includes/Modules/SavedCarts/Module.php:443
-#: includes/Modules/SavedCarts/Module.php:450
-#: includes/Modules/SavedCarts/Module.php:468
+#: includes/Modules/SavedCarts/Module.php:338
+#: includes/Modules/SavedCarts/Module.php:357
+#: includes/Modules/SavedCarts/Module.php:451
+#: includes/Modules/SavedCarts/Module.php:458
+#: includes/Modules/SavedCarts/Module.php:476
 msgid "Saved carts"
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:471
+#: includes/Modules/SavedCarts/Module.php:479
 msgid "Name"
 msgstr ""
 
-#: includes/Modules/SavedCarts/Module.php:472
+#: includes/Modules/SavedCarts/Module.php:480
 msgid "Products"
 msgstr ""
 
@@ -3605,72 +5606,74 @@ msgstr ""
 msgid "Tick \"Service\" next to Virtual and Downloadable on a product, then add instructions in its Service tab."
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:51
+#. translators: %s: placeholder that is replaced with the product name.
+#: includes/Modules/ServiceProducts/Module.php:52
 #, php-format
 msgid "Shown above the instructions. %s is replaced with the product name."
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:53
-#: includes/Modules/ServiceProducts/Module.php:255
+#. translators: %s: product name.
+#: includes/Modules/ServiceProducts/Module.php:55
+#: includes/Modules/ServiceProducts/Module.php:258
 #, php-format
 msgid "%s: what happens next"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:58
+#: includes/Modules/ServiceProducts/Module.php:60
 msgid "Emails"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:59
+#: includes/Modules/ServiceProducts/Module.php:61
 msgid "Include instructions in the customer's processing and completed order emails"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:65
+#: includes/Modules/ServiceProducts/Module.php:67
 msgid "Before payment"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:66
+#: includes/Modules/ServiceProducts/Module.php:68
 msgid "Shown instead of the instructions while an order is unpaid (for example bank transfer). Leave empty to show nothing."
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:68
+#: includes/Modules/ServiceProducts/Module.php:70
 msgid "Instructions for your service appear here as soon as your payment is confirmed."
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:130
-#: includes/Modules/ServiceProducts/Module.php:141
+#: includes/Modules/ServiceProducts/Module.php:132
+#: includes/Modules/ServiceProducts/Module.php:143
 msgid "Service"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:131
+#: includes/Modules/ServiceProducts/Module.php:133
 msgid "Services need no shipping. Customers get the instructions from the Service tab after paying."
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:166
+#: includes/Modules/ServiceProducts/Module.php:168
 msgid "After-payment instructions"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:173
+#: includes/Modules/ServiceProducts/Module.php:175
 msgid "How the customer books, sends a brief or receives the service. Shown on the thank-you page, in paid order emails and in My Account once the order is paid."
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:178
+#: includes/Modules/ServiceProducts/Module.php:180
 msgid "Booking or intake link"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:181
+#: includes/Modules/ServiceProducts/Module.php:183
 msgid "Optional. Placeholders: {order_number}, {order_id}, {email}, {first_name}, {last_name}, {name}, {product}. Values are URL-encoded."
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:187
+#: includes/Modules/ServiceProducts/Module.php:189
 msgid "Link button text"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:188
-#: includes/Modules/ServiceProducts/Module.php:280
+#: includes/Modules/ServiceProducts/Module.php:190
+#: includes/Modules/ServiceProducts/Module.php:283
 msgid "Book your session"
 msgstr ""
 
-#: includes/Modules/ServiceProducts/Module.php:206
+#: includes/Modules/ServiceProducts/Module.php:208
 msgid "The booking link must start with http:// or https://. It was not saved."
 msgstr ""
 
@@ -3876,6 +5879,758 @@ msgstr ""
 
 #: includes/Modules/StockUrgency/Module.php:251
 msgid "Show the low stock label at or below this many units. Leave blank to use the store setting."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:45
+msgid "Test"
+msgstr ""
+
+#. translators: %s: Test or Live
+#: includes/Modules/StripeGateway/Admin.php:51
+#, php-format
+msgid "%s mode is selected but no API keys are entered. Stripe stays hidden at checkout until you add them."
+msgstr ""
+
+#. translators: %s: Test or Live
+#: includes/Modules/StripeGateway/Admin.php:57
+#, php-format
+msgid "%s mode needs both the publishable key and the secret key."
+msgstr ""
+
+#. translators: 1: Test or Live, 2: expected prefix
+#: includes/Modules/StripeGateway/Admin.php:62
+#, php-format
+msgid "The %1$s secret key should start with %2$s."
+msgstr ""
+
+#. translators: 1: Test or Live, 2: expected prefix
+#: includes/Modules/StripeGateway/Admin.php:67
+#, php-format
+msgid "The %1$s publishable key should start with %2$s."
+msgstr ""
+
+#. translators: %s: Test or Live
+#: includes/Modules/StripeGateway/Admin.php:72
+#, php-format
+msgid "The %s webhook signing secret should start with whsec_."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:88
+msgid "Stripe accepted the live keys, but the account cannot take charges yet. Finish activation in the Stripe Dashboard."
+msgstr ""
+
+#. translators: 1: Test or Live, 2: Stripe account id
+#: includes/Modules/StripeGateway/Admin.php:91
+#, php-format
+msgid "%1$s keys verified with Stripe (account %2$s)."
+msgstr ""
+
+#. translators: %s: Test or Live
+#: includes/Modules/StripeGateway/Admin.php:102
+#, php-format
+msgid "%s restricted key verified with Stripe."
+msgstr ""
+
+#. translators: 1: Test or Live, 2: Stripe error message
+#: includes/Modules/StripeGateway/Admin.php:113
+#, php-format
+msgid "Stripe rejected the %1$s secret key: %2$s"
+msgstr ""
+
+#. translators: %s: Test or Live
+#: includes/Modules/StripeGateway/Admin.php:132
+#, php-format
+msgid "Add the %s webhook signing secret. Without webhooks, bank debits, Dashboard refunds, disputes and removed cards will not sync."
+msgstr ""
+
+#. translators: 1: Test or Live, 2: link to the endpoint in Stripe
+#: includes/Modules/StripeGateway/Admin.php:144
+#, php-format
+msgid "Stripe already has a %1$s webhook for this site. Open it in %2$s, reveal its signing secret and paste it here."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:146
+#: includes/Modules/StripeGateway/Module.php:25
+msgid "Stripe"
+msgstr ""
+
+#. translators: %s: Stripe error message
+#: includes/Modules/StripeGateway/Admin.php:158
+#, php-format
+msgid "Creating it automatically failed: %s"
+msgstr ""
+
+#. translators: %s: Test or Live
+#: includes/Modules/StripeGateway/Admin.php:166
+#, php-format
+msgid "%s webhook created in Stripe and its signing secret saved."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:199
+msgid "Enabled at checkout."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:200
+msgid "Disabled."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:201
+msgid "Turn on or off in WooCommerce → Settings → Payments"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:206
+msgid "Live account"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:206
+msgid "Test account"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:210
+msgid "Connected"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:215
+msgid "Not verified. Save valid keys to check the connection."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:220
+msgid "Webhook endpoint"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:222
+msgid "In Stripe → Developers → Webhooks, add an endpoint with this URL for test mode and again for live mode, select these events, then paste each signing secret above:"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:226
+msgid "Last webhook"
+msgstr ""
+
+#. translators: 1: event type, 2: mode, 3: time ago
+#: includes/Modules/StripeGateway/Admin.php:229
+#, php-format
+msgid "%1$s (%2$s) %3$s ago"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:231
+msgid "No signed webhook received yet."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:235
+msgid "Event"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:235
+msgid "Result"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Admin.php:235
+msgid "Received (UTC)"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Assets.php:96
+#: includes/Modules/StripeGateway/Gateway.php:183
+#: includes/Modules/StripeGateway/Gateway.php:245
+#: includes/Modules/StripeGateway/Gateway.php:346
+#: includes/Modules/StripeGateway/Gateway.php:401
+msgid "Enter your payment details to continue."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Assets.php:97
+#: includes/Modules/StripeGateway/Express.php:313
+msgid "Choose product options before paying."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Assets.php:98
+msgid "Calculated from your address"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Assets.php:99
+msgid "We cannot ship to this address."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Assets.php:100
+#: templates/stripe_gateway/payment-fields.php:62
+msgid "Your payment details will be saved securely by Stripe and used for future renewals."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Assets.php:101
+msgid "Processing payment…"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Assets.php:102
+msgid "Test mode: use card 4242 4242 4242 4242 with any future expiry date and any CVC."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Assets.php:103
+msgid "The total changed after taxes or shipping were added. Check the new total and try again."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Customers.php:97
+msgid "Stripe did not return a customer."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Endpoints.php:78
+msgid "We could not find that order."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Endpoints.php:96
+msgid "Payment method updated."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Endpoints.php:144
+msgid "Your session expired. Add the payment method again."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Endpoints.php:157
+msgid "Payment method successfully added."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:41
+#: includes/Modules/StripeGateway/ErrorMapper.php:147
+#: includes/Modules/StripeGateway/ErrorMapper.php:180
+msgid "Your card was declined. Try another card or payment method."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:43
+#: includes/Modules/StripeGateway/ErrorMapper.php:153
+msgid "Your card has expired. Use a different card."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:46
+#: includes/Modules/StripeGateway/ErrorMapper.php:156
+msgid "Your card's security code is incorrect."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:49
+#: includes/Modules/StripeGateway/ErrorMapper.php:159
+msgid "Your card number is incorrect."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:52
+msgid "Your card's expiry date is invalid."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:55
+#: includes/Modules/StripeGateway/ErrorMapper.php:161
+msgid "Your card's postal code is incorrect."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:57
+msgid "An error occurred while processing your card. Try again in a moment."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:60
+#: includes/Modules/StripeGateway/ErrorMapper.php:170
+msgid "Your bank needs you to confirm this payment. Pay the order from your account to authenticate it."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:63
+msgid "We could not verify your payment method. Try again or choose another payment method."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:65
+msgid "The order total is below the minimum amount that can be charged in this currency."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:67
+msgid "The order total is above the maximum amount that can be charged in one payment."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:69
+msgid "Your payment method does not support this currency."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:73
+msgid "This payment method is not available right now. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:76
+msgid "The payment attempt expired or failed. Try again."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:79
+msgid "The payment service is busy. Try again in a moment."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:81
+msgid "We could not reach the payment service. Check your connection and try again."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:93
+msgid "We could not process your payment. Try again or use a different payment method."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:151
+msgid "Your card has insufficient funds."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:164
+msgid "Your card has reached its spending limit. Try another card or contact your bank."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:166
+msgid "Your card does not support this currency."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:168
+msgid "Your card does not support this type of purchase."
+msgstr ""
+
+#: includes/Modules/StripeGateway/ErrorMapper.php:174
+msgid "Your bank could not be reached. Try again in a moment."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Express.php:198
+msgid "Sign in to check out."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Express.php:301
+msgid "This product cannot be purchased."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Express.php:341
+msgid "This product could not be added to the cart."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:33
+msgid "Stripe (Stackless)"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:34
+msgid "Cards, wallets and local payment methods through the Stripe Payment Element, with saved methods and automatic subscription renewals."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:44
+msgid "Use a new payment method"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:56
+msgid "Enable/Disable"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:57
+msgid "Enable Stripe"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:69
+msgid "API keys, webhooks, checkout appearance and express buttons live in the Stackless settings."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:71
+msgid "Open Stripe settings"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:217
+#: includes/Modules/StripeGateway/Gateway.php:393
+msgid "That saved payment method is not available. Choose another one."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:226
+msgid "Saved Stripe payment method attached for future payments."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/Modules/StripeGateway/Gateway.php:279
+#, php-format
+msgid "Stripe payment attempt failed: %s"
+msgstr ""
+
+#. translators: %s: payment method name, e.g. "Visa ending in 4242"
+#: includes/Modules/StripeGateway/Gateway.php:462
+#, php-format
+msgid "Renewals now charge %s."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:510
+msgid "Refund amount must be greater than zero."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:518
+msgid "No Stripe payment was found for this order."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:525
+msgid "The Stripe authorization could not be released."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:527
+msgid "This payment is only authorized. Capture it first (set the order to Processing), then refund part of it."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Gateway.php:554
+msgid "Stripe declined the refund."
+msgstr ""
+
+#. translators: 1: amount, 2: Stripe refund id, 3: refund status
+#: includes/Modules/StripeGateway/Gateway.php:563
+#, php-format
+msgid "Refunded %1$s through Stripe (%2$s, %3$s)."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:30
+msgid "Take cards, Apple Pay, Google Pay, Link and local payment methods with Stripe, save cards, and renew subscriptions automatically."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:129
+msgid "Stripe account"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:131
+msgid "Get test keys"
+msgstr ""
+
+#. translators: %s: webhook URL
+#: includes/Modules/StripeGateway/Module.php:135
+#, php-format
+msgid "Copy the publishable and secret keys into the fields below. Keys are checked with Stripe when you save, and Stripe's webhook is created for you when its signing secret is empty (it needs a key that may manage webhook endpoints). Webhook URL for both modes: <code>%s</code>"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:139
+msgid "Use test keys. Only Stripe test cards work; no real money moves."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:140
+msgid "Test publishable key"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:141
+msgid "Test secret key"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:142
+msgid "Test webhook signing secret"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:143
+msgid "Live publishable key"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:144
+msgid "Live secret key"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:145
+msgid "Live webhook signing secret"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:149
+#: includes/Modules/StripeGateway/Settings.php:81
+msgid "Card and more"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:149
+msgid "Payment method name shoppers see at checkout."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:150
+#: includes/Modules/StripeGateway/Settings.php:86
+msgid "Pay securely with your card, Apple Pay, Google Pay, Link or a local payment method."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:154
+msgid "Capture"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:157
+msgid "Charge immediately"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:158
+msgid "Authorize only, capture when the order moves to Processing or Completed"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:160
+msgid "Orders with subscriptions always charge immediately. Authorizations expire after 7 days."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:162
+msgid "Saved payment methods"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:162
+msgid "Let signed-in customers save and reuse payment methods. Subscription orders always save the method for renewals."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:163
+msgid "Statement descriptor suffix"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:163
+msgid "Added after your account's shortened descriptor on card statements, e.g. an order prefix. Letters required; no < > \\ ' \" * characters."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:167
+msgid "Payment form style"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:170
+msgid "Match my theme (colors, font, light or dark)"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:171
+msgid "Stripe default"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:172
+msgid "Flat"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:173
+msgid "Night (dark)"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:181
+msgid "Express checkout"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:182
+msgid "Apple Pay, Google Pay and Link buttons. Apple Pay also needs your domain registered in Stripe → Settings → Payment method domains."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:187
+msgid "Show buttons on"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:199
+msgid "Button label"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:202
+msgid "Logo only"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:203
+msgid "Buy with"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:204
+msgid "Checkout with"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:205
+msgid "Order with"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:206
+msgid "Pay with"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Module.php:212
+msgid "Log API calls and webhook results to WooCommerce → Status → Logs (stackless-stripe_gateway). Keys and card data are never logged. Errors are always logged."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Payments.php:100
+msgid "No payment method was provided."
+msgstr ""
+
+#. translators: 1: PaymentIntent id, 2: how the result arrived (checkout, webhook, renewal...)
+#: includes/Modules/StripeGateway/Payments.php:289
+#, php-format
+msgid "Stripe payment succeeded (%1$s, via %2$s)."
+msgstr ""
+
+#. translators: %s: PaymentIntent id
+#: includes/Modules/StripeGateway/Payments.php:312
+#, php-format
+msgid "Stripe authorized the payment (%s). Change the order to Processing or Completed to capture it; authorizations expire after 7 days."
+msgstr ""
+
+#. translators: %s: PaymentIntent id
+#: includes/Modules/StripeGateway/Payments.php:327
+#, php-format
+msgid "Stripe is processing the renewal payment (%s). The order updates when the bank confirms."
+msgstr ""
+
+#. translators: %s: PaymentIntent id
+#: includes/Modules/StripeGateway/Payments.php:331
+#, php-format
+msgid "Stripe is processing the payment (%s). The order updates when the bank confirms it."
+msgstr ""
+
+#. translators: %s: PaymentIntent id
+#: includes/Modules/StripeGateway/Payments.php:342
+#, php-format
+msgid "Stripe PaymentIntent %s was canceled."
+msgstr ""
+
+#. translators: 1: PaymentIntent id, 2: customer-facing reason
+#: includes/Modules/StripeGateway/Payments.php:352
+#, php-format
+msgid "Stripe payment failed (%1$s): %2$s"
+msgstr ""
+
+#. translators: 1: PaymentIntent id, 2: amount on the intent, 3: order total
+#: includes/Modules/StripeGateway/Payments.php:406
+#, php-format
+msgid "Stripe PaymentIntent %1$s is for %2$s but the order total is now %3$s. The order was not marked paid; check the payment in Stripe before fulfilling."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Payments.php:441
+msgid "Stripe confirmed the setup but the payment method could not be saved."
+msgstr ""
+
+#. translators: 1: SetupIntent id, 2: how the result arrived
+#: includes/Modules/StripeGateway/Payments.php:445
+#, php-format
+msgid "Payment method saved for future payments (%1$s, via %2$s)."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Payments.php:447
+msgid "Stripe is verifying the saved payment method."
+msgstr ""
+
+#. translators: 1: SetupIntent id, 2: reason
+#: includes/Modules/StripeGateway/Payments.php:459
+#, php-format
+msgid "Saving the payment method failed (%1$s): %2$s"
+msgstr ""
+
+#. translators: %s: formatted amount
+#: includes/Modules/StripeGateway/Payments.php:589
+#, php-format
+msgid "Stripe charge captured: %s."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/Modules/StripeGateway/Payments.php:593
+#, php-format
+msgid "Stripe capture failed: %s"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Payments.php:612
+msgid "Stripe authorization released."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/Modules/StripeGateway/Payments.php:616
+#, php-format
+msgid "Releasing the Stripe authorization failed: %s"
+msgstr ""
+
+#. translators: 1: site name, 2: order number
+#: includes/Modules/StripeGateway/Payments.php:638
+#, php-format
+msgid "%1$s - Order %2$s"
+msgstr ""
+
+#: includes/Modules/StripeGateway/PaymentToken.php:30
+msgid "Saved payment method"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Renewals.php:37
+msgid "This site is a copy of the live store, so it does not charge saved payment methods."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Renewals.php:44
+msgid "The renewal order cannot be paid in its current status."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/StripeGateway/Renewals.php:55
+#, php-format
+msgid "Stripe does not support %s."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Renewals.php:63
+msgid "No saved Stripe payment method is attached to this subscription."
+msgstr ""
+
+#. translators: %s: error summary
+#: includes/Modules/StripeGateway/Renewals.php:197
+#, php-format
+msgid "Stripe could not be reached for the renewal charge (%s). Retrying automatically with the same idempotency key."
+msgstr ""
+
+#. translators: %s: order payment URL
+#: includes/Modules/StripeGateway/Renewals.php:217
+#, php-format
+msgid "The bank requires the customer to authenticate this renewal (3D Secure). The customer can confirm and pay at: %s"
+msgstr ""
+
+#. translators: %s: reason
+#: includes/Modules/StripeGateway/Renewals.php:231
+#, php-format
+msgid "Stripe renewal charge failed: %s"
+msgstr ""
+
+#: includes/Modules/StripeGateway/StripeClient.php:77
+msgid "Stripe is not configured: the secret key is missing."
+msgstr ""
+
+#. translators: 1: payment method name, 2: last four digits
+#: includes/Modules/StripeGateway/Tokens.php:281
+#, php-format
+msgid "%1$s ending in %2$s"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:289
+msgid "Card"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:290
+msgid "Link"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:291
+msgid "SEPA Direct Debit"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:292
+msgid "US bank account"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:293
+msgid "Bacs Direct Debit"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:294
+msgid "BECS Direct Debit"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:295
+msgid "Pre-authorized debit"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:297
+msgid "Cash App Pay"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:298
+msgid "Revolut Pay"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Tokens.php:299
+msgid "Amazon Pay"
+msgstr ""
+
+#: includes/Modules/StripeGateway/Webhooks.php:43
+#: includes/Modules/StripeGateway/Webhooks.php:55
+msgid "Invalid Stripe signature."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Webhooks.php:59
+msgid "Malformed event."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Webhooks.php:65
+msgid "Event mode does not match the signing secret."
+msgstr ""
+
+#: includes/Modules/StripeGateway/Webhooks.php:202
+msgid "Refunded in the Stripe Dashboard."
+msgstr ""
+
+#. translators: %s: refunded amount
+#: includes/Modules/StripeGateway/Webhooks.php:210
+#, php-format
+msgid "Recorded a %s refund made in Stripe."
+msgstr ""
+
+#. translators: 1: dispute amount, 2: dispute reason, 3: dispute id
+#: includes/Modules/StripeGateway/Webhooks.php:233
+#, php-format
+msgid "The customer disputed this payment (%1$s, reason: %2$s). Respond in the Stripe Dashboard before the deadline. Dispute %3$s."
 msgstr ""
 
 #: includes/Modules/Wishlist/Module.php:40
@@ -4243,6 +6998,28 @@ msgstr ""
 msgid "Accepted payment methods"
 msgstr ""
 
+#. translators: %s: site name
+#: templates/paddle_gateway/pay-page.php:24
+#, php-format
+msgid "Checkout · %s"
+msgstr ""
+
+#: templates/paddle_gateway/pay-page.php:36
+msgid "Opening secure checkout…"
+msgstr ""
+
+#: templates/paddle_gateway/pay-page.php:38
+msgid "Back to the store"
+msgstr ""
+
+#: templates/paypal_gateway/payment-fields.php:29
+msgid "Your PayPal account will be saved so future subscription payments are taken automatically. You can remove it any time in your PayPal account."
+msgstr ""
+
+#: templates/paypal_gateway/payment-fields.php:49
+msgid "Place your order and you will be sent to PayPal to pay."
+msgstr ""
+
 #: templates/saved_carts/account.php:21
 msgid "Saved carts and order again"
 msgstr ""
@@ -4319,12 +7096,6 @@ msgstr ""
 msgid "Your past orders appear here so you can reorder in one click."
 msgstr ""
 
-#. translators: %s: order number
-#: templates/saved_carts/account.php:102
-#, php-format
-msgid "Order #%s"
-msgstr ""
-
 #: templates/saved_carts/account.php:115
 msgid "View"
 msgstr ""
@@ -4347,6 +7118,22 @@ msgstr ""
 
 #: templates/saved_carts/signed-out.php:15
 msgid "Sign in"
+msgstr ""
+
+#. translators: %s: terms and conditions URL
+#: templates/stripe_gateway/express-buttons.php:27
+#, php-format
+msgid "By paying with an express method you agree to our <a href=\"%s\" target=\"_blank\" rel=\"noopener\">terms and conditions</a>."
+msgstr ""
+
+#: templates/stripe_gateway/express-buttons.php:36
+msgid "or"
+msgstr ""
+
+#. translators: %s: test card number
+#: templates/stripe_gateway/payment-fields.php:33
+#, php-format
+msgid "Test mode: use card %s with any future expiry date and any CVC."
 msgstr ""
 
 #. translators: %s: customer display name

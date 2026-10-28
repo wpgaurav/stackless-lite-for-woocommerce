@@ -20,14 +20,14 @@ $stackless_allowed_svg = ['svg' => ['viewbox' => true, 'fill' => true, 'stroke' 
     <?php endif; ?>
     <?php if ($trust['lines']) : ?>
         <ul>
-            <?php foreach ($trust['lines'] as $line) : ?>
-                <li><?php echo wp_kses($stackless_check, $stackless_allowed_svg); ?><span><?php echo esc_html($line); ?></span></li>
+            <?php foreach ($trust['lines'] as $stackless_line) : ?>
+                <li><?php echo wp_kses($stackless_check, $stackless_allowed_svg); ?><span><?php echo esc_html($stackless_line); ?></span></li>
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
     <?php if ($trust['image_id']) :
-        $alt = (string) get_post_meta((int) $trust['image_id'], '_wp_attachment_image_alt', true); ?>
-        <div class="stackless-trust-image"><?php echo wp_get_attachment_image((int) $trust['image_id'], 'medium', false, ['loading' => 'lazy', 'alt' => $alt !== '' ? $alt : __('Accepted payment methods', 'stackless-lite')]); ?></div>
+        $stackless_alt = (string) get_post_meta((int) $trust['image_id'], '_wp_attachment_image_alt', true); ?>
+        <div class="stackless-trust-image"><?php echo wp_get_attachment_image((int) $trust['image_id'], 'medium', false, ['loading' => 'lazy', 'alt' => $stackless_alt !== '' ? $stackless_alt : __('Accepted payment methods', 'stackless-lite')]); ?></div>
     <?php endif; ?>
     <?php if ($trust['policy_page']) : ?>
         <p class="stackless-trust-policy"><a href="<?php echo esc_url((string) get_permalink((int) $trust['policy_page'])); ?>" target="_blank" rel="noopener"><?php echo esc_html($trust['policy_label']); ?><span class="screen-reader-text"> <?php esc_html_e('(opens in a new tab)', 'stackless-lite'); ?></span></a></p>

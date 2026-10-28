@@ -88,10 +88,11 @@ final class InternalEmails
     /** The email of the checkout being processed: posted (classic) or on the customer (Checkout block). */
     public static function checkoutEmail(): string
     {
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the checkout nonce; this only reads the address.
+        // phpcs:disable WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the checkout nonce; this only reads the address.
         if (isset($_POST['billing_email']) && is_string($_POST['billing_email'])) {
             return sanitize_email(wp_unslash($_POST['billing_email']));
         }
+        // phpcs:enable WordPress.Security.NonceVerification.Missing
         return function_exists('WC') && WC()->customer ? (string) WC()->customer->get_billing_email() : '';
     }
 

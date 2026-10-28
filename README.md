@@ -8,7 +8,7 @@ It runs on core WooCommerce alone, works with the Cart and Checkout blocks and t
 
 **[Product page](https://gauravtiwari.org/product/stackless-lite-for-woocommerce/)** · [Download the latest ZIP](https://gauravtiwari.org/wp-json/gt-plugin-updates/v1/plugins/stackless-lite-for-woocommerce/download) · [Documentation](https://gauravtiwari.org/docs/stackless-for-woocommerce/) · [Upgrade to Stackless for WooCommerce](https://gauravtiwari.org/product/stackless-for-woocommerce/)
 
-**Latest version:** 1.7.0 · **Requires:** WordPress 6.7+, WooCommerce 9.9+, PHP 7.4+ · **License:** GPL-2.0-or-later
+**Latest version:** 1.7.1 · **Requires:** WordPress 6.7+, WooCommerce 9.9+, PHP 7.4+ · **License:** GPL-2.0-or-later
 
 ## Modules
 

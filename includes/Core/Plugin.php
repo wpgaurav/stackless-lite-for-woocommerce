@@ -32,7 +32,6 @@ final class Plugin
 
     public function boot(): void
     {
-        load_plugin_textdomain('stackless-lite', false, dirname(plugin_basename(STACKLESS_PLUGIN_FILE)) . '/languages');
         Assets::register();
         OrderQuery::boot();
         LiveStore::boot();

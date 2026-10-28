@@ -618,10 +618,9 @@ final class Module extends \Stackless\Core\Module
             return;
         }
         foreach ([self::META_MIN, self::META_MAX, self::META_STEP] as $key) {
-            // WooCommerce checks the save-variations nonce and edit_products capability before this action.
-            // phpcs:ignore WordPress.Security.NonceVerification.Missing
             $field = self::variationField($key);
-            $raw = isset($_POST[$field][$index]) ? sanitize_text_field(wp_unslash((string) $_POST[$field][$index])) : '';
+            // WooCommerce checks the save-variations nonce and edit_products capability before this action.
+            $raw = isset($_POST[$field][$index]) ? sanitize_text_field(wp_unslash((string) $_POST[$field][$index])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
             $this->storeValue($variation, $key, $raw);
         }
         unset($this->cache[$variation->get_id()]);

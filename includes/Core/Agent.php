@@ -101,7 +101,7 @@ final class Agent
     {
         $id = isset($input[$key]) && is_numeric($input[$key]) ? (int) $input[$key] : 0;
         if ($id < 1) {
-            throw new \InvalidArgumentException('Pass a numeric ' . $key . '.');
+            throw new \InvalidArgumentException(esc_html('Pass a numeric ' . $key . '.'));
         }
         return $id;
     }

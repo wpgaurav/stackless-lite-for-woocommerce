@@ -161,9 +161,8 @@ final class Admin
 
     public function save(\WC_Product $product): void
     {
-        // WooCommerce verified the product nonce and edit capability before this action.
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing
-        $raw = isset($_POST[self::FIELD]) && is_array($_POST[self::FIELD]) ? wp_unslash($_POST[self::FIELD]) : null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- each value is sanitized in Repository::validate().
+        // WooCommerce verified the product nonce and edit capability before this action; each value is sanitized in Repository::validate().
+        $raw = isset($_POST[self::FIELD]) && is_array($_POST[self::FIELD]) ? wp_unslash($_POST[self::FIELD]) : null; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
         if (!is_array($raw) || empty($raw['present'])) {
             return;
         }

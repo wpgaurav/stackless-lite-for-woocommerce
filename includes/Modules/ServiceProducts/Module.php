@@ -48,8 +48,10 @@ class Module extends \Stackless\Core\Module
                 'id' => 'stackless_service_products_heading',
                 'type' => 'text',
                 'title' => __('Heading', 'stackless-lite'),
+                /* translators: %s: placeholder that is replaced with the product name. */
                 'desc' => __('Shown above the instructions. %s is replaced with the product name.', 'stackless-lite'),
                 'desc_tip' => true,
+                /* translators: %s: product name. */
                 'default' => __('%s: what happens next', 'stackless-lite'),
             ],
             [
@@ -252,6 +254,7 @@ class Module extends \Stackless\Core\Module
             $lines[] = ['product_id' => $id, 'is_service' => $item->get_meta(self::ITEM_META, true) === 'yes' || self::isService($id)];
         }
         $blocks = [];
+        /* translators: %s: product name. */
         $heading = (string) $this->option('heading', __('%s: what happens next', 'stackless-lite'));
         foreach (Links::serviceProducts($lines) as $id) {
             $product = wc_get_product($id);

@@ -180,7 +180,7 @@ final class ProductSettings
         };
         $presets = [];
         if (isset($_POST[self::FIELD . '_presets']) && is_array($_POST[self::FIELD . '_presets'])) {
-            foreach (wp_unslash($_POST[self::FIELD . '_presets']) as $value) {
+            foreach (map_deep(wp_unslash($_POST[self::FIELD . '_presets']), 'sanitize_text_field') as $value) {
                 if (is_scalar($value)) {
                     $presets[] = sanitize_text_field((string) $value);
                 }
@@ -258,7 +258,7 @@ final class ProductSettings
     public function saveVariation(\WC_Product $variation, $index): void
     {
         // phpcs:disable WordPress.Security.NonceVerification.Missing -- WooCommerce verified the save-variations nonce.
-        $all = isset($_POST[self::FIELD . '_var']) && is_array($_POST[self::FIELD . '_var']) ? wp_unslash($_POST[self::FIELD . '_var']) : [];
+        $all = isset($_POST[self::FIELD . '_var']) && is_array($_POST[self::FIELD . '_var']) ? map_deep(wp_unslash($_POST[self::FIELD . '_var']), 'sanitize_text_field') : [];
         // phpcs:enable
         $row = is_array($all) && isset($all[$index]) && is_array($all[$index]) ? $all[$index] : null;
         if ($row === null) {

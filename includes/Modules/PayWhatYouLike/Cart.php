@@ -469,7 +469,7 @@ final class Cart
         if (!isset($_POST[self::KEY]) || !wp_verify_nonce($nonce, 'woocommerce-cart')) {
             return (bool) $updated;
         }
-        $posted = wp_unslash($_POST[self::KEY]);
+        $posted = map_deep(wp_unslash($_POST[self::KEY]), 'sanitize_text_field');
         // phpcs:enable
         return $this->applyPosted($posted) || (bool) $updated;
     }

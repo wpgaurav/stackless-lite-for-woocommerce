@@ -10,14 +10,14 @@
 
 defined('ABSPATH') || exit;
 
-foreach ($blocks as $block) : ?>
+foreach ($blocks as $stackless_block) : ?>
     <div style="margin:0 0 24px;">
-        <h2><?php echo esc_html($block['heading']); ?></h2>
-        <?php if (trim(wp_strip_all_tags($block['instructions'])) !== '') : ?>
-            <?php echo wp_kses_post(wpautop($block['instructions'])); ?>
+        <h2><?php echo esc_html($stackless_block['heading']); ?></h2>
+        <?php if (trim(wp_strip_all_tags($stackless_block['instructions'])) !== '') : ?>
+            <?php echo wp_kses_post(wpautop($stackless_block['instructions'])); ?>
         <?php endif; ?>
-        <?php if ($block['link'] !== '') : ?>
-            <p><a href="<?php echo esc_url($block['link']); ?>" style="font-weight:600;"><?php echo esc_html($block['link_label']); ?></a></p>
+        <?php if ($stackless_block['link'] !== '') : ?>
+            <p><a href="<?php echo esc_url($stackless_block['link']); ?>" style="font-weight:600;"><?php echo esc_html($stackless_block['link_label']); ?></a></p>
         <?php endif; ?>
     </div>
 <?php endforeach;

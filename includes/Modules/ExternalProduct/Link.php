@@ -52,8 +52,8 @@ final class Link
         if ($url === '') {
             return false;
         }
-        $scheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
-        $host = (string) parse_url($url, PHP_URL_HOST);
+        $scheme = strtolower((string) wp_parse_url($url, PHP_URL_SCHEME));
+        $host = (string) wp_parse_url($url, PHP_URL_HOST);
         return in_array($scheme, ['http', 'https'], true) && $host !== '';
     }
 }

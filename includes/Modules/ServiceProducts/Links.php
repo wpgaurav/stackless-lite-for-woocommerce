@@ -30,8 +30,8 @@ final class Links
         // Unknown placeholders are removed rather than left in the link.
         $url = strtr($template, $replace);
         $url = preg_replace('/\{[a-z_]+\}/', '', $url) ?? '';
-        $scheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
-        if (!in_array($scheme, ['http', 'https'], true) || !parse_url($url, PHP_URL_HOST)) {
+        $scheme = strtolower((string) wp_parse_url($url, PHP_URL_SCHEME));
+        if (!in_array($scheme, ['http', 'https'], true) || !wp_parse_url($url, PHP_URL_HOST)) {
             return '';
         }
         return $url;

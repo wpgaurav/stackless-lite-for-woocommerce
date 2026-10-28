@@ -116,27 +116,27 @@ final class Fields
             case 'number':
                 if (!preg_match('/^\d{1,9}$/', $value)) {
                     /* translators: %s: field name */
-                    throw new \InvalidArgumentException(sprintf(__('%s must be a whole number.', 'stackless-lite'), $label));
+                    throw new \InvalidArgumentException(esc_html(sprintf(__('%s must be a whole number.', 'stackless-lite'), $label)));
                 }
                 return (string) (int) $value;
             case 'date':
                 $time = strtotime($value);
                 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value) || $time === false || gmdate('Y-m-d', $time) !== $value) {
                     /* translators: %s: field name */
-                    throw new \InvalidArgumentException(sprintf(__('%s must be a valid date (YYYY-MM-DD).', 'stackless-lite'), $label));
+                    throw new \InvalidArgumentException(esc_html(sprintf(__('%s must be a valid date (YYYY-MM-DD).', 'stackless-lite'), $label)));
                 }
                 return $value;
             case 'url':
                 $url = esc_url_raw($value, ['http', 'https']);
                 if ($url === '') {
                     /* translators: %s: field name */
-                    throw new \InvalidArgumentException(sprintf(__('%s must be a web address starting with https://.', 'stackless-lite'), $label));
+                    throw new \InvalidArgumentException(esc_html(sprintf(__('%s must be a web address starting with https://.', 'stackless-lite'), $label)));
                 }
                 return $url;
             case 'select':
                 if (!in_array($value, (array) ($field['options'] ?? []), true)) {
                     /* translators: %s: field name */
-                    throw new \InvalidArgumentException(sprintf(__('Choose one of the options for %s.', 'stackless-lite'), $label));
+                    throw new \InvalidArgumentException(esc_html(sprintf(__('Choose one of the options for %s.', 'stackless-lite'), $label)));
                 }
                 return $value;
             case 'list':
@@ -146,7 +146,7 @@ final class Fields
             case 'gtin':
                 $digits = (string) preg_replace('/[\s-]/', '', $value);
                 if (!self::validGtin($digits)) {
-                    throw new \InvalidArgumentException(__('The GTIN must be 8, 12, 13 or 14 digits with a valid check digit.', 'stackless-lite'));
+                    throw new \InvalidArgumentException(esc_html__('The GTIN must be 8, 12, 13 or 14 digits with a valid check digit.', 'stackless-lite'));
                 }
                 return $digits;
             case 'isbn13':
@@ -154,14 +154,14 @@ final class Fields
                 $isbn = self::isbn13($value);
                 if ($isbn === '') {
                     /* translators: %s: field name */
-                    throw new \InvalidArgumentException(sprintf(__('%s is not a valid ISBN. Check the digits, including the last one.', 'stackless-lite'), $label));
+                    throw new \InvalidArgumentException(esc_html(sprintf(__('%s is not a valid ISBN. Check the digits, including the last one.', 'stackless-lite'), $label)));
                 }
                 if ($field['type'] === 'isbn13') {
                     return $isbn;
                 }
                 $isbn10 = self::isbn10($isbn);
                 if ($isbn10 === '') {
-                    throw new \InvalidArgumentException(__('ISBNs starting with 979 have no ISBN-10. Enter it as the ISBN-13 instead.', 'stackless-lite'));
+                    throw new \InvalidArgumentException(esc_html__('ISBNs starting with 979 have no ISBN-10. Enter it as the ISBN-13 instead.', 'stackless-lite'));
                 }
                 return $isbn10;
         }

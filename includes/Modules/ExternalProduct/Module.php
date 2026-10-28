@@ -244,9 +244,9 @@ final class Module extends \Stackless\Core\Module
         }
         $themeClass = function_exists('wc_wp_theme_get_element_class_name') ? (string) wc_wp_theme_get_element_class_name('button') : '';
 
-        do_action('woocommerce_before_add_to_cart_form');
+        do_action('woocommerce_before_add_to_cart_form'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce's own hook, fired the way WooCommerce does.
         echo '<div class="cart stackless-external-product">';
-        do_action('woocommerce_before_add_to_cart_button');
+        do_action('woocommerce_before_add_to_cart_button'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce's own hook, fired the way WooCommerce does.
         printf(
             '<a href="%1$s" class="single_add_to_cart_button button alt%2$s" target="%3$s"%4$s%5$s>%6$s</a>',
             esc_url($url),
@@ -256,9 +256,9 @@ final class Module extends \Stackless\Core\Module
             $tracking ? ' data-stackless-external="' . esc_attr((string) $product->get_id()) . '"' : '',
             esc_html($product->single_add_to_cart_text())
         );
-        do_action('woocommerce_after_add_to_cart_button');
+        do_action('woocommerce_after_add_to_cart_button'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce's own hook, fired the way WooCommerce does.
         echo '</div>';
-        do_action('woocommerce_after_add_to_cart_form');
+        do_action('woocommerce_after_add_to_cart_form'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce's own hook, fired the way WooCommerce does.
     }
 
     private function queueScript(): void

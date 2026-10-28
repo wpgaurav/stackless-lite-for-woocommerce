@@ -12,12 +12,12 @@
 defined('ABSPATH') || exit;
 ?>
 <div class="stackless-consents" data-stackless-consents>
-    <?php foreach ($consents as $consent) :
-        $field_id = 'stackless_consent_' . $consent['id']; ?>
-        <p class="form-row stackless-consent-row<?php echo $consent['required'] ? ' validate-required' : ''; ?>" id="<?php echo esc_attr($field_id . '_field'); ?>">
-            <label class="stackless-consent" for="<?php echo esc_attr($field_id); ?>">
-                <input type="checkbox" id="<?php echo esc_attr($field_id); ?>" name="stackless_consent[<?php echo esc_attr($consent['id']); ?>]" value="1" data-stackless-consent<?php echo $consent['required'] ? ' data-required aria-required="true"' : ''; ?>>
-                <span><?php echo wp_kses($consent['label'], $allowed); ?><?php if ($consent['required']) : ?> <abbr class="stackless-consent-required required" title="<?php esc_attr_e('required', 'stackless-lite'); ?>">*</abbr><?php endif; ?></span>
+    <?php foreach ($consents as $stackless_consent) :
+        $stackless_field_id = 'stackless_consent_' . $stackless_consent['id']; ?>
+        <p class="form-row stackless-consent-row<?php echo $stackless_consent['required'] ? ' validate-required' : ''; ?>" id="<?php echo esc_attr($stackless_field_id . '_field'); ?>">
+            <label class="stackless-consent" for="<?php echo esc_attr($stackless_field_id); ?>">
+                <input type="checkbox" id="<?php echo esc_attr($stackless_field_id); ?>" name="stackless_consent[<?php echo esc_attr($stackless_consent['id']); ?>]" value="1" data-stackless-consent<?php echo $stackless_consent['required'] ? ' data-required aria-required="true"' : ''; ?>>
+                <span><?php echo wp_kses($stackless_consent['label'], $allowed); ?><?php if ($stackless_consent['required']) : ?> <abbr class="stackless-consent-required required" title="<?php esc_attr_e('required', 'stackless-lite'); ?>">*</abbr><?php endif; ?></span>
             </label>
         </p>
     <?php endforeach; ?>

@@ -3,7 +3,7 @@
  * Plugin Name: Stackless Lite for WooCommerce
  * Plugin URI: https://gauravtiwari.org/product/stackless-lite-for-woocommerce/
  * Description: Free store tools for WooCommerce: wishlist, saved carts, back-in-stock alerts, quantity limits, buy links, pay what you like, checkout tweaks and catalog labels. Switch on only what you use.
- * Version: 1.7.0
+ * Version: 1.7.1
  * Author: Gaurav Tiwari
  * Author URI: https://gauravtiwari.org
  * License: GPL-2.0-or-later
@@ -48,7 +48,7 @@ if (defined('STACKLESS_VERSION') || (static function (): bool {
     return;
 }
 
-define('STACKLESS_LITE_VERSION', '1.7.0');
+define('STACKLESS_LITE_VERSION', '1.7.1');
 define('STACKLESS_VERSION', STACKLESS_LITE_VERSION);
 define('STACKLESS_PLUGIN_FILE', __FILE__);
 define('STACKLESS_PLUGIN_PATH', plugin_dir_path(__FILE__));

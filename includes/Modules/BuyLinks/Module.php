@@ -131,7 +131,7 @@ final class Module extends \Stackless\Core\Module
 
         wc_nocache_headers();
         if (!defined('DONOTCACHEPAGE')) {
-            define('DONOTCACHEPAGE', true);
+            define('DONOTCACHEPAGE', true); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- the shared signal page-cache plugins read.
         }
 
         $params = ['items' => $raw, 'coupon' => $couponRaw, 'clear' => in_array($clearParam, ['0', '1'], true) ? $clearParam : '', 'to' => in_array($to, ['checkout', 'cart'], true) ? $to : '', 'exp' => $exp];
@@ -157,7 +157,9 @@ final class Module extends \Stackless\Core\Module
             $session->set_customer_session_cookie(true);
         }
         $clear = $params['clear'] !== '' ? $params['clear'] === '1' : get_option('stackless_buy_links_clear', 'yes') === 'yes';
+        $before = null;
         if ($clear) {
+            $before = ['contents' => WC()->cart->get_cart_contents(), 'coupons' => WC()->cart->get_applied_coupons()];
             WC()->cart->empty_cart();
         }
 
@@ -170,6 +172,12 @@ final class Module extends \Stackless\Core\Module
             if ($this->addItem($resolved, $attributes)) {
                 $added++;
             }
+        }
+        if (!$added && $before && $before['contents']) {
+            // Nothing from the link could be added: give the visitor their cart back.
+            WC()->cart->set_cart_contents($before['contents']);
+            WC()->cart->set_applied_coupons($before['coupons']);
+            WC()->cart->calculate_totals();
         }
         if ($parsed['errors']) {
             wc_add_notice(__('Some products in this link could not be read and were skipped.', 'stackless-lite'), 'notice');
@@ -244,7 +252,7 @@ final class Module extends \Stackless\Core\Module
             }
         }
         $qty = $product->is_sold_individually() ? 1 : $item['qty'];
-        if (!apply_filters('woocommerce_add_to_cart_validation', true, $productId, $qty, $variationId, $variation)) {
+        if (!apply_filters('woocommerce_add_to_cart_validation', true, $productId, $qty, $variationId, $variation)) { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce's own hook, fired the way WooCommerce does.
             return false;
         }
         try {
@@ -286,7 +294,7 @@ final class Module extends \Stackless\Core\Module
         if (!in_array($type, ['simple', 'variable'], true) && !apply_filters('stackless_buy_links_buy_now_supports', false, $product)) {
             return;
         }
-        $action = add_query_arg(self::BUY_NOW_PARAM, '1', apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())); // phpcs:ignore WooCommerce.Commenting.CommentHooks.MissingHookComment -- core hook.
+        $action = add_query_arg(self::BUY_NOW_PARAM, '1', apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound, WooCommerce.Commenting.CommentHooks.MissingHookComment -- core hook.
         $classes = ['button', 'alt', 'stackless-buy-now'];
         if (function_exists('wc_wp_theme_get_element_class_name') && wc_wp_theme_get_element_class_name('button')) {
             $classes[] = wc_wp_theme_get_element_class_name('button');

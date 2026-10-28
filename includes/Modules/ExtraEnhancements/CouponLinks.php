@@ -44,7 +44,7 @@ final class CouponLinks
         if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || empty($_GET[self::PARAM]) || self::handledElsewhere()) {
             return;
         }
-        $code = self::sanitize($_GET[self::PARAM]);
+        $code = self::sanitize(sanitize_text_field(wp_unslash($_GET[self::PARAM])));
         // phpcs:enable
         if ($code === '') {
             return;
@@ -82,7 +82,7 @@ final class CouponLinks
 
     public static function pending(): string
     {
-        return self::sanitize($_COOKIE[self::COOKIE] ?? '');
+        return self::sanitize(isset($_COOKIE[self::COOKIE]) ? sanitize_text_field(wp_unslash($_COOKIE[self::COOKIE])) : '');
     }
 
     public function apply(): void

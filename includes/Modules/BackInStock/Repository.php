@@ -2,6 +2,8 @@
 
 namespace Stackless\Modules\BackInStock;
 
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- alert requests live in a custom table and change with every sign-up, confirmation and send, so they are read fresh.
+
 defined('ABSPATH') || exit;
 
 /**
@@ -45,7 +47,7 @@ final class Repository
     {
         global $wpdb;
         $table = self::table();
-        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id = %d", $id), ARRAY_A);
+        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM %i WHERE id = %d", $table, $id), ARRAY_A);
         return $row ?: null;
     }
 
@@ -54,7 +56,7 @@ final class Repository
     {
         global $wpdb;
         $table = self::table();
-        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE email = %s AND product_id = %d", $email, $product_id), ARRAY_A);
+        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM %i WHERE email = %s AND product_id = %d", $table, $email, $product_id), ARRAY_A);
         return $row ?: null;
     }
 
@@ -108,7 +110,7 @@ final class Repository
         $table = self::table();
         $now = gmdate('Y-m-d H:i:s');
         return (bool) $wpdb->query($wpdb->prepare(
-            "UPDATE {$table} SET status = %s, updated_at = %s, notified_at = IF(%s = 'notified', %s, notified_at) WHERE id = %d AND status = %s",
+            "UPDATE %i SET status = %s, updated_at = %s, notified_at = IF(%s = 'notified', %s, notified_at) WHERE id = %d AND status = %s", $table,
             $to,
             $now,
             $to,
@@ -124,7 +126,7 @@ final class Repository
         global $wpdb;
         $table = self::table();
         $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT * FROM {$table} WHERE product_id = %d AND status = 'confirmed' AND id > %d ORDER BY id ASC LIMIT %d",
+            "SELECT * FROM %i WHERE product_id = %d AND status = 'confirmed' AND id > %d ORDER BY id ASC LIMIT %d", $table,
             $product_id,
             $after,
             $limit
@@ -137,7 +139,7 @@ final class Repository
     {
         global $wpdb;
         $table = self::table();
-        $ids = $wpdb->get_col($wpdb->prepare("SELECT DISTINCT product_id FROM {$table} WHERE status = 'confirmed' LIMIT %d", $limit));
+        $ids = $wpdb->get_col($wpdb->prepare("SELECT DISTINCT product_id FROM %i WHERE status = 'confirmed' LIMIT %d", $table, $limit));
         return array_map('intval', is_array($ids) ? $ids : []);
     }
 
@@ -151,7 +153,7 @@ final class Repository
         global $wpdb;
         $table = self::table();
         $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT product_id, SUM(status = 'confirmed') AS confirmed, SUM(status = 'pending') AS pending, SUM(status = 'notified') AS notified, SUM(status = 'failed') AS failed, MAX(created_at) AS last_request FROM {$table} GROUP BY product_id ORDER BY confirmed DESC, last_request DESC LIMIT %d", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+            "SELECT product_id, SUM(status = 'confirmed') AS confirmed, SUM(status = 'pending') AS pending, SUM(status = 'notified') AS notified, SUM(status = 'failed') AS failed, MAX(created_at) AS last_request FROM %i GROUP BY product_id ORDER BY confirmed DESC, last_request DESC LIMIT %d", $table,
             $limit
         ), ARRAY_A);
         return is_array($rows) ? $rows : [];
@@ -161,7 +163,7 @@ final class Repository
     {
         global $wpdb;
         $table = self::table();
-        return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE product_id = %d AND status = 'confirmed'", $product_id)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i WHERE product_id = %d AND status = 'confirmed'", $table, $product_id));
     }
 
     /** @return array<string, int> */
@@ -169,7 +171,7 @@ final class Repository
     {
         global $wpdb;
         $table = self::table();
-        $rows = $wpdb->get_results("SELECT status, COUNT(*) AS total FROM {$table} GROUP BY status", ARRAY_A); // phpcs:ignore WordPress.DB.PreparedSQL -- no input.
+        $rows = $wpdb->get_results($wpdb->prepare('SELECT status, COUNT(*) AS total FROM %i GROUP BY status', $table), ARRAY_A);
         return Batch::counts(is_array($rows) ? $rows : []);
     }
 
@@ -177,7 +179,7 @@ final class Repository
     {
         global $wpdb;
         $table = self::table();
-        return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE created_at >= %s", gmdate('Y-m-d H:i:s', time() - $days * DAY_IN_SECONDS)));
+        return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i WHERE created_at >= %s", $table, gmdate('Y-m-d H:i:s', time() - $days * DAY_IN_SECONDS)));
     }
 
     /**
@@ -201,15 +203,15 @@ final class Repository
             );
         }
         if ($status !== 'all' && in_array($status, Batch::STATUSES, true)) {
-            $where .= $wpdb->prepare(" AND EXISTS (SELECT 1 FROM {$table} m2 WHERE m2.product_id = a.product_id AND m2.status = %s)", $status);
+            $where .= $wpdb->prepare(" AND EXISTS (SELECT 1 FROM %i m2 WHERE m2.product_id = a.product_id AND m2.status = %s)", $table, $status);
         }
-        $total = (int) $wpdb->get_var("SELECT COUNT(DISTINCT a.product_id) FROM {$table} a {$where}"); // phpcs:ignore WordPress.DB.PreparedSQL -- $where is prepared above.
+        $total = (int) $wpdb->get_var("SELECT COUNT(DISTINCT a.product_id) FROM {$table} a {$where}"); // phpcs:ignore WordPress.DB.PreparedSQL, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $table is this plugin's own table; $where is built with prepare() above.
         $sql = "SELECT a.product_id, MAX(a.parent_id) AS parent_id, COUNT(*) AS total, MAX(a.created_at) AS last_request,
             SUM(a.status = 'pending') AS pending, SUM(a.status = 'confirmed') AS confirmed, SUM(a.status = 'notified') AS notified,
             SUM(a.status = 'failed') AS failed, SUM(a.status = 'unsubscribed') AS unsubscribed
             FROM {$table} a {$where} GROUP BY a.product_id ORDER BY last_request DESC, a.product_id DESC "
             . $wpdb->prepare('LIMIT %d OFFSET %d', $per_page, max(0, ($page - 1) * $per_page));
-        $rows = $wpdb->get_results($sql, ARRAY_A); // phpcs:ignore WordPress.DB.PreparedSQL -- prepared parts above.
+        $rows = $wpdb->get_results($sql, ARRAY_A); // phpcs:ignore WordPress.DB.PreparedSQL, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $table is this plugin's own table; every value is added with prepare() above.
         return ['rows' => is_array($rows) ? $rows : [], 'total' => $total];
     }
 
@@ -218,7 +220,7 @@ final class Repository
     {
         global $wpdb;
         $table = self::table();
-        $rows = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$table} WHERE email = %s ORDER BY id ASC LIMIT %d OFFSET %d", $email, $limit, $offset), ARRAY_A);
+        $rows = $wpdb->get_results($wpdb->prepare("SELECT * FROM %i WHERE email = %s ORDER BY id ASC LIMIT %d OFFSET %d", $table, $email, $limit, $offset), ARRAY_A);
         return is_array($rows) ? $rows : [];
     }
 

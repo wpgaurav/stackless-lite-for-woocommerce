@@ -77,7 +77,7 @@ final class Upgrade
         echo '<section class="stackless-group stackless-group--pro" data-group="pro" aria-labelledby="stackless-pro-title">';
         echo '<div class="stackless-pro-intro">';
         echo '<div><h2 class="stackless-group__title" id="stackless-pro-title">' . Icons::svg('lock', 18) . esc_html__('In Stackless', 'stackless-lite') . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput
-        echo '<p>' . esc_html__('Stackless is the full plugin: everything in Lite plus subscriptions, payment gateways, licensing, multi-currency, invoices and more. It uses the same settings and data, so upgrading keeps everything you set up here.', 'stackless-lite') . '</p></div>';
+        echo '<p>' . esc_html__('Stackless is the full plugin: everything in Lite plus subscriptions with automatic renewals, software licensing, multi-currency, invoices and more. It uses the same settings and data, so upgrading keeps everything you set up here.', 'stackless-lite') . '</p></div>';
         echo self::upgradeLink('button button-primary stackless-pro-intro__cta'); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in upgradeLink().
         echo '</div><div class="stackless-grid">';
         foreach (ProCatalog::all() as $slug => $module) {

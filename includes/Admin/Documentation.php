@@ -15,6 +15,11 @@ final class Documentation
     /** Module id (or screen key) => section/page. */
     private const PAGES = [
         'dashboard' => 'getting-started/dashboard-and-modules',
+        'stripe_gateway' => 'payments/stripe',
+        'paypal_gateway' => 'payments/paypal',
+        'polar_gateway' => 'payments/polar',
+        'dodo_gateway' => 'payments/dodo-payments',
+        'gateway_tools' => 'payments/payment-gateway-tools',
         'checkout_enhancements' => 'checkout-and-sales/checkout-enhancements',
         'extra_enhancements' => 'checkout-and-sales/extra-enhancements',
         'buy_links' => 'checkout-and-sales/buy-links',

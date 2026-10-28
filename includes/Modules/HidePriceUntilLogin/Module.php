@@ -93,6 +93,7 @@ final class Module extends \Stackless\Core\Module
         add_filter('woocommerce_sale_flash', [$this, 'filterSaleFlash'], 9999, 3);
         add_filter('render_block_woocommerce/product-sale-badge', [$this, 'filterSaleBadgeBlock'], 20, 3);
         add_filter('woocommerce_structured_data_product', [$this, 'filterStructuredData'], 9999, 2);
+        add_filter('rest_request_before_callbacks', [$this, 'filterStoreApiRequest'], 20, 3);
         add_filter('rest_request_after_callbacks', [$this, 'filterStoreApiResponse'], 20, 3);
 
         // Purchasing.
@@ -351,11 +352,7 @@ final class Module extends \Stackless\Core\Module
      */
     public function filterStoreApiResponse($response, $handler, $request)
     {
-        if (!$response instanceof \WP_REST_Response || !$request instanceof \WP_REST_Request || $this->viewerSeesPrices()) {
-            return $response;
-        }
-        $route = (string) $request->get_route();
-        if (strpos($route, '/wc/store') !== 0 || strpos($route, '/products') === false) {
+        if (!$response instanceof \WP_REST_Response || !$request instanceof \WP_REST_Request || !$this->isStoreApiProducts($request) || $this->viewerSeesPrices()) {
             return $response;
         }
         $data = $response->get_data();
@@ -364,15 +361,63 @@ final class Module extends \Stackless\Core\Module
         }
         if (isset($data['id'], $data['prices'])) {
             $data = $this->stripProductPrices($data);
-        } else {
-            foreach ($data as $index => $item) {
-                if (is_array($item) && isset($item['id'], $item['prices'])) {
-                    $data[$index] = $this->stripProductPrices($item);
-                }
+        } elseif (array_key_exists('price_range', $data)) {
+            // collection-data: the range of hidden prices is itself a price.
+            if ($this->hidesEverything()) {
+                $data['price_range'] = null;
             }
+        } else {
+            // A price filter must not answer "is this hidden product between X and Y?".
+            $priceFiltered = $request->get_param('min_price') !== null || $request->get_param('max_price') !== null;
+            foreach ($data as $index => $item) {
+                if (!is_array($item) || !isset($item['id'], $item['prices'])) {
+                    continue;
+                }
+                if ($priceFiltered && $this->hides(wc_get_product((int) $item['id']))) {
+                    unset($data[$index]);
+                    continue;
+                }
+                $data[$index] = $this->stripProductPrices($item);
+            }
+            $data = array_values($data);
         }
         $response->set_data($data);
         return $response;
+    }
+
+    /**
+     * When every price is hidden from this viewer, Store API price filters and price ranges are
+     * dropped before the query runs, so they cannot be used to probe hidden prices.
+     *
+     * @param \WP_REST_Response|\WP_Error|mixed $response
+     * @param array                            $handler
+     * @param \WP_REST_Request                 $request
+     * @return mixed
+     */
+    public function filterStoreApiRequest($response, $handler, $request)
+    {
+        if ($request instanceof \WP_REST_Request && $this->isStoreApiProducts($request) && !$this->viewerSeesPrices() && $this->hidesEverything()) {
+            foreach (['min_price', 'max_price'] as $param) {
+                if ($request->get_param($param) !== null) {
+                    $request->set_param($param, null);
+                }
+            }
+            if ($request->get_param('calculate_price_range')) {
+                $request->set_param('calculate_price_range', false);
+            }
+        }
+        return $response;
+    }
+
+    private function isStoreApiProducts(\WP_REST_Request $request): bool
+    {
+        $route = (string) $request->get_route();
+        return strpos($route, '/wc/store') === 0 && strpos($route, '/products') !== false;
+    }
+
+    private function hidesEverything(): bool
+    {
+        return Scope::normalizeScope((string) $this->option('scope', Scope::ALL)) === Scope::ALL;
     }
 
     /**

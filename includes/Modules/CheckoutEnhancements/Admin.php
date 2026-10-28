@@ -70,9 +70,10 @@ final class Admin
 
     private function onScreen(): bool
     {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- screen detection only.
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended -- screen detection only.
         $page = isset($_GET['page']) ? sanitize_key(wp_unslash($_GET['page'])) : '';
         $module = isset($_GET['module']) ? sanitize_key(wp_unslash($_GET['module'])) : (isset($_GET['tab']) ? sanitize_key(wp_unslash($_GET['tab'])) : '');
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended
         return in_array($page, [\Stackless\Admin\SettingsPage::SETTINGS, \Stackless\Admin\SettingsPage::PARENT], true) && $module === 'checkout_enhancements';
     }
 
