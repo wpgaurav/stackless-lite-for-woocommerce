@@ -1,0 +1,66 @@
+name: Bug report
+description: Something in Stackless Lite does not work as described.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for reporting. Please don't post security problems here; use https://gauravtiwari.org/contact/ instead."
+  - type: dropdown
+    id: module
+    attributes:
+      label: Module
+      options:
+        - Free Price Text
+        - Custom Add to Cart Text
+        - Sold Count
+        - Stock Urgency Labels
+        - Min/Max Quantity
+        - Hide Price Until Login
+        - External Product Extras
+        - Product Details Table
+        - Wishlist
+        - Back-in-stock Alerts
+        - Saved Carts & Order Again
+        - Service Products
+        - WooCommerce Optimizer
+        - Checkout Enhancements
+        - Extra Enhancements
+        - Buy Links
+        - Pay What You Like
+        - Dashboard, settings or updates
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Switch on …\n2. Open …\n3. See …"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected and what happened
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      placeholder: "Stackless Lite 1.6.2, WordPress 6.8, WooCommerce 11.2, PHP 8.2"
+    validations:
+      required: true
+  - type: dropdown
+    id: checkout
+    attributes:
+      label: Checkout
+      options:
+        - Checkout block
+        - Classic checkout
+        - Not checkout related
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Anything from WooCommerce → Status → Logs with a source starting with stackless-.
+      render: text

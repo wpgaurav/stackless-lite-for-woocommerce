@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://gauravtiwari.org/docs/stackless-for-woocommerce/
+    about: Setup guides for every module.
+  - name: Security report
+    url: https://gauravtiwari.org/contact/
+    about: Please report security problems privately, not as a public issue.
+  - name: Stackless (full plugin) support
+    url: https://gauravtiwari.org/product/stackless-for-woocommerce/
+    about: Questions about Stackless itself go through gauravtiwari.org.

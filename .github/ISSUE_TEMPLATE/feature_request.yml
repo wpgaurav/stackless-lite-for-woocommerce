@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an improvement to a Lite module.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do in your store, and what gets in the way?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help
+    validations:
+      required: true
+  - type: input
+    id: module
+    attributes:
+      label: Module (if any)

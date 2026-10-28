@@ -1,0 +1,4398 @@
+# Copyright (C) 2026 Gaurav Tiwari
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stackless Lite for WooCommerce 1.7.0\n"
+"Report-Msgid-Bugs-To: https://github.com/wpgaurav/stackless-lite-for-woocommerce/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-28T03:12:49+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: stackless-lite\n"
+
+#. Plugin Name of the plugin
+#: stackless-lite.php
+msgid "Stackless Lite for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: stackless-lite.php
+msgid "https://gauravtiwari.org/product/stackless-lite-for-woocommerce/"
+msgstr ""
+
+#. Description of the plugin
+#: stackless-lite.php
+msgid "Free store tools for WooCommerce: wishlist, saved carts, back-in-stock alerts, quantity limits, buy links, pay what you like, checkout tweaks and catalog labels. Switch on only what you use."
+msgstr ""
+
+#. Author of the plugin
+#: stackless-lite.php
+msgid "Gaurav Tiwari"
+msgstr ""
+
+#. Author URI of the plugin
+#: stackless-lite.php
+msgid "https://gauravtiwari.org"
+msgstr ""
+
+#: includes/Admin/Documentation.php:52
+#: includes/Modules/ProductEnhancements/Fields.php:53
+msgid "Documentation"
+msgstr ""
+
+#: includes/Admin/Documentation.php:58
+#: includes/Admin/SettingsPage.php:267
+#: includes/Lite/Upgrade.php:54
+#: includes/Lite/Upgrade.php:70
+#: includes/Lite/Upgrade.php:158
+#: templates/checkout_enhancements/trust.php:33
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:62
+#: includes/Admin/SettingsPage.php:407
+msgid "Modules"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:76
+#: includes/Admin/SettingsPage.php:77
+#: includes/Admin/SettingsPage.php:295
+msgid "Stackless"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:84
+msgid "Stackless modules"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:84
+#: includes/Admin/SettingsPage.php:243
+msgid "Dashboard"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:89
+msgid "Stackless settings"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:89
+#: includes/Admin/SettingsPage.php:244
+#: includes/Admin/SettingsPage.php:362
+#: includes/Admin/SettingsPage.php:396
+msgid "Settings"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:91
+msgid "Stackless license"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:91
+#: includes/Admin/SettingsPage.php:247
+#: includes/Admin/SettingsPage.php:463
+#: includes/Modules/ProductEnhancements/Fields.php:39
+msgid "License"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:136
+#: includes/Admin/SettingsPage.php:303
+msgid "On"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:137
+#: includes/Admin/SettingsPage.php:303
+msgid "Off"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:138
+msgid "Could not save. Reload and try again."
+msgstr ""
+
+#. translators: 1: enabled count, 2: total
+#: includes/Admin/SettingsPage.php:140
+#: includes/Admin/SettingsPage.php:308
+#, php-format
+msgid "%1$d of %2$d on"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:151
+msgid "You are not allowed to change modules."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:156
+msgid "Unknown module."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:200
+#: includes/Lite/ProCatalog.php:20
+#: includes/Lite/ProCatalog.php:40
+msgid "Subscriptions"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:201
+#: includes/Lite/ProCatalog.php:21
+msgid "Payments"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:202
+#: includes/Lite/ProCatalog.php:22
+#: includes/Modules/BuyLinks/Admin.php:75
+#: includes/Modules/BuyLinks/Module.php:59
+#: includes/Modules/ExtraEnhancements/Module.php:68
+#: includes/Modules/ExtraEnhancements/ProductCheckout.php:212
+msgid "Checkout"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:203
+#: includes/Lite/ProCatalog.php:23
+msgid "Sales & invoices"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:204
+#: includes/Lite/ProCatalog.php:24
+msgid "Currency"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:205
+#: includes/Lite/ProCatalog.php:25
+msgid "Access & licensing"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:206
+msgid "Catalog"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:207
+#: includes/Lite/ProCatalog.php:26
+msgid "Store tools"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:208
+#: includes/Lite/ProCatalog.php:27
+#: includes/Modules/WooCommerceOptimizer/Module.php:59
+msgid "Admin"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:266
+#: includes/Admin/SettingsPage.php:357
+msgid "Docs"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:275
+msgid "Settings saved."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:295
+msgid "You don't need any other add-ons for WooCommerce. Switch on only what you use; switched-off modules load no code."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:300
+#: includes/Admin/SettingsPage.php:301
+msgid "Search modules"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:302
+msgid "Filter modules"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:303
+msgid "All"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:323
+msgid "No modules match your search."
+msgstr ""
+
+#. translators: %s: module name
+#: includes/Admin/SettingsPage.php:349
+#, php-format
+msgid "Enable %s"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:396
+msgid "Configure the modules you have switched on."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:401
+#: includes/Admin/SettingsPage.php:431
+msgid "Switch on a module from the Dashboard to configure it here."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:402
+#: includes/Admin/SettingsPage.php:432
+msgid "Open Dashboard"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:434
+msgid "That module is switched off or has no settings."
+msgstr ""
+
+#. translators: %s: module name
+#: includes/Admin/SettingsPage.php:446
+#, php-format
+msgid "How to set up %s"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:453
+msgid "Save changes"
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:463
+msgid "Activate your license for automatic updates and support. Every feature works without it."
+msgstr ""
+
+#: includes/Admin/SettingsPage.php:470
+msgid "Turn on the License & Updates module on the Dashboard to manage your license."
+msgstr ""
+
+#: includes/Core/Installer.php:262
+msgid "Stackless could not finish setting up these modules:"
+msgstr ""
+
+#: includes/Core/Installer.php:268
+msgid "Setup will retry on the next page load. See WooCommerce → Status → Logs (stackless-*)."
+msgstr ""
+
+#: includes/Core/LiteUpdater.php:190
+msgid "See the release notes on gauravtiwari.org."
+msgstr ""
+
+#: includes/Core/LiteUpdater.php:221
+msgid "The downloaded Stackless Lite package does not match its published checksum, so it was not installed. Try again in a few minutes."
+msgstr ""
+
+#: includes/Core/LiveStore.php:202
+msgid "This site is a copy of the live store, so Stackless does not charge customers or contact payment providers here. If this is the live store, confirm it in the Stackless notice first."
+msgstr ""
+
+#: includes/Core/LiveStore.php:368
+msgid "This site is now the live store. Automatic billing and customer emails resumed, and anything held while it was paused was queued to run now."
+msgstr ""
+
+#: includes/Core/LiveStore.php:381
+msgid "STACKLESS_LIVE_STORE is set to false in wp-config.php, so this site is treated as a copy of the live store."
+msgstr ""
+
+#. translators: %s: environment type
+#: includes/Core/LiveStore.php:384
+#, php-format
+msgid "No live store is recorded yet, and this site's environment type is \"%s\"."
+msgstr ""
+
+#. translators: 1: this site's environment type, 2: the live store's environment type
+#: includes/Core/LiveStore.php:387
+#, php-format
+msgid "This site's environment type is \"%1$s\", but the live store was recorded as \"%2$s\"."
+msgstr ""
+
+#. translators: 1: this site's address, 2: the live store's address
+#: includes/Core/LiveStore.php:390
+#, php-format
+msgid "This site's address (%1$s) does not match the live store (%2$s)."
+msgstr ""
+
+#. translators: 1: this site's address, 2: the live store's address
+#: includes/Core/LiveStore.php:390
+msgid "unknown"
+msgstr ""
+
+#: includes/Core/LiveStore.php:392
+msgid "A filter on stackless_live_store marks this site as a copy."
+msgstr ""
+
+#: includes/Core/LiveStore.php:395
+msgid "Stackless paused automatic billing on this site."
+msgstr ""
+
+#: includes/Core/LiveStore.php:396
+msgid "Saved payment methods are not charged, payments are not retried, dunning does not run and customers are not emailed here. Held renewals and reminders run as soon as this site is confirmed as the live store."
+msgstr ""
+
+#: includes/Core/LiveStore.php:401
+msgid "If this is the live store, for example after moving it to a new domain, confirm it. Hosts can set STACKLESS_LIVE_STORE in wp-config.php instead."
+msgstr ""
+
+#: includes/Core/LiveStore.php:405
+msgid "Customers with saved payment methods will be charged from this site. Confirm this is the live store?"
+msgstr ""
+
+#: includes/Core/LiveStore.php:405
+msgid "This is the live store"
+msgstr ""
+
+#: includes/Core/LiveStore.php:407
+msgid "Keep paused and hide this notice"
+msgstr ""
+
+#: includes/Core/LiveStore.php:415
+#: includes/Modules/BackInStock/Module.php:541
+msgid "You are not allowed to do that."
+msgstr ""
+
+#: includes/Core/LiveStore.php:422
+msgid "STACKLESS_LIVE_STORE in wp-config.php decides whether this site is the live store."
+msgstr ""
+
+#. translators: %s: plugin name
+#: includes/Core/ModuleRegistry.php:130
+#, php-format
+msgid "Paused because %s is active and does the same job."
+msgstr ""
+
+#. translators: %s: module title
+#: includes/Core/ModuleRegistry.php:138
+#, php-format
+msgid "Needs the %s module enabled."
+msgstr ""
+
+#: includes/Core/ModuleRegistry.php:147
+msgid "Failed to start. See WooCommerce → Status → Logs (stackless-*)."
+msgstr ""
+
+#. translators: 1: required WooCommerce version, 2: installed version
+#: includes/Core/Requirements.php:21
+#, php-format
+msgid "Stackless for WooCommerce needs WooCommerce %1$s or newer. You have %2$s."
+msgstr ""
+
+#: includes/Core/Requirements.php:22
+msgid "Stackless for WooCommerce needs WooCommerce installed and active."
+msgstr ""
+
+#: includes/functions.php:103
+#: includes/functions.php:137
+#: includes/functions.php:147
+msgid "Subscriptions module is not active."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:43
+msgid "Recurring billing on simple and variable products, with automatic or invoiced renewals and a customer portal."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:45
+msgid "Daily, weekly, monthly or yearly plans with free trials, signup fees and fixed-length terms"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:46
+msgid "Mixed carts: several subscriptions and one-time products in one checkout"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:47
+msgid "Renewals charge a saved payment method, or email the customer a pay link with any gateway"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:48
+msgid "Failed-payment retries on your schedule, plan switching with proration and recurring coupons"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:49
+msgid "Customers cancel, reactivate, switch plans and change their card from My Account"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:50
+msgid "Ten subscription emails, admin list and edit screens, and an MRR and churn widget"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:55
+msgid "Stripe"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:58
+msgid "Cards, Apple Pay, Google Pay, Link and local payment methods through the Stripe Payment Element."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:60
+msgid "3D Secure, saved cards and express checkout buttons"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:61
+msgid "Automatic off-session subscription renewals"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:62
+msgid "Refunds from the order screen and signed webhooks"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:63
+#: includes/Lite/ProCatalog.php:172
+#: includes/Lite/ProCatalog.php:283
+msgid "Works on the Checkout block and the classic checkout"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:68
+msgid "PayPal"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:71
+msgid "PayPal Smart Buttons and Pay Later on the block and classic checkout, through PayPal’s REST APIs."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:73
+msgid "Smart Buttons and Pay Later messaging"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:74
+msgid "Saved PayPal accounts that renew subscriptions automatically"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:75
+msgid "Refunds from WooCommerce"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:80
+msgid "Polar"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:83
+msgid "Polar as a merchant of record: hosted checkout with sales tax and VAT handled for you."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:85
+#: includes/Lite/ProCatalog.php:97
+msgid "One-time orders and pay links"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:86
+msgid "Single-product subscriptions with free trials that Polar renews"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:87
+msgid "Payments, renewals, refunds and cancellations sync both ways through signed webhooks"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:92
+msgid "Paddle"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:95
+msgid "Paddle Billing as a merchant of record, with an overlay checkout and sales tax and VAT handled for you."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:98
+msgid "Subscriptions that Paddle renews, with signup fees, free trials and one-time items in the same cart"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:99
+msgid "Customers update their card through Paddle from My Account"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:100
+msgid "Two-way sync of payments, renewals, refunds and cancellations"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:105
+msgid "Dodo Payments"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:108
+msgid "Dodo Payments as a merchant of record: hosted checkout with sales tax, VAT and GST handled for you."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:110
+msgid "Cards, UPI, wallets and local payment methods"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:111
+msgid "One-time orders in any currency Dodo supports, and pay links"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:112
+msgid "Single-product subscriptions with free trials that Dodo renews"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:113
+msgid "Two-way sync through signed webhooks"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:118
+msgid "Payment Gateway Tools"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:121
+msgid "Run Polar, Paddle or Dodo Payments with a second account."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:123
+msgid "Duplicate a hosted gateway: each copy has its own keys, webhook URL, badge and orders"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:124
+msgid "Rename or remove copies at any time"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:125
+msgid "A Stackless label on its gateways in payment settings and order screens"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:130
+msgid "Checkout Builder"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:133
+msgid "Five ready-made checkout layouts in your colours, previewed and switched on without an editor."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:135
+msgid "Five layouts for the Checkout block and the classic checkout"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:136
+msgid "Your brand colours, with a live preview before you switch"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:141
+msgid "On-page Checkout"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:144
+msgid "Plan cards and your checkout on any page, so buyers choose and pay without leaving it."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:146
+msgid "A block and a shortcode for any page"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:147
+msgid "Each plan gets its own cart, so the store cart is left alone"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:148
+msgid "After payment the whole page moves to the receipt"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:153
+msgid "Modal Checkout"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:156
+msgid "Buy buttons and checkout links open your checkout in a modal on the same page."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:158
+msgid "Turn it on with a class, a link hash, or for every Add to cart and checkout link"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:159
+msgid "Classes that limit the payment methods a modal offers, enforced on the server"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:164
+msgid "Order Bumps"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:167
+msgid "One-click add-on offers at checkout."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:169
+msgid "Shown by cart rules such as products, categories and cart total"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:170
+msgid "Discounted prices calculated on the server"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:171
+msgid "Take rates per bump"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:177
+msgid "Custom Invoices"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:180
+msgid "Invoice customers for products or custom items with a branded invoice and a secure pay link."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:182
+msgid "Numbered, printable invoices in six layouts"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:183
+msgid "Recurring invoices, deposits with automatic balance invoices and due-date reminders"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:184
+msgid "A library of reusable invoice-only items and remembered customer details"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:185
+msgid "VAT and company registration numbers on the invoice"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:190
+msgid "Request a Quote"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:193
+msgid "Customers ask for a quote from any page or product, and accept your proposal online."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:195
+msgid "A quote form for any page or product"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:196
+msgid "Reply with a proposal the customer accepts online"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:197
+msgid "Accepting issues the invoice and takes the customer to payment"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:202
+msgid "Coupon Affiliates"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:205
+msgid "Customers and partners earn a commission on every paid order that uses their coupon."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:207
+msgid "Personal codes from My Account, or any coupon you assign"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:208
+msgid "A refund hold and automatic reversal on refunds and cancellations"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:209
+msgid "Manual payouts with CSV export"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:214
+msgid "Multi-Currency Checkout"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:217
+msgid "Sell in several currencies with one settlement currency per cart and order."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:219
+msgid "Exact prices per product and per variation in each currency"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:220
+msgid "Manual or Frankfurter exchange rates, with markup and rounding"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:221
+msgid "Rules for products without a price in the shopper’s currency"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:222
+msgid "Subscription renewals keep the currency they started in"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:227
+msgid "Storefront Currency Selector"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:230
+msgid "Let shoppers pick their currency."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:232
+msgid "A shortcode, a block, or a selector above the checkout payment methods"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:233
+msgid "Switching reprices the cart on the server"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:238
+msgid "Currency-Aware Payment Gateways"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:241
+msgid "Choose which payment gateways handle each currency."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:243
+msgid "Pick the gateways, and the one shown first, per currency"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:244
+msgid "Unsupported gateways are removed at checkout and rejected on the server"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:249
+msgid "Software Licensing"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:252
+msgid "Sell plugins and themes with license keys and automatic updates from your own store."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:254
+msgid "License keys per order item or subscription"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:255
+msgid "Site activation limits that customers manage from My Account"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:256
+msgid "A license API to validate, activate and deactivate"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:257
+msgid "An update server for your plugins and themes"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:262
+msgid "Page Access"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:265
+msgid "Unlock chosen pages for customers who buy a product."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:267
+msgid "Published pages show an access notice to everyone else"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:268
+msgid "Private pages stay hidden from everyone except buyers"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:269
+msgid "Subscriptions keep access while they are active"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:270
+msgid "A My pages tab in My Account"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:275
+msgid "Fields & Paid Add-ons"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:278
+msgid "Product add-ons with prices, and checkout fields with optional fees."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:280
+msgid "Checkbox, dropdown, text and number add-ons"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:281
+msgid "Per-item or one-off add-on prices"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:282
+msgid "Collapsible checkout fields with optional fees"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:288
+msgid "Delivery & Pickup Slots"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:291
+msgid "Customers pick a delivery or pickup time at checkout."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:293
+msgid "Weekly time windows with a capacity per slot"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:294
+msgid "Lead time and closed dates"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:295
+msgid "Availability per shipping method"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:300
+msgid "Webhooks and REST API"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:303
+msgid "Connect your store to Zapier, Make, n8n or your own code."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:305
+msgid "Subscription and license events in WooCommerce webhooks"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:306
+msgid "A subscriptions REST API that works with WooCommerce REST API keys"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:311
+msgid "FluentCRM"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:314
+msgid "Connect subscriptions, licenses, invoices and quotes to FluentCRM."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:316
+msgid "Automation triggers for subscriptions, renewals, licenses, invoices and quotes"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:317
+msgid "Tags and lists that follow subscription status"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:318
+msgid "Smart codes for emails"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:319
+msgid "Subscriptions and licenses on each contact’s profile"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:324
+msgid "AI Agents"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:327
+msgid "Let Claude, ChatGPT, Cursor and other agents run your store through the free Site Agent plugin."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:329
+msgid "Sales reports, orders, invoices, quotes, subscriptions and license keys"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:330
+msgid "Stock alerts, product details and page access"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:331
+msgid "Agents work as a WordPress user you choose"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:332
+msgid "They ask you before anything reaches a customer"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:337
+msgid "Woo Redesign"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:340
+msgid "A cleaner WooCommerce admin in the same look as the Stackless screens."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:342
+msgid "Orders, products, coupons, settings, status and analytics restyled"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:343
+msgid "Pick the areas, the accent colour and the table density"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:344
+msgid "Nothing changes on your storefront"
+msgstr ""
+
+#: includes/Lite/Upgrade.php:53
+msgid "Upgrade to Stackless"
+msgstr ""
+
+#: includes/Lite/Upgrade.php:60
+#: includes/Lite/Upgrade.php:109
+msgid "Pro"
+msgstr ""
+
+#: includes/Lite/Upgrade.php:69
+#: includes/Lite/Upgrade.php:100
+msgid "Upgrade"
+msgstr ""
+
+#: includes/Lite/Upgrade.php:79
+msgid "In Stackless"
+msgstr ""
+
+#: includes/Lite/Upgrade.php:80
+msgid "Stackless is the full plugin: everything in Lite plus subscriptions, payment gateways, licensing, multi-currency, invoices and more. It uses the same settings and data, so upgrading keeps everything you set up here."
+msgstr ""
+
+#. translators: %s: module name
+#: includes/Lite/Upgrade.php:99
+#: includes/Modules/ProductEnhancements/Admin.php:36
+#: includes/Modules/ProductEnhancements/Module.php:55
+#: includes/Modules/ProductEnhancements/Module.php:206
+#: includes/Modules/ProductEnhancements/Module.php:208
+msgid "Details"
+msgstr ""
+
+#. translators: %s: module name
+#: includes/Lite/Upgrade.php:99
+#, php-format
+msgid "about %s"
+msgstr ""
+
+#: includes/Lite/Upgrade.php:146
+msgid "What you get"
+msgstr ""
+
+#: includes/Lite/Upgrade.php:151
+msgid "This module is part of Stackless, the full plugin. Stackless includes every Lite module and keeps your Lite settings and data when you switch."
+msgstr ""
+
+#: includes/Lite/Upgrade.php:157
+msgid "Read the docs"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:25
+msgid "Stock alerts"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:39
+msgid "All statuses"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:40
+msgid "Awaiting confirmation"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:41
+msgid "Waiting for stock"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:42
+msgid "Emailed"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:43
+msgid "Mail failed"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:44
+msgid "Unsubscribed"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:66
+#: includes/Modules/BackInStock/Module.php:63
+#: includes/Modules/BackInStock/Module.php:572
+#: includes/Modules/BackInStock/Module.php:579
+#: includes/Modules/BackInStock/Module.php:593
+msgid "Back-in-stock alerts"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:67
+msgid "Confirmed demand, notification progress and mail failures for each product or variation. Alert emails are separate from marketing lists."
+msgstr ""
+
+#. translators: %d: number of products
+#: includes/Modules/BackInStock/AdminScreen.php:70
+#, php-format
+msgid "Queued availability emails for %d product."
+msgid_plural "Queued availability emails for %d products."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of sign-ups
+#: includes/Modules/BackInStock/AdminScreen.php:75
+msgid "Sign-ups"
+msgstr ""
+
+#. translators: %d: number of sign-ups
+#: includes/Modules/BackInStock/AdminScreen.php:75
+#, php-format
+msgid "%d in the last 30 days"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:76
+msgid "Confirmed addresses"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:77
+msgid "Not on the list until confirmed"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:78
+msgid "Accepted by the mail server"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:79
+msgid "Customers can sign up again"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:87
+msgid "Availability check"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:87
+msgid "Stock changes queue emails automatically. Run a check after a bulk inventory import."
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:90
+msgid "Check products in stock now"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:93
+msgid "Search"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:93
+msgid "Product, SKU or email"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:94
+#: includes/Modules/BackInStock/Module.php:598
+msgid "Status"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:98
+msgid "Filter"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:100
+msgid "Clear filters"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:105
+#: includes/Modules/BackInStock/Module.php:596
+#: includes/Modules/CheckoutEnhancements/Admin.php:158
+#: includes/Modules/Wishlist/Module.php:796
+msgid "Product"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:105
+msgid "Stock"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:109
+msgid "Last sign-up"
+msgstr ""
+
+#. translators: %d: product id
+#: includes/Modules/BackInStock/AdminScreen.php:114
+#, php-format
+msgid "Deleted product #%d"
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:127
+msgid "No products match these filters."
+msgstr ""
+
+#: includes/Modules/BackInStock/AdminScreen.php:127
+msgid "Sign-ups appear here after customers ask to be notified about an out-of-stock product."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:33
+msgid "Back-in-stock Alerts"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:38
+msgid "A \"Notify me\" form on out-of-stock products and variations, confirmed by email, with one availability email when stock returns."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:67
+msgid "Form heading"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:68
+#: includes/Modules/BackInStock/Module.php:205
+msgid "Email me when it is back"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:73
+msgid "Guests"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:74
+msgid "Let visitors without an account sign up"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:80
+msgid "Signed-in customers"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:81
+msgid "Skip the confirmation email when a signed-in customer uses their account email"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:87
+#: includes/Modules/StockUrgency/Module.php:54
+msgid "Backorders"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:88
+msgid "Also notify when a product becomes available on backorder"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:94
+msgid "Sign-ups per visitor per hour"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:95
+msgid "Limits abuse of the form. Store managers are never limited."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:150
+#: includes/Modules/Wishlist/Module.php:485
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:262
+#: includes/Modules/SavedCarts/Module.php:217
+#: includes/Modules/Wishlist/Module.php:411
+msgid "Your session expired. Please try again."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:279
+msgid "Check your email to confirm the alert. If you already confirmed, you are on the list."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:284
+msgid "Tick the box to confirm you want an availability email."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:287
+msgid "Sign in to get availability alerts."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:292
+msgid "Choose a product option and enter a valid email address."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:296
+#: includes/Modules/Wishlist/Module.php:321
+#: includes/Modules/Wishlist/Module.php:356
+msgid "This product is not available."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:299
+msgid "Good news: this option is available now. You can add it to your cart."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:302
+msgid "Too many requests. Please try again in an hour."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:314
+msgid "Your alert could not be saved. Please try again."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:317
+msgid "You are on the list. We will email you once when this is back in stock."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:321
+msgid "The confirmation email could not be sent. Please try again later."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:354
+msgid "Product availability"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:356
+msgid "This alert link is not valid any more."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:360
+#: includes/Modules/PayWhatYouLike/Cart.php:395
+msgid "this product"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:367
+msgid "You will not get an availability email for this product."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:370
+msgid "This confirmation link expired. Please sign up again on the product page."
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/BackInStock/Module.php:380
+#, php-format
+msgid "Your alert is confirmed. We will email you once when %s is back in stock."
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:386
+#: templates/back_in_stock/email-confirm.php:25
+msgid "Stop this alert"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:386
+#: templates/back_in_stock/email-confirm.php:21
+msgid "Confirm my alert"
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/BackInStock/Module.php:389
+#, php-format
+msgid "Stop the availability email for %s?"
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/BackInStock/Module.php:391
+#, php-format
+msgid "Confirm that you want one email when %s is back in stock."
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/BackInStock/Module.php:420
+#, php-format
+msgid "Confirm your alert for %s"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:421
+msgid "Confirm your availability alert"
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/BackInStock/Module.php:438
+#, php-format
+msgid "%s is back in stock"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:439
+msgid "It is back"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:597
+msgid "Email"
+msgstr ""
+
+#: includes/Modules/BackInStock/Module.php:599
+msgid "Signed up"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:22
+#: includes/Modules/BuyLinks/Admin.php:79
+msgid "Buy link"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:37
+#: includes/Modules/Wishlist/Module.php:486
+msgid "Link copied."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:38
+msgid "Copy failed. Select the link and copy it yourself."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:39
+msgid "The link could not be made. Save the product and try again."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:55
+msgid "Publish the product before sharing its link. Links to drafts only work for store managers."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:58
+msgid "Grouped and external products cannot be bought through a link."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:62
+msgid "Variation"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:62
+msgid "Choose a variation"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:71
+msgid "Quantity"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:72
+msgid "Also add"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:72
+msgid "Other products (optional)"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:73
+msgid "Coupon"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:73
+msgid "Optional"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:74
+msgid "Existing cart"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:74
+#: includes/Modules/BuyLinks/Admin.php:75
+#: includes/Modules/BuyLinks/Admin.php:82
+#: includes/Modules/ExternalProduct/Module.php:414
+msgid "Store default"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:74
+msgid "Empty it first"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:74
+msgid "Keep it"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:75
+msgid "Open"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:75
+#: includes/Modules/BuyLinks/Module.php:59
+msgid "Cart"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:76
+msgid "Sign the link so it cannot be edited"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:77
+msgid "Expires (optional)"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:78
+msgid "Make link"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:79
+msgid "Copy"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:81
+#: includes/Modules/BuyLinks/Module.php:67
+msgid "Buy now button"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:82
+msgid "Show on this product"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:82
+msgid "Hide on this product"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:109
+msgid "You cannot make links for this product."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:113
+#: includes/Modules/ExternalProduct/Module.php:328
+msgid "Product not found."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Admin.php:120
+msgid "Choose a variation first."
+msgstr ""
+
+#. translators: %d: number of products left out
+#: includes/Modules/BuyLinks/Admin.php:154
+#, php-format
+msgid "%d product was left out: variable, grouped and external products need a specific variation or cannot be linked."
+msgid_plural "%d products were left out: variable, grouped and external products need a specific variation or cannot be linked."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/BuyLinks/Admin.php:155
+msgid "Link ready."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:25
+msgid "Buy Links"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:30
+msgid "Shareable links that fill the cart and open checkout, with coupons, multiple products and tamper-proof signatures, plus an optional Buy now button."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:48
+msgid "Buy links"
+msgstr ""
+
+#. translators: 1: example URL, 2: example parameters
+#: includes/Modules/BuyLinks/Module.php:53
+#, php-format
+msgid "Any page URL with %1$s adds that product and opens checkout. Use product:variation:quantity for more control, commas for several products, and %2$s to apply a coupon. Generate ready links from the Buy link box on each product."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:58
+msgid "Empty the cart first"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:58
+msgid "Replace the cart with the link's products (a link can override this with clear=0 or clear=1)"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:59
+msgid "Send customers to"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:60
+msgid "Signed links"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:61
+msgid "Optional: unsigned links work, signed links are checked"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:62
+msgid "Required: only signed links work, so nobody can change the quantity or coupon"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:63
+msgid "A signature covers the products, quantities, coupons, cart option, destination and expiry date."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:64
+msgid "Reset signing key"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:64
+msgid "Make a new key when you save. Every signed link made so far stops working."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:67
+msgid "A second button beside Add to cart that goes straight to checkout. Each product can override this in its Buy link box."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:68
+msgid "Show Buy now"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:68
+msgid "On product pages"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:69
+msgid "In shop grids"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:69
+msgid "Also on simple products in shop and category grids"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:70
+#: includes/Modules/CustomCartText/Module.php:57
+#: includes/Modules/HidePriceUntilLogin/Module.php:83
+msgid "Button text"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:70
+#: includes/Modules/BuyLinks/Module.php:276
+msgid "Buy now"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:71
+msgid "Buy only this product"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:71
+msgid "Buy now checks out just this product and leaves nothing else in the cart"
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:140
+msgid "This buy link is not valid. Please ask the store for a new one."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:144
+msgid "This buy link has expired. Please ask the store for a new one."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:151
+msgid "This buy link does not include any products."
+msgstr ""
+
+#: includes/Modules/BuyLinks/Module.php:175
+msgid "Some products in this link could not be read and were skipped."
+msgstr ""
+
+#. translators: %d: product ID
+#: includes/Modules/BuyLinks/Module.php:218
+#: includes/Modules/BuyLinks/Module.php:234
+#, php-format
+msgid "Product #%d from this link is not available."
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/BuyLinks/Module.php:223
+#: includes/Modules/BuyLinks/Module.php:241
+#, php-format
+msgid "Choose the options for \"%s\" to add it to your cart."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:28
+msgid "Consent checkboxes"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:28
+msgid "Shown above the Place order button on the classic checkout and in the order information step of the Checkout block. Each order stores the exact wording, its version, the answer and the time."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:29
+msgid "Checkboxes"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:30
+msgid "Show answers to customers"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:30
+msgid "On the thank-you page and the order in My Account"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:31
+msgid "Show answers in emails"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:31
+msgid "In order emails to the customer and the store"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:34
+msgid "Shorter checkout for free and digital orders"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:34
+msgid "Ask only for what an order needs. A cart with anything that ships keeps every field. The state goes with the country, since its list depends on it. The country is still saved on the order: a signed-in customer's saved country, then the buyer's location from Cloudflare, then WooCommerce's default customer location, then your store country. If none is known, the country field shows as usual. On paid orders it stays visible while WooCommerce tax is on, because tax is worked out from it."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:35
+msgid "Free digital products"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:35
+msgid "Hide the company, country, state and currency selector"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:35
+msgid "When nothing ships and nothing is charged: no item price, no fees and no subscription to bill later."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:36
+msgid "Paid digital products"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:36
+msgid "Hide the country and state"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:37
+msgid "Coupons"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:37
+msgid "Hide the coupon form when the products are free"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:38
+msgid "Free order button"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:38
+msgid "Relabel the Place order button when there is nothing to pay"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:38
+msgid "Applies when the order total is zero, after coupons, and nothing is billed later. It takes the place of your own Place order label on those orders."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:39
+msgid "Free order button text"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:39
+#: includes/Modules/CheckoutEnhancements/Settings.php:179
+msgid "Get it for free"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:42
+msgid "Shorter checkout for virtual-only carts"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:42
+msgid "When nothing in the cart ships, hide address fields a digital buyer does not need. The country is covered by the section above."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:43
+msgid "Hide fields"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:43
+msgid "Hide the fields below when every item is virtual or downloadable"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:44
+msgid "Fields to hide"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:44
+msgid "Keep State if your tax rates depend on it."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:47
+msgid "Checkout wording"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:47
+msgid "Leave a box empty to keep WooCommerce's text. Field names also change in the matching required-field messages. A custom Place order label replaces payment-method specific button text too."
+msgstr ""
+
+#. translators: %s: checkout field name
+#: includes/Modules/CheckoutEnhancements/Admin.php:51
+#, php-format
+msgid "%s field"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:56
+msgid "Place order button"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:56
+msgid "Place order"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:60
+msgid "Trust block under payment"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:60
+msgid "A short reassurance under the payment methods: what protects the payment, an optional payment methods image, and a link to your refund policy."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:61
+msgid "Show trust block"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:61
+msgid "Show the trust block at checkout"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:62
+#: includes/Modules/PayWhatYouLike/Module.php:59
+#: includes/Modules/ServiceProducts/Module.php:50
+msgid "Heading"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:62
+#: includes/Modules/CheckoutEnhancements/Settings.php:283
+msgid "Secure checkout"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:63
+msgid "Reassurance lines"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:63
+#: includes/Modules/CheckoutEnhancements/Settings.php:275
+msgid "Payments are encrypted and processed by our payment provider."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:63
+msgid "One per line, up to 6. Keep them true for your store, for example your refund window or support hours."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:64
+msgid "Payment methods image"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:64
+msgid "Use an image of the payment brands your gateways really accept. Its alt text from the media library is used at checkout."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:65
+msgid "Refund policy page"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:65
+msgid "No link"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:66
+msgid "Link text"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:66
+#: includes/Modules/CheckoutEnhancements/Settings.php:287
+msgid "Refund policy"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:92
+msgid "Remove this consent? Orders already placed keep their record."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:93
+msgid "Choose a payment methods image"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:94
+msgid "Use this image"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:120
+msgid "No consent checkboxes yet. Add one with the buttons below."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:121
+msgid "Add a consent checkbox"
+msgstr ""
+
+#. translators: %d: maximum number of consent checkboxes
+#: includes/Modules/CheckoutEnhancements/Admin.php:127
+#, php-format
+msgid "Up to %d checkboxes. The suggested wording is a starting point; check it against your own policies and local law, especially the EU digital content waiver. Links in the wording show as plain text on the Checkout block."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:141
+msgid "Required"
+msgstr ""
+
+#. translators: %d: wording version number
+#: includes/Modules/CheckoutEnhancements/Admin.php:144
+#, php-format
+msgid "Wording v%d"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:150
+msgid "Type"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:154
+msgid "Show for"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:159
+msgid "Search for a product"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:164
+msgid "Checkbox text"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:165
+msgid "Links, bold and italic are allowed on the classic checkout, for example <a href=\"/privacy-policy/\">privacy policy</a>. Changing the text starts a new wording version."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:166
+msgid "Customer must tick this to place the order"
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/CheckoutEnhancements/Admin.php:167
+#: templates/saved_carts/account.php:84
+#: templates/wishlist/list.php:69
+msgid "Remove"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:177
+msgid "Choose image"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:178
+msgid "Remove image"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:188
+#: includes/Modules/CheckoutEnhancements/Module.php:317
+#: includes/Modules/CheckoutEnhancements/Module.php:341
+msgid "Checkout consents"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:200
+msgid "No consent checkboxes were shown for this order."
+msgstr ""
+
+#. translators: 1: Accepted or Not accepted, 2: consent wording, 3: wording version
+#: includes/Modules/CheckoutEnhancements/Admin.php:209
+#: includes/Modules/CheckoutEnhancements/Module.php:315
+#: includes/Modules/CheckoutEnhancements/Module.php:371
+#: templates/checkout_enhancements/order-consents.php:23
+msgid "Accepted"
+msgstr ""
+
+#. translators: 1: Accepted or Not accepted, 2: consent wording, 3: wording version
+#: includes/Modules/CheckoutEnhancements/Admin.php:209
+#: includes/Modules/CheckoutEnhancements/Module.php:315
+#: includes/Modules/CheckoutEnhancements/Module.php:371
+#: templates/checkout_enhancements/order-consents.php:23
+msgid "Not accepted"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Admin.php:210
+#: templates/checkout_enhancements/consents.php:20
+msgid "required"
+msgstr ""
+
+#. translators: 1: wording version, 2: date and time
+#: includes/Modules/CheckoutEnhancements/Admin.php:213
+#, php-format
+msgid "Wording v%1$d · %2$s"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:38
+msgid "Checkout Enhancements"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:43
+msgid "Consent checkboxes with stored proof, a shorter checkout for free and digital orders, a \"Get it for free\" button, your own checkout wording, and a trust block under the payment methods."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:127
+#: includes/Modules/CheckoutEnhancements/Module.php:764
+msgid "Please tick this box to continue."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:182
+msgid "Cart has a virtual or downloadable item."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:183
+msgid "Something in the cart ships."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:184
+msgid "Nothing in the cart ships."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:185
+msgid "No item price, no fees and no subscription to bill later."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:186
+msgid "Nothing to pay at checkout, after coupons, and no subscription to bill later."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:187
+msgid "The shorter checkout for free digital products applies."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Module.php:188
+msgid "The country field is hidden and a saved country is used."
+msgstr ""
+
+#. translators: %s: the consent wording the customer must accept
+#: includes/Modules/CheckoutEnhancements/Module.php:253
+#, php-format
+msgid "Please confirm: %s"
+msgstr ""
+
+#. translators: 1: Accepted or Not accepted, 2: consent wording, 3: wording version
+#: includes/Modules/CheckoutEnhancements/Module.php:315
+#, php-format
+msgid "%1$s: %2$s (wording v%3$d)"
+msgstr ""
+
+#. translators: 1: Accepted or Not accepted, 2: date and time, 3: wording version
+#: includes/Modules/CheckoutEnhancements/Module.php:373
+#, php-format
+msgid "%1$s on %2$s (wording v%3$d)"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:45
+msgid "Privacy policy"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:46
+msgid "Marketing emails"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:47
+msgid "EU digital content waiver"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:48
+msgid "Age confirmation"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:49
+msgid "Custom"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:56
+msgid "All carts"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:57
+msgid "Carts with items that ship"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:58
+msgid "Carts with virtual or downloadable items"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:59
+msgid "Carts where nothing ships"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:60
+msgid "Carts with a specific product"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:68
+msgid "I have read the privacy policy."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:69
+msgid "Email me product updates and offers. I can unsubscribe at any time."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:70
+msgid "I agree that delivery of the digital content starts immediately, and I understand that I lose my right of withdrawal once it starts."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:71
+msgid "I confirm that I am 18 or older."
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:80
+#: templates/back_in_stock/form.php:33
+msgid "Email address"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:81
+msgid "First name"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:82
+msgid "Last name"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:83
+#: includes/Modules/CheckoutEnhancements/Settings.php:98
+msgid "Company"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:84
+msgid "Country / Region"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:85
+#: includes/Modules/CheckoutEnhancements/Settings.php:99
+msgid "Street address"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:86
+#: includes/Modules/CheckoutEnhancements/Settings.php:100
+msgid "Apartment, suite, unit"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:87
+#: includes/Modules/CheckoutEnhancements/Settings.php:101
+msgid "Town / City"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:88
+#: includes/Modules/CheckoutEnhancements/Settings.php:102
+msgid "State / County"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:89
+#: includes/Modules/CheckoutEnhancements/Settings.php:103
+msgid "Postcode / ZIP"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:90
+#: includes/Modules/CheckoutEnhancements/Settings.php:104
+msgid "Phone"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:116
+msgid "Contact information heading (block checkout)"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:117
+msgid "Billing heading"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:118
+msgid "Shipping address heading (block checkout)"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:119
+msgid "Ship to a different address (classic checkout)"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:120
+msgid "Shipping options heading (block checkout)"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:121
+msgid "Payment heading (block checkout)"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:122
+msgid "Order summary heading"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:123
+msgid "Order note checkbox (block checkout)"
+msgstr ""
+
+#: includes/Modules/CheckoutEnhancements/Settings.php:124
+msgid "Additional information heading (classic checkout)"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:26
+msgid "Custom Add to Cart Text"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:31
+msgid "Rename the add to cart button per product type, for free, subscription and sold-out products, and per product or variation."
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:43
+msgid "Simple products"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:44
+msgid "Variable products"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:45
+msgid "Grouped products"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:46
+msgid "External/Affiliate products"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:47
+msgid "Subscription products"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:48
+msgid "Free products"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:49
+msgid "Out of stock products"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:57
+msgid "Leave a box blank to keep WooCommerce's text. Product-level text (Product data → Advanced) wins over these. Sold out wins over free and subscription, which win over the product type."
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:60
+msgid "Shop grids and product blocks"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:61
+msgid "Product page"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:71
+msgid "Select options"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:71
+#: includes/Modules/CustomCartText/Module.php:73
+#: includes/Modules/CustomCartText/Module.php:79
+#: templates/wishlist/list.php:58
+msgid "Add to cart"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:73
+msgid "View products"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:75
+msgid "Buy product"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:77
+msgid "Read more"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:193
+msgid "Button text in shop"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:194
+#: includes/Modules/CustomCartText/Module.php:202
+msgid "Store setting"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:196
+msgid "Add to cart text on shop grids and product blocks. Leave blank to use the store setting."
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:201
+msgid "Button text on product page"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:204
+msgid "Add to cart text on this product's page. Variations can override it."
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:238
+msgid "Add to cart button text"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:239
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:248
+msgid "Product setting"
+msgstr ""
+
+#: includes/Modules/CustomCartText/Module.php:242
+msgid "Shown on the product page when this variation is selected."
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:33
+msgid "External Product Extras"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:38
+msgid "Control rel and target on External/Affiliate product links, hide their prices, count outbound clicks, and make sure they can never be added to the cart."
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:55
+msgid "External product links"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:55
+msgid "Store defaults for every External/Affiliate product. Each product can override them under Product data → General."
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:56
+msgid "Link attributes"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:56
+msgid "Add rel=\"nofollow\""
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:57
+msgid "Add rel=\"sponsored\" (recommended for paid and affiliate links)"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:58
+msgid "Open links"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:59
+msgid "In a new tab (adds rel=\"noopener\")"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:60
+#: includes/Modules/ExternalProduct/Module.php:432
+msgid "In the same tab"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:62
+msgid "Prices"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:62
+msgid "Hide prices on external products (useful when the seller's price changes often)"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:63
+msgid "Click tracking"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:63
+msgid "Count clicks on external product buttons and show them in the product list"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:160
+#: includes/Modules/ExternalProduct/Module.php:170
+msgid "This product is sold on another website and cannot be added to the cart."
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:185
+msgid "An external product was removed from your cart. It can only be bought on the seller's website."
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:360
+#: includes/Modules/ExternalProduct/Module.php:364
+#: includes/Modules/ExternalProduct/Module.php:443
+msgid "Outbound clicks"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:419
+msgid "rel=\"nofollow\""
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:420
+#: includes/Modules/ExternalProduct/Module.php:426
+msgid "Add"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:420
+#: includes/Modules/ExternalProduct/Module.php:426
+msgid "Do not add"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:425
+msgid "rel=\"sponsored\""
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:431
+msgid "Open link"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:432
+msgid "In a new tab"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:437
+msgid "Price display"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:438
+msgid "Hide price"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:438
+msgid "Show price"
+msgstr ""
+
+#. translators: %s: date and time of the last click
+#: includes/Modules/ExternalProduct/Module.php:446
+#, php-format
+msgid "Last click %s"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:454
+msgid "Reset clicks"
+msgstr ""
+
+#: includes/Modules/ExternalProduct/Module.php:455
+msgid "Set the click count back to zero when you update the product."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/CheckoutGuard.php:92
+msgid "Please use an email address you keep. We send your receipt and downloads there."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/CheckoutGuard.php:97
+msgid "Too many order attempts from your connection. Please try again in an hour, or contact us for help."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/InternalEmails.php:149
+msgid "no account was created"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/InternalEmails.php:150
+msgid "integrations did not run"
+msgstr ""
+
+#. translators: %s: what was skipped, e.g. "no account was created and integrations did not run"
+#: includes/Modules/ExtraEnhancements/InternalEmails.php:156
+#, php-format
+msgid "Internal email: this address is on the Extra Enhancements internal list, so %s."
+msgstr ""
+
+#. translators: %s: what was skipped, e.g. "no account was created and integrations did not run"
+#: includes/Modules/ExtraEnhancements/InternalEmails.php:156
+msgid " and "
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:24
+msgid "Extra Enhancements"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:30
+msgid "Small fixes with their own switches: payment methods and an after-purchase link per product, ?coupon= links that stick, internal test emails that skip accounts and integrations, a checkout guard against throwaway emails and card testing, and no empty payment section when the only method is a hosted checkout."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:32
+msgid "Small fixes with their own switches: email alerts for failed live payments, payment methods and an after-purchase link per product, ?coupon= links that stick, internal test emails that skip accounts and integrations, a checkout guard against throwaway emails and card testing, and no empty payment section when the only method is a hosted checkout."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:55
+msgid "Payment failure alerts"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:55
+msgid "Emails you when a live payment fails or a payment provider’s API refuses a live request (refunds, checkouts, renewals). Test and sandbox activity never alerts. The email has no keys, card or customer details. Repeats of the same failure are held back for 30 minutes."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:56
+msgid "Alerts"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:56
+msgid "Email me about failed live payments"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:57
+msgid "Send alerts to"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:57
+msgid "Leave empty to use the site admin email."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:58
+msgid "Watch these gateways"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:60
+msgid "Clear the list to watch none."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:69
+msgid "Per-product checkout"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:69
+msgid "Choose payment methods and an after-purchase link on each product (Product data → Checkout)"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:70
+msgid "Hosted-only payment"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:70
+msgid "Hide the payment section when the only payment method is a hosted checkout (Polar, Paddle, Dodo Payments)"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:71
+msgid "Coupon links"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:71
+msgid "Any store link with ?coupon=CODE keeps the code for a day and applies it once the visitor has a cart"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:74
+msgid "Internal and test emails"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:74
+msgid "Orders from these addresses or domains are recorded as usual but don’t create a customer account and don’t run integrations (Stackless FluentCRM sync and WooCommerce webhooks). Use it for your own test purchases."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:75
+msgid "Emails and domains"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:75
+msgid "One per line. @example.com or example.com means the whole domain."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:76
+msgid "Accounts"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:76
+msgid "Don’t create a customer account"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:77
+msgid "Integrations"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:77
+msgid "Don’t run integrations"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:80
+msgid "Checkout guard"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:80
+msgid "Refuses throwaway email addresses and slows down a connection that places too many orders in an hour (card testing). Store managers are never limited."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:81
+msgid "Throwaway emails"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:81
+msgid "Refuse well-known throwaway inboxes (Mailinator, Guerrilla Mail, YOPmail and others)"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:82
+msgid "Also refuse"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:82
+msgid "More domains, one per line."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:83
+msgid "Orders per hour"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/Module.php:83
+msgid "Most order attempts one connection may make in an hour. 0 turns the limit off."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/ProductCheckout.php:139
+msgid "The selected payment method is not available for a product in your cart. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/ProductCheckout.php:245
+msgid "Payment methods"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/ProductCheckout.php:247
+msgid "off"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/ProductCheckout.php:250
+msgid "Leave all unticked to allow every payment method. If a cart has products with different choices, buyers see only the methods they all allow."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/ProductCheckout.php:253
+msgid "After payment, send buyers to"
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/ProductCheckout.php:257
+msgid "Any page on this site (/welcome/) or another website (https://…). Leave empty to show the order-received page. Renewals always show the order-received page."
+msgstr ""
+
+#: includes/Modules/ExtraEnhancements/ProductCheckout.php:292
+msgid "After-payment link: enter a full web address starting with https://, or a path on this site starting with /."
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:30
+msgid "Free Price Text"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:35
+msgid "Show custom text such as \"Free\" instead of a zero price on product pages, shop grids, the cart and checkout."
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:47
+#: includes/Modules/FreePriceText/Module.php:284
+msgid "Free price text"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:47
+msgid "Products with a price of exactly zero show this text instead. Products with no price at all are left alone, because WooCommerce cannot sell them."
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:48
+msgid "Text"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:48
+#: includes/Modules/FreePriceText/Module.php:93
+#: includes/Modules/FreePriceText/Module.php:96
+#: includes/Modules/FreePriceText/Module.php:285
+msgid "Free"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:48
+msgid "Shown in place of the zero price. Each product can override it under Product data → General."
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:49
+msgid "Price ranges"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:49
+msgid "Use the text at the low end of a range, for example \"Free – $19\""
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:50
+msgid "Free on sale"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:50
+msgid "Keep the regular price struck through when a sale makes the product free"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:51
+msgid "Cart and checkout"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:51
+msgid "Also show the text for free items in the cart, mini-cart, checkout and order details"
+msgstr ""
+
+#. translators: 1: free text (e.g. "Free"), 2: highest price
+#: includes/Modules/FreePriceText/Module.php:165
+#, php-format
+msgctxt "Free price range"
+msgid "%1$s &ndash; %2$s"
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:242
+msgid "Whether the item is free and should show the free price text."
+msgstr ""
+
+#: includes/Modules/FreePriceText/Module.php:287
+msgid "Shown instead of the price when this product costs nothing. Leave blank to use the store setting."
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:39
+msgid "Hide Price Until Login"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:44
+msgid "Hide prices and buying from guests, store-wide, by category or per product, with a login link in place of the price."
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:66
+msgid "Who and what"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:66
+msgid "Guests never see hidden prices and cannot add those products to the cart. Each product can also be set to always or never hide under Product data → Advanced."
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:67
+msgid "Hide prices on"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:68
+msgid "All products"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:69
+msgid "Products in selected categories"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:70
+msgid "Only products set to hide"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:72
+msgid "Categories"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:72
+msgid "Used when hiding by category. Subcategories are included."
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:73
+msgid "Roles that see prices"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:73
+msgid "Leave empty to show prices to every logged-in customer."
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:76
+msgid "What guests see"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:77
+msgid "Price text"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:77
+#: includes/Modules/HidePriceUntilLogin/Module.php:218
+#: includes/Modules/HidePriceUntilLogin/Module.php:219
+msgid "Log in to see prices"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:78
+msgid "Login link"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:78
+msgid "Link the price text to the login page and return the shopper to the product afterwards"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:79
+msgid "Login page"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:80
+msgid "WooCommerce My Account page"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:81
+msgid "WordPress login screen"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:83
+#: includes/Modules/HidePriceUntilLogin/Module.php:251
+#: includes/Modules/HidePriceUntilLogin/Module.php:453
+#: includes/Modules/HidePriceUntilLogin/Module.php:477
+msgid "Log in to buy"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:83
+msgid "Replaces the add to cart button on hidden products. Leave blank to remove the button."
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:433
+msgid "Please log in to buy this product."
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:560
+msgid "Hide price until login"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:562
+msgid "Follow the store setting"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:563
+msgid "Always hide from guests"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:564
+msgid "Never hide"
+msgstr ""
+
+#: includes/Modules/HidePriceUntilLogin/Module.php:567
+msgid "Guests see the login text instead of the price and cannot buy until they log in."
+msgstr ""
+
+#. translators: %s: minimum price
+#: includes/Modules/PayWhatYouLike/BlocksIntegration.php:63
+#: includes/Modules/PayWhatYouLike/Storefront.php:64
+#, php-format
+msgid "Enter at least %s."
+msgstr ""
+
+#. translators: %s: maximum price
+#: includes/Modules/PayWhatYouLike/BlocksIntegration.php:65
+#: includes/Modules/PayWhatYouLike/Storefront.php:66
+#, php-format
+msgid "Enter at most %s."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/BlocksIntegration.php:66
+#: includes/Modules/PayWhatYouLike/Storefront.php:67
+msgid "Enter an amount such as 12.50, without a currency symbol."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/BlocksIntegration.php:67
+msgid "Your total is being updated. Try again in a moment."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/BlocksIntegration.php:68
+msgid "Your amount could not be saved. Please try again."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/BlocksIntegration.php:69
+#: templates/pay_what_you_like/amount-field.php:48
+msgid "Quick amounts"
+msgstr ""
+
+#. translators: 1: minimum price, 2: product name
+#: includes/Modules/PayWhatYouLike/Cart.php:186
+#, php-format
+msgid "Enter at least %1$s for %2$s."
+msgstr ""
+
+#. translators: 1: maximum price, 2: product name
+#: includes/Modules/PayWhatYouLike/Cart.php:189
+#, php-format
+msgid "Enter at most %1$s for %2$s."
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/PayWhatYouLike/Cart.php:195
+#, php-format
+msgid "Enter an amount such as 12.50 for %s, without a currency symbol."
+msgstr ""
+
+#. translators: %s: maximum price
+#: includes/Modules/PayWhatYouLike/Cart.php:209
+#, php-format
+msgid "Enter 0 to get it free, or any amount up to %s."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Cart.php:210
+msgid "Enter 0 to get it free, or any amount you like."
+msgstr ""
+
+#. translators: 1: minimum price, 2: maximum price
+#: includes/Modules/PayWhatYouLike/Cart.php:214
+#, php-format
+msgid "Minimum %1$s, maximum %2$s"
+msgstr ""
+
+#. translators: %s: minimum price
+#: includes/Modules/PayWhatYouLike/Cart.php:216
+#, php-format
+msgid "Minimum %s"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Cart.php:392
+#: includes/Modules/PayWhatYouLike/Module.php:140
+msgid "That cart item no longer exists."
+msgstr ""
+
+#. translators: %s: product name
+#: includes/Modules/PayWhatYouLike/Cart.php:398
+#, php-format
+msgid "%s has a fixed price."
+msgstr ""
+
+#. translators: 1: product name, 2: amount paid per item, 3: minimum price
+#: includes/Modules/PayWhatYouLike/Cart.php:591
+#, php-format
+msgid "%1$s: %2$s (minimum %3$s)"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Cart.php:600
+#: includes/Modules/PayWhatYouLike/Module.php:58
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:107
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:127
+msgid "Pay what you like"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Cart.php:678
+msgid "Whether the buyer chooses what to pay for this item."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Cart.php:679
+msgid "Amount per item, chosen or default, in the cart currency."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:34
+msgid "Pay What You Like"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:39
+msgid "Let buyers choose what to pay for a product, with a minimum, a suggested amount, quick amounts and an optional maximum. Works on product pages, block and classic cart and checkout, and buy links."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:58
+msgid "Turn it on per product in the \"Pay what you like\" product data tab. Each product's price is its minimum unless you set a lower one, so a price of 0 makes it \"free, or pay what you like\". Subscription products keep their set price."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:59
+#: includes/Modules/PayWhatYouLike/Module.php:72
+msgid "Name your price"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:59
+msgid "Label of the amount field on product pages and heading of the box on the cart and checkout."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:60
+msgid "Line under the heading"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:60
+msgid "Optional, for example \"Every amount helps keep this project going.\""
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:61
+#: includes/Modules/SoldCount/Module.php:62
+#: includes/Modules/StockUrgency/Module.php:55
+#: includes/Modules/Wishlist/Module.php:99
+msgid "Product pages"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:61
+msgid "Show the amount field above Add to cart. When off, buyers choose their amount in the cart and at checkout."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:62
+msgid "Price line"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Module.php:62
+msgid "Show \"Pay what you like: this price or more\" (or \"Free, or pay what you like\") under prices"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:123
+#: includes/Modules/ProductEnhancements/Admin.php:71
+#: includes/Modules/ServiceProducts/Module.php:165
+msgid "How this works"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:128
+msgid "Let buyers choose what to pay"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:132
+msgid "The product's price is the minimum unless you set one below, so a price of 0 makes it \"free, or pay what you like\". Subscription products keep their set price."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:135
+msgid "Minimum"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:135
+msgid "Leave empty to use the product's price as the minimum."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:136
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:236
+msgid "Suggested amount"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:136
+msgid "Filled in for the buyer. Leave empty to start at the product's price."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:137
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:237
+msgid "Maximum"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:137
+msgid "Leave empty to allow up to 1,000,000."
+msgstr ""
+
+#. translators: 1: field label, 2: currency symbol
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:143
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:245
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr ""
+
+#. translators: 1: quick amount number (1-4), 2: currency symbol
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:156
+#, php-format
+msgid "Quick amount %1$d (%2$s)"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:160
+msgid "One-tap amounts shown with the amount field, for example 0, 5 and 10. Amounts below a product's minimum are left out, so 0 only shows when the minimum is 0."
+msgstr ""
+
+#. translators: %s: store currency code
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:165
+#, php-format
+msgid "Amounts are in %s. Other currencies are converted at checkout. Variations can override the minimum, suggested amount and maximum, or opt out."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:228
+msgid "Fixed price"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:229
+msgid "No pay what you like for this variation (when the product has it on)"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:235
+msgid "Pay what you like minimum"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:251
+msgid "Leave empty to use the product's Pay what you like setting."
+msgstr ""
+
+#. translators: 1: variation ID, 2: error message
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:276
+#, php-format
+msgid "Variation #%1$d: %2$s"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:294
+msgid "Pay what you like: the minimum is not a valid amount and was not saved."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:296
+msgid "Pay what you like: the suggested amount is not a valid amount and was not saved."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:298
+msgid "Pay what you like: the maximum is not a valid amount and was not saved."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:300
+msgid "Pay what you like: a quick amount is not a valid amount and was left out."
+msgstr ""
+
+#. translators: %d: the number of quick amounts allowed
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:303
+#, php-format
+msgid "Pay what you like: add up to %d quick amounts."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:305
+msgid "Pay what you like: the minimum is above the maximum, so the maximum was not saved."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:307
+msgid "Pay what you like: the suggested amount can't be above the maximum and was not saved."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:309
+msgid "Pay what you like: quick amounts above the maximum were left out."
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:311
+msgid "Pay what you like: some settings could not be saved."
+msgstr ""
+
+#. translators: %s: minimum price
+#: includes/Modules/PayWhatYouLike/Storefront.php:237
+#, php-format
+msgid "Pay what you like, from %s"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Storefront.php:238
+#: includes/Modules/PayWhatYouLike/Storefront.php:242
+msgid "Free, or pay what you like"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Storefront.php:243
+msgid "Pay what you like: this price or more"
+msgstr ""
+
+#: includes/Modules/PayWhatYouLike/Storefront.php:264
+msgid "Your price"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:77
+msgid "Product type"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:82
+msgid "Picks which details to show. Grey values come from WooCommerce data and fill in automatically when you leave a box empty."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:89
+msgid "Details table"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:90
+msgid "Show the details table on the product page"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:111
+msgid "Hide"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:125
+msgid "Extra details"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:126
+msgid ""
+"Care | Machine wash cold\n"
+"Certified | OEKO-TEX"
+msgstr ""
+
+#. translators: %d: maximum number of rows
+#: includes/Modules/ProductEnhancements/Admin.php:130
+#, php-format
+msgid "One per line as \"Name | Value\". Up to %d rows, shown after the fields above."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:143
+msgid "Not set"
+msgstr ""
+
+#. translators: %s: validation message
+#: includes/Modules/ProductEnhancements/Admin.php:179
+#, php-format
+msgid "Product details: %s"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:204
+msgid "Product details for this variation"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Admin.php:205
+msgid "Leave blank to use the product's value. The field list follows the product type set in the Details tab; update the product after changing it."
+msgstr ""
+
+#. translators: 1: variation ID, 2: validation message
+#: includes/Modules/ProductEnhancements/Admin.php:252
+#, php-format
+msgid "Variation #%1$d details: %2$s"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/AutoFill.php:91
+#: includes/Modules/ProductEnhancements/Fields.php:46
+msgid "Ebook"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:20
+msgid "Brand"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:21
+msgid "Model number"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:22
+msgid "GTIN / UPC / EAN"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:22
+msgid "8, 12, 13 or 14 digits from the barcode."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:23
+msgid "Condition"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:23
+#: includes/Modules/ProductEnhancements/Schema.php:100
+msgid "New"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:23
+#: includes/Modules/ProductEnhancements/Schema.php:100
+msgid "Used"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:23
+#: includes/Modules/ProductEnhancements/Schema.php:100
+msgid "Refurbished"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:24
+msgid "Colors"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:25
+msgid "Size"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:26
+msgid "Material"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:27
+msgid "Dimensions"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:27
+msgid "Length × width × height, for example 20 × 15 × 3 cm."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:28
+msgid "Weight"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:29
+msgid "In the box"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:30
+msgid "Country of origin"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:31
+msgid "Warranty"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:32
+msgid "File type"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:33
+msgid "File size"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:34
+msgid "Files included"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:35
+msgid "Pages"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:36
+msgid "Version"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:37
+msgid "Last updated"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:38
+msgid "Requirements"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:40
+msgid "Delivery"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:40
+msgid "Instant download after payment"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:41
+msgid "Author"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:42
+msgid "Publisher"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:43
+msgid "Publication date"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:44
+msgid "Edition"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:45
+msgid "Language"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:46
+#: includes/Modules/ProductEnhancements/Fields.php:56
+msgid "Format"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:46
+msgid "Paperback"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:46
+msgid "Hardcover"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:46
+msgid "Audiobook"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:47
+msgid "ISBN-13"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:47
+msgid "Enter either ISBN. The other is worked out for you when it exists."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:48
+msgid "ISBN-10"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:49
+msgid "Works with"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:50
+msgid "Sites or devices"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:51
+msgid "Support"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:52
+msgid "Updates"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:54
+msgid "Live demo"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:55
+msgid "Duration"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:56
+msgid "Self-paced"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:56
+msgid "Live online"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:56
+msgid "In person"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:56
+msgid "Hybrid"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:57
+msgid "Level"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:57
+msgid "Beginner"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:57
+msgid "Intermediate"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:57
+msgid "Advanced"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:57
+msgid "All levels"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:58
+msgid "Includes"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:59
+msgid "Access"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:60
+msgid "Delivery time"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:61
+msgid "Location"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:75
+msgid "Physical product"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:76
+msgid "Digital download"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:77
+msgid "Book or ebook"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:78
+msgid "Software or plugin"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:79
+msgid "Course or service"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:80
+msgid "Custom details only"
+msgstr ""
+
+#. translators: %s: field name
+#: includes/Modules/ProductEnhancements/Fields.php:119
+#, php-format
+msgid "%s must be a whole number."
+msgstr ""
+
+#. translators: %s: field name
+#: includes/Modules/ProductEnhancements/Fields.php:126
+#, php-format
+msgid "%s must be a valid date (YYYY-MM-DD)."
+msgstr ""
+
+#. translators: %s: field name
+#: includes/Modules/ProductEnhancements/Fields.php:133
+#, php-format
+msgid "%s must be a web address starting with https://."
+msgstr ""
+
+#. translators: %s: field name
+#: includes/Modules/ProductEnhancements/Fields.php:139
+#, php-format
+msgid "Choose one of the options for %s."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:149
+msgid "The GTIN must be 8, 12, 13 or 14 digits with a valid check digit."
+msgstr ""
+
+#. translators: %s: field name
+#: includes/Modules/ProductEnhancements/Fields.php:157
+#, php-format
+msgid "%s is not a valid ISBN. Check the digits, including the last one."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Fields.php:164
+msgid "ISBNs starting with 979 have no ISBN-10. Enter it as the ISBN-13 instead."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:31
+msgid "Product Details Table"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:36
+msgid "Add a specifications table to products with presets for physical goods, downloads, books, software and services. Values fill in from WooCommerce data and feed product schema."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:48
+msgid "Product details table"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:48
+msgid "Fill in details per product under Product data → Details. The shortcode [stackless_product_details] places the table anywhere; add id=\"123\" outside product pages."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:49
+msgid "Placement"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:50
+msgid "Its own product tab"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:51
+msgid "Inside the Additional information tab"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:52
+msgid "Below the product summary"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:53
+msgid "Only where I place the shortcode"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:55
+msgid "Tab title"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:56
+msgid "Table heading"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:56
+#: includes/Modules/ProductEnhancements/Module.php:117
+msgid "Specifications"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:56
+msgid "Leave blank for no heading."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:57
+msgid "Structured data"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:57
+msgid "Add details to the product schema (brand, GTIN, MPN, condition, weight, dimensions, other properties)"
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Module.php:197
+msgid "Additional information"
+msgstr ""
+
+#. translators: %s: the line the merchant typed
+#: includes/Modules/ProductEnhancements/Repository.php:128
+#, php-format
+msgid "Extra detail \"%s\" needs a name and a value separated by |."
+msgstr ""
+
+#: includes/Modules/ProductEnhancements/Repository.php:137
+msgid "Each extra detail needs a name and a value."
+msgstr ""
+
+#. translators: %d: maximum number of extra details
+#: includes/Modules/ProductEnhancements/Repository.php:142
+#, php-format
+msgid "Only the first %d extra details are kept."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:35
+msgid "Min/Max Quantity"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:40
+msgid "Set minimum, maximum and step quantities store-wide, per product and per variation. Enforced on the classic cart and the Cart/Checkout blocks."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:52
+msgid "Store defaults"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:52
+msgid "Products and variations can override each value. Variation values win over product values, which win over these."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:53
+#: includes/Modules/QuantityLimits/Module.php:528
+#: includes/Modules/QuantityLimits/Module.php:589
+msgid "Minimum quantity"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:54
+#: includes/Modules/QuantityLimits/Module.php:529
+#: includes/Modules/QuantityLimits/Module.php:590
+msgid "Maximum quantity"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:54
+msgid "0 means no limit. Stock levels still cap it."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:55
+#: includes/Modules/QuantityLimits/Module.php:530
+#: includes/Modules/QuantityLimits/Module.php:591
+msgid "Sold in multiples of"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:58
+msgid "Shopper messages"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:58
+msgid "Placeholders: {product}, {min}, {max}, {step}, {quantity}."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:59
+msgid "Limits note"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:59
+msgid "Show the limits next to the quantity box on product pages"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:60
+msgid "Minimum note"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:60
+#: includes/Modules/QuantityLimits/Module.php:470
+msgid "Minimum {min}"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:61
+msgid "Maximum note"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:61
+#: includes/Modules/QuantityLimits/Module.php:473
+msgid "Maximum {max}"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:62
+msgid "Step note"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:62
+#: includes/Modules/QuantityLimits/Module.php:476
+msgid "Sold in packs of {step}"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:63
+msgid "Below minimum error"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:63
+#: includes/Modules/QuantityLimits/Module.php:289
+msgid "You need at least {min} of \"{product}\" in your cart."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:64
+msgid "Above maximum error"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:64
+#: includes/Modules/QuantityLimits/Module.php:290
+msgid "You can buy at most {max} of \"{product}\"."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:65
+msgid "Wrong multiple error"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:65
+#: includes/Modules/QuantityLimits/Module.php:291
+msgid "\"{product}\" is sold in multiples of {step}."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:526
+#: includes/Modules/QuantityLimits/Module.php:594
+msgid "Quantity limits"
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:526
+msgid "Leave blank to use the store default. Variations can override these."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:541
+msgid "0 means no limit."
+msgstr ""
+
+#: includes/Modules/QuantityLimits/Module.php:603
+msgid "Product default"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:27
+msgid "Saved Carts & Order Again"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:32
+msgid "Customers save their cart under a name, restore it later, and reorder from any past order. Adds a Saved carts tab to My Account."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:53
+msgid "Saved carts & order again"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:57
+#: includes/Modules/Wishlist/Module.php:84
+msgid "My Account endpoint"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:58
+msgid "URL slug of the Saved carts tab. Leave empty to hide the tab (the shortcode still works)."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:65
+msgid "Cart page"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:66
+msgid "Show a \"Save this cart\" form below the cart for signed-in customers"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:73
+msgid "Order again for"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:74
+msgid "Order statuses that show an Order again button. WooCommerce alone allows completed orders only."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:131
+msgid "Your cart is empty. Add products before saving it."
+msgstr ""
+
+#. translators: %d: maximum number of saved carts
+#: includes/Modules/SavedCarts/Module.php:138
+#, php-format
+msgid "You can keep %d saved carts. Remove one before saving another."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:140
+msgid "Give this cart a name."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:143
+msgid "Cart saved. Find it any time under Saved carts."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:164
+msgid "A product that is no longer available"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:212
+msgid "Sign in to manage saved carts."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:234
+msgid "Saved cart removed."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:234
+msgid "That saved cart was not found."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:241
+msgid "None of these products can be bought right now."
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:245
+msgid "Your saved cart is back. Current prices apply; check any product options before paying."
+msgstr ""
+
+#. translators: %s: product names
+#: includes/Modules/SavedCarts/Module.php:248
+#, php-format
+msgid "Not added: %s"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:330
+#: includes/Modules/SavedCarts/Module.php:349
+#: includes/Modules/SavedCarts/Module.php:443
+#: includes/Modules/SavedCarts/Module.php:450
+#: includes/Modules/SavedCarts/Module.php:468
+msgid "Saved carts"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:471
+msgid "Name"
+msgstr ""
+
+#: includes/Modules/SavedCarts/Module.php:472
+msgid "Products"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:30
+msgid "Service Products"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:35
+msgid "Mark products as services: no shipping, plus after-payment instructions and an optional booking or intake link on the thank-you page, emails and the customer account."
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:46
+msgid "Service products"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:46
+msgid "Tick \"Service\" next to Virtual and Downloadable on a product, then add instructions in its Service tab."
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:51
+#, php-format
+msgid "Shown above the instructions. %s is replaced with the product name."
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:53
+#: includes/Modules/ServiceProducts/Module.php:255
+#, php-format
+msgid "%s: what happens next"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:58
+msgid "Emails"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:59
+msgid "Include instructions in the customer's processing and completed order emails"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:65
+msgid "Before payment"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:66
+msgid "Shown instead of the instructions while an order is unpaid (for example bank transfer). Leave empty to show nothing."
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:68
+msgid "Instructions for your service appear here as soon as your payment is confirmed."
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:130
+#: includes/Modules/ServiceProducts/Module.php:141
+msgid "Service"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:131
+msgid "Services need no shipping. Customers get the instructions from the Service tab after paying."
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:166
+msgid "After-payment instructions"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:173
+msgid "How the customer books, sends a brief or receives the service. Shown on the thank-you page, in paid order emails and in My Account once the order is paid."
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:178
+msgid "Booking or intake link"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:181
+msgid "Optional. Placeholders: {order_number}, {order_id}, {email}, {first_name}, {last_name}, {name}, {product}. Values are URL-encoded."
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:187
+msgid "Link button text"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:188
+#: includes/Modules/ServiceProducts/Module.php:280
+msgid "Book your session"
+msgstr ""
+
+#: includes/Modules/ServiceProducts/Module.php:206
+msgid "The booking link must start with http:// or https://. It was not saved."
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:25
+msgid "Sold Count"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:30
+msgid "Show an \"X sold\" badge on products once they pass a sales threshold. Uses WooCommerce's own sales counter."
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:42
+#: includes/Modules/SoldCount/Module.php:48
+#: includes/Modules/StockUrgency/Module.php:57
+#: includes/Modules/StockUrgency/Module.php:63
+msgid "After the title"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:43
+#: includes/Modules/SoldCount/Module.php:49
+#: includes/Modules/StockUrgency/Module.php:58
+#: includes/Modules/StockUrgency/Module.php:64
+msgid "After the price"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:44
+#: includes/Modules/StockUrgency/Module.php:59
+msgid "After the add to cart button"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:45
+#: includes/Modules/StockUrgency/Module.php:60
+msgid "Do not show on product pages"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:50
+#: includes/Modules/StockUrgency/Module.php:65
+msgid "Before the add to cart button"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:51
+#: includes/Modules/StockUrgency/Module.php:66
+msgid "Do not show in shop grids"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:54
+msgid "Sold count badge"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:54
+msgid "Counts come from completed and processing orders, as recorded by WooCommerce. Variations add up on their parent product."
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:55
+msgid "Badge text"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:55
+#: includes/Modules/SoldCount/Module.php:119
+msgid "{count} sold"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:55
+msgid "{count} is replaced with the number sold."
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:56
+msgid "Count multiplier"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:56
+msgid "The badge shows the real count times this number, rounded up. For example, 12 sold × 6.32 = 75.84 shows as 76. Leave it at 1 to show the real count. A count that does not match real sales can mislead buyers and may break consumer-protection rules where you sell."
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:57
+msgid "Show from"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:57
+msgid "Hide the badge until it would show at least this many. Compared with the count the badge shows, after the multiplier."
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:58
+msgid "Number style"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:59
+msgid "Exact (1,268 sold)"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:60
+msgid "Rounded down (1,200+ sold)"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:63
+#: includes/Modules/StockUrgency/Module.php:62
+#: includes/Modules/Wishlist/Module.php:92
+msgid "Shop grids"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:63
+msgid "Applies to the shop, category pages, related products and product blocks."
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:146
+msgid "Hide sold count"
+msgstr ""
+
+#: includes/Modules/SoldCount/Module.php:147
+msgid "Do not show the \"sold\" badge for this product."
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:30
+msgid "Stock Urgency Labels"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:35
+msgid "Show \"Only 3 left\" style labels when stock runs low, with separate low and very-low thresholds and messages."
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:47
+msgid "Stock urgency labels"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:47
+msgid "Labels only appear on products (and variations) with \"Track stock quantity\" turned on."
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:48
+msgid "Low stock at"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:48
+msgid "Show the low stock label at or below this many units."
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:49
+msgid "Low stock text"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:49
+#: includes/Modules/StockUrgency/Module.php:168
+msgid "Only {count} left in stock"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:49
+msgid "{count} is replaced with the units left."
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:50
+msgid "Very low stock at"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:50
+msgid "Show the stronger label at or below this many units. Set 0 to skip it."
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:51
+msgid "Very low stock text"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:51
+#: includes/Modules/StockUrgency/Module.php:169
+msgid "Almost gone: only {count} left"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:52
+msgid "Plenty in stock"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:52
+msgid "Show a label when stock is above the low threshold"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:53
+msgid "In stock text"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:53
+#: includes/Modules/StockUrgency/Module.php:170
+msgid "In stock"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:54
+msgid "Skip products that allow backorders, since they never really run out"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:56
+msgid "Replace WooCommerce's stock line (updates per variation)"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:240
+msgid "Hide urgency label"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:241
+msgid "Never show a low stock label for this product."
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:246
+msgid "Urgency threshold"
+msgstr ""
+
+#: includes/Modules/StockUrgency/Module.php:251
+msgid "Show the low stock label at or below this many units. Leave blank to use the store setting."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:40
+#: includes/Modules/Wishlist/Module.php:70
+#: includes/Modules/Wishlist/Module.php:598
+#: includes/Modules/Wishlist/Module.php:720
+#: includes/Modules/Wishlist/Module.php:736
+#: includes/Modules/Wishlist/Module.php:766
+#: includes/Modules/Wishlist/Module.php:776
+#: includes/Modules/Wishlist/Module.php:793
+#: templates/wishlist/list.php:23
+#: assets/wishlist/wishlist-block.js:13
+#: assets/wishlist/wishlist-block.js:20
+msgid "Wishlist"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:45
+msgid "Guest and account wishlists that merge on sign-in, with buttons on product pages and shop grids, a wishlist page, a My Account tab, share links and move to cart."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:74
+msgid "Wishlist page"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:75
+msgid "A page containing the [stackless_wishlist] shortcode or the Wishlist block. Needed for share links."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:85
+msgid "URL slug for the Wishlist tab in My Account. Leave empty to hide the tab."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:93
+msgid "Show the wishlist button on product grids and Product Collection blocks"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:100
+msgid "Show the wishlist button below the add to cart button"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:106
+msgid "Guest wishlists"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:107
+msgid "Let visitors save products without an account (kept in a cookie, merged when they sign in)"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:113
+msgid "Keep guest lists for"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:114
+msgid "days since the last change"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:121
+msgid "Maximum products per list"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:128
+#: templates/wishlist/list.php:58
+msgid "Move to cart"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:129
+msgid "Remove a product from the wishlist after it is moved to the cart"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:325
+msgid "Sign in to save products to your wishlist."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:329
+#: includes/Modules/Wishlist/Module.php:338
+msgid "Removed from your wishlist."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:341
+msgid "Your wishlist is full. Remove a product before adding another."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:344
+msgid "Saved to your wishlist."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:344
+msgid "Could not save this product. Please try again."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:368
+msgid "This product cannot be bought right now."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:374
+#: includes/Modules/Wishlist/Module.php:379
+#: includes/Modules/Wishlist/Module.php:385
+msgid "Choose the product options first."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:396
+msgid "This product cannot be added to the cart."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:401
+msgid "Moved to your cart."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:429
+msgid "A new share link was created. The old link no longer works."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:450
+msgid "Your session expired. Reload the page and try again."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:462
+msgid "Unknown wishlist action."
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:483
+#: templates/wishlist/button.php:16
+msgid "Save to wishlist"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:484
+#: templates/wishlist/button.php:16
+msgid "Saved to wishlist"
+msgstr ""
+
+#: includes/Modules/Wishlist/Module.php:650
+msgid "This wishlist link is no longer available."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:26
+msgid "WooCommerce Optimizer"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:31
+msgid "Load WooCommerce scripts and styles only where they are used, stop cart and checkout prefetching, defer store scripts and keep sessions and logs lean."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:43
+msgid "Storefront"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:43
+msgid "Stackless already serves its own files minified and deferred. These settings tune what WooCommerce itself loads. Clear your page cache after changing them."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:44
+msgid "Cart and checkout prefetch"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:44
+msgid "Stop prefetching the Cart and Checkout block scripts on every page"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:44
+msgid "Once the cart has items, WooCommerce adds about 50 prefetch links to every page so checkout opens faster. Shoppers download them whether or not they check out."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:45
+msgid "Store assets"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:45
+msgid "Load WooCommerce scripts and styles only on store pages"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:45
+msgid "Store pages are the shop, products, categories, cart, checkout, account and any page with a WooCommerce or Stackless block or shortcode."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:46
+msgid "Always treat as store pages"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:46
+msgid "Page IDs or URL paths, one per line (for example 42 or /landing/). Use for pages whose store widgets come from a page builder."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:47
+msgid "Cart fragments"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:48
+msgid "Keep (WooCommerce default)"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:49
+msgid "Remove outside store pages"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:50
+msgid "Remove while the cart is empty"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:51
+msgid "Remove everywhere"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:52
+msgid "Cart fragments refresh the classic mini cart with an AJAX request on page load. Block themes and the Mini-Cart block do not use them."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:53
+msgid "Defer WooCommerce scripts"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:53
+msgid "Load WooCommerce scripts with defer outside cart and checkout"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:53
+msgid "WordPress keeps a script blocking when another plugin needs it that way, so this never breaks load order."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:54
+msgid "Password strength meter"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:54
+msgid "Remove the password strength meter (about 400 KB of JavaScript) from account and checkout pages"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:55
+msgid "Order attribution"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:55
+msgid "Turn off order attribution tracking and its two scripts"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:55
+msgid "Orders stop recording their traffic source (Origin column and order screen box)."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:56
+msgid "Generator tag"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:56
+msgid "Remove the WooCommerce version meta tag from page source"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:60
+msgid "Marketplace suggestions"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:60
+msgid "Hide WooCommerce.com extension suggestions and promotions"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:61
+msgid "Remote inbox notes"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:61
+msgid "Stop fetching remote tips and notes into the WooCommerce inbox"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:62
+msgid "Dashboard widgets"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:62
+msgid "Remove the WooCommerce status and recent reviews widgets from the WordPress dashboard"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:62
+msgid "Each widget runs its own report queries every time the dashboard loads."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:63
+msgid "Connect notices"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:63
+msgid "Hide WooCommerce.com connection and subscription notices"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:66
+msgid "Housekeeping"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:66
+msgid "Smaller tables mean faster queries for orders, carts and scheduled actions."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:67
+msgid "Scheduled action logs"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:67
+msgid "Days to keep completed and cancelled scheduled actions. WooCommerce keeps 31; 7 is plenty for most stores."
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:68
+msgid "Guest cart lifetime"
+msgstr ""
+
+#: includes/Modules/WooCommerceOptimizer/Module.php:68
+msgid "Hours a guest cart session is kept. WooCommerce keeps 48. Logged-in customers keep their saved cart either way."
+msgstr ""
+
+#: stackless-lite.php:46
+msgid "Stackless Lite is idle because Stackless is active. Stackless includes every Lite module and uses the same settings and data, so you can deactivate and delete Stackless Lite."
+msgstr ""
+
+#. translators: %s: product name
+#: templates/back_in_stock/email-available.php:18
+#, php-format
+msgid "Good news: %s is back in stock."
+msgstr ""
+
+#: templates/back_in_stock/email-available.php:24
+#: templates/wishlist/list.php:61
+msgid "View product"
+msgstr ""
+
+#: templates/back_in_stock/email-available.php:25
+msgid "Stock is limited and items are not reserved, so it may sell out again."
+msgstr ""
+
+#: templates/back_in_stock/email-available.php:27
+msgid "This was a one-time alert you asked for."
+msgstr ""
+
+#: templates/back_in_stock/email-available.php:28
+msgid "Manage this alert"
+msgstr ""
+
+#. translators: %s: product name
+#: templates/back_in_stock/email-confirm.php:18
+#, php-format
+msgid "You asked to hear when %s is back in stock."
+msgstr ""
+
+#: templates/back_in_stock/email-confirm.php:22
+msgid "We will send one email when it is available. The link expires in 7 days."
+msgstr ""
+
+#: templates/back_in_stock/email-confirm.php:24
+msgid "Did not ask for this? Ignore this email and nothing will be sent."
+msgstr ""
+
+#: templates/back_in_stock/form.php:37
+msgid "Send me one email when this is available again."
+msgstr ""
+
+#: templates/back_in_stock/form.php:39
+msgid "Leave this empty"
+msgstr ""
+
+#: templates/back_in_stock/form.php:40
+msgid "Notify me"
+msgstr ""
+
+#: templates/back_in_stock/form.php:42
+msgid "Enable JavaScript to sign up for availability alerts."
+msgstr ""
+
+#: templates/checkout_enhancements/trust.php:30
+msgid "Accepted payment methods"
+msgstr ""
+
+#: templates/saved_carts/account.php:21
+msgid "Saved carts and order again"
+msgstr ""
+
+#: templates/saved_carts/account.php:22
+msgid "Keep a cart for later, or start a new cart from a past order. Prices and stock are checked again when you restore."
+msgstr ""
+
+#: templates/saved_carts/account.php:25
+msgid "Save your current cart"
+msgstr ""
+
+#. translators: %d: number of items
+#: templates/saved_carts/account.php:33
+#, php-format
+msgid "%d item in your cart."
+msgid_plural "%d items in your cart."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/saved_carts/account.php:36
+#: templates/saved_carts/cart-form.php:20
+msgid "Cart name"
+msgstr ""
+
+#: templates/saved_carts/account.php:38
+msgid "For example: monthly supplies"
+msgstr ""
+
+#: templates/saved_carts/account.php:39
+#: templates/saved_carts/cart-form.php:21
+msgid "Save cart"
+msgstr ""
+
+#: templates/saved_carts/account.php:43
+msgid "Your cart is empty. Add products, then save the cart here."
+msgstr ""
+
+#: templates/saved_carts/account.php:44
+#: templates/wishlist/list.php:39
+msgid "Browse products"
+msgstr ""
+
+#: templates/saved_carts/account.php:49
+msgid "Saved for later"
+msgstr ""
+
+#: templates/saved_carts/account.php:51
+msgid "Saved carts appear here."
+msgstr ""
+
+#. translators: %d: number of products
+#: templates/saved_carts/account.php:60
+#, php-format
+msgid "%d product"
+msgid_plural "%d products"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/saved_carts/account.php:77
+msgid "Replace my current cart"
+msgstr ""
+
+#: templates/saved_carts/account.php:78
+msgid "Restore cart"
+msgstr ""
+
+#: templates/saved_carts/account.php:92
+#: templates/saved_carts/account.php:114
+msgid "Order again"
+msgstr ""
+
+#: templates/saved_carts/account.php:94
+msgid "Your past orders appear here so you can reorder in one click."
+msgstr ""
+
+#. translators: %s: order number
+#: templates/saved_carts/account.php:102
+#, php-format
+msgid "Order #%s"
+msgstr ""
+
+#: templates/saved_carts/account.php:115
+msgid "View"
+msgstr ""
+
+#: templates/saved_carts/cart-form.php:18
+msgid "Save this cart for later"
+msgstr ""
+
+#: templates/saved_carts/cart-form.php:24
+msgid "View saved carts"
+msgstr ""
+
+#: templates/saved_carts/signed-out.php:13
+msgid "Keep your carts for later"
+msgstr ""
+
+#: templates/saved_carts/signed-out.php:14
+msgid "Sign in to save carts and reorder past purchases."
+msgstr ""
+
+#: templates/saved_carts/signed-out.php:15
+msgid "Sign in"
+msgstr ""
+
+#. translators: %s: customer display name
+#: templates/wishlist/list.php:28
+#, php-format
+msgid "Products saved by %s."
+msgstr ""
+
+#: templates/wishlist/list.php:35
+msgid "No saved products yet."
+msgstr ""
+
+#: templates/wishlist/list.php:37
+msgid "Tap the heart on any product to keep it here for later."
+msgstr ""
+
+#. translators: %s: product name
+#: templates/wishlist/list.php:69
+#, php-format
+msgid "Remove %s from wishlist"
+msgstr ""
+
+#: templates/wishlist/list.php:82
+msgid "This list is saved on this device."
+msgstr ""
+
+#: templates/wishlist/list.php:83
+msgid "Sign in to keep it in your account."
+msgstr ""
+
+#: templates/wishlist/list.php:89
+msgid "Share this wishlist"
+msgstr ""
+
+#: templates/wishlist/list.php:92
+msgid "Copy link"
+msgstr ""
+
+#: templates/wishlist/list.php:97
+msgid "Create a new link (stops the old one working)"
+msgstr ""
+
+#: assets/wishlist/wishlist-block.js:14
+msgid "Shows the visitor's saved products with move to cart, remove and share."
+msgstr ""
+
+#: assets/wishlist/wishlist-block.js:21
+msgid "Visitors see their saved products here. Shared links open a read-only copy of the list."
+msgstr ""

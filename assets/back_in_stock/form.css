@@ -1,0 +1,10 @@
+.stackless-stock-alert{margin:1.25em 0;padding:16px;border:1px solid rgba(0,0,0,.12);border-radius:6px}
+.stackless-stock-alert[hidden]{display:none}
+.stackless-stock-alert-title{margin:0 0 .5em;font-size:1.05em}
+.stackless-stock-alert-form p{margin:0 0 .75em}
+.stackless-stock-alert-field label{display:block;margin-bottom:4px;font-weight:600}
+.stackless-stock-alert-field input{width:100%;max-width:360px}
+.stackless-stock-alert-option{font-weight:600}
+.stackless-stock-alert-status{margin:0;min-height:1.4em}
+.stackless-stock-alert-status.is-error{color:#b32d2e}
+.stackless-hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}

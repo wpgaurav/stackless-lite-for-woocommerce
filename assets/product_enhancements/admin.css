@@ -1,0 +1,9 @@
+/* Stackless for WooCommerce: product details editor */
+#woocommerce-product-data ul.wc-tabs li.stackless_details_options a::before{content:"\f163"}
+.stackless-pe-panel .stackless-pe-field input.short,.stackless-pe-panel .stackless-pe-field select.short{width:50%}
+.stackless-pe-panel .stackless-pe-hide{float:none;display:inline-flex;align-items:center;gap:4px;width:auto;margin:0 0 0 10px;padding:0;line-height:30px}
+.stackless-pe-panel .stackless-pe-hide input{margin:0}
+.stackless-pe-panel .stackless-pe-field.is-hidden input.short,.stackless-pe-panel .stackless-pe-field.is-hidden select.short{opacity:.45}
+.stackless-pe-panel #stackless_pe_custom{width:50%;min-height:90px}
+.stackless-pe-variation{clear:both;padding-top:6px;border-top:1px solid #eee;margin-top:6px}
+.stackless-pe-variation input,.stackless-pe-variation select{width:100%}

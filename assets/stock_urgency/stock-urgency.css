@@ -1,0 +1,11 @@
+/* Stackless for WooCommerce: Stock Urgency */
+.stackless-stock-urgency{display:block;margin:.35em 0 .6em;line-height:1.3}
+.stackless-stock-urgency__text{display:inline-flex;align-items:center;gap:.35em;padding:.2em .6em;border-radius:4px;font-size:.85em;font-weight:600}
+.stackless-stock-urgency--low .stackless-stock-urgency__text{color:#8a4b00;background:rgba(219,128,0,.12)}
+.stackless-stock-urgency--very-low .stackless-stock-urgency__text{color:#a1161f;background:rgba(214,54,56,.12)}
+.stackless-stock-urgency--in-stock .stackless-stock-urgency__text{color:#1d6b3a;background:rgba(29,107,58,.1)}
+.stackless-stock-urgency--archive{margin:.25em 0 .5em}
+.stackless-stock-urgency--archive .stackless-stock-urgency__text{font-size:.78em}
+.stackless-stock-urgency--very-low .stackless-stock-urgency__text::before{content:"";width:.5em;height:.5em;border-radius:50%;background:currentColor;animation:stackless-stock-pulse 1.6s ease-in-out infinite}
+@keyframes stackless-stock-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.stackless-stock-urgency--very-low .stackless-stock-urgency__text::before{animation:none}}
