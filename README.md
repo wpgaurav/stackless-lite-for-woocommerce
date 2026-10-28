@@ -1,3 +1,5 @@
+<img src=".github/assets/icon-256x256.png" width="96" height="96" alt="Stackless Lite for WooCommerce logo">
+
 # Stackless Lite for WooCommerce
 
 Seventeen free WooCommerce store tools in one plugin: wishlist, saved carts, back-in-stock alerts, min/max quantities, buy links, pay what you like, checkout tweaks and catalog labels. Each one switches on and off on its own, and a switched-off module loads no code.
