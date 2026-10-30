@@ -67,7 +67,7 @@ final class AdminScreen
         echo '<p class="stackless-stock-intro">' . esc_html__('Confirmed demand, notification progress and mail failures for each product or variation. Alert emails are separate from marketing lists.', 'stackless-lite') . '</p>';
         if ($queued !== null) {
             /* translators: %d: number of products */
-            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html(sprintf(_n('Queued availability emails for %d product.', 'Queued availability emails for %d products.', $queued, 'stackless-lite'), $queued)) . '</p></div>';
+            echo \Stackless\Admin\Toast::notice(sprintf(_n('Queued availability emails for %d product.', 'Queued availability emails for %d products.', $queued, 'stackless-lite'), $queued)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Toast::notice().
         }
 
         $metrics = [

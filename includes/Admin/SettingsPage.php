@@ -57,6 +57,7 @@ final class SettingsPage
         add_action('admin_init', [$this, 'save']);
         add_action('admin_enqueue_scripts', [$this, 'assets']);
         add_action('wp_ajax_stackless_toggle_module', [$this, 'ajaxToggle']);
+        Toast::register();
         add_filter('woocommerce_screen_ids', [$this, 'screenIds']);
         add_filter('plugin_action_links_' . plugin_basename(STACKLESS_PLUGIN_FILE), function ($links) {
             array_unshift($links, '<a href="' . esc_url(self::url()) . '">' . esc_html__('Modules', 'stackless-lite') . '</a>');
@@ -65,6 +66,10 @@ final class SettingsPage
         add_filter('plugin_row_meta', function ($meta, $file) {
             if ($file === plugin_basename(STACKLESS_PLUGIN_FILE)) {
                 $meta[] = Documentation::link('dashboard');
+                // Pro's changelog; Lite's lives in its WordPress.org listing.
+                if (!defined('STACKLESS_LITE_VERSION')) {
+                    $meta[] = '<a href="' . esc_url(Documentation::CHANGELOG) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Changelog', 'stackless-lite') . '<span class="screen-reader-text"> ' . esc_html__('(opens in a new tab)', 'stackless-lite') . '</span></a>';
+                }
             }
             return $meta;
         }, 10, 2);
@@ -136,6 +141,10 @@ final class SettingsPage
                 'on' => __('On', 'stackless-lite'),
                 'off' => __('Off', 'stackless-lite'),
                 'failed' => __('Could not save. Reload and try again.', 'stackless-lite'),
+                /* translators: %s: module name */
+                'turnedOn' => __('%s is on.', 'stackless-lite'),
+                /* translators: %s: module name */
+                'turnedOff' => __('%s is off.', 'stackless-lite'),
                 /* translators: 1: enabled count, 2: total */
                 'count' => __('%1$d of %2$d on', 'stackless-lite'),
             ],
@@ -272,7 +281,7 @@ final class SettingsPage
     private function notices(): void
     {
         if (!empty($_GET['updated'])) { // phpcs:ignore WordPress.Security.NonceVerification
-            echo '<div class="notice notice-success is-dismissible stackless-notice"><p>' . esc_html__('Settings saved.', 'stackless-lite') . '</p></div>';
+            echo Toast::notice(__('Settings saved.', 'stackless-lite'), 'success', 'is-dismissible stackless-notice'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Toast::notice().
         }
     }
 

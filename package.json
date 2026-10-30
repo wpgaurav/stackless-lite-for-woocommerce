@@ -1,0 +1,12 @@
+{
+  "name": "stackless-development",
+  "private": true,
+  "scripts": {
+    "build:toast": "node tools/build/toast.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "motion": "14.7.1",
+    "notch-toast": "0.2.0"
+  }
+}

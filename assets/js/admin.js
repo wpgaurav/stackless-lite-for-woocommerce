@@ -74,10 +74,16 @@
           count.textContent = cfg.i18n.count.replace('%1$d', res.data.count).replace('%2$d', res.data.total);
         }
         apply();
+        // A toast confirms the switch when the toast script is on this screen.
+        var title = card.querySelector('.stackless-card__title');
+        if (window.StacklessToast && title && cfg.i18n && cfg.i18n.turnedOn) {
+          window.StacklessToast.success((on ? cfg.i18n.turnedOn : cfg.i18n.turnedOff).replace('%s', title.textContent.trim()));
+        }
       })
       .catch(function () {
         sw.setAttribute('aria-checked', next ? 'false' : 'true');
-        window.alert((cfg.i18n && cfg.i18n.failed) || 'Could not save.');
+        var message = (cfg.i18n && cfg.i18n.failed) || 'Could not save.';
+        if (window.StacklessToast) { window.StacklessToast.error(message); } else { window.alert(message); }
       })
       .finally(function () { sw.removeAttribute('aria-busy'); });
   });

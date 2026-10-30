@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 1.7.1
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,10 @@ When a customer pays with Dodo Payments, your site creates a checkout through th
 * [Source code on GitHub](https://github.com/wpgaurav/stackless-lite-for-woocommerce)
 * [Stackless for WooCommerce](https://gauravtiwari.org/product/stackless-for-woocommerce/), the full plugin
 
+== Source code and libraries ==
+
+The admin toasts in `assets/js/toast.js` bundle [Notch Toast](https://github.com/Devsethi3/notch-toast) 0.2.0 and [Motion](https://motion.dev/) 14.7.1, both MIT licensed (see `assets/js/toast.LICENSE.txt`). React comes from WordPress. `assets/js/toast.js` is the readable build and `toast.min.js` its minified copy; the source (`tools/build/toast/entry.js`) and the build script (`tools/build/toast.mjs`) are in the [GitHub repository](https://github.com/wpgaurav/stackless-lite-for-woocommerce).
+
 == Installation ==
 
 1. Make sure WooCommerce is installed and active.
@@ -141,6 +145,9 @@ Yes. Every module that touches the cart or checkout supports the Cart and Checko
 Through the normal WordPress update screens, from gauravtiwari.org. No license key or account is needed.
 
 == Changelog ==
+
+= 1.8.0 =
+* New: short confirmations on Stackless admin screens, such as "Settings saved." and switching a module on or off, show as a toast that drops from the admin bar. Errors and longer messages stay on the page.
 
 = 1.7.1 =
 * New: Stripe, PayPal, Polar, Paddle and Dodo Payments gateways and Payment Gateway Tools are now part of Stackless Lite.
