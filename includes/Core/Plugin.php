@@ -37,6 +37,7 @@ final class Plugin
         LiveStore::boot();
         $this->modules->discover();
         Installer::maybeUpgrade($this->modules);
+        OptionCache::prime($this->modules);
         $this->modules->bootEnabled();
 
         if (is_admin()) {

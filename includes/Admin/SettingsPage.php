@@ -4,6 +4,7 @@ namespace Stackless\Admin;
 
 use Stackless\Core\Module;
 use Stackless\Core\ModuleRegistry;
+use Stackless\Core\OptionCache;
 
 defined('ABSPATH') || exit;
 
@@ -196,6 +197,7 @@ final class SettingsPage
             return;
         }
         \WC_Admin_Settings::save_fields($module->settingsFields());
+        OptionCache::flush(); // a module's fields can depend on its saved settings
         do_action('stackless_settings_saved_' . $module->id());
         wp_safe_redirect(self::url($id, ['updated' => '1']));
         exit;

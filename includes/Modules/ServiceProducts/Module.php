@@ -75,6 +75,8 @@ class Module extends \Stackless\Core\Module
 
     public function boot(): void
     {
+        // Contract: apply_filters('stackless_is_service_product', false, $product). Google Product Feed asks it.
+        add_filter('stackless_is_service_product', [$this, 'filterIsService'], 10, 2);
         // Product editor.
         add_filter('product_type_options', [$this, 'typeOption']);
         add_filter('woocommerce_product_data_tabs', [$this, 'tab']);
@@ -96,6 +98,15 @@ class Module extends \Stackless\Core\Module
     /* ------------------------------------------------------------------
      * Detection
      * ---------------------------------------------------------------- */
+
+    /**
+     * @param mixed $service
+     * @param mixed $product
+     */
+    public function filterIsService($service, $product): bool
+    {
+        return (bool) $service || self::isService($product instanceof \WC_Product ? $product : null);
+    }
 
     /** @param \WC_Product|int|null $product */
     public static function isService($product): bool

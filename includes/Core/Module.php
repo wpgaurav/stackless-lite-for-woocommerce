@@ -67,6 +67,30 @@ abstract class Module
         return [];
     }
 
+    /**
+     * Options this module reads on a normal request: its settings fields unless overridden.
+     * For enabled modules Stackless loads them all with one query per request (OptionCache),
+     * so an unsaved setting does not cost a query of its own. Add options stored outside the
+     * settings fields here, such as a payment gateway's WooCommerce settings.
+     *
+     * Called once WordPress has loaded (wp_loaded), when the plugin version or the set of
+     * enabled modules changes, and cached until then.
+     *
+     * @return string[]
+     */
+    public function optionNames(): array
+    {
+        $names = [];
+        foreach ($this->settingsFields() as $field) {
+            $type = (string) ($field['type'] ?? '');
+            $id = (string) ($field['id'] ?? '');
+            if ($id !== '' && $type !== 'title' && $type !== 'sectionend') {
+                $names[] = $id;
+            }
+        }
+        return $names;
+    }
+
     /** Runs on plugin activation and on version change, even when disabled. Create tables here (dbDelta). */
     public function install(): void
     {

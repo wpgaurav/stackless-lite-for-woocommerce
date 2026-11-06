@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 1.8.0
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -145,6 +145,9 @@ Yes. Every module that touches the cart or checkout supports the Cart and Checko
 Through the normal WordPress update screens, from gauravtiwari.org. No license key or account is needed.
 
 == Changelog ==
+
+= 1.9.1 =
+* Fixed: on stores without a persistent object cache, each Stackless setting left at its default no longer costs a database query on every page. Stackless loads them all in one query.
 
 = 1.8.0 =
 * New: short confirmations on Stackless admin screens, such as "Settings saved." and switching a module on or off, show as a toast that drops from the admin bar. Errors and longer messages stay on the page.

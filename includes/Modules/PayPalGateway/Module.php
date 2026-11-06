@@ -33,6 +33,12 @@ final class Module extends BaseModule
         WebhookLog::install();
     }
 
+    public function optionNames(): array
+    {
+        // The gateway's enabled switch, read by the gateway and the blocks integration.
+        return array_merge(parent::optionNames(), ['woocommerce_' . Gateway::ID . '_settings']);
+    }
+
     public function settingsFields(): array
     {
         return [

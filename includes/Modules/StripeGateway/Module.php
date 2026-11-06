@@ -46,6 +46,12 @@ final class Module extends \Stackless\Core\Module
         EventStore::install();
     }
 
+    public function optionNames(): array
+    {
+        // The gateway's enabled switch, read by the gateway and the blocks integration.
+        return array_merge(parent::optionNames(), ['woocommerce_' . Settings::GATEWAY_ID . '_settings']);
+    }
+
     public function boot(): void
     {
         add_filter('woocommerce_payment_gateways', [$this, 'registerGateway']);

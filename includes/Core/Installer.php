@@ -6,7 +6,7 @@ defined('ABSPATH') || exit;
 
 final class Installer
 {
-    /** Set to STACKLESS_VERSION only once every module has installed for that version. */
+    /** Set to STACKLESS_VERSION only once every module has installed for that version. Autoloaded. */
     public const VERSION_OPTION = 'stackless_db_version';
     /** Module id => plugin version its install() last completed for. */
     public const MODULES_OPTION = 'stackless_module_db_versions';
@@ -125,7 +125,8 @@ final class Installer
                 delete_option(self::FAILURES_OPTION);
             }
             if ($current) {
-                update_option(self::VERSION_OPTION, STACKLESS_VERSION, false);
+                // Autoloaded: maybeUpgrade() reads it on every request.
+                update_option(self::VERSION_OPTION, STACKLESS_VERSION, true);
             }
         } finally {
             self::unlock();
