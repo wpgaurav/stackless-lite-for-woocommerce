@@ -16,6 +16,7 @@ final class Ajax
     {
         add_action('wc_ajax_stackless_paypal_create_order', [self::class, 'createOrder']);
         add_action('wc_ajax_stackless_paypal_create_setup_token', [self::class, 'createSetupToken']);
+        add_action('wc_ajax_stackless_paypal_fastlane_token', [self::class, 'fastlaneToken']);
     }
 
     public static function urls(): array
@@ -23,6 +24,7 @@ final class Ajax
         return [
             'createOrder' => \WC_AJAX::get_endpoint('stackless_paypal_create_order'),
             'createSetupToken' => \WC_AJAX::get_endpoint('stackless_paypal_create_setup_token'),
+            'fastlaneToken' => \WC_AJAX::get_endpoint('stackless_paypal_fastlane_token'),
         ];
     }
 
@@ -78,6 +80,25 @@ final class Ajax
             unset($result['approve']);
         }
         self::respond($result);
+    }
+
+    /** SDK client token for Fastlane, bound to this store's domain. Guests only. */
+    public static function fastlaneToken(): void
+    {
+        self::verify();
+        $gateway = Gateway::instance();
+        if (!$gateway->fastlaneAvailable()) {
+            wp_send_json_error(['message' => __('Fastlane is not available.', 'stackless-lite')], 400);
+        }
+        $host = strtolower((string) wp_parse_url(home_url(), PHP_URL_HOST));
+        $token = $gateway->api()->sdkClientToken([$host]);
+        if (is_wp_error($token)) {
+            $gateway->log('Fastlane client token failed: ' . $token->get_error_message(), 'warning');
+            wp_send_json_error(['message' => $token->get_error_message()], 400);
+        }
+        // The token is short-lived and bound to the domain; it is not a secret, but never cache it.
+        wc_nocache_headers();
+        wp_send_json_success(['id' => 'fastlane', 'token' => $token]);
     }
 
     private static function verify(): void

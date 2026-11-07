@@ -146,6 +146,7 @@ final class Module extends \Stackless\Core\Module
             'label' => __('Hide sold count', 'stackless-lite'),
             'description' => __('Do not show the "sold" badge for this product.', 'stackless-lite'),
         ]);
+        echo \Stackless\Admin\Documentation::helpField('sold_count', __('Sold count help', 'stackless-lite')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         echo '</div>';
     }
 

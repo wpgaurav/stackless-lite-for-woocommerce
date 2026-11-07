@@ -203,6 +203,7 @@ final class Module extends \Stackless\Core\Module
             'desc_tip' => true,
             'description' => __('Add to cart text on this product\'s page. Variations can override it.', 'stackless-lite'),
         ]);
+        echo \Stackless\Admin\Documentation::helpField('custom_cart_text', __('Button text help', 'stackless-lite')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         echo '</div>';
     }
 

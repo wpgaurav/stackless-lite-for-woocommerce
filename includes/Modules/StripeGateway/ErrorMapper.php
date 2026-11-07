@@ -22,6 +22,23 @@ final class ErrorMapper
     private const AUTH_CODES = ['authentication_required', 'card_authentication_required'];
 
     /**
+     * Declines the issuer will never approve for this method (lost, stolen, fraud, closed,
+     * invalid or expired): retrying the same card is pointless. Bank-debit error codes for
+     * closed or unusable accounts are included.
+     */
+    private const HARD_DECLINES = [
+        'lost_card', 'stolen_card', 'pickup_card', 'fraudulent', 'merchant_blacklist', 'restricted_card',
+        'security_violation', 'invalid_account', 'invalid_number', 'incorrect_number', 'expired_card',
+        'new_account_information_available', 'revocation_of_authorization', 'revocation_of_all_authorizations',
+        'stop_payment_order', 'do_not_try_again', 'card_not_supported', 'currency_not_supported',
+        'transaction_not_allowed', 'service_not_allowed',
+        'account_closed', 'bank_account_unusable', 'bank_account_restricted', 'no_account', 'debit_not_authorized',
+    ];
+
+    /** Not enough money or over a spending limit: retry later in the cycle. */
+    private const FUNDS_DECLINES = ['insufficient_funds', 'card_velocity_exceeded', 'withdrawal_count_limit_exceeded', 'balance_insufficient'];
+
+    /**
      * @param string $code         Stripe error code (error.code), e.g. card_declined.
      * @param string $decline_code Stripe decline code (error.decline_code), e.g. insufficient_funds.
      * @param string $fallback     Stripe's own message; shown only for card errors, which Stripe documents as customer-safe.
@@ -133,6 +150,49 @@ final class ErrorMapper
             return true;
         }
         return $http_status >= 500;
+    }
+
+    /**
+     * Decline category (Contracts\SubscriptionData::DECLINE_*) for a failed charge, so Dunning
+     * knows whether to retry the card, wait for funds, ask the customer to authenticate, or stop.
+     *
+     * @param string $code         Stripe error code (error.code).
+     * @param string $decline_code Stripe decline code (error.decline_code).
+     * @param string $type         Stripe error type; api_connection_error means Stripe was not reached.
+     * @param int    $http_status  HTTP status of the failed call, or -1 when the error came from an intent.
+     */
+    public static function declineCategory(string $code, string $decline_code = '', string $type = '', int $http_status = -1): string
+    {
+        if ($type === 'api_connection_error' || $http_status === 0 || $http_status >= 500 || in_array($code, ['rate_limit', 'lock_timeout', 'api_connection_error'], true)) {
+            return 'network';
+        }
+        foreach ([$decline_code, $code] as $value) {
+            if ($value === '') {
+                continue;
+            }
+            if (in_array($value, self::AUTH_CODES, true) || in_array($value, ['offline_pin_required', 'online_or_offline_pin_required', 'payment_intent_authentication_failure'], true)) {
+                return 'auth';
+            }
+            if (in_array($value, self::FUNDS_DECLINES, true)) {
+                return 'funds';
+            }
+            if (in_array($value, self::HARD_DECLINES, true)) {
+                return 'hard';
+            }
+        }
+        return 'soft';
+    }
+
+    /** Category for a PaymentIntent/SetupIntent last_payment_error / last_setup_error array. */
+    public static function declineCategoryFromIntentError(array $error): string
+    {
+        return self::declineCategory((string) ($error['code'] ?? ''), (string) ($error['decline_code'] ?? ''), (string) ($error['type'] ?? ''));
+    }
+
+    /** Category for a StripeApiException. */
+    public static function declineCategoryFromException(StripeApiException $e): string
+    {
+        return self::declineCategory($e->getStripeCode(), $e->getDeclineCode(), $e->getStripeType(), $e->getHttpStatus());
     }
 
     /** True for errors that mean the card or bank refused: no point retrying the same request. */

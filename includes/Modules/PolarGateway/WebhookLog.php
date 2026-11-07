@@ -121,4 +121,48 @@ final class WebhookLog
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery
         $wpdb->query($wpdb->prepare("DELETE FROM %i WHERE created_at < %s LIMIT 1000", $table, gmdate('Y-m-d H:i:s', time() - 90 * DAY_IN_SECONDS)));
     }
+
+    /**
+     * Failed events, and events stuck mid-processing, from the last $days days (Billing Health).
+     *
+     * @return array<int,array{type:string,status:string,note:string,at:int}>
+     */
+    public static function problems(int $days = 7, int $limit = 20): array
+    {
+        global $wpdb;
+        $table = self::table();
+        if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table)) !== $table) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            return [];
+        }
+        $since = gmdate('Y-m-d H:i:s', time() - $days * DAY_IN_SECONDS);
+        $stale = gmdate('Y-m-d H:i:s', time() - self::STALE_AFTER);
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $rows = $wpdb->get_results($wpdb->prepare("SELECT event_type, status, message, updated_at FROM {$table} WHERE created_at >= %s AND (status = 'failed' OR (status = 'processing' AND updated_at < %s)) ORDER BY id DESC LIMIT %d", $since, $stale, max(1, $limit)), ARRAY_A);
+        $problems = [];
+        foreach (is_array($rows) ? $rows : [] as $row) {
+            $problems[] = [
+                'type' => (string) $row['event_type'],
+                'status' => (string) $row['status'],
+                'note' => (string) $row['message'],
+                'at' => (int) strtotime((string) $row['updated_at'] . ' UTC'),
+            ];
+        }
+        return $problems;
+    }
+
+    /** Billing Health source: recent webhook failures for this gateway. @return array<string,mixed> */
+    public static function healthReport(string $label): array
+    {
+        $events = self::problems();
+        $issues = [];
+        if ($events) {
+            $issues[] = [
+                'severity' => 'warning',
+                /* translators: 1: number of events, 2: payment provider */
+                'title' => sprintf(_n('%1$d %2$s webhook failed or got stuck in the last 7 days.', '%1$d %2$s webhooks failed or got stuck in the last 7 days.', count($events), 'stackless-lite'), count($events), $label),
+                'detail' => __('The provider retries failed webhooks. If failures keep coming, check the webhook secret in the gateway settings and the log under WooCommerce → Status → Logs.', 'stackless-lite'),
+            ];
+        }
+        return ['label' => $label, 'issues' => $issues, 'events' => $events];
+    }
 }

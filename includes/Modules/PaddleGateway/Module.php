@@ -54,6 +54,13 @@ final class Module extends BaseModule
 
     public function boot(): void
     {
+        add_filter('stackless_billing_health_sources', static function ($sources) {
+            $sources = is_array($sources) ? $sources : [];
+            $sources['paddle'] = static function (): array {
+                return WebhookLog::healthReport('Paddle');
+            };
+            return $sources;
+        });
         add_filter('woocommerce_payment_gateways', [$this, 'registerGateway']);
         add_action('woocommerce_blocks_payment_method_type_registration', [$this, 'registerBlocks']);
         // woocommerce_blocks_loaded fires at plugins_loaded:10, before modules boot (20).

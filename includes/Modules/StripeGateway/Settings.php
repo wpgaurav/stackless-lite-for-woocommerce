@@ -144,6 +144,18 @@ final class Settings
         return self::$clients[$cache_key];
     }
 
+    /** Client pinned to another Stripe-Version (Managed Payments), same keys and mode rules. */
+    public static function versionedClient(string $api_version, ?string $mode = null): StripeClient
+    {
+        $mode = ($mode === 'live' || $mode === 'test') ? $mode : self::mode();
+        $secret = self::secretKey($mode);
+        $cache_key = $mode . ':' . md5($secret) . ':' . $api_version;
+        if (!isset(self::$clients[$cache_key])) {
+            self::$clients[$cache_key] = new StripeClient($secret, $mode, $api_version);
+        }
+        return self::$clients[$cache_key];
+    }
+
     /** Client for an order: always the mode the order was paid in, even after the store switches modes. */
     public static function clientForOrder(\WC_Order $order): StripeClient
     {
@@ -171,6 +183,17 @@ final class Settings
             'payment_method.detached',
             'payment_method.updated',
             'payment_method.automatically_updated',
+            // Stripe Managed Payments (2.0.0): Checkout Sessions and the Stripe Billing subscriptions they create.
+            'checkout.session.completed',
+            'checkout.session.async_payment_succeeded',
+            'checkout.session.async_payment_failed',
+            'checkout.session.expired',
+            'invoice.paid',
+            'invoice.payment_failed',
+            'customer.subscription.updated',
+            'customer.subscription.deleted',
+            'customer.subscription.paused',
+            'customer.subscription.resumed',
         ];
     }
 

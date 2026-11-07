@@ -3,6 +3,7 @@
 namespace Stackless\Modules\PaddleGateway;
 
 use Stackless\Contracts\SubscriptionData;
+use Stackless\Contracts\PausableGateway;
 use Stackless\Contracts\SubscriptionGateway;
 use Stackless\Core\Logger;
 
@@ -16,7 +17,7 @@ defined('ABSPATH') || exit;
  * itself. Orders, renewals, refunds and cancellations stay in step through the
  * browser return and signed webhooks.
  */
-class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
+class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, PausableGateway
 {
     public const ID = 'stackless_paddle';
 
@@ -572,6 +573,80 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
         $subscription->add_order_note($deferred
             ? __('Paddle subscription set to end at the close of the paid period.', 'stackless-lite')
             : __('Paddle subscription canceled immediately.', 'stackless-lite'));
+        return true;
+    }
+
+    /**
+     * Pause at Paddle now; Paddle resumes it on $resume_at by itself (2.0.0). On resume the
+     * paid period continues if it hasn't ended, otherwise a new one starts.
+     *
+     * @param \WC_Order $subscription
+     */
+    public function stackless_pause_subscription($subscription, ?int $resume_at): bool
+    {
+        if (!$subscription instanceof \WC_Order) {
+            return false;
+        }
+        $paddleId = (string) $subscription->get_meta(SubscriptionData::META_GATEWAY_SUBSCRIPTION);
+        if ($paddleId === '') {
+            return false;
+        }
+        $api = $this->api($this->orderMode($subscription));
+        $remote = $api->request('GET', 'subscriptions/' . rawurlencode($paddleId));
+        if (is_wp_error($remote)) {
+            $this->log('Pause lookup for ' . $paddleId . ' failed: ' . $remote->get_error_message(), 'error');
+            return false;
+        }
+        if (($remote['status'] ?? '') === 'paused') {
+            return true;
+        }
+        if (($remote['status'] ?? '') !== 'active') {
+            return false;
+        }
+        $body = ['effective_from' => 'immediately', 'on_resume' => 'continue_existing_billing_period'];
+        if ($resume_at !== null && $resume_at > time()) {
+            $body['resume_at'] = gmdate('Y-m-d\TH:i:s\Z', $resume_at);
+        }
+        $result = $api->request('POST', 'subscriptions/' . rawurlencode($paddleId) . '/pause', $body);
+        if (is_wp_error($result)) {
+            $this->log('Pause of ' . $paddleId . ' failed: ' . $result->get_error_message(), 'error');
+            return false;
+        }
+        $subscription->add_order_note(__('Paddle subscription paused.', 'stackless-lite'));
+        return true;
+    }
+
+    /** @param \WC_Order $subscription */
+    public function stackless_resume_subscription($subscription): bool
+    {
+        if (!$subscription instanceof \WC_Order) {
+            return false;
+        }
+        $paddleId = (string) $subscription->get_meta(SubscriptionData::META_GATEWAY_SUBSCRIPTION);
+        if ($paddleId === '') {
+            return false;
+        }
+        $api = $this->api($this->orderMode($subscription));
+        $remote = $api->request('GET', 'subscriptions/' . rawurlencode($paddleId));
+        if (is_wp_error($remote)) {
+            $this->log('Resume lookup for ' . $paddleId . ' failed: ' . $remote->get_error_message(), 'error');
+            return false;
+        }
+        if (in_array($remote['status'] ?? '', ['active', 'trialing'], true)) {
+            return true; // Paddle already resumed it (its own resume date).
+        }
+        if (($remote['status'] ?? '') !== 'paused') {
+            return false;
+        }
+        $result = $api->request('POST', 'subscriptions/' . rawurlencode($paddleId) . '/resume', [
+            'effective_from' => 'immediately',
+            'on_resume' => 'continue_existing_billing_period',
+        ]);
+        if (is_wp_error($result)) {
+            $this->log('Resume of ' . $paddleId . ' failed: ' . $result->get_error_message(), 'error');
+            return false;
+        }
+        $subscription->add_order_note(__('Paddle subscription resumed.', 'stackless-lite'));
         return true;
     }
 }

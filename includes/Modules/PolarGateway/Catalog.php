@@ -320,6 +320,7 @@ final class Catalog
         }
         echo '<div class="options_group show_if_simple">';
         self::fieldsHtml($product_object, '', '');
+        echo \Stackless\Admin\Documentation::helpField('polar_gateway', __('Polar product help', 'stackless-lite')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         echo '</div>';
     }
 

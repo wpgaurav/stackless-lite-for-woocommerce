@@ -99,6 +99,43 @@ class Api
     }
 
     /**
+     * SDK client token for Fastlane (data-sdk-client-token), bound to this store's domains.
+     *
+     * @param string[] $domains Root domains only, no protocol or subdomain wildcard.
+     * @return string|\WP_Error
+     */
+    public function sdkClientToken(array $domains)
+    {
+        if (!$this->hasCredentials()) {
+            return new \WP_Error('stackless_paypal_credentials', __('PayPal is not connected.', 'stackless-lite'));
+        }
+        $body = 'grant_type=client_credentials&response_type=client_token&intent=sdk_init';
+        foreach (array_filter(array_map('strval', $domains)) as $domain) {
+            $body .= '&' . rawurlencode('domains[]') . '=' . rawurlencode($domain);
+        }
+        $response = wp_remote_post($this->base() . '/v1/oauth2/token', [
+            'timeout' => 30,
+            'headers' => [
+                'Authorization' => 'Basic ' . base64_encode($this->clientId . ':' . $this->secret),
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'User-Agent' => self::userAgent(),
+            ],
+            'body' => $body,
+        ]);
+        if (is_wp_error($response)) {
+            return new \WP_Error('stackless_paypal_http', $response->get_error_message(), ['status' => 0]);
+        }
+        $code = (int) wp_remote_retrieve_response_code($response);
+        $decoded = json_decode((string) wp_remote_retrieve_body($response), true);
+        $token = is_array($decoded) ? (string) ($decoded['access_token'] ?? ($decoded['client_token'] ?? '')) : '';
+        if ($code !== 200 || $token === '') {
+            return new \WP_Error('stackless_paypal_client_token', __('PayPal did not return a client token for Fastlane.', 'stackless-lite'), ['status' => $code]);
+        }
+        return $token;
+    }
+
+    /**
      * @param array|null $body    JSON body (null = none).
      * @param array      $headers Extra headers, e.g. PayPal-Request-Id.
      * @return array|\WP_Error Decoded response.
@@ -270,6 +307,12 @@ class Api
         return $this->request('POST', 'v3/vault/payment-tokens', [
             'payment_source' => ['token' => ['id' => $setupTokenId, 'type' => 'SETUP_TOKEN']],
         ], $requestId !== '' ? ['PayPal-Request-Id' => $requestId] : []);
+    }
+
+    /** @return array|\WP_Error */
+    public function getPaymentToken(string $vaultId)
+    {
+        return $this->request('GET', 'v3/vault/payment-tokens/' . rawurlencode($vaultId));
     }
 
     /** @return array|\WP_Error */

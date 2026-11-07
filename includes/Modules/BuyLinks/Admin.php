@@ -82,7 +82,8 @@ final class Admin
         foreach (['' => __('Store default', 'stackless-lite'), 'yes' => __('Show on this product', 'stackless-lite'), 'no' => __('Hide on this product', 'stackless-lite')] as $value => $label) {
             echo '<option value="' . esc_attr($value) . '"' . selected($override, $value, false) . '>' . esc_html($label) . '</option>';
         }
-        echo '</select></p></div>';
+        echo '</select></p>';
+        echo '<p class="stackless-docs-field">' . \Stackless\Admin\Documentation::helpLinks('buy_links', __('Buy link help', 'stackless-lite')) . '</p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
     }
 
     public function saveProduct($product): void

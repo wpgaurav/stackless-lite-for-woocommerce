@@ -22,3 +22,55 @@
 .stackless-paypal__status:empty {
 	display: none;
 }
+
+.stackless-paypal__wallets:not(:empty) {
+	display: grid;
+	gap: 0.5em;
+	margin-top: 0.5em;
+}
+
+.stackless-paypal__wallet apple-pay-button {
+	--apple-pay-button-width: 100%;
+	--apple-pay-button-height: 45px;
+	--apple-pay-button-border-radius: 4px;
+	display: block;
+}
+
+.stackless-paypal__wallet--googlepay {
+	min-height: 45px;
+}
+
+/* "Or pay with a card" centered between two hairlines in the theme text color. */
+.stackless-paypal__or {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+	font-size: 0.875em;
+	margin: 1em 0 0.75em;
+}
+
+.stackless-paypal__or::before,
+.stackless-paypal__or::after {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: currentColor;
+	opacity: 0.2;
+}
+
+/* Name and number full width; expiry and security code side by side. */
+.stackless-paypal__card-fields--grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	column-gap: 0.5em;
+}
+
+.stackless-paypal__card-fields--grid .stackless-paypal__card-field--name,
+.stackless-paypal__card-fields--grid .stackless-paypal__card-field--number {
+	grid-column: 1 / -1;
+}
+
+.stackless-paypal__card-field {
+	min-width: 0;
+	margin-bottom: 0.25em;
+}

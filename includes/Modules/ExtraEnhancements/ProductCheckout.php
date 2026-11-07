@@ -256,6 +256,7 @@ final class ProductCheckout
             'desc_tip' => true,
             'description' => __('Any page on this site (/welcome/) or another website (https://…). Leave empty to show the order-received page. Renewals always show the order-received page.', 'stackless-lite'),
         ]);
+        echo \Stackless\Admin\Documentation::helpField('extra_enhancements'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         wp_nonce_field('stackless_checkout_options', 'stackless_checkout_options_nonce');
         echo '</div></div>';
     }

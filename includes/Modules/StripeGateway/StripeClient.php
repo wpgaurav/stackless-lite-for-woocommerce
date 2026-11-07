@@ -24,15 +24,28 @@ final class StripeClient
     /** @var string test|live */
     private $mode;
 
-    public function __construct(string $secret, string $mode = 'test')
+    /** @var string Stripe-Version sent with every request. */
+    private $version;
+
+    /**
+     * @param string $api_version Stripe-Version for this client; '' = API_VERSION. Managed Payments
+     *                            needs a newer version than the rest of the module (see Managed\Gateway).
+     */
+    public function __construct(string $secret, string $mode = 'test', string $api_version = '')
     {
         $this->secret = $secret;
         $this->mode = $mode === 'live' ? 'live' : 'test';
+        $this->version = $api_version !== '' ? $api_version : self::API_VERSION;
     }
 
     public function mode(): string
     {
         return $this->mode;
+    }
+
+    public function apiVersion(): string
+    {
+        return $this->version;
     }
 
     public function hasKey(): bool
@@ -86,7 +99,7 @@ final class StripeClient
 
         $headers = [
             'Authorization' => 'Bearer ' . $this->secret,
-            'Stripe-Version' => self::API_VERSION,
+            'Stripe-Version' => $this->version,
             'Content-Type' => 'application/x-www-form-urlencoded',
             'X-Stripe-Client-User-Agent' => (string) wp_json_encode([
                 'lang' => 'php',

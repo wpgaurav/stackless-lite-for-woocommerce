@@ -85,6 +85,35 @@ final class Module extends \Stackless\Core\Module
         add_filter('woocommerce_add_to_cart_redirect', [$this, 'buyNowRedirect'], 20, 2);
         add_action('woocommerce_after_shop_loop_item', [$this, 'loopButton'], 15);
         add_action('wp_enqueue_scripts', [$this, 'assets']);
+        add_filter('stackless_buy_link_url', [$this, 'buildUrl'], 10, 3);
+    }
+
+    /**
+     * stackless_buy_link_url: a signed buy link for other modules (abandoned checkout reminders).
+     * Always signed, so the products, quantities, coupon and expiry cannot be edited.
+     *
+     * @param mixed $url   '' unless another callback answered
+     * @param mixed $items [[product_id, variation_id, qty], …]
+     * @param mixed $args  coupon (string), clear ('', '0', '1'), to ('', 'checkout', 'cart'), exp (unix time)
+     * @return mixed
+     */
+    public function buildUrl($url, $items = [], $args = [])
+    {
+        if (is_string($url) && $url !== '') {
+            return $url;
+        }
+        $items = LinkParser::normalizeItems($items);
+        if (!$items) {
+            return '';
+        }
+        $args = is_array($args) ? $args : [];
+        return Links::url($items, [
+            'coupon' => (string) ($args['coupon'] ?? ''),
+            'clear' => isset($args['clear']) ? (string) $args['clear'] : '',
+            'to' => (string) ($args['to'] ?? ''),
+            'exp' => (int) ($args['exp'] ?? 0),
+            'sign' => true,
+        ]);
     }
 
     public function maybeRotate(): void

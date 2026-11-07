@@ -456,6 +456,7 @@ final class Module extends \Stackless\Core\Module
                 ]);
             }
         }
+        echo \Stackless\Admin\Documentation::helpField('external_product', __('External product help', 'stackless-lite')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         echo '</div>';
     }
 

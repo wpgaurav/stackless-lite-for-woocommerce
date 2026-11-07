@@ -395,8 +395,13 @@ final class Webhook
             return 'already saved';
         }
         $payments = $this->gateway->payments();
-        $source = (array) ($token['payment_source']['paypal'] ?? []);
         $customerId = (string) ($token['customer']['id'] ?? '');
+        if (isset($token['payment_source']['card'])) {
+            $tokenId = CardTokens::save((int) $order->get_customer_id(), $vaultId, (array) $token['payment_source']['card'], $customerId, (string) $order->get_meta(Gateway::META_ENV) ?: $this->gateway->environment());
+            $payments->attachToken($order, $tokenId, $vaultId, $customerId, 'card');
+            return 'saved card';
+        }
+        $source = (array) ($token['payment_source']['paypal'] ?? []);
         $tokenId = $payments->saveToken((int) $order->get_customer_id(), $vaultId, (string) ($source['email_address'] ?? ''), (string) ($source['account_id'] ?? ''), $customerId, (string) $order->get_meta(Gateway::META_ENV));
         $payments->attachToken($order, $tokenId, $vaultId, $customerId);
         return 'saved';

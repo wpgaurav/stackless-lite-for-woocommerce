@@ -62,8 +62,9 @@ final class EventMap
             case 'active':
                 return $cancelScheduled ? SubscriptionData::STATUS_PENDING_CANCEL : SubscriptionData::STATUS_ACTIVE;
             case 'past_due':
-            case 'paused':
                 return SubscriptionData::STATUS_ON_HOLD;
+            case 'paused':
+                return SubscriptionData::STATUS_PAUSED;
             case 'canceled':
                 return SubscriptionData::STATUS_CANCELLED;
             default:

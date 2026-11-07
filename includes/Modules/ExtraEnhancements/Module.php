@@ -55,9 +55,9 @@ final class Module extends BaseModule
             ['type' => 'title', 'id' => $p . 'alerts_section', 'title' => __('Payment failure alerts', 'stackless-lite'), 'desc' => __('Emails you when a live payment fails or a payment provider’s API refuses a live request (refunds, checkouts, renewals). Test and sandbox activity never alerts. The email has no keys, card or customer details. Repeats of the same failure are held back for 30 minutes.', 'stackless-lite')],
             ['type' => 'checkbox', 'id' => $p . 'payment_alerts', 'title' => __('Alerts', 'stackless-lite'), 'desc' => __('Email me about failed live payments', 'stackless-lite'), 'default' => 'yes'],
             ['type' => 'text', 'id' => $p . 'alert_email', 'title' => __('Send alerts to', 'stackless-lite'), 'default' => '', 'placeholder' => (string) get_option('admin_email'), 'desc' => __('Leave empty to use the site admin email.', 'stackless-lite'), 'css' => 'min-width:300px'],
-            ['type' => 'multiselect', 'id' => $p . 'alert_gateways', 'title' => __('Watch these gateways', 'stackless-lite'), 'default' => array_keys(PaymentAlerts::GATEWAYS), 'class' => 'wc-enhanced-select', 'options' => array_map(static function ($gateway) {
+            ['type' => 'multiselect', 'id' => $p . 'alert_gateways', 'title' => __('Watch these gateways', 'stackless-lite'), 'default' => array_keys(PaymentAlerts::gateways()), 'class' => 'wc-enhanced-select', 'options' => array_map(static function ($gateway) {
                 return $gateway['label'];
-            }, PaymentAlerts::GATEWAYS), 'desc' => __('Clear the list to watch none.', 'stackless-lite')],
+            }, PaymentAlerts::gateways()), 'desc' => __('Clear the list to watch none.', 'stackless-lite')],
             ['type' => 'sectionend', 'id' => $p . 'alerts_section'],
         ];
     }
@@ -93,7 +93,7 @@ final class Module extends BaseModule
     public function boot(): void
     {
         if (self::hasAlerts() && $this->on('payment_alerts')) {
-            PaymentAlerts::init((string) $this->option('alert_email', ''), PaymentAlerts::selectedRoutes($this->option('alert_gateways', null)));
+            PaymentAlerts::boot((string) $this->option('alert_email', ''), $this->option('alert_gateways', null));
         }
         if ($this->on('product_checkout')) {
             (new ProductCheckout())->register();

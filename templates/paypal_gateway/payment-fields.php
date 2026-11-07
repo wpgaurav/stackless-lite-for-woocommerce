@@ -3,6 +3,9 @@
  * PayPal payment fields (classic checkout, order-pay, My Account → Add payment method).
  *
  * Override by copying to yourtheme/stackless/paypal_gateway/payment-fields.php.
+ * Since 2.0.0 the card fields, Fastlane and wallets need the #stackless-paypal-card,
+ * #stackless-paypal-card-fields and #stackless-paypal-wallets containers and the two extra
+ * hidden inputs; an older override keeps working with the PayPal buttons only.
  *
  * @var \Stackless\Modules\PayPalGateway\Gateway $gateway
  * @var string $description
@@ -42,9 +45,16 @@ defined('ABSPATH') || exit;
 		data-order-key="<?php echo esc_attr($order_key); ?>"
 	></div>
 	<div class="stackless-paypal__messages" id="stackless-paypal-messages"></div>
+	<div class="stackless-paypal__wallets" id="stackless-paypal-wallets"></div>
+	<div class="stackless-paypal__card" id="stackless-paypal-card" hidden>
+		<p class="stackless-paypal__or"><?php esc_html_e('Or pay with a card', 'stackless-lite'); ?></p>
+		<div class="stackless-paypal__card-fields" id="stackless-paypal-card-fields"></div>
+	</div>
 	<p class="stackless-paypal__status" role="status" aria-live="polite"></p>
 
 	<input type="hidden" name="stackless_paypal_order_id" value="" />
 	<input type="hidden" name="stackless_paypal_setup_token" value="" />
+	<input type="hidden" name="stackless_paypal_fastlane_token" value="" />
+	<input type="hidden" name="stackless_paypal_funding" value="" />
 	<noscript><p><?php esc_html_e('Place your order and you will be sent to PayPal to pay.', 'stackless-lite'); ?></p></noscript>
 </div>

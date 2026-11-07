@@ -7,7 +7,7 @@ use Stackless\Contracts\SubscriptionData;
 defined('ABSPATH') || exit;
 
 /**
- * Adds, renames and removes copies of Stackless's hosted gateways (Polar, Paddle,
+ * Adds, renames and removes copies of Stackless's hosted gateways (Polar, Paddle, Creem,
  * Dodo Payments): a second account of the same provider, each copy with its own
  * gateway id ("<family>_copyN"), settings, webhook URL and orders.
  *
@@ -28,6 +28,7 @@ final class Copies
         'wc-' . SubscriptionData::STATUS_TRIAL,
         'wc-' . SubscriptionData::STATUS_ACTIVE,
         'wc-' . SubscriptionData::STATUS_ON_HOLD,
+        'wc-' . SubscriptionData::STATUS_PAUSED,
         'wc-' . SubscriptionData::STATUS_PENDING_CANCEL,
         'wc-' . SubscriptionData::STATUS_CANCELLED,
         'wc-' . SubscriptionData::STATUS_EXPIRED,
@@ -136,7 +137,7 @@ final class Copies
     {
         $declared = self::families()[$family] ?? null;
         if (!$declared) {
-            return new \WP_Error('stackless_copy_family', __('Only Stackless’s hosted gateways (Polar, Paddle and Dodo Payments) can be duplicated, and only while their module is on.', 'stackless-lite'));
+            return new \WP_Error('stackless_copy_family', __('Only Stackless’s hosted gateways (Polar, Paddle, Dodo Payments and Creem) can be duplicated, and only while their module is on.', 'stackless-lite'));
         }
         $copies = self::of($family);
         $number = self::nextNumber(array_column($copies, 'number'));

@@ -351,6 +351,9 @@ final class Payments
                         /* translators: 1: PaymentIntent id, 2: customer-facing reason */
                         $note = sprintf(__('Stripe payment failed (%1$s): %2$s', 'stackless-lite'), $intent_id, $message);
                         if ($order->has_status('on-hold') || $order->get_meta(self::META_OFF_SESSION) === 'yes') {
+                            // Dunning reads the category when the order turns failed, so it goes first.
+                            Declines::fromIntentError($order, $error);
+                            $order->save();
                             $order->update_status('failed', $note);
                         } else {
                             $order->add_order_note($note);

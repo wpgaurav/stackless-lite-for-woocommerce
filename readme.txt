@@ -6,15 +6,15 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 1.9.1
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-23 free WooCommerce modules: Stripe, PayPal, Polar, Paddle and Dodo Payments, wishlists, saved carts, back-in-stock alerts and more.
+30 free WooCommerce modules: Stripe, PayPal, Paddle, Razorpay, Mollie, Square and six more payment providers, wishlists, saved carts and more.
 
 == Description ==
 
-Most WooCommerce stores collect a small plugin for every little job: one for the wishlist, one for back-in-stock emails, one for min/max quantities, one for the "Only 3 left" label. Stackless Lite puts those jobs, and five payment gateways, into one plugin that runs on core WooCommerce alone.
+Most WooCommerce stores collect a small plugin for every little job: one for the wishlist, one for back-in-stock emails, one for min/max quantities, one for the "Only 3 left" label. Stackless Lite puts those jobs, and payment gateways for 12 providers, into one plugin that runs on core WooCommerce alone.
 
 Switch on only what you use from Stackless → Dashboard. A switched-off module loads no code.
 
@@ -48,18 +48,25 @@ Every module that touches the cart or checkout works with the Cart and Checkout 
 
 = Payments =
 
-* **Stripe:** cards, Apple Pay, Google Pay, Link and local payment methods, with refunds from the order screen.
-* **PayPal:** PayPal Smart Buttons and Pay Later at checkout, with refunds.
+* **Stripe:** cards, Apple Pay, Google Pay, Link and local payment methods, with refunds from the order screen, plus Stripe Managed Payments with Stripe as merchant of record for digital products.
+* **PayPal:** PayPal Smart Buttons and Pay Later at checkout, card fields, Fastlane, Apple Pay and Google Pay, with refunds.
 * **Polar:** Polar as a merchant of record, with hosted checkout and sales tax and VAT handled for you.
 * **Paddle:** Paddle Billing as a merchant of record, with a checkout that handles sales tax and VAT for you.
 * **Dodo Payments:** Dodo Payments as a merchant of record, with hosted checkout and sales tax, VAT and GST handled for you.
-* **Payment Gateway Tools:** take payments with more than one Polar, Paddle or Dodo Payments account.
+* **Creem:** Creem as a merchant of record for software and digital products, with hosted checkout and sales tax and VAT handled for you, in US dollars or euros.
+* **Razorpay:** UPI, cards, netbanking and wallets through Razorpay Checkout, with refunds both ways.
+* **Mollie:** cards, iDEAL, Bancontact, PayPal, Apple Pay and every other method on your Mollie account, on Mollie's hosted checkout, with refunds both ways.
+* **Square:** cards, Apple Pay and Google Pay with Square's own payment form, in your Square location's currency, with refunds both ways.
+* **Paystack:** cards, bank transfer, USSD, mobile money and Apple Pay on Paystack's hosted checkout, for stores in Nigeria, Ghana, South Africa, Kenya and Côte d'Ivoire.
+* **Flutterwave:** cards, bank transfer, mobile money and USSD on Flutterwave's hosted checkout, with refunds both ways.
+* **Mercado Pago:** Checkout Pro for stores in Argentina, Brazil, Chile, Colombia, Mexico, Peru and Uruguay, with cards, Pix, boleto, OXXO and local methods in the account's currency.
+* **Payment Gateway Tools:** take payments with more than one Polar, Paddle, Dodo Payments or Creem account.
 
 The email for failed live payments in Extra Enhancements watches these gateways.
 
 = Need more? =
 
-Stackless (the full plugin) adds subscriptions with automatic renewals and saved payment methods, software licensing, multi-currency, invoices and quotes, order bumps, product add-ons, delivery slots and more. The Dashboard lists those modules with a short description of each; nothing in Lite is locked, time-limited or reduced.
+Stackless (the full plugin) adds subscriptions with automatic renewals and saved payment methods, a WooCommerce Subscriptions importer, software licensing, multi-currency, invoices and quotes, order bumps, post-purchase offers, abandoned checkout emails, gift cards, wholesale pricing, product add-ons, delivery slots and more. The Dashboard lists those modules with a short description of each; nothing in Lite is locked, time-limited or reduced.
 
 = Privacy =
 
@@ -73,11 +80,11 @@ The payment modules connect to the payment provider you switch on, and only that
 
 = Stripe =
 
-When a customer pays with Stripe, the checkout loads Stripe.js from js.stripe.com so card details go straight to Stripe and never reach your server. Your site sends the order amount, currency, order ID, and the customer's name and email to the Stripe API (api.stripe.com) to create the payment, and Stripe sends payment events back to your site's webhook. Stripe's [Services Agreement](https://stripe.com/legal/ssa) and [Privacy Policy](https://stripe.com/privacy) apply.
+When a customer pays with Stripe, the checkout loads Stripe.js from js.stripe.com so card details go straight to Stripe and never reach your server. Your site sends the order amount, currency, order ID, and the customer's name and email to the Stripe API (api.stripe.com) to create the payment, and Stripe sends payment events back to your site's webhook. With Stripe Managed Payments, the buyer pays on a page of your store that embeds Stripe Checkout (js.stripe.com); Stripe is the seller of record and receives the order's line items, amounts and the customer's email. Stripe's [Services Agreement](https://stripe.com/legal/ssa) and [Privacy Policy](https://stripe.com/privacy) apply.
 
 = PayPal =
 
-When a customer pays with PayPal, the checkout loads the PayPal JavaScript SDK from www.paypal.com and your site creates and captures the order through the PayPal API (api-m.paypal.com, or the sandbox in test mode), sending the order amount, currency, a description of the purchase and the order ID. PayPal sends payment events back to your site's webhook. PayPal's [User Agreement](https://www.paypal.com/us/legalhub/useragreement-full) and [Privacy Statement](https://www.paypal.com/us/legalhub/privacy-full) apply.
+When a customer pays with PayPal, the checkout loads the PayPal JavaScript SDK from www.paypal.com and your site creates and captures the order through the PayPal API (api-m.paypal.com, or the sandbox in test mode), sending the order amount, currency, a description of the purchase and the order ID. PayPal card fields and Fastlane load from www.paypal.com, so card details go to PayPal and never reach your server; card payments also send the billing address for verification, and Fastlane looks up the buyer's email with PayPal. Apple Pay through PayPal loads Apple Pay JS from applepay.cdn-apple.com and Google Pay loads from pay.google.com; both receive the total and currency for the payment sheet. PayPal sends payment events back to your site's webhook. PayPal's [User Agreement](https://www.paypal.com/us/legalhub/useragreement-full) and [Privacy Statement](https://www.paypal.com/us/legalhub/privacy-full) apply.
 
 = Polar =
 
@@ -90,6 +97,34 @@ When a customer pays with Paddle, the pay page loads Paddle.js from cdn.paddle.c
 = Dodo Payments =
 
 When a customer pays with Dodo Payments, your site creates a checkout through the Dodo Payments API (live.dodopayments.com, or test.dodopayments.com in test mode), sending the products, amount, currency, order ID and the customer's name and email, and sends the customer to Dodo's hosted checkout. Dodo Payments sends payment events back to your site's webhook. Dodo Payments' [Terms of Use](https://dodopayments.com/legal/terms-of-use) and [Privacy Policy](https://dodopayments.com/legal/privacy-policy) apply.
+
+= Creem =
+
+When a customer pays with Creem, your site creates a product and a checkout through the Creem API (api.creem.io, or test-api.creem.io in test mode), sending the product name, price, currency, order ID, subscription schedule and the customer's email, and sends the customer to Creem's hosted checkout. Creem sends payment, subscription and refund events back to your site's webhook. Creem's [Terms of Service](https://www.creem.io/terms) and [Privacy Policy](https://www.creem.io/privacy) apply.
+
+= Razorpay =
+
+When a customer pays with Razorpay, the order's payment page loads Razorpay Checkout from checkout.razorpay.com, where the buyer enters payment details with Razorpay, never on your store. Your site creates the order through the Razorpay API (api.razorpay.com), sending the amount, currency, order ID and your site's host name. Razorpay sends payment and refund events back to your site's webhook. Razorpay's [Terms and Conditions](https://razorpay.com/terms/) and [Privacy Policy](https://razorpay.com/privacy-policy/) apply.
+
+= Mollie =
+
+When a customer pays with Mollie, your site creates a payment through the Mollie API (api.mollie.com), sending the amount, currency, a description with the order number, the order ID, your site's host name, the return and webhook URLs, and the billing name, email and address, and sends the customer to Mollie's hosted checkout on www.mollie.com. Your site reads each payment back from the Mollie API before it changes an order. Mollie's [User Agreement](https://www.mollie.com/legal/user-agreement) and [Privacy Statement](https://www.mollie.com/legal/privacy) apply.
+
+= Square =
+
+When a customer pays with Square, the checkout loads Square's Web Payments SDK from web.squarecdn.com (sandbox.web.squarecdn.com in sandbox mode), so card details go from the browser to Square and never reach your server. Your site creates the payment through the Square API (connect.squareup.com, or connect.squareupsandbox.com in sandbox mode), sending the amount, currency, order ID, a note with the order number, and the buyer's email and billing address, and for a saved card a Square customer (name and email). Square sends payment and refund events back to your site's webhook. Square's [General Terms of Service](https://squareup.com/us/en/legal/general/ua) and [Privacy Notice](https://squareup.com/us/en/legal/general/privacy) apply.
+
+= Paystack =
+
+When a customer pays with Paystack, your site starts a transaction through the Paystack API (api.paystack.co), sending the amount, currency, order ID and number, and the customer's email and name, and sends the customer to Paystack's hosted checkout. Paystack sends payment, refund and dispute events back to your site's webhook. Paystack's [Terms of Service](https://paystack.com/terms) and [Merchant Privacy Policy](https://paystack.com/privacy/merchant) apply.
+
+= Flutterwave =
+
+When a customer pays with Flutterwave, your site creates a payment link through the Flutterwave API (api.flutterwave.com), sending the amount, currency, order ID and number, and the customer's email, name and phone, and sends the customer to Flutterwave's hosted checkout. Flutterwave sends payment and refund events back to your site's webhook. Flutterwave's [Terms and Conditions](https://flutterwave.com/us/terms) and [Privacy Notice](https://flutterwave.com/us/privacy-notice) apply.
+
+= Mercado Pago =
+
+When a customer pays with Mercado Pago, your site creates a Checkout Pro preference through the Mercado Pago API (api.mercadopago.com), sending the order total, currency, order ID and number, and the customer's email and name, and sends the customer to Mercado Pago's checkout. Your site also reads the account's country from the API when you save the access token. Mercado Pago sends payment notifications back to your site's webhook. Mercado Pago's terms and privacy policy for your account's country apply, for example in [Argentina](https://www.mercadopago.com.ar/ayuda/terminos-y-politicas_194) ([privacy](https://www.mercadopago.com.ar/privacidad)), [Brazil](https://www.mercadopago.com.br/ajuda/termos-e-politicas_194) ([privacy](https://www.mercadopago.com.br/privacidade)) and [Mexico](https://www.mercadopago.com.mx/ayuda/terminos-y-politicas_194) ([privacy](https://www.mercadopago.com.mx/privacidad)).
 
 = Links =
 
@@ -145,6 +180,20 @@ Yes. Every module that touches the cart or checkout supports the Cart and Checko
 Through the normal WordPress update screens, from gauravtiwari.org. No license key or account is needed.
 
 == Changelog ==
+
+= 2.0.0 =
+* New: Creem, Razorpay, Mollie, Square, Paystack, Flutterwave and Mercado Pago gateways, in the Checkout block and the classic checkout.
+* New: Creem as a merchant of record for software and digital products, with hosted checkout. On a public HTTPS site, saving an API key creates the webhook, and Payment Gateway Tools can run one copy per Creem store.
+* New: Razorpay Checkout for UPI, cards, netbanking and wallets, with refunds both ways and a signed webhook.
+* New: Mollie's hosted checkout with every method on your Mollie account, an optional method picker, refunds both ways and chargeback notes.
+* New: Square's card form with buyer verification, Google Pay and Apple Pay, and refunds both ways. Saving the settings fills in your main location and its currency and creates a signed webhook.
+* New: Paystack, Flutterwave and Mercado Pago take one-time payments on each provider's hosted checkout, with refunds from the order screen and provider-side refunds recorded on the order. Mercado Pago holds boleto, OXXO and other cash payments until they clear.
+* New: Stripe Managed Payments, a second Stripe gateway with Stripe as merchant of record for digital products. Stripe handles sales tax, VAT and disputes, and buyers pay in Stripe Checkout embedded in a page of your store.
+* New: PayPal card fields with 3D Secure, on by default for new PayPal setups; stores that set PayPal up before 2.0 turn them on in the PayPal settings.
+* New: Fastlane by PayPal for guest buyers in the US, and Apple Pay and Google Pay through PayPal. Stackless serves Apple's domain association file for you.
+* Improved: saving the Stripe settings adds any missing events to an existing Stripe webhook.
+* Improved: the email for failed live payments watches only live calls on providers whose test and live modes share one API host, so test-mode failures don't email you.
+* New for developers: `stackless_buy_link_url` builds a signed Buy Link from other plugins, and each new gateway fires a `stackless_{gateway}_gateway_webhook` action.
 
 = 1.9.1 =
 * Fixed: on stores without a persistent object cache, each Stackless setting left at its default no longer costs a database query on every page. Stackless loads them all in one query.

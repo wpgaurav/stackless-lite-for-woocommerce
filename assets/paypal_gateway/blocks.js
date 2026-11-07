@@ -36,7 +36,13 @@
 	function Content(props) {
 		var container = useRef(null);
 		var messages = useRef(null);
+		var cardEl = useRef(null);
+		var walletsEl = useRef(null);
 		var approval = useRef(null);
+		var extras = useRef({ card: null, fastlane: null });
+		var cardState = useState(false);
+		var cardShown = cardState[0];
+		var setCardShown = cardState[1];
 		var statusState = useState('');
 		var status = statusState[0];
 		var setStatus = statusState[1];
@@ -54,6 +60,72 @@
 		var onSubmit = props.onSubmit;
 		var eventRegistration = props.eventRegistration;
 		var emitResponse = props.emitResponse;
+		var email = props.billing && props.billing.billingAddress ? props.billing.billingAddress.email : '';
+		var address = props.billing && props.billing.billingAddress ? props.billing.billingAddress : {};
+
+		// Card fields (or Fastlane for guests) and Apple Pay / Google Pay, for paid orders only.
+		useEffect(function () {
+			extras.current = { card: null, fastlane: null };
+			setCardShown(false);
+			if (mode !== 'order' || !currencySupported(currency)) {
+				return undefined;
+			}
+			var cancelled = false;
+			var common = { currency: currency, intent: data.intent, vault: vault, context: 'checkout' };
+			if (cardEl.current) {
+				var start = data.fastlane ? window.stacklessPayPal.fastlane(data, Object.assign({ el: cardEl.current }, common)) : Promise.resolve(null);
+				start.then(function (fast) {
+					if (cancelled) {
+						return false;
+					}
+					if (fast) {
+						extras.current.fastlane = fast;
+						return true;
+					}
+					return window.stacklessPayPal.cardFields(data, Object.assign({ el: cardEl.current }, common)).then(function (card) {
+						if (!cancelled) {
+							extras.current.card = card;
+						}
+						return !!card;
+					});
+				}).then(function (shown) {
+					if (!cancelled) {
+						setCardShown(!!shown);
+					}
+				}).catch(function () {
+					if (!cancelled) {
+						setCardShown(false);
+					}
+				});
+			}
+			if (walletsEl.current) {
+				window.stacklessPayPal.wallets(data, Object.assign({
+					el: walletsEl.current,
+					amount: amount,
+					onApproved: function (orderId, funding) {
+						approval.current = { type: 'order', id: orderId, mode: mode, funding: funding };
+						setStatus(data.i18n.approved);
+						onSubmit();
+					},
+					onError: function (message) {
+						setStatus(message);
+					}
+				}, common)).catch(function () {
+					if (walletsEl.current) {
+						walletsEl.current.innerHTML = '';
+					}
+				});
+			}
+			return function () {
+				cancelled = true;
+			};
+		}, [mode, vault, currency]);
+
+		useEffect(function () {
+			if (extras.current.fastlane && email) {
+				extras.current.fastlane.lookup(email);
+			}
+		}, [email, cardShown]);
 
 		useEffect(function () {
 			if (approval.current && approval.current.mode !== mode) {
@@ -108,16 +180,50 @@
 		}, [mode, vault, currency]);
 
 		useEffect(function () {
-			return eventRegistration.onPaymentSetup(function () {
+			function success() {
 				var paymentMethodData = { stackless_paypal_context: 'checkout' };
 				if (approval.current && approval.current.type === 'order') {
 					paymentMethodData.stackless_paypal_order_id = approval.current.id;
 				} else if (approval.current && approval.current.type === 'setup') {
 					paymentMethodData.stackless_paypal_setup_token = approval.current.id;
+				} else if (approval.current && approval.current.type === 'fastlane') {
+					paymentMethodData.stackless_paypal_fastlane_token = approval.current.id;
+				}
+				if (approval.current && approval.current.funding) {
+					paymentMethodData.stackless_paypal_funding = approval.current.funding;
 				}
 				return { type: emitResponse.responseTypes.SUCCESS, meta: { paymentMethodData: paymentMethodData } };
+			}
+			return eventRegistration.onPaymentSetup(function () {
+				var ex = extras.current;
+				if (approval.current || (!ex.card && !ex.fastlane)) {
+					return success();
+				}
+				// Place order with the card fields (or Fastlane): pay by card first, then check out.
+				var billing = {
+					addressLine1: address.address_1 || '',
+					addressLine2: address.address_2 || '',
+					adminArea2: address.city || '',
+					adminArea1: address.state || '',
+					postalCode: address.postcode || '',
+					countryCode: address.country || ''
+				};
+				var pay = ex.fastlane
+					? ex.fastlane.token(billing).then(function (id) {
+						approval.current = { type: 'fastlane', id: id, mode: mode, funding: 'fastlane' };
+					})
+					: ex.card.submit(billing).then(function (id) {
+						approval.current = { type: 'order', id: id, mode: mode, funding: 'card' };
+					});
+				return pay.then(success).catch(function (error) {
+					approval.current = null;
+					return {
+						type: emitResponse.responseTypes.ERROR,
+						message: error && error.message && error.message.length < 200 ? error.message : data.i18n.cardIncomplete
+					};
+				});
 			});
-		}, [eventRegistration.onPaymentSetup, emitResponse.responseTypes.SUCCESS]);
+		}, [eventRegistration.onPaymentSetup, emitResponse.responseTypes.SUCCESS, emitResponse.responseTypes.ERROR, mode, address.postcode, address.country, address.city, address.address_1]);
 
 		useEffect(function () {
 			return eventRegistration.onCheckoutFail(function () {
@@ -132,6 +238,11 @@
 			vault ? el('p', { className: 'stackless-paypal__vault-note' }, data.i18n.saving) : null,
 			el('div', { className: 'stackless-paypal__buttons', ref: container }),
 			el('div', { className: 'stackless-paypal__messages', ref: messages }),
+			el('div', { className: 'stackless-paypal__wallets', ref: walletsEl }),
+			el('div', { className: 'stackless-paypal__card', hidden: !cardShown },
+				el('p', { className: 'stackless-paypal__or' }, data.i18n.orCard),
+				el('div', { className: 'stackless-paypal__card-fields', ref: cardEl })
+			),
 			el('p', { className: 'stackless-paypal__status', role: 'status', 'aria-live': 'polite' }, status)
 		);
 	}

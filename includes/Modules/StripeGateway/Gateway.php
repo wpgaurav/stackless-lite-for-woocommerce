@@ -3,6 +3,7 @@
 namespace Stackless\Modules\StripeGateway;
 
 use Stackless\Admin\SettingsPage;
+use Stackless\Contracts\SavedMethodCharger;
 use Stackless\Contracts\SubscriptionData;
 use Stackless\Contracts\SubscriptionGateway;
 
@@ -18,7 +19,7 @@ defined('ABSPATH') || exit;
  * or a redirect, process_payment() returns a #stackless-stripe-confirm/... fragment that the
  * checkout scripts pick up, hand to stripe.handleNextAction(), and then verify server-side.
  */
-class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
+class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedMethodCharger
 {
     /** Contract features this gateway supports (everything except gateway_managed). */
     public const STACKLESS_FEATURES = ['auto_renewal', 'multiple_subscriptions', 'zero_total_setup', 'payment_method_change', 'amount_change', 'date_change'];
@@ -600,6 +601,20 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
     public function stackless_cancel_subscription($subscription, bool $at_period_end): bool
     {
         return true;
+    }
+
+    /* ---------------------------------------------------------------------
+     * Contracts\SavedMethodCharger (2.0.0)
+     * ------------------------------------------------------------------- */
+
+    /**
+     * Charges a saved method for an order outside the renewal schedule (post-purchase offers).
+     *
+     * @return array{result:string, message?:string, redirect?:string}
+     */
+    public function stackless_charge_saved_method(\WC_Order $order, \WC_Payment_Token $token, bool $on_session): array
+    {
+        return SavedCharges::charge($order, $token, $on_session);
     }
 
     /* ---------------------------------------------------------------------

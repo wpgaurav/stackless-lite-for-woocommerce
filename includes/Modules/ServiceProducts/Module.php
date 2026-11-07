@@ -175,7 +175,7 @@ class Module extends \Stackless\Core\Module
             return;
         }
         echo '<div id="stackless_service_data" class="panel woocommerce_options_panel hidden">';
-        echo '<p class="form-field stackless-docs-field">' . \Stackless\Admin\Documentation::link('service_products', __('How this works', 'stackless-lite')) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in Documentation::link().
+        echo \Stackless\Admin\Documentation::helpField('service_products'); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in Documentation::link().
         echo '<div class="options_group"><p class="form-field"><label for="stackless_service_instructions">' . esc_html__('After-payment instructions', 'stackless-lite') . '</label></p><div style="padding:0 20px 12px 162px;">';
         wp_editor((string) $product->get_meta(self::META_INSTRUCTIONS, true), 'stackless_service_instructions', [
             'textarea_name' => 'stackless_service_instructions',

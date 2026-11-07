@@ -27,7 +27,7 @@ final class Module extends \Stackless\Core\Module
 
     public function description(): string
     {
-        return __('Take cards, Apple Pay, Google Pay, Link and local payment methods with Stripe, save cards, and renew subscriptions automatically.', 'stackless-lite');
+        return __('Take cards, Apple Pay, Google Pay, Link and local payment methods with Stripe, save cards, and renew subscriptions automatically. Includes Stripe Managed Payments, with Stripe as merchant of record for digital products.', 'stackless-lite');
     }
 
     public function group(): string
@@ -49,7 +49,7 @@ final class Module extends \Stackless\Core\Module
     public function optionNames(): array
     {
         // The gateway's enabled switch, read by the gateway and the blocks integration.
-        return array_merge(parent::optionNames(), ['woocommerce_' . Settings::GATEWAY_ID . '_settings']);
+        return array_merge(parent::optionNames(), ['woocommerce_' . Settings::GATEWAY_ID . '_settings', 'woocommerce_' . Managed\Gateway::ID . '_settings']);
     }
 
     public function boot(): void
@@ -62,6 +62,22 @@ final class Module extends \Stackless\Core\Module
         add_action('woocommerce_order_status_on-hold_to_processing', [$this, 'captureOnStatus']);
         add_action('woocommerce_order_status_on-hold_to_completed', [$this, 'captureOnStatus']);
         add_action('woocommerce_order_status_cancelled', [$this, 'voidOnCancel']);
+
+        add_filter('stackless_stripe_gateway_adopt_payment_method', [Adoption::class, 'adoptPaymentMethod'], 10, 2);
+        add_filter('stackless_billing_health_sources', [Health::class, 'register']);
+        add_filter('stackless_payment_alerts_gateways', [Health::class, 'alertRoutes']);
+
+        // Stripe Managed Payments (2.0.0).
+        // woocommerce_blocks_loaded fires at plugins_loaded:10, before modules boot (20).
+        if (did_action('woocommerce_blocks_loaded')) {
+            $this->extendStoreApi();
+        } else {
+            add_action('woocommerce_blocks_loaded', [$this, 'extendStoreApi']);
+        }
+        add_action('woocommerce_api_stackless_stripe_managed_pay', [$this, 'managedPayPage']);
+        add_action('woocommerce_api_stackless_stripe_managed_return', [$this, 'managedReturn']);
+        add_action('woocommerce_api_stackless_stripe_managed_portal', [$this, 'managedPortal']);
+        add_filter('stackless_subscriptions_customer_actions', [$this, 'managedCustomerActions'], 10, 2);
 
         Tokens::registerHooks();
         Endpoints::registerHooks();
@@ -80,6 +96,7 @@ final class Module extends \Stackless\Core\Module
     public function registerGateway($gateways)
     {
         $gateways[] = Gateway::class;
+        $gateways[] = Managed\Gateway::instance();
         return $gateways;
     }
 
@@ -88,7 +105,90 @@ final class Module extends \Stackless\Core\Module
     {
         if (class_exists(\Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType::class)) {
             $registry->register(new BlocksIntegration());
+            $registry->register(new Managed\BlocksSupport());
         }
+    }
+
+    /** Tells the Checkout block whether Managed Payments can take the cart (digital goods, one schedule). */
+    public function extendStoreApi(): void
+    {
+        if (!function_exists('woocommerce_store_api_register_endpoint_data')) {
+            return;
+        }
+        woocommerce_store_api_register_endpoint_data([
+            'endpoint' => 'cart',
+            'namespace' => 'stackless_stripe_managed',
+            'schema_type' => ARRAY_A,
+            'data_callback' => static function () {
+                $reason = Managed\Eligibility::cartReason();
+                return ['eligible' => $reason === Managed\Eligibility::OK, 'reason' => $reason];
+            },
+            'schema_callback' => static function () {
+                return [
+                    'eligible' => [
+                        'description' => __('Whether Stripe Managed Payments can take this cart.', 'stackless-lite'),
+                        'type' => 'boolean',
+                        'context' => ['view', 'edit'],
+                        'readonly' => true,
+                    ],
+                    'reason' => [
+                        'description' => __('Why Stripe Managed Payments cannot take this cart, when it cannot.', 'stackless-lite'),
+                        'type' => 'string',
+                        'context' => ['view', 'edit'],
+                        'readonly' => true,
+                    ],
+                ];
+            },
+        ]);
+    }
+
+    public function managedPayPage(): void
+    {
+        (new Managed\Checkout(Managed\Gateway::instance()))->renderPayPage();
+    }
+
+    public function managedReturn(): void
+    {
+        (new Managed\Checkout(Managed\Gateway::instance()))->handleReturn();
+    }
+
+    public function managedPortal(): void
+    {
+        (new Managed\Checkout(Managed\Gateway::instance()))->handlePortal();
+    }
+
+    /**
+     * Stripe keeps the card for Managed Payments subscriptions and the API cannot change it,
+     * so "Update payment method" opens Stripe's customer portal.
+     *
+     * @param array $actions
+     * @param mixed $subscription
+     * @return array
+     */
+    public function managedCustomerActions($actions, $subscription)
+    {
+        if (!$subscription instanceof \WC_Order || $subscription->get_payment_method() !== Managed\Gateway::ID) {
+            return $actions;
+        }
+        if ((string) $subscription->get_meta(\Stackless\Contracts\SubscriptionData::META_GATEWAY_SUBSCRIPTION) === '' || (string) $subscription->get_meta(\Stackless\Contracts\SubscriptionData::META_GATEWAY_CUSTOMER) === '') {
+            return $actions;
+        }
+        $open = [
+            \Stackless\Contracts\SubscriptionData::STATUS_ACTIVE,
+            \Stackless\Contracts\SubscriptionData::STATUS_TRIAL,
+            \Stackless\Contracts\SubscriptionData::STATUS_ON_HOLD,
+            \Stackless\Contracts\SubscriptionData::STATUS_PENDING_CANCEL,
+            \Stackless\Contracts\SubscriptionData::STATUS_PAUSED,
+        ];
+        if (!in_array($subscription->get_status(), $open, true)) {
+            return $actions;
+        }
+        $actions['stripe_managed_update_payment'] = [
+            'label' => __('Update payment method', 'stackless-lite'),
+            'url' => Managed\Checkout::portalUrl($subscription),
+            'class' => 'button',
+        ];
+        return $actions;
     }
 
     /** @param int $order_id */

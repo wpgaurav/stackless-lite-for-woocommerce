@@ -611,6 +611,7 @@ final class Module extends \Stackless\Core\Module
             'desc_tip' => true,
             'description' => __('Guests see the login text instead of the price and cannot buy until they log in.', 'stackless-lite'),
         ]);
+        echo \Stackless\Admin\Documentation::helpField('hide_price_until_login', __('Hide price help', 'stackless-lite')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         echo '</div>';
     }
 

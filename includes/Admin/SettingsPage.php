@@ -59,6 +59,7 @@ final class SettingsPage
         add_action('admin_enqueue_scripts', [$this, 'assets']);
         add_action('wp_ajax_stackless_toggle_module', [$this, 'ajaxToggle']);
         Toast::register();
+        Documentation::register();
         add_filter('woocommerce_screen_ids', [$this, 'screenIds']);
         add_filter('plugin_action_links_' . plugin_basename(STACKLESS_PLUGIN_FILE), function ($links) {
             array_unshift($links, '<a href="' . esc_url(self::url()) . '">' . esc_html__('Modules', 'stackless-lite') . '</a>');

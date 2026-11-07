@@ -52,15 +52,15 @@ final class Renewals
         }
         if (!Amount::isSupported($currency)) {
             /* translators: %s: currency code */
-            return self::fail($renewal, sprintf(__('Stripe does not support %s.', 'stackless-lite'), $currency));
+            return self::fail($renewal, sprintf(__('Stripe does not support %s.', 'stackless-lite'), $currency), 'currency_not_supported', '', SubscriptionData::DECLINE_HARD);
         }
         if (!Amount::meetsMinimum($renewal->get_total(), $currency)) {
-            return self::fail($renewal, ErrorMapper::message('amount_too_small'));
+            return self::fail($renewal, ErrorMapper::message('amount_too_small'), 'amount_too_small', '', SubscriptionData::DECLINE_HARD);
         }
 
         $source = self::resolveSource($renewal, $subscription);
         if (!$source) {
-            return self::fail($renewal, __('No saved Stripe payment method is attached to this subscription.', 'stackless-lite'));
+            return self::fail($renewal, __('No saved Stripe payment method is attached to this subscription.', 'stackless-lite'), 'payment_method_missing', '', SubscriptionData::DECLINE_HARD);
         }
 
         // A previous attempt for this renewal may already have succeeded or still be processing.
@@ -126,7 +126,14 @@ final class Renewals
                 return self::failNeedsAuthentication($renewal);
             default:
                 $error = isset($intent['last_payment_error']) && is_array($intent['last_payment_error']) ? $intent['last_payment_error'] : [];
-                return self::fail($renewal, $error ? ErrorMapper::fromIntentError($error) : ErrorMapper::generic());
+                $code = $error ? ((string) ($error['decline_code'] ?? '') ?: (string) ($error['code'] ?? '')) : '';
+                return self::fail(
+                    $renewal,
+                    $error ? ErrorMapper::fromIntentError($error) : ErrorMapper::generic(),
+                    $code !== '' ? $code : 'declined',
+                    '',
+                    $error ? ErrorMapper::declineCategoryFromIntentError($error) : SubscriptionData::DECLINE_SOFT
+                );
         }
     }
 
@@ -203,7 +210,11 @@ final class Renewals
         if (ErrorMapper::isAuthenticationRequired($e->getStripeCode(), $e->getDeclineCode(), $status)) {
             return self::failNeedsAuthentication($renewal);
         }
-        return self::fail($renewal, ErrorMapper::fromException($e), $e->getDeclineCode() ?: $e->getStripeCode());
+        $code = $e->getDeclineCode() ?: $e->getStripeCode();
+        if ($code === '') {
+            $code = $e->getHttpStatus() === 0 ? 'api_connection_error' : 'http_' . $e->getHttpStatus();
+        }
+        return self::fail($renewal, ErrorMapper::fromException($e), $code, '', ErrorMapper::declineCategoryFromException($e));
     }
 
     /** @return array{result:string, message:string} */
@@ -217,14 +228,20 @@ final class Renewals
             __('The bank requires the customer to authenticate this renewal (3D Secure). The customer can confirm and pay at: %s', 'stackless-lite'),
             $renewal->get_checkout_payment_url()
         );
-        return self::fail($renewal, $message, 'authentication_required', $note);
+        return self::fail($renewal, $message, 'authentication_required', $note, SubscriptionData::DECLINE_AUTH);
     }
 
-    /** @return array{result:string, message:string} */
-    private static function fail(\WC_Order $renewal, string $message, string $code = '', string $note = ''): array
+    /**
+     * Marks the renewal failed. The decline category and code are written first: Dunning reads
+     * them when the order turns failed.
+     *
+     * @return array{result:string, message:string}
+     */
+    private static function fail(\WC_Order $renewal, string $message, string $code = '', string $note = '', string $category = SubscriptionData::DECLINE_SOFT): array
     {
         $renewal->update_meta_data(self::META_ATTEMPT, (string) ((int) $renewal->get_meta(self::META_ATTEMPT) + 1));
         $renewal->delete_meta_data(self::META_TRANSIENT_RETRIES);
+        Declines::write($renewal, $category, $code !== '' ? $code : 'declined');
         $renewal->save();
         if ($note === '') {
             /* translators: %s: reason */

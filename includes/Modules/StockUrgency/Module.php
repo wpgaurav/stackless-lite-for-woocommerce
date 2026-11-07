@@ -250,6 +250,7 @@ final class Module extends \Stackless\Core\Module
             'desc_tip' => true,
             'description' => __('Show the low stock label at or below this many units. Leave blank to use the store setting.', 'stackless-lite'),
         ]);
+        echo \Stackless\Admin\Documentation::helpField('stock_urgency', __('Stock urgency help', 'stackless-lite')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         echo '</div>';
     }
 

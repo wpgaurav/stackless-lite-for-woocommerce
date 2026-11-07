@@ -292,6 +292,22 @@ class Payments
                 return ['result' => 'failed', 'message' => __('The order currency changed after PayPal approved the payment. Please use the PayPal button again.', 'stackless-lite')];
             }
 
+            $authentication = CardSecurity::resultOf($paypal);
+            if ($authentication !== null) {
+                $decision = CardSecurity::decide($authentication);
+                if ($decision !== CardSecurity::CONTINUE) {
+                    $order->add_order_note(sprintf(
+                        /* translators: 1: PayPal order id, 2: liability shift */
+                        __('PayPal card payment %1$s was not captured: 3-D Secure did not pass (liability shift %2$s).', 'stackless-lite'),
+                        $paypalOrderId,
+                        (string) ($authentication['liability_shift'] ?? '?')
+                    ));
+                    return ['result' => 'failed', 'message' => $decision === CardSecurity::REJECT
+                        ? __('Your bank could not verify this card. Use another card or payment method.', 'stackless-lite')
+                        : __('Your bank could not verify this card right now. Try again, or use another card.', 'stackless-lite')];
+                }
+            }
+
             $ops = $this->builder->patchOperations($order, $paypal);
             if ($ops) {
                 $patched = $api->patchOrder($paypalOrderId, $ops);
@@ -372,6 +388,10 @@ class Payments
             if (in_array($status, ['DECLINED', 'FAILED'], true)) {
                 $note = sprintf(/* translators: %s: PayPal capture id */ __('PayPal declined the payment (capture %s).', 'stackless-lite'), $captureId);
                 if (!$order->is_paid()) {
+                    // Dunning reads the decline when the order turns failed, so it is written first.
+                    [$category, $code] = Declines::fromPayment($capture);
+                    Declines::write($order, $category, $code);
+                    $order->save();
                     $order->update_status('failed', $note);
                 }
                 return ['result' => 'failed', 'message' => __('PayPal declined the payment. Please try another way to pay.', 'stackless-lite')];
@@ -428,6 +448,9 @@ class Payments
 
             if (in_array($status, ['DENIED', 'VOIDED', 'EXPIRED'], true)) {
                 if (!$order->is_paid()) {
+                    [$category, $code] = Declines::fromPayment($authorization);
+                    Declines::write($order, $category, $code);
+                    $order->save();
                     $order->update_status('failed', sprintf(/* translators: 1: authorization id, 2: status */ __('PayPal authorization %1$s is %2$s.', 'stackless-lite'), $authId, strtolower($status)));
                 }
                 return ['result' => 'failed', 'message' => __('PayPal declined the payment. Please try another way to pay.', 'stackless-lite')];
@@ -455,6 +478,10 @@ class Payments
     /** Save the vault id PayPal returned with a purchase (vault-with-purchase). */
     private function maybeSaveVault(\WC_Order $order, array $paypal): void
     {
+        if (isset($paypal['payment_source']['card'])) {
+            $this->maybeSaveCardVault($order, (array) $paypal['payment_source']['card']);
+            return;
+        }
         $source = (array) ($paypal['payment_source']['paypal'] ?? []);
         $vault = (array) ($source['attributes']['vault'] ?? []);
         $vaultId = (string) ($vault['id'] ?? '');
@@ -474,6 +501,22 @@ class Payments
             (string) ($vault['customer']['id'] ?? '')
         );
         $this->attachToken($order, $tokenId, $vaultId, (string) ($vault['customer']['id'] ?? ''));
+    }
+
+    /** Card vaulted with a purchase (card fields or Fastlane with store_in_vault). */
+    private function maybeSaveCardVault(\WC_Order $order, array $card): void
+    {
+        $vault = (array) ($card['attributes']['vault'] ?? []);
+        $vaultId = (string) ($vault['id'] ?? '');
+        if ($vaultId === '' || ($vault['status'] ?? 'VAULTED') !== 'VAULTED') {
+            if (stackless_order_requires_saved_payment_method($order) && (string) $order->get_meta(SubscriptionData::META_TOKEN_ID) === '') {
+                $order->add_order_note(__('PayPal is still saving the card for renewals; it will be attached when PayPal confirms it.', 'stackless-lite'));
+            }
+            return;
+        }
+        $customerId = (string) ($vault['customer']['id'] ?? '');
+        $tokenId = CardTokens::save((int) $order->get_customer_id(), $vaultId, $card, $customerId, $this->gateway->environment());
+        $this->attachToken($order, $tokenId, $vaultId, $customerId, 'card');
     }
 
     /** Store (or reuse) a WooCommerce payment token for a vault id. */
@@ -497,12 +540,17 @@ class Payments
         return (int) $token->get_id();
     }
 
-    /** Write the token on the parent order (and any subscriptions already created from it). */
-    public function attachToken(\WC_Order $order, int $tokenId, string $vaultId, string $customerId): void
+    /**
+     * Write the token on the parent order (and any subscriptions already created from it).
+     *
+     * @param string $type paypal|card: what the vault id pays with.
+     */
+    public function attachToken(\WC_Order $order, int $tokenId, string $vaultId, string $customerId, string $type = 'paypal'): void
     {
-        $write = function (\WC_Order $target) use ($tokenId, $vaultId, $customerId) {
+        $write = function (\WC_Order $target) use ($tokenId, $vaultId, $customerId, $type) {
             $target->update_meta_data(SubscriptionData::META_TOKEN_ID, (string) $tokenId);
             $target->update_meta_data(Gateway::META_VAULT_ID, $vaultId);
+            $target->update_meta_data(Gateway::META_VAULT_TYPE, $type === 'card' ? 'card' : 'paypal');
             $target->update_meta_data(Gateway::META_ENV, $this->gateway->environment());
             if ($customerId !== '') {
                 $target->update_meta_data(SubscriptionData::META_GATEWAY_CUSTOMER, $customerId);
@@ -516,7 +564,9 @@ class Payments
                 $write($subscription);
             }
         }
-        $order->add_order_note(__('PayPal account saved for automatic renewals.', 'stackless-lite'));
+        $order->add_order_note($type === 'card'
+            ? __('Card saved at PayPal for automatic renewals.', 'stackless-lite')
+            : __('PayPal account saved for automatic renewals.', 'stackless-lite'));
     }
 
     /**
@@ -594,6 +644,75 @@ class Payments
         return true;
     }
 
+    /**
+     * Fastlane: pay an order with the single-use card token from the Fastlane component.
+     * PayPal charges on create; 3-D Secure, when the bank asks for it, sends the buyer to
+     * PayPal and back to handleReturn(), which captures the order.
+     *
+     * @return array process_payment result
+     */
+    public function payWithSingleUseToken(\WC_Order $order, string $token): array
+    {
+        $currency = $order->get_currency();
+        if (!Amount::supported($currency) || (float) $order->get_total() <= 0) {
+            return ['result' => 'failure', 'message' => __('Fastlane cannot take this payment. Choose another payment method.', 'stackless-lite')];
+        }
+        $order->set_payment_method($this->gateway->id);
+        $order->set_payment_method_title($this->gateway->get_title());
+        $order->update_meta_data(Gateway::META_FUNDING, 'fastlane');
+        $order->update_meta_data(Gateway::META_ENV, $this->gateway->environment());
+        $order->save();
+
+        $done = Lock::run('order-' . $order->get_id(), function () use ($order, $token) {
+            $order = \Stackless\Core\FreshOrder::get($order->get_id());
+            if (!$order instanceof \WC_Order) {
+                return ['result' => 'failure', 'message' => __('Order not found.', 'stackless-lite')];
+            }
+            if ($order->is_paid()) {
+                return ['result' => 'success', 'redirect' => $this->gateway->get_return_url($order)];
+            }
+            $vault = stackless_order_requires_saved_payment_method($order);
+            $requestId = 'stackless-fastlane-' . $order->get_id() . '-' . substr(md5($token), 0, 16);
+            $response = $this->gateway->api()->createOrder($this->builder->fromSingleUseToken($order, $token, $vault, $this->returnUrl($order, 'order')), $requestId);
+            if (is_wp_error($response)) {
+                $this->gateway->log('Fastlane order for #' . $order->get_id() . ' failed: ' . $response->get_error_message(), 'error');
+                /* translators: %s: PayPal error */
+                $order->add_order_note(sprintf(__('Fastlane payment failed: %s', 'stackless-lite'), $response->get_error_message()));
+                return ['result' => 'failure', 'message' => __('The card was declined. Try another card or payment method.', 'stackless-lite')];
+            }
+            if (!empty($response['id'])) {
+                $order->update_meta_data(Gateway::META_ORDER_ID, (string) $response['id']);
+                $order->save();
+            }
+            $status = (string) ($response['status'] ?? '');
+            if ($status === 'PAYER_ACTION_REQUIRED') {
+                $link = self::link($response, ['payer-action', 'approve']);
+                return $link !== ''
+                    ? ['result' => 'success', 'redirect' => $link]
+                    : ['result' => 'failure', 'message' => __('Your bank needs to verify this card, but PayPal did not return a verification page.', 'stackless-lite')];
+            }
+            if (in_array($status, ['CREATED', 'APPROVED'], true) && !empty($response['id'])) {
+                // Already under this order's lock, so capture here rather than through completeCheckout().
+                $response = $this->gateway->api()->captureOrder((string) $response['id'], $requestId . '-capture');
+                if (is_wp_error($response)) {
+                    return ['result' => 'failure', 'message' => $response->get_error_message()];
+                }
+            }
+            $result = $this->applyResult($order, $response, 'checkout');
+            return $result['result'] === 'failed'
+                ? ['result' => 'failure', 'message' => (string) ($result['message'] ?? '')]
+                : ['result' => 'success', 'redirect' => $this->gateway->get_return_url($order)];
+        }, null, 20);
+
+        if (!is_array($done)) {
+            return ['result' => 'failure', 'message' => __('This order is already being processed. Refresh the page in a moment.', 'stackless-lite')];
+        }
+        if (($done['result'] ?? '') === 'failed') {
+            return ['result' => 'failure', 'message' => (string) ($done['message'] ?? '')];
+        }
+        return $done;
+    }
+
     /* ---- Browser return from PayPal (redirect flow) ---------------------------- */
 
     public function handleReturn(): void
@@ -665,19 +784,20 @@ class Payments
         }
         if (!Amount::supported($renewal->get_currency())) {
             /* translators: %s: currency */
-            return $this->failRenewal($renewal, sprintf(__('PayPal cannot charge in %s.', 'stackless-lite'), $renewal->get_currency()), false);
+            return $this->failRenewal($renewal, sprintf(__('PayPal cannot charge in %s.', 'stackless-lite'), $renewal->get_currency()), false, SubscriptionData::DECLINE_HARD, 'currency_not_supported');
         }
 
         $source = $this->renewalSource($renewal, $subscription);
         if (is_wp_error($source)) {
-            return $this->failRenewal($renewal, $source->get_error_message(), false);
+            $code = $source->get_error_code() === 'stackless_paypal_token_owner' ? 'token_owner_mismatch' : 'payment_method_missing';
+            return $this->failRenewal($renewal, $source->get_error_message(), false, SubscriptionData::DECLINE_HARD, $code);
         }
-        [$vaultId, $environment] = $source;
+        [$vaultId, $environment, $sourceType] = $source;
         if ($environment !== $this->gateway->environment()) {
-            return $this->failRenewal($renewal, __('The saved PayPal account belongs to the other PayPal environment (sandbox vs live). Ask the customer to update their payment method.', 'stackless-lite'), false);
+            return $this->failRenewal($renewal, __('The saved PayPal account belongs to the other PayPal environment (sandbox vs live). Ask the customer to update their payment method.', 'stackless-lite'), false, SubscriptionData::DECLINE_HARD, 'environment_mismatch');
         }
 
-        $done = Lock::run('order-' . $renewal->get_id(), function () use ($renewal, $vaultId) {
+        $done = Lock::run('order-' . $renewal->get_id(), function () use ($renewal, $vaultId, $sourceType) {
             $renewal = \Stackless\Core\FreshOrder::get($renewal->get_id());
             if (!$renewal instanceof \WC_Order) {
                 return ['result' => 'failed', 'message' => __('Order not found.', 'stackless-lite')];
@@ -694,7 +814,7 @@ class Payments
             $renewal->save();
 
             $api = $this->gateway->api();
-            $body = $this->builder->renewal($renewal, $vaultId);
+            $body = $this->builder->renewal($renewal, $vaultId, $sourceType);
             $response = $api->createOrder($body, $requestId);
             if (is_wp_error($response) && self::isTransient($response)) {
                 // Same PayPal-Request-Id: if the first call went through, PayPal replays its result.
@@ -702,7 +822,8 @@ class Payments
             }
             if (is_wp_error($response)) {
                 $this->gateway->log('Renewal ' . $renewal->get_id() . ' create failed: ' . $response->get_error_message() . ' ' . wp_json_encode($response->get_error_data()), 'error');
-                return $this->failRenewal($renewal, $response->get_error_message(), !self::isTransient($response));
+                [$category, $code] = Declines::fromError($response);
+                return $this->failRenewal($renewal, $response->get_error_message(), !self::isTransient($response), $category, $code);
             }
 
             $status = (string) ($response['status'] ?? '');
@@ -713,10 +834,11 @@ class Payments
             if (in_array($status, ['CREATED', 'APPROVED', 'SAVED'], true) && !empty($response['id'])) {
                 $response = $api->captureOrder((string) $response['id'], $requestId . '-capture');
                 if (is_wp_error($response)) {
-                    return $this->failRenewal($renewal, $response->get_error_message(), !self::isTransient($response));
+                    [$category, $code] = Declines::fromError($response);
+                    return $this->failRenewal($renewal, $response->get_error_message(), !self::isTransient($response), $category, $code);
                 }
             } elseif ($status === 'PAYER_ACTION_REQUIRED') {
-                return $this->failRenewal($renewal, __('PayPal needs the customer to approve this payment, so it cannot be charged automatically.', 'stackless-lite'), true);
+                return $this->failRenewal($renewal, __('PayPal needs the customer to approve this payment, so it cannot be charged automatically.', 'stackless-lite'), true, SubscriptionData::DECLINE_AUTH, 'PAYER_ACTION_REQUIRED');
             }
 
             $result = $this->applyResult($renewal, $response, 'renewal');
@@ -737,10 +859,11 @@ class Payments
     }
 
     /**
-     * Vault id and environment for a renewal: the renewal's token meta, else the subscription's.
+     * Vault id, environment and source type (paypal|card) for a renewal: the renewal's token
+     * meta, else the subscription's.
      *
      * @param \WC_Order $subscription
-     * @return array{0:string,1:string}|\WP_Error
+     * @return array{0:string,1:string,2:string}|\WP_Error
      */
     private function renewalSource(\WC_Order $renewal, $subscription)
     {
@@ -751,28 +874,38 @@ class Payments
             $tokenId = absint($source->get_meta(SubscriptionData::META_TOKEN_ID));
             if ($tokenId) {
                 $token = \WC_Payment_Tokens::get($tokenId);
-                if ($token instanceof PaymentToken && $token->get_gateway_id() === $this->gateway->id) {
+                if ($token && $token->get_gateway_id() === $this->gateway->id && ($token instanceof PaymentToken || CardTokens::isCard($token))) {
                     if ((int) $token->get_user_id() !== 0 && (int) $renewal->get_customer_id() !== 0 && (int) $token->get_user_id() !== (int) $renewal->get_customer_id()) {
                         return new \WP_Error('stackless_paypal_token_owner', __('The saved PayPal account belongs to a different customer.', 'stackless-lite'));
                     }
-                    return [$token->get_token(), $token->get_environment() ?: (string) $source->get_meta(Gateway::META_ENV) ?: $this->gateway->environment()];
+                    $environment = $token instanceof PaymentToken ? $token->get_environment() : CardTokens::environment($token);
+                    return [$token->get_token(), $environment ?: (string) $source->get_meta(Gateway::META_ENV) ?: $this->gateway->environment(), CardTokens::isCard($token) ? 'card' : 'paypal'];
                 }
             }
             $vaultId = (string) $source->get_meta(Gateway::META_VAULT_ID);
             if ($vaultId !== '') {
-                return [$vaultId, (string) $source->get_meta(Gateway::META_ENV) ?: $this->gateway->environment()];
+                $type = (string) $source->get_meta(Gateway::META_VAULT_TYPE) === 'card' ? 'card' : 'paypal';
+                return [$vaultId, (string) $source->get_meta(Gateway::META_ENV) ?: $this->gateway->environment(), $type];
             }
         }
         return new \WP_Error('stackless_paypal_no_token', __('No saved PayPal account for this subscription.', 'stackless-lite'));
     }
 
-    /** @return array{result:string,message:string} */
-    private function failRenewal(\WC_Order $renewal, string $message, bool $countAttempt): array
+    /**
+     * Marks a renewal failed. The decline category and code go on the order first: Dunning
+     * reads them when the order turns failed.
+     *
+     * @return array{result:string,message:string}
+     */
+    public function failRenewal(\WC_Order $renewal, string $message, bool $countAttempt, string $category = SubscriptionData::DECLINE_SOFT, string $code = 'declined'): array
     {
         if ($countAttempt) {
             $renewal->update_meta_data(Gateway::META_RENEWAL_ATTEMPTS, (string) ((int) $renewal->get_meta(Gateway::META_RENEWAL_ATTEMPTS) + 1));
-            $renewal->save();
         }
+        if (!$renewal->is_paid()) {
+            Declines::write($renewal, $category, $code);
+        }
+        $renewal->save();
         if (!$renewal->is_paid()) {
             /* translators: %s: error message */
             $renewal->update_status('failed', sprintf(__('PayPal renewal payment failed: %s', 'stackless-lite'), $message));

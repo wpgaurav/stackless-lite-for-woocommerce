@@ -68,7 +68,7 @@ final class Admin
         }
 
         echo '<div id="stackless_product_details_panel" class="panel woocommerce_options_panel hidden stackless-pe-panel">';
-        echo '<p class="form-field stackless-docs-field">' . \Stackless\Admin\Documentation::link('product_enhancements', __('How this works', 'stackless-lite')) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in Documentation::link().
+        echo \Stackless\Admin\Documentation::helpField('product_enhancements'); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in Documentation::link().
         echo '<div class="options_group">';
         woocommerce_wp_select([
             'id' => 'stackless_pe_preset',

@@ -26,7 +26,7 @@ final class Module extends BaseModule
 
     public function description(): string
     {
-        return __('Duplicate the Polar, Paddle and Dodo Payments gateways to take payments with a second account, each copy with its own keys, webhook URL, badge and orders. Marks every gateway Stackless adds with a Stackless label in WooCommerce’s payment settings and order screens.', 'stackless-lite');
+        return __('Duplicate the Polar, Paddle, Dodo Payments and Creem gateways to take payments with a second account, each copy with its own keys, webhook URL, badge and orders. Marks every gateway Stackless adds with a Stackless label in WooCommerce’s payment settings and order screens.', 'stackless-lite');
     }
 
     public function group(): string

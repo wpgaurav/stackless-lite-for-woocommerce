@@ -2,6 +2,7 @@
 
 namespace Stackless\Modules\PayPalGateway;
 
+use Stackless\Contracts\SavedMethodCharger;
 use Stackless\Contracts\SubscriptionGateway;
 use Stackless\Core\Logger;
 
@@ -10,7 +11,7 @@ defined('ABSPATH') || exit;
 /**
  * PayPal (Orders v2 + Vault v3) for WooCommerce, with automatic subscription renewals.
  */
-class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
+class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedMethodCharger
 {
     public const ID = 'stackless_paypal';
 
@@ -23,6 +24,10 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
     public const META_REFUND_IDS = '_stackless_paypal_refund_ids';
     public const META_RENEWAL_ATTEMPTS = '_stackless_paypal_renewal_attempts';
     public const META_PAYER_EMAIL = '_stackless_paypal_payer_email';
+    /** paypal|card: what the vault id on an order or subscription pays with (2.0.0). */
+    public const META_VAULT_TYPE = '_stackless_paypal_vault_type';
+    /** paypal|card|fastlane|applepay|googlepay: how a checkout was paid (2.0.0). */
+    public const META_FUNDING = '_stackless_paypal_funding';
 
     /** Features this gateway offers to the Subscriptions module. */
     public const STACKLESS_FEATURES = ['auto_renewal', 'multiple_subscriptions', 'zero_total_setup', 'payment_method_change', 'amount_change', 'date_change'];
@@ -210,6 +215,52 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
                 'type' => 'checkbox',
                 'label' => __('Show Pay Later offers under the buttons where PayPal supports them', 'stackless-lite'),
                 'default' => 'yes',
+            ],
+            'advanced_section' => [
+                'title' => __('Cards and wallets', 'stackless-lite'),
+                'type' => 'title',
+                'description' => __('Card fields, Fastlane, Apple Pay and Google Pay need Advanced Credit and Debit Card Payments turned on for your PayPal app (Apps & Credentials → your app → Features). Each one shows only where PayPal says your account and the buyer are eligible.', 'stackless-lite'),
+            ],
+            'card_fields' => [
+                'title' => __('Card fields', 'stackless-lite'),
+                'type' => 'checkbox',
+                'label' => __('Let buyers pay by card on the checkout page (PayPal Advanced Card Payments)', 'stackless-lite'),
+                'default' => self::cardFieldsDefault(),
+                'description' => __('Card number, expiry and security code fields hosted by PayPal, with 3-D Secure. Cards are saved at PayPal for subscription renewals.', 'stackless-lite'),
+            ],
+            'three_d_secure' => [
+                'title' => __('3-D Secure', 'stackless-lite'),
+                'type' => 'select',
+                'default' => 'SCA_WHEN_REQUIRED',
+                'options' => [
+                    'SCA_WHEN_REQUIRED' => __('When the bank or regulation requires it', 'stackless-lite'),
+                    'SCA_ALWAYS' => __('On every card payment', 'stackless-lite'),
+                ],
+            ],
+            'fastlane' => [
+                'title' => __('Fastlane', 'stackless-lite'),
+                'type' => 'checkbox',
+                'label' => __('Offer Fastlane by PayPal to guest buyers', 'stackless-lite'),
+                'default' => 'no',
+                'description' => __('Guests recognized by their email pay with a card saved in their Fastlane profile. US buyers in US dollars only; needs the card fields.', 'stackless-lite'),
+            ],
+            'apple_pay' => [
+                'title' => __('Apple Pay', 'stackless-lite'),
+                'type' => 'checkbox',
+                'label' => __('Show Apple Pay through PayPal', 'stackless-lite'),
+                'default' => 'no',
+                'description' => sprintf(
+                    /* translators: %s: URL of the domain association file */
+                    __('Add this site’s domain under Apple Pay in your PayPal app. Stackless serves the domain association file at %s. One-time payments only: carts that start a subscription hide it.', 'stackless-lite'),
+                    '<code>' . esc_html(home_url('/.well-known/apple-developer-merchantid-domain-association')) . '</code>'
+                ),
+            ],
+            'google_pay' => [
+                'title' => __('Google Pay', 'stackless-lite'),
+                'type' => 'checkbox',
+                'label' => __('Show Google Pay through PayPal', 'stackless-lite'),
+                'default' => 'no',
+                'description' => __('One-time payments only: carts that start a subscription hide it.', 'stackless-lite'),
             ],
             'debug' => [
                 'title' => __('Debug log', 'stackless-lite'),
@@ -404,6 +455,49 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
         return $this->get_option('paylater_messaging', 'yes') === 'yes';
     }
 
+    public function cardFieldsEnabled(): bool
+    {
+        return $this->get_option('card_fields', self::cardFieldsDefault()) === 'yes';
+    }
+
+    /**
+     * Card fields are on for stores that set PayPal up on 2.0 or later, and stay off for stores
+     * whose PayPal settings were saved before (no card_fields key), so their checkout does not
+     * change on update. Either way they show only where PayPal says the account is eligible.
+     */
+    public static function cardFieldsDefault(): string
+    {
+        $saved = get_option('woocommerce_' . self::ID . '_settings', null);
+        return is_array($saved) && $saved !== [] && !array_key_exists('card_fields', $saved) ? 'no' : 'yes';
+    }
+
+    /** Fastlane for this request: switched on, card fields on, a guest buyer, a US store charging USD. */
+    public function fastlaneAvailable(string $currency = ''): bool
+    {
+        if ($this->get_option('fastlane', 'no') !== 'yes' || !$this->cardFieldsEnabled() || is_user_logged_in()) {
+            return false;
+        }
+        $currency = strtoupper($currency !== '' ? $currency : stackless_current_currency());
+        $country = function_exists('WC') && WC()->countries ? (string) WC()->countries->get_base_country() : '';
+        return (bool) apply_filters('stackless_paypal_gateway_fastlane_available', $currency === 'USD' && $country === 'US');
+    }
+
+    public function applePayEnabled(): bool
+    {
+        return $this->get_option('apple_pay', 'no') === 'yes';
+    }
+
+    public function googlePayEnabled(): bool
+    {
+        return $this->get_option('google_pay', 'no') === 'yes';
+    }
+
+    /** SCA_WHEN_REQUIRED (default) or SCA_ALWAYS for card payments (2.0.0). */
+    public function threeDSecureMethod(): string
+    {
+        return $this->get_option('three_d_secure', 'SCA_WHEN_REQUIRED') === 'SCA_ALWAYS' ? 'SCA_ALWAYS' : 'SCA_WHEN_REQUIRED';
+    }
+
     /** Debug lines only when the merchant turned logging on; errors always. */
     public function log(string $message, string $level = 'info', array $context = []): void
     {
@@ -502,10 +596,19 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
         // phpcs:disable WordPress.Security.NonceVerification.Missing -- WooCommerce verified the checkout nonce.
         $paypalOrderId = isset($_POST['stackless_paypal_order_id']) ? sanitize_text_field(wp_unslash($_POST['stackless_paypal_order_id'])) : '';
         $setupToken = isset($_POST['stackless_paypal_setup_token']) ? sanitize_text_field(wp_unslash($_POST['stackless_paypal_setup_token'])) : '';
+        $fastlaneToken = isset($_POST['stackless_paypal_fastlane_token']) ? sanitize_text_field(wp_unslash($_POST['stackless_paypal_fastlane_token'])) : '';
+        $funding = isset($_POST['stackless_paypal_funding']) ? sanitize_key(wp_unslash($_POST['stackless_paypal_funding'])) : '';
         // phpcs:enable
 
         try {
-            $result = $this->payments()->process($order, $paypalOrderId, $setupToken);
+            if ($fastlaneToken !== '' && preg_match('/^[A-Za-z0-9_-]{6,200}$/', $fastlaneToken)) {
+                $result = $this->payments()->payWithSingleUseToken($order, $fastlaneToken);
+            } else {
+                if (in_array($funding, ['card', 'applepay', 'googlepay', 'paypal', 'paylater', 'venmo'], true)) {
+                    $order->update_meta_data(self::META_FUNDING, $funding);
+                }
+                $result = $this->payments()->process($order, $paypalOrderId, $setupToken);
+            }
         } catch (\Throwable $e) {
             $this->log('Checkout failed for order ' . $order->get_id() . ': ' . $e->getMessage(), 'error');
             $result = ['result' => 'failure', 'message' => __('PayPal could not take this payment. Please try again or choose another payment method.', 'stackless-lite')];
@@ -570,9 +673,27 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
             // and can never charge twice if PayPal did process this one.
             $message = __('PayPal renewal hit an unexpected error before it could be confirmed.', 'stackless-lite');
             if (!$renewal_order->is_paid()) {
+                Declines::write($renewal_order, \Stackless\Contracts\SubscriptionData::DECLINE_NETWORK, 'unexpected_error');
+                $renewal_order->save();
                 $renewal_order->update_status('failed', $message);
             }
             return ['result' => 'failed', 'message' => $message];
+        }
+    }
+
+    /**
+     * Contracts\SavedMethodCharger (2.0.0): charge a vaulted PayPal account or card for an
+     * order outside the renewal schedule.
+     *
+     * @return array{result:string, message?:string, redirect?:string}
+     */
+    public function stackless_charge_saved_method(\WC_Order $order, \WC_Payment_Token $token, bool $on_session): array
+    {
+        try {
+            return (new SavedCharges($this))->charge($order, $token, $on_session);
+        } catch (\Throwable $e) {
+            $this->log('Saved-method charge for order ' . $order->get_id() . ' failed: ' . $e->getMessage(), 'error');
+            return ['result' => 'failed', 'message' => __('PayPal could not take this payment.', 'stackless-lite')];
         }
     }
 

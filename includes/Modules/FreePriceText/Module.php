@@ -286,6 +286,7 @@ final class Module extends \Stackless\Core\Module
             'desc_tip' => true,
             'description' => __('Shown instead of the price when this product costs nothing. Leave blank to use the store setting.', 'stackless-lite'),
         ]);
+        echo \Stackless\Admin\Documentation::helpField('free_price_text', __('Free price text help', 'stackless-lite')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         echo '</div>';
     }
 

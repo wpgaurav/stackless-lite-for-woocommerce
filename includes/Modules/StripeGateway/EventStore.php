@@ -148,6 +148,28 @@ final class EventStore
         return (array) $wpdb->get_results($wpdb->prepare("SELECT event_id, event_type, livemode, status, note, created_at FROM %i ORDER BY id DESC LIMIT %d", $table, $limit), ARRAY_A);
     }
 
+    /**
+     * Events still claimed as "processing" long after a handler should have finished: the
+     * request died mid-way. Stripe's retry takes them over; Billing Health lists them meanwhile.
+     *
+     * @return array<int,array<string,mixed>>
+     */
+    public static function stuck(int $limit = 10): array
+    {
+        global $wpdb;
+        $table = self::table();
+        if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table)) !== $table) {
+            return [];
+        }
+        return (array) $wpdb->get_results($wpdb->prepare(
+            "SELECT event_id, event_type, livemode, status, note, created_at FROM %i WHERE status = 'processing' AND created_at < %s AND created_at > %s ORDER BY id DESC LIMIT %d",
+            $table,
+            gmdate('Y-m-d H:i:s', time() - self::STALE_AFTER),
+            gmdate('Y-m-d H:i:s', time() - 7 * DAY_IN_SECONDS),
+            $limit
+        ), ARRAY_A);
+    }
+
     /** Drops log rows older than 30 days, at most once a day. Stripe never redelivers events that old. */
     public static function maybePrune(): void
     {

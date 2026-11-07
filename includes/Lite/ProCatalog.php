@@ -50,6 +50,30 @@ final class ProCatalog
                 ],
                 'docs' => 'subscriptions/subscription-products/',
             ],
+            'wcs-migration' => [
+                'title' => __('WooCommerce Subscriptions Migration', 'stackless-lite'),
+                'group' => 'recurring',
+                'icon' => 'transfer-in',
+                'summary' => __('Move your WooCommerce Subscriptions subscriptions into Stackless with their dates, prices and past orders.', 'stackless-lite'),
+                'features' => [
+                    __('Scan first, then import after switching WooCommerce Subscriptions off, so nothing renews twice', 'stackless-lite'),
+                    __('Saved Stripe and PayPal payment methods carry over on the same accounts', 'stackless-lite'),
+                    __('Resumable imports, checked one by one afterwards', 'stackless-lite'),
+                ],
+                'docs' => 'subscriptions/migrate-from-woocommerce-subscriptions/',
+            ],
+            'billing-health' => [
+                'title' => __('Billing Health', 'stackless-lite'),
+                'group' => 'recurring',
+                'icon' => 'heart-rate-monitor',
+                'summary' => __('Failed and stuck renewals, missing schedules and payment provider problems on one screen.', 'stackless-lite'),
+                'features' => [
+                    __('On-hold and overdue subscriptions, stuck charges and webhook failures', 'stackless-lite'),
+                    __('Safe fixes with a log of every fix, plus a Site Health test', 'stackless-lite'),
+                    __('Why customers cancelled lately', 'stackless-lite'),
+                ],
+                'docs' => 'subscriptions/billing-health/',
+            ],
             'checkout-builder' => [
                 'title' => __('Checkout Builder', 'stackless-lite'),
                 'group' => 'checkout',
@@ -84,6 +108,30 @@ final class ProCatalog
                 ],
                 'docs' => 'checkout-and-sales/modal-checkout/',
             ],
+            'checkout-recovery' => [
+                'title' => __('Checkout Recovery', 'stackless-lite'),
+                'group' => 'checkout',
+                'icon' => 'mail-forward',
+                'summary' => __('Emails that bring shoppers back to a checkout they left, with their cart restored.', 'stackless-lite'),
+                'features' => [
+                    __('Up to three reminders, with an optional coupon in the last one', 'stackless-lite'),
+                    __('Only with consent, with one-click unsubscribe', 'stackless-lite'),
+                    __('Recovered revenue in the admin and FluentCRM triggers', 'stackless-lite'),
+                ],
+                'docs' => 'checkout-and-sales/checkout-recovery/',
+            ],
+            'vat-numbers' => [
+                'title' => __('VAT Numbers', 'stackless-lite'),
+                'group' => 'checkout',
+                'icon' => 'file-certificate',
+                'summary' => __('A VAT number field with EU VIES checks and reverse charge for business buyers.', 'stackless-lite'),
+                'features' => [
+                    __('Works on the Checkout block and the classic checkout', 'stackless-lite'),
+                    __('Validated numbers and their proof are kept on the order', 'stackless-lite'),
+                    __('Reverse charge for valid business buyers in other EU countries', 'stackless-lite'),
+                ],
+                'docs' => 'checkout-and-sales/vat-numbers/',
+            ],
             'order-bumps' => [
                 'title' => __('Order Bumps', 'stackless-lite'),
                 'group' => 'sales',
@@ -96,6 +144,30 @@ final class ProCatalog
                     __('Works on the Checkout block and the classic checkout', 'stackless-lite'),
                 ],
                 'docs' => 'checkout-and-sales/order-bumps/',
+            ],
+            'post-purchase-offers' => [
+                'title' => __('Post-purchase Offers', 'stackless-lite'),
+                'group' => 'sales',
+                'icon' => 'hand-click',
+                'summary' => __('One-click offers on the thank-you page, charged to the payment method the customer just used.', 'stackless-lite'),
+                'features' => [
+                    __('Offers shown by rules, priced on the server, with take rates', 'stackless-lite'),
+                    __('Charged only on the customer\'s click, never twice', 'stackless-lite'),
+                    __('Falls back to a pay link when a one-click charge isn\'t possible', 'stackless-lite'),
+                ],
+                'docs' => 'checkout-and-sales/post-purchase-offers/',
+            ],
+            'gift-cards' => [
+                'title' => __('Gift Cards and Store Credit', 'stackless-lite'),
+                'group' => 'sales',
+                'icon' => 'gift-card',
+                'summary' => __('Sell gift cards and keep store credit for customers.', 'stackless-lite'),
+                'features' => [
+                    __('Gift card products that email a code to the recipient', 'stackless-lite'),
+                    __('Store credit balances with a full history', 'stackless-lite'),
+                    __('Refunds to store credit, and partial redemption at checkout', 'stackless-lite'),
+                ],
+                'docs' => 'checkout-and-sales/gift-cards-and-store-credit/',
             ],
             'custom-invoices' => [
                 'title' => __('Custom Invoices', 'stackless-lite'),
@@ -207,6 +279,18 @@ final class ProCatalog
                     __('Works on the Checkout block and the classic checkout', 'stackless-lite'),
                 ],
                 'docs' => 'store-tools/product-addons/',
+            ],
+            'wholesale-pricing' => [
+                'title' => __('Wholesale Pricing', 'stackless-lite'),
+                'group' => 'store',
+                'icon' => 'building-warehouse',
+                'summary' => __('Prices by customer role and quantity tiers.', 'stackless-lite'),
+                'features' => [
+                    __('Role prices and quantity breaks per product, variation or category', 'stackless-lite'),
+                    __('A tier table on the product page', 'stackless-lite'),
+                    __('Works with Hide Price Until Login and multi-currency', 'stackless-lite'),
+                ],
+                'docs' => 'catalog/wholesale-pricing/',
             ],
             'delivery-slots' => [
                 'title' => __('Delivery & Pickup Slots', 'stackless-lite'),

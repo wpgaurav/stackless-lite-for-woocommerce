@@ -92,6 +92,11 @@ final class Admin
                 }
                 if ($pendingWebhook) {
                     $notices[] = self::createWebhook($client, $mode, $label);
+                } else {
+                    $added = self::ensureEvents($client, $mode, $label);
+                    if ($added) {
+                        $notices[] = $added;
+                    }
                 }
             } catch (StripeApiException $e) {
                 if ($e->getHttpStatus() === 403 || $e->getStripeCode() === 'secret_key_required' || ($e->getStripeType() === 'invalid_request_error' && strpos($secret, 'rk_') === 0)) {
@@ -162,8 +167,59 @@ final class Admin
             return ['warning', $missing];
         }
         update_option(Settings::PREFIX . $mode . '_webhook_secret', $secret);
+        update_option(self::eventsOption($mode), self::eventsHash(), false);
         /* translators: %s: Test or Live */
         return ['success', sprintf(__('%s webhook created in Stripe and its signing secret saved.', 'stackless-lite'), $label)];
+    }
+
+    /**
+     * An existing webhook endpoint for this site gets any events added since it was created
+     * (2.0.0 added the Managed Payments Checkout, invoice and subscription events).
+     *
+     * @return array{0:string,1:string}|null Notice, or null when nothing changed.
+     */
+    public static function ensureEvents(StripeClient $client, string $mode, string $label): ?array
+    {
+        if (get_option(self::eventsOption($mode)) === self::eventsHash()) {
+            return null;
+        }
+        try {
+            $existing = $client->get('webhook_endpoints', ['limit' => 100]);
+            foreach ((array) ($existing['data'] ?? []) as $endpoint) {
+                if (!is_array($endpoint) || (string) ($endpoint['url'] ?? '') !== Settings::webhookUrl()) {
+                    continue;
+                }
+                $enabled = array_map('strval', (array) ($endpoint['enabled_events'] ?? []));
+                $missing = in_array('*', $enabled, true) ? [] : array_values(array_diff(Settings::webhookEvents(), $enabled));
+                if ($missing) {
+                    $client->post('webhook_endpoints/' . rawurlencode((string) ($endpoint['id'] ?? '')), [
+                        'enabled_events' => array_values(array_unique(array_merge($enabled, $missing))),
+                    ]);
+                }
+                update_option(self::eventsOption($mode), self::eventsHash(), false);
+                return $missing ? ['success', sprintf(
+                    /* translators: 1: Test or Live, 2: number of events */
+                    _n('%1$s webhook now also sends %2$d new event.', '%1$s webhook now also sends %2$d new events.', count($missing), 'stackless-lite'),
+                    $label,
+                    count($missing)
+                )] : null;
+            }
+        } catch (StripeApiException $e) {
+            /* translators: 1: Test or Live, 2: Stripe error message */
+            return ['warning', sprintf(__('Could not add the new events to the %1$s webhook: %2$s Add them in Stripe → Developers → Webhooks.', 'stackless-lite'), $label, $e->getMessage())];
+        }
+        return null;
+    }
+
+    public static function eventsOption(string $mode): string
+    {
+        return Settings::PREFIX . 'webhook_events_' . ($mode === 'live' ? 'live' : 'test');
+    }
+
+    /** Fingerprint of the event list, to tell whether an endpoint was brought up to date. */
+    public static function eventsHash(): string
+    {
+        return md5(implode(',', Settings::webhookEvents()));
     }
 
     public static function notices(): void

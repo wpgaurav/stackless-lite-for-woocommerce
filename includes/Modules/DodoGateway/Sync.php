@@ -24,6 +24,7 @@ class Sync
         'wc-' . SubscriptionData::STATUS_TRIAL,
         'wc-' . SubscriptionData::STATUS_ACTIVE,
         'wc-' . SubscriptionData::STATUS_ON_HOLD,
+        'wc-' . SubscriptionData::STATUS_PAUSED,
         'wc-' . SubscriptionData::STATUS_PENDING_CANCEL,
         'wc-' . SubscriptionData::STATUS_CANCELLED,
         'wc-' . SubscriptionData::STATUS_EXPIRED,

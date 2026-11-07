@@ -120,7 +120,7 @@ final class ProductSettings
         $symbol = get_woocommerce_currency_symbol(stackless_base_currency());
 
         echo '<div id="stackless_pay_what_you_like_data" class="panel woocommerce_options_panel hidden">';
-        echo '<p class="form-field">' . \Stackless\Admin\Documentation::link('pay_what_you_like', __('How this works', 'stackless-lite')) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in Documentation::link().
+        echo \Stackless\Admin\Documentation::helpField('pay_what_you_like'); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in Documentation::link().
         echo '<div class="options_group">';
         woocommerce_wp_checkbox([
             'id' => self::FIELD . '_enabled',

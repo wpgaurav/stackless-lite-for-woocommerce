@@ -110,6 +110,28 @@ final class WebhookLog
         ], ['event_id' => $eventId]);
     }
 
+    /**
+     * Failed events, and events claimed but never finished, from the last 7 days (newest
+     * first), for Billing Health.
+     *
+     * @return array<int,array<string,mixed>>
+     */
+    public static function problems(int $limit = 20): array
+    {
+        global $wpdb;
+        $table = self::table();
+        if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table)) !== $table) {
+            return [];
+        }
+        return (array) $wpdb->get_results($wpdb->prepare(
+            "SELECT event_id, event_type, status, message, attempts, updated_at FROM %i WHERE updated_at > %s AND (status = 'failed' OR (status = 'processing' AND updated_at < %s)) ORDER BY updated_at DESC LIMIT %d",
+            $table,
+            gmdate('Y-m-d H:i:s', time() - 7 * DAY_IN_SECONDS),
+            gmdate('Y-m-d H:i:s', time() - self::STALE_AFTER),
+            $limit
+        ), ARRAY_A);
+    }
+
     /** Keep 90 days of history; runs on roughly one claim in fifty. */
     private static function maybePrune(): void
     {

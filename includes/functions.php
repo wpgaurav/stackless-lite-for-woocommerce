@@ -104,6 +104,24 @@ function stackless_create_renewal_order($subscription)
 }
 
 /**
+ * Create a subscription from another system's record, keeping its dates (2.0.0). Used by
+ * migrations such as the WooCommerce Subscriptions importer. Idempotent per `source`: a second
+ * call with the same source returns the subscription created the first time.
+ *
+ * $data keys: source (required, e.g. "wcs:123"), status (internal slug), customer_id, currency,
+ * prices_include_tax, billing, shipping, customer_note, payment_method, payment_method_title,
+ * renewal_mode (auto|manual), token_id, gateway_customer, period, interval, dates (start,
+ * trial_end, next_payment, end, last_payment, cancelled as Unix times), paid_cycles, parent_id,
+ * items, shipping_lines, fees, coupons, renewal_orders ([id, paid]), note.
+ *
+ * @return int|\WP_Error The subscription id.
+ */
+function stackless_import_subscription(array $data)
+{
+    return apply_filters('stackless_import_subscription', new \WP_Error('stackless_subscriptions_inactive', __('Subscriptions module is not active.', 'stackless-lite')), $data);
+}
+
+/**
  * Page through subscriptions for the REST API and other admin tooling.
  *
  * @param array $args status => string[] (internal slugs), customer_id => int, product_id => int,

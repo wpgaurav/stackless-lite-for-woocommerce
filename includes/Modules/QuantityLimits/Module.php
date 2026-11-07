@@ -541,6 +541,7 @@ final class Module extends \Stackless\Core\Module
                 'description' => $key === self::META_MAX ? __('0 means no limit.', 'stackless-lite') : '',
             ]);
         }
+        echo \Stackless\Admin\Documentation::helpField('quantity_limits', __('Quantity limits help', 'stackless-lite')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Documentation.
         echo '</div>';
     }
 

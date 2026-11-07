@@ -20,7 +20,7 @@ final class Module extends BaseModule
 
     public function description(): string
     {
-        return __('PayPal Smart Buttons and Pay Later on the block and classic checkout, refunds, and saved PayPal accounts that renew subscriptions automatically. Uses PayPal’s REST APIs directly.', 'stackless-lite');
+        return __('PayPal Smart Buttons and Pay Later on the block and classic checkout, with optional card fields, Fastlane, Apple Pay and Google Pay. Refunds, and saved PayPal accounts and cards that renew subscriptions automatically. Uses PayPal’s REST APIs directly.', 'stackless-lite');
     }
 
     public function group(): string
@@ -76,6 +76,9 @@ final class Module extends BaseModule
         add_action('woocommerce_order_status_processing', [$this, 'captureOnStatus'], 5);
         add_action('woocommerce_order_status_completed', [$this, 'captureOnStatus'], 5);
         add_action('woocommerce_order_status_cancelled', [$this, 'voidOnCancel']);
+        add_filter('stackless_paypal_gateway_adopt_vault', [Adoption::class, 'adoptVault'], 10, 2);
+        add_filter('stackless_billing_health_sources', [Health::class, 'register']);
+        add_action('init', [Wallets::class, 'serveDomainAssociation'], 1);
         Ajax::register();
     }
 
@@ -164,15 +167,44 @@ final class Module extends BaseModule
     /** Settings the browser needs (no secrets: the client id is public by design). */
     public static function scriptData(Gateway $gateway): array
     {
+        $components = ['buttons'];
+        if ($gateway->payLaterMessaging()) {
+            $components[] = 'messages';
+        }
+        if ($gateway->cardFieldsEnabled()) {
+            $components[] = 'card-fields';
+        }
+        if ($gateway->applePayEnabled()) {
+            $components[] = 'applepay';
+        }
+        if ($gateway->googlePayEnabled()) {
+            $components[] = 'googlepay';
+        }
+        $fastlane = $gateway->fastlaneAvailable();
         return [
             'gatewayId' => Gateway::ID,
             'clientId' => $gateway->clientId(),
             'sdkBase' => 'https://www.paypal.com/sdk/js',
             'sdkParams' => (array) apply_filters('stackless_paypal_gateway_sdk_params', [
-                'components' => $gateway->payLaterMessaging() ? 'buttons,messages' : 'buttons',
+                'components' => implode(',', $components),
                 'enable-funding' => $gateway->payLaterMessaging() ? 'paylater' : '',
+                // With card fields on the page, the buttons' own card form would be a second card form.
+                'disable-funding' => $gateway->cardFieldsEnabled() ? 'card' : '',
                 'commit' => 'true',
             ]),
+            'cardFields' => $gateway->cardFieldsEnabled(),
+            // Look of the inputs inside PayPal's card field frames (PayPal's CSS subset).
+            'cardStyle' => (array) apply_filters('stackless_paypal_gateway_card_fields_style', [
+                'input' => ['font-size' => '16px', 'padding' => '10px 12px', 'border' => '1px solid #8c8f94', 'border-radius' => '4px', 'box-shadow' => 'none'],
+                'input:focus' => ['border-color' => '#066fd1', 'box-shadow' => '0 0 0 1px #066fd1'],
+                '.invalid' => ['color' => '#b32d2e', 'border-color' => '#b32d2e'],
+            ]),
+            'fastlane' => $fastlane,
+            'applePay' => $gateway->applePayEnabled(),
+            'googlePay' => $gateway->googlePayEnabled(),
+            'sandbox' => $gateway->isSandbox(),
+            'storeName' => $gateway->brandName(),
+            'storeCountry' => function_exists('WC') && WC()->countries ? (string) WC()->countries->get_base_country() : '',
             // Extra SDK parameters used only when saving an account without a purchase.
             'sdkSetupParams' => (array) apply_filters('stackless_paypal_gateway_sdk_setup_params', []),
             'intent' => $gateway->intent(),
@@ -187,6 +219,17 @@ final class Module extends BaseModule
                 'saving' => __('Your PayPal account will be saved for future payments.', 'stackless-lite'),
                 'unavailable' => __('PayPal is not available for this currency.', 'stackless-lite'),
                 'cancelled' => __('You closed PayPal before finishing. Use the button again when you are ready.', 'stackless-lite'),
+                'orCard' => __('Or pay with a card', 'stackless-lite'),
+                'cardName' => __('Name on card', 'stackless-lite'),
+                'cardNumber' => __('Card number', 'stackless-lite'),
+                'cardExpiry' => __('Expiry date', 'stackless-lite'),
+                'cardCvv' => __('Security code', 'stackless-lite'),
+                'cardIncomplete' => __('Check your card details and try again.', 'stackless-lite'),
+                'cardDeclined' => __('The card was declined. Try another card or payment method.', 'stackless-lite'),
+                'cardVerify' => __('Your bank could not verify this card. Try again or use another card.', 'stackless-lite'),
+                'cardSaved' => __('Your card will be saved securely by PayPal for future renewals.', 'stackless-lite'),
+                'fastlaneEmail' => __('Enter your email address to check for a Fastlane profile.', 'stackless-lite'),
+                'walletError' => __('The wallet payment did not finish. Try again or choose another way to pay.', 'stackless-lite'),
             ],
         ];
     }
