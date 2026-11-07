@@ -2,7 +2,8 @@
   "name": "stackless-development",
   "private": true,
   "scripts": {
-    "build:toast": "node tools/build/toast.mjs"
+    "build:toast": "node tools/build/toast.mjs",
+    "test:js": "node --test tests/js/"
   },
   "devDependencies": {
     "esbuild": "0.28.2",

@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 
 /**
  * Mercado Pago in the Checkout block: a redirect method, so the block only needs a label,
- * a short description and the currencies it can take.
+ * a short description and the currencies the connected account can take.
  */
 final class BlocksSupport extends AbstractPaymentMethodType
 {
@@ -48,7 +48,8 @@ final class BlocksSupport extends AbstractPaymentMethodType
             'title' => $gateway->get_title(),
             'description' => wp_kses_post($gateway->get_description()),
             'testmode' => $gateway->mode() === 'test',
-            'currencies' => Money::currencies(),
+            // The connected account's currency (every Mercado Pago currency until the account is known).
+            'currencies' => $gateway->supported_currencies(),
             'supports' => array_values(array_filter($gateway->supports, [$gateway, 'supports'])),
             'i18n' => [
                 'testmode' => __('Test mode: no real payment will be taken.', 'stackless-lite'),

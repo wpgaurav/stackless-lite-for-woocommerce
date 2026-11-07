@@ -26,6 +26,12 @@
 		if (opts.components) {
 			extra.components = opts.components;
 		}
+		if (opts.cardButton && extra['disable-funding']) {
+			// Card fields aren't offered to this store or buyer: bring back the buttons' own card form.
+			extra['disable-funding'] = String(extra['disable-funding']).split(',').filter(function (source) {
+				return source.trim() !== 'card';
+			}).join(',');
+		}
 		Object.keys(extra).forEach(function (key) {
 			if (extra[key] !== '' && extra[key] !== null && extra[key] !== undefined) {
 				params[key] = String(extra[key]);
@@ -136,10 +142,20 @@
 	 */
 	function render(data, el, opts) {
 		var mode = opts.mode === 'setup' ? 'setup' : 'order';
-		return load(data, {
+		var sdkOpts = {
 			currency: opts.currency,
 			intent: mode === 'setup' || opts.vault ? 'capture' : opts.intent,
 			mode: mode
+		};
+		return load(data, sdkOpts).then(function (paypal) {
+			// With card fields on, the SDK hides the buttons' card form (disable-funding=card). When
+			// PayPal doesn't offer card fields to this account, currency or buyer, the buttons get
+			// their card form back, so the customer can still pay by card. Saved-account flows
+			// only show the PayPal button, so they keep the first SDK.
+			if (!data.cardFields || mode !== 'order' || opts.vault || cardFieldsEligible(paypal)) {
+				return paypal;
+			}
+			return load(data, Object.assign({}, sdkOpts, { cardButton: true }));
 		}).then(function (paypal) {
 			var funding = 'paypal';
 			var lastError = '';
@@ -180,7 +196,10 @@
 				};
 			} else {
 				config.createOrder = function () {
-					return post(data, data.ajax.createOrder, Object.assign({ funding: funding }, common)).then(function (result) {
+					// The buttons' own card form collects the card in PayPal's window; "card" is
+					// reserved for the card fields, whose order carries the card payment source.
+					var source = funding === 'card' ? 'guest_card' : funding;
+					return post(data, data.ajax.createOrder, Object.assign({ funding: source }, common)).then(function (result) {
 						return result.id;
 					}).catch(function (error) {
 						lastError = error.message;
@@ -216,6 +235,24 @@
 			}
 			return buttons;
 		});
+	}
+
+	/** Whether PayPal offers card fields here (the SDK must load the card-fields component). */
+	function cardFieldsEligible(paypal) {
+		if (!paypal || typeof paypal.CardFields !== 'function') {
+			return false;
+		}
+		try {
+			var probe = paypal.CardFields({
+				createOrder: function () {
+					return Promise.reject(new Error('eligibility check'));
+				},
+				onApprove: function () {}
+			});
+			return !!(probe && probe.isEligible && probe.isEligible());
+		} catch (error) {
+			return false;
+		}
 	}
 
 	/**
@@ -504,5 +541,5 @@
 		});
 	}
 
-	window.stacklessPayPal = { load: load, post: post, render: render, sdkUrl: sdkUrl, cardFields: cardFields, fastlane: fastlane, wallets: wallets };
+	window.stacklessPayPal = { load: load, post: post, render: render, sdkUrl: sdkUrl, cardFields: cardFields, cardFieldsEligible: cardFieldsEligible, fastlane: fastlane, wallets: wallets };
 })(window, document);

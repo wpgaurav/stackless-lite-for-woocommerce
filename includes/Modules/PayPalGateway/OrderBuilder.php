@@ -398,7 +398,8 @@ class OrderBuilder
                 'shipping_preference' => $shippingPreference,
             ]]];
         }
-        // Other funding sources (guest card, local methods) are handled by the JS SDK itself.
+        // Other funding sources (guest_card: the buttons' own card form, local methods) carry no
+        // payment source: the JS SDK collects them in PayPal's window.
 
         return (array) apply_filters('stackless_paypal_gateway_order_args', $body, $context);
     }

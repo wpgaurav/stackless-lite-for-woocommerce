@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,10 @@ Yes. Every module that touches the cart or checkout supports the Cart and Checko
 Through the normal WordPress update screens, from gauravtiwari.org. No license key or account is needed.
 
 == Changelog ==
+
+= 2.0.1 =
+* Fixed: with PayPal card fields on, PayPal's own card button comes back when PayPal doesn't offer card fields to the account, currency or buyer.
+* Fixed: Mercado Pago on the Checkout block is offered only in the connected account's currency.
 
 = 2.0.0 =
 * New: Creem, Razorpay, Mollie, Square, Paystack, Flutterwave and Mercado Pago gateways, in the Checkout block and the classic checkout.
