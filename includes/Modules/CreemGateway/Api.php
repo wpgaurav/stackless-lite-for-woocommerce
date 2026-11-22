@@ -87,9 +87,20 @@ class Api
         $raw = (string) wp_remote_retrieve_body($response);
         $body = $raw === '' ? [] : json_decode($raw, true);
         if ($code >= 400) {
-            return new \WP_Error('stackless_creem_api', self::errorMessage(is_array($body) ? $body : [], $code, $this->mode), ['status' => $code]);
+            return new \WP_Error('stackless_creem_api', self::errorMessage(is_array($body) ? $body : [], $code, $this->mode), [
+                'status' => $code,
+                // Creem's errors repeat the status in the body; a proxy's error page doesn't.
+                'body_status' => is_array($body) ? (int) ($body['status'] ?? 0) : 0,
+            ]);
         }
         return is_array($body) ? $body : [];
+    }
+
+    /** Creem itself said the resource doesn't exist (not a proxy's 404, not a refused key). */
+    public static function isNotFound(\WP_Error $error): bool
+    {
+        $data = $error->get_error_data();
+        return is_array($data) && (int) ($data['status'] ?? 0) === 404 && (int) ($data['body_status'] ?? 0) === 404;
     }
 
     /** Creem errors are {"status": 400, "error": "Bad Request", "message": ["…"], "trace_id": "…"}. */
@@ -109,11 +120,14 @@ class Api
             : sprintf(__('Creem returned an unexpected error (HTTP %d).', 'stackless-lite'), $code);
     }
 
-    /** True when an error says a product in the checkout no longer exists (archived or deleted in Creem). */
+    /**
+     * True when an error says a product in the checkout can't be sold: an unknown one answers
+     * 404, an archived one 409 (PRODUCT_UNAVAILABLE, "Product is no longer available").
+     */
     public static function isProductError(\WP_Error $error): bool
     {
         $data = $error->get_error_data();
         $status = is_array($data) ? (int) ($data['status'] ?? 0) : 0;
-        return in_array($status, [400, 404], true) && stripos($error->get_error_message(), 'product') !== false;
+        return in_array($status, [400, 404, 409], true) && stripos($error->get_error_message(), 'product') !== false;
     }
 }

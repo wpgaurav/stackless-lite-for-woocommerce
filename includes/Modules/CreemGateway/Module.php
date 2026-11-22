@@ -72,6 +72,7 @@ final class Module extends BaseModule
             add_action('woocommerce_blocks_loaded', [$this, 'extendStoreApi']);
         }
         add_action('rest_api_init', [Webhook::class, 'register']);
+        Attempts::register();
         add_action('woocommerce_api_stackless_creem_return', [Checkout::class, 'handleReturn']);
         // Payment Gateway Tools adds, renames and removes copies of this gateway.
         add_filter('stackless_gateway_copy_families', [Copies::class, 'declare']);

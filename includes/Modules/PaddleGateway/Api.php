@@ -106,6 +106,13 @@ class Api
         return $data;
     }
 
+    /** Paddle itself said the entity doesn't exist (not a proxy's 404, not a refused key). */
+    public static function isNotFound(\WP_Error $error): bool
+    {
+        $data = $error->get_error_data();
+        return is_array($data) && (int) ($data['status'] ?? 0) === 404 && in_array($data['code'] ?? '', ['not_found', 'entity_not_found'], true);
+    }
+
     /** Turn Paddle's error object (detail plus per-field errors) into one sentence. */
     public static function errorMessage(array $error, int $code): string
     {

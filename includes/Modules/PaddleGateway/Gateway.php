@@ -24,6 +24,9 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, Pausab
     public const META_TRANSACTION_ID = '_stackless_paddle_transaction_id';
     public const META_MODE = '_stackless_paddle_mode';
     public const META_FINGERPRINT = '_stackless_paddle_fingerprint';
+    public const META_SOURCE = '_stackless_paddle_transaction_source';
+    public const META_UNVERIFIED = '_stackless_paddle_unverified_transaction';
+    public const META_RELEASED = '_stackless_paddle_released_transaction';
     public const META_ADJUSTMENT_IDS = '_stackless_paddle_adjustment_ids';
     public const META_TAX = '_stackless_paddle_tax_amount';
     public const META_TOTAL = '_stackless_paddle_total_amount';

@@ -93,6 +93,9 @@ class Sync
         if ((string) ($transaction['custom_data']['wc_order_id'] ?? '') !== (string) $order->get_id()) {
             return new \WP_Error('stackless_paddle_mismatch', __('This Paddle transaction belongs to a different order.', 'stackless-lite'));
         }
+        if (EventMap::fullyRefunded($transaction)) {
+            return new \WP_Error('stackless_paddle_refunded', __('This Paddle transaction was refunded in full.', 'stackless-lite'));
+        }
         if (!EventMap::isPaid($transaction)) {
             /* translators: %s: Paddle transaction status */
             return new \WP_Error('stackless_paddle_unpaid', sprintf(__('The Paddle transaction is %s, not paid yet. It will be confirmed automatically.', 'stackless-lite'), (string) ($transaction['status'] ?? 'unknown')));
@@ -120,14 +123,103 @@ class Sync
             return 'other site';
         }
         $order = wc_get_order(absint($customData['wc_order_id'] ?? 0));
-        if (!$order instanceof \WC_Order || $order->get_payment_method() !== $this->gateway->id) {
+        if (!$order instanceof \WC_Order) {
             return 'not ours';
         }
+        $id = (string) ($transaction['id'] ?? '');
         $stored = (string) $order->get_meta(Gateway::META_TRANSACTION_ID);
-        if ($stored !== '' && $stored !== (string) ($transaction['id'] ?? '')) {
-            return 'transaction mismatch';
+        $method = (string) $order->get_payment_method();
+        if ($method !== $this->gateway->id) {
+            // Money taken here for an order that moved on is the merchant's to refund. Left alone:
+            // data not from this plugin, the payment that paid the order, another copy's payment.
+            if (empty($customData['wc_site']) || ($order->is_paid() && $order->get_transaction_id() === $id)
+                || ($stored === $id && Copies::belongs($method) && Attempts::source($order)[0] !== $this->gateway->id)) {
+                return 'not ours';
+            }
+            return $this->extraPayment($order, $transaction, $mode);
+        }
+        if ($stored !== '' && $stored !== $id) {
+            return $this->extraPayment($order, $transaction, $mode); // Superseded, then paid.
         }
         return $this->confirmPayment($order, $transaction, $mode);
+    }
+
+    private function extraPayment(\WC_Order $order, array $transaction, string $mode): string
+    {
+        return (string) Lock::run('order-' . $order->get_id(), function () use ($order, $transaction, $mode) {
+            $order = \Stackless\Core\FreshOrder::get($order->get_id());
+            return $order instanceof \WC_Order ? Attempts::flagExtra($order, $transaction, $mode, $this->gateway) : 'gone';
+        }, 'busy');
+    }
+
+    /**
+     * Whether a subscription event may change the order's subscription.
+     *
+     * Paddle copies a transaction's custom data to the subscription it starts, so a replaced or
+     * extra payment's subscription names the same order. The order's own is the one linked to it,
+     * or started by the transaction it waits for. An unnamed one is taken only once the order is
+     * paid, or for a free trial, and never when the order has an extra payment. Until the first
+     * payment is confirmed, nothing a subscription event says can end the order's subscription.
+     */
+    private function ownsEvent(\WC_Order $subscription, array $remote): bool
+    {
+        $parent = $subscription->get_parent_id() ? wc_get_order($subscription->get_parent_id()) : false;
+        if (!$parent instanceof \WC_Order) {
+            return true;
+        }
+        $id = (string) ($remote['id'] ?? '');
+        $linked = self::linkedTo($id, $parent, $subscription);
+        $waiting = self::awaitingFirstPayment($parent, $subscription);
+        if (Attempts::extraSubscription($parent, $id)) {
+            return $linked && !$waiting;
+        }
+        $running = [SubscriptionData::STATUS_ACTIVE, SubscriptionData::STATUS_TRIAL, SubscriptionData::STATUS_PENDING_CANCEL];
+        if ($waiting && !in_array(EventMap::status($remote), $running, true)) {
+            return false;
+        }
+        if ($linked) {
+            return true;
+        }
+        $startedBy = (string) ($remote['transaction_id'] ?? ''); // Only on subscription.created.
+        $stored = (string) $parent->get_meta(Gateway::META_TRANSACTION_ID);
+        if ($startedBy !== '' && $stored !== '') {
+            return $startedBy === $stored;
+        }
+        return !Attempts::hasExtra($parent) && (!$waiting || (float) $parent->get_total() <= 0);
+    }
+
+    /** The order that has to be told about a renewal of a subscription that isn't its own, if it is one. */
+    private function extraRenewal(array $transaction, ?\WC_Order $subscription): ?\WC_Order
+    {
+        $custom = (array) ($transaction['custom_data'] ?? []);
+        if ($subscription) {
+            $orderId = $subscription->get_parent_id();
+        } else {
+            $orderId = empty($custom['wc_site']) || self::otherSite($custom) ? 0 : absint($custom['wc_order_id'] ?? 0);
+        }
+        $parent = $orderId ? wc_get_order($orderId) : false;
+        if (!$parent instanceof \WC_Order) {
+            return null;
+        }
+        $id = (string) ($transaction['subscription_id'] ?? '');
+        $linked = self::linkedTo($id, $parent, $subscription);
+        $waiting = $subscription && self::awaitingFirstPayment($parent, $subscription);
+        $extra = Attempts::extraSubscription($parent, $id)
+            ? !$linked || $waiting
+            : !$linked && ($waiting || Attempts::hasExtra($parent));
+        return $extra ? $parent : null;
+    }
+
+    private static function linkedTo(string $id, \WC_Order $parent, ?\WC_Order $subscription): bool
+    {
+        $key = SubscriptionData::META_GATEWAY_SUBSCRIPTION;
+        return $id !== '' && (($subscription && (string) $subscription->get_meta($key) === $id) || (string) $parent->get_meta($key) === $id);
+    }
+
+    /** A refunded order is not waiting: its first payment was confirmed once. */
+    private static function awaitingFirstPayment(\WC_Order $parent, \WC_Order $subscription): bool
+    {
+        return !$parent->is_paid() && !$parent->get_date_paid() && (string) $subscription->get_status() === SubscriptionData::STATUS_PENDING;
     }
 
     public function confirmPayment(\WC_Order $order, array $transaction, string $mode): string
@@ -142,6 +234,11 @@ class Sync
             $customer = (string) ($transaction['customer_id'] ?? '');
 
             if ($order->is_paid()) {
+                // Marked paid some other way, and then Paddle took the money as well.
+                if ((int) ($transaction['details']['totals']['grand_total'] ?? 0) > 0 && $order->get_transaction_id() !== $transactionId
+                    && (string) $order->get_meta(Gateway::META_TOTAL) === '') {
+                    return Attempts::flagExtra($order, $transaction, $mode, $this->gateway);
+                }
                 // transaction.completed after transaction.paid: the subscription id arrives now.
                 if ($paddleSubscription !== '' && (string) $order->get_meta(SubscriptionData::META_GATEWAY_SUBSCRIPTION) === '') {
                     $this->linkSubscription($order, $paddleSubscription, $customer, $mode);
@@ -304,6 +401,10 @@ class Sync
             return 'duplicate';
         }
         $subscription = $this->findSubscription($paddleSubscription, (array) ($transaction['custom_data'] ?? []));
+        $extra = $this->extraRenewal($transaction, $subscription);
+        if ($extra) {
+            return $this->extraPayment($extra, $transaction, $mode);
+        }
         if (!$subscription) {
             $this->gateway->log('Renewal ' . $transactionId . ' arrived for unknown Paddle subscription ' . $paddleSubscription . '.', 'warning');
             return 'unknown subscription';
@@ -395,6 +496,9 @@ class Sync
         }
         if (!in_array($subscription->get_payment_method(), ['', $this->gateway->id], true)) {
             return 'other gateway';
+        }
+        if (!$this->ownsEvent($subscription, $remote)) {
+            return 'not this subscription';
         }
 
         // Webhooks can arrive out of order; ignore one older than what was applied.

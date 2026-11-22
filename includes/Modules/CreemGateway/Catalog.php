@@ -141,13 +141,12 @@ final class Catalog
             'tax_mode' => $this->gateway->taxInclusive() ? 'inclusive' : 'exclusive',
             'tax_category' => $this->gateway->taxCategory(),
         ];
+        // One-time products send no billing_period: Creem refuses "once" and fills it in itself.
         if ($billing) {
             $body += $billing;
             if ($trialDays > 0) {
                 $body['trial_period_days'] = $trialDays;
             }
-        } else {
-            $body['billing_period'] = 'once';
         }
         $body = (array) apply_filters('stackless_creem_gateway_product_args', $body, $item, $billing, $mode, $this->gateway);
         $product = $this->gateway->api($mode)->request('POST', 'v1/products', $body);

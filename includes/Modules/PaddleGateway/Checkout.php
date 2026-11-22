@@ -129,10 +129,39 @@ class Checkout
     /**
      * Create (or reuse) the Paddle transaction for an order.
      *
-     * @return string|\WP_Error URL of the store's Paddle pay page.
+     * @return string|\WP_Error URL of the store's Paddle pay page, or of the return when the
+     *                          order's transaction turns out to be paid.
      */
     public function start(\WC_Order $order)
     {
+        // One attempt at a time, each reading what the last one stored.
+        $started = Lock::run('start-' . $order->get_id(), function () use ($order) {
+            $fresh = \Stackless\Core\FreshOrder::get($order->get_id());
+            return $fresh instanceof \WC_Order ? $this->startOnce($fresh) : Attempts::tryAgain();
+        });
+        if ($started === null) {
+            $this->gateway->log('Order ' . $order->get_id() . ': no new Paddle transaction, because another attempt is still running.', 'warning');
+            return Attempts::tryAgain();
+        }
+        return $started;
+    }
+
+    /** @return string|\WP_Error */
+    private function startOnce(\WC_Order $order)
+    {
+        if ($order->is_paid() || $order->has_status('on-hold')) {
+            return $this->gateway->get_return_url($order);
+        }
+        // Before anything that can refuse the order: it may already be paid.
+        $attempts = new Attempts($this->gateway);
+        $earlier = $attempts->earlier($order);
+        if (is_wp_error($earlier)) {
+            return $earlier;
+        }
+        if (isset($earlier['url'])) {
+            return $earlier['url'];
+        }
+
         $mode = $this->gateway->mode();
         $currency = strtoupper($order->get_currency());
         if (!Money::supported($currency)) {
@@ -147,7 +176,18 @@ class Checkout
 
         $body = $this->body($order, $plan['items'], $plan['subscription']);
         $fingerprint = $mode . ':' . md5((string) wp_json_encode($body));
-        if (!$this->reusable($order, $fingerprint)) {
+        $open = $earlier['open'] ?? null;
+        $account = $earlier['gateway'] ?? null;
+        // Reuse the open transaction when nothing changed (double submits, back button).
+        $reuse = $open && $account && $account->id === $this->gateway->id && in_array($open['status'], ['draft', 'ready'], true)
+            && (string) $order->get_meta(Gateway::META_FINGERPRINT) === $fingerprint;
+        if (!$reuse) {
+            if ($open && $account) {
+                $closed = $attempts->close($order, $open, $account);
+                if (is_wp_error($closed)) {
+                    return $closed;
+                }
+            }
             $transaction = $this->gateway->api($mode)->request('POST', 'transactions', $body);
             if (is_wp_error($transaction)) {
                 $this->gateway->log('Transaction for order ' . $order->get_id() . ' failed: ' . $transaction->get_error_message(), 'error');
@@ -158,6 +198,7 @@ class Checkout
             }
             $order->update_meta_data(Gateway::META_TRANSACTION_ID, (string) $transaction['id']);
             $order->update_meta_data(Gateway::META_FINGERPRINT, $fingerprint);
+            Attempts::remember($order, $this->gateway, $mode);
             $this->gateway->log('Created Paddle transaction ' . $transaction['id'] . ' for order ' . $order->get_id() . '.');
         }
 
@@ -181,18 +222,6 @@ class Checkout
             'checkout' => ['url' => self::payUrl($order)],
         ];
         return (array) apply_filters('stackless_paddle_gateway_transaction_args', $body, $order, $subscription);
-    }
-
-    /** Reuse the order's open transaction when nothing about it changed (double submits, back button). */
-    private function reusable(\WC_Order $order, string $fingerprint): bool
-    {
-        $transactionId = (string) $order->get_meta(Gateway::META_TRANSACTION_ID);
-        if ($transactionId === '' || (string) $order->get_meta(Gateway::META_FINGERPRINT) !== $fingerprint) {
-            return false;
-        }
-        $mode = (string) strtok($fingerprint, ':');
-        $transaction = $this->gateway->api($mode)->request('GET', 'transactions/' . rawurlencode($transactionId));
-        return !is_wp_error($transaction) && in_array($transaction['status'] ?? '', ['draft', 'ready'], true);
     }
 
     public static function siteHost(): string
@@ -244,7 +273,8 @@ class Checkout
             wp_safe_redirect(wc_get_page_permalink('shop'));
             exit;
         }
-        if ($order->is_paid()) {
+        // On hold means a payment arrived that needs the merchant: don't offer another.
+        if ($order->is_paid() || $order->has_status('on-hold')) {
             wp_safe_redirect($this->gateway->get_return_url($order));
             exit;
         }

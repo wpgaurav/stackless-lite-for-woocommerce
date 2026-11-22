@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 2.0.1
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,19 @@ Yes. Every module that touches the cart or checkout supports the Cart and Checko
 Through the normal WordPress update screens, from gauravtiwari.org. No license key or account is needed.
 
 == Changelog ==
+
+= 2.0.4 =
+* Fixed: one-time checkout with Creem no longer sends a billing field that Creem rejects, and a product archived in Creem no longer blocks checkout.
+* Fixed: paying again for an order no longer starts a second Creem payment when the first went through or can't be checked.
+* Fixed: a Creem payment from a replaced checkout is noted on the order to refund, and holds the order while it is unpaid.
+* Fixed: a subscription started by a duplicate Creem checkout no longer takes the place of the customer's subscription. Subscriptions already linked wrongly this way need a manual check.
+* Fixed: an expired event from Creem no longer ends a subscription Creem still bills, and an older event can't undo a newer one.
+* Fixed: the return from Creem and the check for an existing webhook are more reliable.
+* Fixed: paying again for an order no longer starts a second Paddle payment when the first went through or can't be checked. An open payment is canceled in Paddle before a new one replaces it.
+* Fixed: a Paddle payment an order wasn't waiting for is noted on the order to refund, and holds the order while it is unpaid.
+* Fixed: when an earlier payment can't be checked, the order gets a note, and "Allow a new Paddle payment" under Order actions lets you release it after checking it in Paddle.
+* Fixed: a fully refunded Paddle payment can't complete an order when the buyer returns to the store.
+* Fixed: a subscription started by a duplicate Paddle payment no longer takes the place of the customer's subscription, and canceling the duplicate in Paddle no longer cancels it. Subscriptions already linked wrongly or canceled this way need a manual check.
 
 = 2.0.1 =
 * Fixed: with PayPal card fields on, PayPal's own card button comes back when PayPal doesn't offer card fields to the account, currency or buyer.

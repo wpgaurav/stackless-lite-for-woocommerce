@@ -64,7 +64,8 @@ final class EventMap
      */
     public static function status(array $remote, string $event = ''): ?string
     {
-        if ($event === 'subscription.expired') {
+        // subscription.expired changes nothing in Creem, which may still retry the card: only canceled is final.
+        if ($event === 'subscription.expired' && ($remote['status'] ?? '') === 'canceled') {
             return SubscriptionData::STATUS_EXPIRED;
         }
         switch ((string) ($remote['status'] ?? '')) {

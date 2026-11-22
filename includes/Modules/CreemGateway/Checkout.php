@@ -86,6 +86,34 @@ class Checkout
      */
     public function start(\WC_Order $order)
     {
+        // One attempt at a time, each reading what the last one stored.
+        $started = Lock::run('start-' . $order->get_id(), function () use ($order) {
+            $fresh = \Stackless\Core\FreshOrder::get($order->get_id());
+            return $fresh instanceof \WC_Order ? $this->startOnce($fresh) : Attempts::tryAgain();
+        });
+        if ($started === null) {
+            $this->gateway->log('Order ' . $order->get_id() . ': no new Creem checkout, because another attempt is still running.', 'warning');
+            return Attempts::tryAgain();
+        }
+        return $started;
+    }
+
+    /** @return string|\WP_Error */
+    private function startOnce(\WC_Order $order)
+    {
+        if ($order->is_paid() || $order->has_status('on-hold')) {
+            return $this->gateway->get_return_url($order);
+        }
+        // Before anything that can refuse the order: it may already be paid.
+        $attempts = new Attempts($this->gateway);
+        $earlier = $attempts->earlier($order);
+        if (is_wp_error($earlier)) {
+            return $earlier;
+        }
+        if (isset($earlier['url'])) {
+            return $earlier['url'];
+        }
+
         $mode = $this->gateway->mode();
         $currency = strtoupper($order->get_currency());
         if (!Money::supported($currency)) {
@@ -102,9 +130,17 @@ class Checkout
             return new \WP_Error('stackless_creem_minimum', __('Creem takes payments of 1.00 or more. Choose another payment method for this order.', 'stackless-lite'));
         }
 
-        $reused = $this->reusable($order, $mode, $minor);
-        if ($reused !== '') {
-            return $reused;
+        $open = $earlier['open'] ?? null;
+        if ($open) {
+            if ($this->canReuse($order, $open, $mode, $minor)) {
+                return (string) $order->get_meta(Gateway::META_CHECKOUT_URL);
+            }
+            if ($open['status'] === 'processing') {
+                $held = $attempts->processing($order, $open['session']);
+                if (is_wp_error($held)) {
+                    return $held;
+                }
+            }
         }
 
         $catalog = $this->gateway->catalog();
@@ -133,6 +169,10 @@ class Checkout
             return new \WP_Error('stackless_creem_checkout', __('Creem did not return a checkout page.', 'stackless-lite'));
         }
 
+        $now = \Stackless\Core\FreshOrder::get($order->get_id());
+        if ($now instanceof \WC_Order && ($now->is_paid() || $now->has_status('on-hold'))) {
+            return $this->gateway->get_return_url($now); // Paid meanwhile: nobody is given the new session's URL.
+        }
         $order->set_payment_method($this->gateway->id);
         $order->set_payment_method_title($this->gateway->get_title());
         $order->update_meta_data(Gateway::META_CHECKOUT_ID, (string) $session['id']);
@@ -141,6 +181,7 @@ class Checkout
         $order->update_meta_data(Gateway::META_MODE, $mode);
         $order->update_meta_data(Gateway::META_AMOUNT, (string) $minor);
         $order->update_meta_data(Gateway::META_PRODUCT_ID, $productId);
+        Attempts::remember($order, $this->gateway, $mode, $earlier['payable'] ?? []);
         $order->save();
         $this->gateway->log('Started Creem checkout ' . $session['id'] . ' for order ' . $order->get_id() . '.');
         return (string) $session['checkout_url'];
@@ -148,11 +189,9 @@ class Checkout
 
     public static function returnUrl(\WC_Order $order): string
     {
-        // Creem appends checkout_id, order_id, subscription_id and a signature.
-        return add_query_arg([
-            'order_id' => $order->get_id(),
-            'key' => $order->get_order_key(),
-        ], WC()->api_request_url('stackless_creem_return'));
+        // Creem adds checkout_id, order_id (its own, ord_...), customer_id, product_id,
+        // subscription_id, request_id and signature, so only the order key names the order here.
+        return add_query_arg('key', $order->get_order_key(), WC()->api_request_url('stackless_creem_return'));
     }
 
     /** request_id Creem echoes back: the order on this site. */
@@ -187,25 +226,14 @@ class Checkout
         return (array) apply_filters('stackless_creem_gateway_checkout_args', $body, $order, $subscription, $this->gateway);
     }
 
-    /** Reuse an open session for the same order and amount (double submits, back button). */
-    private function reusable(\WC_Order $order, string $mode, int $minor): string
+    /** Send the buyer back to the open session for the same amount (double submits, back button). */
+    private function canReuse(\WC_Order $order, array $open, string $mode, int $minor): bool
     {
-        $checkoutId = (string) $order->get_meta(Gateway::META_CHECKOUT_ID);
-        $url = (string) $order->get_meta(Gateway::META_CHECKOUT_URL);
-        if ($checkoutId === '' || $url === '' || (string) $order->get_meta(Gateway::META_MODE) !== $mode || (int) $order->get_meta(Gateway::META_AMOUNT) !== $minor
-            || (int) $order->get_meta(Gateway::META_SESSION_AT) < time() - Gateway::SESSION_TTL) {
-            return '';
-        }
-        $session = $this->gateway->api($mode)->request('GET', 'v1/checkouts', ['checkout_id' => $checkoutId]);
-        if (is_wp_error($session)) {
-            return '';
-        }
-        $status = (string) ($session['status'] ?? '');
-        if ($status === 'completed') {
-            (new Sync($this->gateway))->applyCheckout($session, $mode, $order);
-            return $this->gateway->get_return_url($order);
-        }
-        return $status === 'pending' ? $url : '';
+        return $open['gateway'] === $this->gateway->id
+            && $open['session']['mode'] === $mode
+            && (string) $order->get_meta(Gateway::META_CHECKOUT_URL) !== ''
+            && (int) $order->get_meta(Gateway::META_AMOUNT) === $minor
+            && (int) $order->get_meta(Gateway::META_SESSION_AT) >= time() - Gateway::SESSION_TTL;
     }
 
     /* ---- Buyer returns from Creem ---------------------------------------------------- */
@@ -214,10 +242,11 @@ class Checkout
     public static function handleReturn(): void
     {
         // phpcs:disable WordPress.Security.NonceVerification.Recommended -- authenticated by the order key; the checkout is read back from Creem.
-        $orderId = isset($_GET['order_id']) ? absint($_GET['order_id']) : 0;
-        $key = isset($_GET['key']) ? sanitize_text_field(wp_unslash($_GET['key'])) : '';
+        $key = isset($_GET['key']) ? self::beforeSecondQuery(sanitize_text_field(wp_unslash($_GET['key']))) : '';
         // phpcs:enable
 
+        // order_id on this URL is Creem's order, so the order is found by its key.
+        $orderId = $key !== '' ? absint(wc_get_order_id_by_order_key($key)) : 0;
         $order = $orderId ? wc_get_order($orderId) : false;
         $gateway = $order instanceof \WC_Order ? Gateway::forOrder($order) : null;
         if (!$order instanceof \WC_Order || !$gateway || $key === '' || !hash_equals($order->get_order_key(), $key)) {
@@ -233,6 +262,13 @@ class Checkout
         }
         wp_safe_redirect($target['url']);
         exit;
+    }
+
+    /** A value from the return URL. Should Creem join its parameters with a second "?", they end up in the last one. */
+    private static function beforeSecondQuery(string $value): string
+    {
+        $cut = strpos($value, '?');
+        return $cut === false ? $value : substr($value, 0, $cut);
     }
 
     /**

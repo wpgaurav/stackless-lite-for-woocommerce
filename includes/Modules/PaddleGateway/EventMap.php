@@ -88,6 +88,14 @@ final class EventMap
         return in_array($transaction['status'] ?? '', ['paid', 'completed'], true);
     }
 
+    /** Whether everything a paid transaction took has been given back. */
+    public static function fullyRefunded(array $transaction): bool
+    {
+        $left = $transaction['details']['adjusted_totals']['grand_total'] ?? null;
+        $taken = (int) ($transaction['details']['totals']['grand_total'] ?? 0);
+        return self::isPaid($transaction) && $taken > 0 && is_numeric($left) && (int) $left === 0;
+    }
+
     /** first|renewal|other for a paid Paddle transaction. */
     public static function transactionKind(array $transaction): string
     {

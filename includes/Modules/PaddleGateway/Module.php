@@ -70,6 +70,7 @@ final class Module extends BaseModule
             add_action('woocommerce_blocks_loaded', [$this, 'extendStoreApi']);
         }
         add_action('rest_api_init', [Webhook::class, 'register']);
+        Attempts::register();
         add_action('woocommerce_api_stackless_paddle_pay', [$this, 'handlePayPage']);
         add_action('woocommerce_api_stackless_paddle_return', [$this, 'handleReturn']);
         add_action('woocommerce_api_stackless_paddle_update_payment', [$this, 'handleUpdatePayment']);

@@ -111,10 +111,39 @@ class Sync
         if ($status !== 'completed') {
             return new \WP_Error('stackless_creem_pending', __('Creem has not completed this checkout yet. It will be confirmed automatically.', 'stackless-lite'));
         }
+        $recorded = (string) $order->get_meta(Gateway::META_TRANSACTION_ID);
+        // Seen before (held for its amount, say): it may have been refunded since.
+        if ($recorded !== '' && $recorded === EventMap::id($session['order']['transaction'] ?? '') && !$order->is_paid()) {
+            $refunded = $this->refundedCheckout($session, $mode);
+            if (is_wp_error($refunded)) {
+                return $refunded;
+            }
+            if ($refunded) {
+                return new \WP_Error('stackless_creem_refunded', __('This Creem payment was refunded.', 'stackless-lite'));
+            }
+        }
         $outcome = $this->applyCheckout($session, $mode, $order);
         return in_array($outcome, ['paid', 'trial', 'already paid'], true)
             ? true
             : new \WP_Error('stackless_creem_' . str_replace(' ', '_', $outcome), $outcome);
+    }
+
+    /**
+     * Whether a completed checkout's payment was given back in full.
+     *
+     * @return bool|\WP_Error
+     */
+    public function refundedCheckout(array $checkout, string $mode)
+    {
+        $id = EventMap::id($checkout['order']['transaction'] ?? '');
+        if ($id === '') {
+            return false;
+        }
+        $transaction = $this->gateway->api($mode)->request('GET', 'v1/transactions', ['transaction_id' => $id]);
+        if (is_wp_error($transaction)) {
+            return $transaction;
+        }
+        return in_array((string) ($transaction['status'] ?? ''), ['refunded', 'chargedBack', 'chargeback'], true);
     }
 
     /** The order a checkout was started for: by metadata, then by session id. */
@@ -138,13 +167,19 @@ class Sync
             return 'not completed';
         }
         $order = $order ?: $this->orderFor($checkout);
-        if (!$order instanceof \WC_Order || $order->get_payment_method() !== $this->gateway->id) {
+        if (!$order instanceof \WC_Order) {
             return 'not ours';
         }
-        $metadata = is_array($checkout['metadata'] ?? null) ? $checkout['metadata'] : [];
-        $sameSession = (string) ($checkout['id'] ?? '') === (string) $order->get_meta(Gateway::META_CHECKOUT_ID);
-        if (!$sameSession && (string) ($metadata['wc_order_id'] ?? '') !== (string) $order->get_id()) {
+        // The order it names wins over a session id, which a duplicated order copies.
+        $owner = Attempts::orderIdOf($checkout);
+        $thisOrder = $owner !== ''
+            ? $owner === (string) $order->get_id()
+            : (string) ($checkout['id'] ?? '') === (string) $order->get_meta(Gateway::META_CHECKOUT_ID);
+        if (!$thisOrder) {
             return 'not this order';
+        }
+        if ($order->get_payment_method() !== $this->gateway->id) {
+            return $this->paymentForMovedOrder($order, $checkout, $mode);
         }
 
         $creemOrder = is_array($checkout['order'] ?? null) ? $checkout['order'] : [];
@@ -168,7 +203,105 @@ class Sync
         if ((string) ($creemOrder['status'] ?? '') !== 'paid') {
             return 'not paid';
         }
-        return $this->settle($order, $creemOrder, $mode, $subscriptionId, $customer);
+        $current = (string) $order->get_meta(Gateway::META_CHECKOUT_ID);
+        $outcome = $this->settle($order, $creemOrder, $mode, $subscriptionId, $customer);
+        if (in_array($outcome, ['amount mismatch', 'currency mismatch'], true) && $current !== '' && (string) ($checkout['id'] ?? '') !== $current) {
+            // A replaced checkout, paid at what the order used to cost: name the payment to refund.
+            $reference = EventMap::id($creemOrder['transaction'] ?? '') ?: EventMap::id($creemOrder['id'] ?? '');
+            $this->takeExtra($order, $creemOrder, $reference, $mode, $subscriptionId);
+        }
+        return $outcome;
+    }
+
+    private function takeExtra(\WC_Order $order, array $paid, string $reference, string $mode, string $subscriptionId): string
+    {
+        return (string) Lock::run('order-' . $order->get_id(), function () use ($order, $paid, $reference, $mode, $subscriptionId) {
+            $order = \Stackless\Core\FreshOrder::get($order->get_id());
+            return $order instanceof \WC_Order
+                ? Attempts::flagExtra($order, $reference, Money::paidTotal($paid), (string) ($paid['currency'] ?? ''), $mode, $this->gateway, $subscriptionId)
+                : 'gone';
+        }, 'busy');
+    }
+
+    /**
+     * Whether a subscription event may change the order's subscription.
+     *
+     * Every checkout of an order copies the same metadata to the subscription it starts. The
+     * order's own is the one its payment linked. An unlinked one is taken only once the order is
+     * paid, or for a free trial, and never when the order has an extra payment. Until the first
+     * payment is confirmed, nothing a subscription event says can end the order's subscription.
+     */
+    private function ownsEvent(\WC_Order $subscription, array $remote, string $event): bool
+    {
+        $parent = $subscription->get_parent_id() ? wc_get_order($subscription->get_parent_id()) : false;
+        if (!$parent instanceof \WC_Order) {
+            return true;
+        }
+        $id = EventMap::id($remote['id'] ?? '');
+        $linked = self::linkedTo($id, $parent, $subscription);
+        $waiting = self::awaitingFirstPayment($parent, $subscription);
+        if (Attempts::extraSubscription($parent, $id)) {
+            return $linked && !$waiting;
+        }
+        $running = [SubscriptionData::STATUS_ACTIVE, SubscriptionData::STATUS_TRIAL, SubscriptionData::STATUS_PENDING_CANCEL];
+        if ($waiting && !in_array(EventMap::status($remote, $event), $running, true)) {
+            return false;
+        }
+        return $linked || (!Attempts::hasExtra($parent) && (!$waiting || (float) $parent->get_total() <= 0));
+    }
+
+    /** The order that has to be told about a charge by a subscription that isn't its own, if it is one. */
+    private function extraCharge(array $remote, ?\WC_Order $subscription): ?\WC_Order
+    {
+        $metadata = (array) ($remote['metadata'] ?? []);
+        if ($subscription) {
+            $orderId = $subscription->get_parent_id();
+        } else {
+            $ours = !empty($metadata['wc_site']) && self::forThisSite($metadata) && ($metadata['wc_gateway'] ?? '') === $this->gateway->id;
+            $orderId = $ours ? absint($metadata['wc_order_id'] ?? 0) : 0;
+        }
+        $parent = $orderId ? wc_get_order($orderId) : false;
+        if (!$parent instanceof \WC_Order) {
+            return null;
+        }
+        $id = EventMap::id($remote['id'] ?? '');
+        $linked = self::linkedTo($id, $parent, $subscription);
+        $waiting = $subscription && self::awaitingFirstPayment($parent, $subscription);
+        // While waiting, an unknown subscription's charge may be the first payment.
+        $extra = Attempts::extraSubscription($parent, $id)
+            ? !$linked || $waiting
+            : !$linked && !$waiting && Attempts::hasExtra($parent);
+        return $extra ? $parent : null;
+    }
+
+    private static function linkedTo(string $id, \WC_Order $parent, ?\WC_Order $subscription): bool
+    {
+        $key = SubscriptionData::META_GATEWAY_SUBSCRIPTION;
+        return $id !== '' && (($subscription && (string) $subscription->get_meta($key) === $id) || (string) $parent->get_meta($key) === $id);
+    }
+
+    /** A refunded order is not waiting: its first payment was confirmed once. */
+    private static function awaitingFirstPayment(\WC_Order $parent, \WC_Order $subscription): bool
+    {
+        return !$parent->is_paid() && !$parent->get_date_paid() && (string) $subscription->get_status() === SubscriptionData::STATUS_PENDING;
+    }
+
+    /** A checkout this gateway sold for an order that has since switched payment method. */
+    private function paymentForMovedOrder(\WC_Order $order, array $checkout, string $mode): string
+    {
+        $paid = is_array($checkout['order'] ?? null) && ($checkout['order']['status'] ?? '') === 'paid' ? $checkout['order'] : [];
+        $subscription = EventMap::id($checkout['subscription'] ?? '');
+        $transaction = EventMap::id($paid['transaction'] ?? '');
+        $reference = $transaction ?: (EventMap::id($paid['id'] ?? '') ?: $subscription);
+        if ($reference === '' || ($checkout['metadata']['wc_gateway'] ?? '') !== $this->gateway->id || ($order->is_paid() && $order->get_transaction_id() === $reference)) {
+            return 'not ours';
+        }
+        return (string) Lock::run('order-' . $order->get_id(), function () use ($order, $paid, $mode, $subscription, $reference) {
+            $order = \Stackless\Core\FreshOrder::get($order->get_id());
+            return $order instanceof \WC_Order
+                ? Attempts::flagExtra($order, $reference, Money::paidTotal($paid), (string) ($paid['currency'] ?? ''), $mode, $this->gateway, $subscription)
+                : 'gone';
+        }, 'busy');
     }
 
     /**
@@ -186,19 +319,41 @@ class Sync
             $isTransaction = (string) ($paid['object'] ?? '') === 'transaction';
             $transactionId = $isTransaction ? EventMap::id($paid['id'] ?? '') : EventMap::id($paid['transaction'] ?? '');
             $creemOrderId = $isTransaction ? EventMap::id($paid['order'] ?? '') : EventMap::id($paid['id'] ?? '');
+            $reference = $transactionId !== '' ? $transactionId : $creemOrderId;
+            $charged = Money::paidTotal($paid);
+            $chargedIn = (string) ($paid['currency'] ?? '');
             $orderMode = (string) $order->get_meta(Gateway::META_MODE);
             if ($orderMode !== '' && $orderMode !== $mode) {
                 $this->gateway->log('Ignored a ' . $mode . '-mode Creem payment for ' . $orderMode . '-mode order ' . $order->get_id() . '.', 'warning');
+                Attempts::flagExtra($order, $reference, $charged, $chargedIn, $mode, $this->gateway, $subscriptionId);
                 return 'other mode';
             }
+            $recorded = (string) $order->get_meta(Gateway::META_TRANSACTION_ID);
+            $recordedOrder = (string) $order->get_meta(Gateway::META_ORDER_ID);
+            $another = $recorded !== '' && $transactionId !== ''
+                ? $recorded !== $transactionId
+                : $recordedOrder !== '' && $creemOrderId !== '' && $recordedOrder !== $creemOrderId;
             if ($order->is_paid()) {
-                if ((string) $order->get_meta(Gateway::META_TRANSACTION_ID) === '' && $transactionId !== '') {
+                // A second checkout paid, or the order was marked paid some other way first.
+                $paidElsewhere = $recorded === '' && $recordedOrder === '' && (string) $order->get_meta(Gateway::META_TOTAL) === ''
+                    && $charged > 0 && !in_array($order->get_transaction_id(), [$transactionId, $creemOrderId], true);
+                if ($another || $paidElsewhere) {
+                    $flagged = Attempts::flagExtra($order, $reference, $charged, $chargedIn, $mode, $this->gateway, $subscriptionId);
+                    if ($another) {
+                        return $flagged;
+                    }
+                }
+                if ($recorded === '' && $transactionId !== '') {
                     $order->update_meta_data(Gateway::META_TRANSACTION_ID, $transactionId);
                     $order->save();
                 }
                 return 'already paid';
             }
 
+            if ($another) {
+                // An earlier payment was held (wrong amount, say): keep it visible before it is replaced.
+                Attempts::flagExtra($order, $recorded !== '' ? $recorded : $recordedOrder, (int) $order->get_meta(Gateway::META_TOTAL), '', $mode, $this->gateway);
+            }
             $currency = strtoupper((string) ($paid['currency'] ?? ''));
             if ($currency !== '' && $currency !== strtoupper($order->get_currency())) {
                 $order->update_meta_data(Gateway::META_TRANSACTION_ID, $transactionId);
@@ -214,7 +369,8 @@ class Sync
             $currency = $currency !== '' ? $currency : strtoupper($order->get_currency());
             $this->storeAmounts($order, $paid, $transactionId, $creemOrderId, $mode);
 
-            $expected = (int) $order->get_meta(Gateway::META_AMOUNT) ?: Money::toMinor($order->get_total());
+            // What the order costs now, not what the session was opened for.
+            $expected = Money::toMinor($order->get_total());
             if (!Money::paidMatches($paid, $expected)) {
                 $order->save();
                 $order->update_status('on-hold', sprintf(
@@ -252,7 +408,15 @@ class Sync
         }
         return (string) Lock::run('order-' . $order->get_id(), function () use ($order, $remote, $mode) {
             $order = \Stackless\Core\FreshOrder::get($order->get_id());
-            if (!$order instanceof \WC_Order || $order->is_paid()) {
+            if (!$order instanceof \WC_Order) {
+                return 'gone';
+            }
+            $creemId = EventMap::id($remote['id'] ?? '');
+            if ($order->is_paid()) {
+                $linked = (string) $order->get_meta(SubscriptionData::META_GATEWAY_SUBSCRIPTION);
+                if ($linked !== '' && $creemId !== '' && $linked !== $creemId) {
+                    Attempts::flagExtra($order, $creemId, 0, '', $mode, $this->gateway, $creemId);
+                }
                 return 'already paid';
             }
             if ((float) $order->get_total() > 0) {
@@ -260,9 +424,9 @@ class Sync
             }
             $orderMode = (string) $order->get_meta(Gateway::META_MODE);
             if ($orderMode !== '' && $orderMode !== $mode) {
+                Attempts::flagExtra($order, $creemId, 0, '', $mode, $this->gateway, $creemId);
                 return 'other mode';
             }
-            $creemId = EventMap::id($remote['id'] ?? '');
             $this->linkSubscription($order, $creemId, EventMap::id($remote['customer'] ?? ''), $mode);
             $order->update_meta_data(Gateway::META_MODE, $mode);
             $order->save();
@@ -342,6 +506,10 @@ class Sync
             return 'duplicate';
         }
         $subscription = $this->findSubscription(EventMap::id($remote['id'] ?? ''), (array) ($remote['metadata'] ?? []));
+        $extra = $this->extraCharge($remote, $subscription);
+        if ($extra) {
+            return $this->takeExtra($extra, $transaction, $transactionId, $mode, EventMap::id($remote['id'] ?? ''));
+        }
         if (!$subscription) {
             $this->gateway->log('Payment ' . $transactionId . ' arrived for unknown Creem subscription ' . EventMap::id($remote['id'] ?? '') . '.', 'warning');
             return 'unknown subscription';
@@ -597,6 +765,16 @@ class Sync
         if (!in_array($subscription->get_payment_method(), ['', $this->gateway->id], true)) {
             return 'other gateway';
         }
+        if (!$this->ownsEvent($subscription, $remote, $event)) {
+            return 'not this subscription';
+        }
+
+        // Creem retries failed deliveries for hours; ignore a state older than the one applied.
+        $updated = strtotime((string) ($remote['updated_at'] ?? '')) ?: 0;
+        $applied = (int) $subscription->get_meta(Gateway::META_SYNCED_AT);
+        if ($updated && $applied && $updated < $applied) {
+            return 'stale';
+        }
 
         $status = (string) ($remote['status'] ?? '');
         $cancelAtEnd = $status === 'scheduled_cancel';
@@ -611,6 +789,9 @@ class Sync
         }
         $subscription->update_meta_data(Gateway::META_MODE, $mode);
         $subscription->update_meta_data(Gateway::META_CANCEL_AT_END, $cancelAtEnd ? 'yes' : 'no');
+        if ($updated) {
+            $subscription->update_meta_data(Gateway::META_SYNCED_AT, (string) $updated);
+        }
         $next = (string) ($remote['current_period_end_date'] ?? ($remote['next_transaction_date'] ?? ''));
         if ($next !== '') {
             $subscription->update_meta_data(Gateway::META_NEXT_BILLING, $next);
@@ -644,7 +825,7 @@ class Sync
             return 'unchanged';
         }
         /* translators: %s: Creem subscription status */
-        $subscription->update_status($target, sprintf(__('Creem subscription is now %s.', 'stackless-lite'), $event === 'subscription.expired' ? 'expired' : $status));
+        $subscription->update_status($target, sprintf(__('Creem subscription is now %s.', 'stackless-lite'), $target === SubscriptionData::STATUS_EXPIRED ? 'expired' : $status));
         do_action('stackless_creem_gateway_subscription_synced', $subscription, $remote, $event);
         return 'status ' . $target;
     }

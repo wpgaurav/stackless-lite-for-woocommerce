@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stackless Lite for WooCommerce 2.0.1\n"
+"Project-Id-Version: Stackless Lite for WooCommerce 2.0.4\n"
 "Report-Msgid-Bugs-To: https://github.com/wpgaurav/stackless-lite-for-woocommerce/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-07T15:21:51+00:00\n"
+"POT-Creation-Date: 2026-11-22T04:26:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: stackless-lite\n"
@@ -2097,24 +2097,111 @@ msgstr ""
 msgid "Could not reach Creem: %s"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Api.php:100
+#: includes/Modules/CreemGateway/Api.php:111
 msgid "Creem rejected the test API key. Switch the Creem dashboard to test mode, then copy the key that starts with creem_test from Developers → API keys."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Api.php:101
+#: includes/Modules/CreemGateway/Api.php:112
 msgid "Creem rejected the live API key, or it lacks a permission this store needs. Copy a live key from Developers → API keys."
 msgstr ""
 
 #. translators: %s: Creem error message
-#: includes/Modules/CreemGateway/Api.php:107
+#: includes/Modules/CreemGateway/Api.php:118
 #, php-format
 msgid "Creem: %s"
 msgstr ""
 
 #. translators: %d: HTTP status code
-#: includes/Modules/CreemGateway/Api.php:109
+#: includes/Modules/CreemGateway/Api.php:120
 #, php-format
 msgid "Creem returned an unexpected error (HTTP %d)."
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:39
+msgid "We couldn’t check the earlier Creem payment for this order, so you weren’t charged again. Please try again in a moment, or contact us if this keeps happening."
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:134
+#: includes/Modules/PaddleGateway/Attempts.php:155
+msgid "a payment on it is still being processed"
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:169
+#: includes/Modules/PaddleGateway/Attempts.php:108
+msgid "the API key it was created with is no longer saved"
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:173
+#: includes/Modules/PaddleGateway/Attempts.php:112
+msgid "there is no record of the API key it was created with"
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:176
+#: includes/Modules/PaddleGateway/Attempts.php:115
+msgid "the API key changed and the new one cannot see it"
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:186
+msgid "Creem’s answer could not be read"
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:196
+msgid "Creem shows a paid order on it"
+msgstr ""
+
+#. translators: %s: what stopped it, such as "no order yet"
+#: includes/Modules/CreemGateway/Attempts.php:232
+#, php-format
+msgid "it completed but could not be applied (%s)"
+msgstr ""
+
+#. translators: 1: Creem checkout id, 2: reason
+#: includes/Modules/CreemGateway/Attempts.php:254
+#, php-format
+msgid "Stackless didn’t start another Creem payment, because it couldn’t confirm that checkout %1$s is unpaid: %2$s. If this persists, check the checkout in Creem. If it wasn’t paid, choose “Allow a new Creem payment” under Order actions."
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:299
+msgid "Allow a new Creem payment (checked unpaid in Creem)"
+msgstr ""
+
+#. translators: %s: Creem checkout id
+#: includes/Modules/CreemGateway/Attempts.php:323
+#, php-format
+msgid "A new Creem payment may now start: the merchant confirmed checkout %s is unpaid."
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:358
+#: includes/Modules/CreemGateway/Gateway.php:320
+#: includes/Modules/StripeGateway/Health.php:74
+msgid "test"
+msgstr ""
+
+#: includes/Modules/CreemGateway/Attempts.php:358
+#: includes/Modules/CreemGateway/Gateway.php:320
+#: includes/Modules/PaddleGateway/Attempts.php:297
+#: includes/Modules/PaddleGateway/Gateway.php:300
+#: includes/Modules/PayPalGateway/Gateway.php:336
+#: includes/Modules/StripeGateway/Health.php:74
+msgid "live"
+msgstr ""
+
+#. translators: 1: amount, 2: Creem payment id, 3: test or live
+#: includes/Modules/CreemGateway/Attempts.php:362
+#, php-format
+msgid "Creem took %1$s in %3$s payment %2$s, which this order was not waiting for. If the customer paid twice or the order won’t be fulfilled, refund it in Creem."
+msgstr ""
+
+#. translators: 1: Creem payment or subscription id, 2: test or live
+#: includes/Modules/CreemGateway/Attempts.php:369
+#, php-format
+msgid "Creem reported %2$s payment or subscription %1$s, which this order was not waiting for. Check it in Creem and refund anything it took."
+msgstr ""
+
+#. translators: %s: Creem subscription id
+#: includes/Modules/CreemGateway/Attempts.php:375
+#, php-format
+msgid "Also cancel Creem subscription %s there, or it keeps billing."
 msgstr ""
 
 #: includes/Modules/CreemGateway/BlocksSupport.php:56
@@ -2152,11 +2239,11 @@ msgstr ""
 msgid "Sold on %s"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Catalog.php:155
+#: includes/Modules/CreemGateway/Catalog.php:154
 msgid "Creem did not return a product for this checkout."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Catalog.php:168
+#: includes/Modules/CreemGateway/Catalog.php:167
 #: includes/Modules/DodoGateway/Catalog.php:179
 msgid "Purchase"
 msgstr ""
@@ -2186,20 +2273,20 @@ msgid "Creem charges the same amount on every billing cycle, so it cannot take a
 msgstr ""
 
 #. translators: %s: currency code
-#: includes/Modules/CreemGateway/Checkout.php:93
+#: includes/Modules/CreemGateway/Checkout.php:121
 #, php-format
 msgid "Creem cannot charge in %s. Choose another payment method."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Checkout.php:102
+#: includes/Modules/CreemGateway/Checkout.php:130
 msgid "Creem takes payments of 1.00 or more. Choose another payment method for this order."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Checkout.php:133
+#: includes/Modules/CreemGateway/Checkout.php:169
 msgid "Creem did not return a checkout page."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Checkout.php:261
+#: includes/Modules/CreemGateway/Checkout.php:297
 #: includes/Modules/DodoGateway/Checkout.php:300
 #: includes/Modules/DodoGateway/Sync.php:114
 #: includes/Modules/FlutterwaveGateway/Checkout.php:205
@@ -2238,20 +2325,20 @@ msgstr ""
 msgid "Creem bills this subscription itself and keeps retrying the card on file, so this renewal can’t be paid again here. Update the card in Creem’s customer portal (linked in your Creem receipts)."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:88
+#: includes/Modules/CreemGateway/Gateway.php:93
 msgid "Creem (Stackless)"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:89
+#: includes/Modules/CreemGateway/Gateway.php:94
 msgid "Sell software, digital products and subscriptions through Creem, a merchant of record that handles sales tax and VAT for you. Buyers pay by card, Apple Pay or Google Pay on Creem’s secure checkout."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:118
+#: includes/Modules/CreemGateway/Gateway.php:123
 #: includes/Modules/DodoGateway/Gateway.php:109
 #: includes/Modules/FlutterwaveGateway/Gateway.php:76
 #: includes/Modules/MercadoPagoGateway/Gateway.php:76
 #: includes/Modules/MollieGateway/Gateway.php:95
-#: includes/Modules/PaddleGateway/Gateway.php:97
+#: includes/Modules/PaddleGateway/Gateway.php:100
 #: includes/Modules/PayPalGateway/Gateway.php:77
 #: includes/Modules/PaystackGateway/Gateway.php:76
 #: includes/Modules/PolarGateway/Gateway.php:102
@@ -2261,16 +2348,16 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:120
+#: includes/Modules/CreemGateway/Gateway.php:125
 msgid "Accept payments with Creem"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:124
+#: includes/Modules/CreemGateway/Gateway.php:129
 #: includes/Modules/DodoGateway/Gateway.php:115
 #: includes/Modules/FlutterwaveGateway/Gateway.php:82
 #: includes/Modules/MercadoPagoGateway/Gateway.php:82
 #: includes/Modules/MollieGateway/Gateway.php:101
-#: includes/Modules/PaddleGateway/Gateway.php:103
+#: includes/Modules/PaddleGateway/Gateway.php:106
 #: includes/Modules/PayPalGateway/Gateway.php:83
 #: includes/Modules/PaystackGateway/Gateway.php:82
 #: includes/Modules/PolarGateway/Gateway.php:108
@@ -2281,16 +2368,16 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:126
+#: includes/Modules/CreemGateway/Gateway.php:131
 msgid "Card, Apple Pay or Google Pay (Creem)"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:129
+#: includes/Modules/CreemGateway/Gateway.php:134
 #: includes/Modules/DodoGateway/Gateway.php:120
 #: includes/Modules/FlutterwaveGateway/Gateway.php:87
 #: includes/Modules/MercadoPagoGateway/Gateway.php:87
 #: includes/Modules/MollieGateway/Gateway.php:106
-#: includes/Modules/PaddleGateway/Gateway.php:108
+#: includes/Modules/PaddleGateway/Gateway.php:111
 #: includes/Modules/PayPalGateway/Gateway.php:90
 #: includes/Modules/PaystackGateway/Gateway.php:87
 #: includes/Modules/PolarGateway/Gateway.php:113
@@ -2301,12 +2388,12 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:131
+#: includes/Modules/CreemGateway/Gateway.php:136
 msgid "You’ll finish paying on Creem’s secure checkout. Creem adds any sales tax or VAT for your location before you pay."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:134
-#: includes/Modules/CreemGateway/Gateway.php:149
+#: includes/Modules/CreemGateway/Gateway.php:139
+#: includes/Modules/CreemGateway/Gateway.php:154
 #: includes/Modules/DodoGateway/Gateway.php:125
 #: includes/Modules/DodoGateway/Gateway.php:140
 #: includes/Modules/FlutterwaveGateway/Gateway.php:92
@@ -2321,14 +2408,14 @@ msgstr ""
 msgid "Test mode"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:136
+#: includes/Modules/CreemGateway/Gateway.php:141
 msgid "Use Creem test mode (no real money moves)"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:140
+#: includes/Modules/CreemGateway/Gateway.php:145
 #: includes/Modules/DodoGateway/Gateway.php:131
 #: includes/Modules/FlutterwaveGateway/Gateway.php:98
-#: includes/Modules/PaddleGateway/Gateway.php:119
+#: includes/Modules/PaddleGateway/Gateway.php:122
 #: includes/Modules/PaystackGateway/Gateway.php:98
 #: includes/Modules/PolarGateway/Gateway.php:124
 #: includes/Modules/RazorpayGateway/Gateway.php:127
@@ -2336,46 +2423,46 @@ msgstr ""
 msgid "Live"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:142
+#: includes/Modules/CreemGateway/Gateway.php:147
 #: includes/Modules/FlutterwaveGateway/Gateway.php:101
 #: includes/Modules/PaystackGateway/Gateway.php:101
 msgid "Get API keys"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:143
+#: includes/Modules/CreemGateway/Gateway.php:148
 msgid "In Developers → API keys, copy the live key and paste it below. On a public HTTPS site the webhook and its secret are set up for you when you save."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:151
+#: includes/Modules/CreemGateway/Gateway.php:156
 msgid "Test and live keys are separate: switch the Creem dashboard to test mode (bottom of the sidebar) to copy the key that starts with creem_test."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:156
+#: includes/Modules/CreemGateway/Gateway.php:161
 #: includes/Modules/DodoGateway/Gateway.php:147
 #: includes/Modules/MollieGateway/Gateway.php:126
 msgid "Test API key"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:156
+#: includes/Modules/CreemGateway/Gateway.php:161
 #: includes/Modules/DodoGateway/Gateway.php:147
 #: includes/Modules/MollieGateway/Gateway.php:126
-#: includes/Modules/PaddleGateway/Gateway.php:126
+#: includes/Modules/PaddleGateway/Gateway.php:129
 msgid "Live API key"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:163
+#: includes/Modules/CreemGateway/Gateway.php:168
 #: includes/Modules/DodoGateway/Gateway.php:154
 #: includes/Modules/MercadoPagoGateway/Gateway.php:122
 msgid "Test webhook secret"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:163
+#: includes/Modules/CreemGateway/Gateway.php:168
 #: includes/Modules/DodoGateway/Gateway.php:154
 #: includes/Modules/PolarGateway/Gateway.php:137
 msgid "Live webhook secret"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:172
+#: includes/Modules/CreemGateway/Gateway.php:177
 #: includes/Modules/DodoGateway/Gateway.php:163
 #: includes/Modules/FlutterwaveGateway/Gateway.php:132
 #: includes/Modules/MercadoPagoGateway/Gateway.php:130
@@ -2387,87 +2474,87 @@ msgstr ""
 msgid "Webhook"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:177
+#: includes/Modules/CreemGateway/Gateway.php:182
 #: includes/Modules/DodoGateway/Gateway.php:168
-#: includes/Modules/PaddleGateway/Gateway.php:173
+#: includes/Modules/PaddleGateway/Gateway.php:176
 #: includes/Modules/PolarGateway/Gateway.php:166
 #: includes/Modules/StripeGateway/Managed/Gateway.php:126
 msgid "Prices and tax"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:181
-#: includes/Modules/PaddleGateway/Gateway.php:178
+#: includes/Modules/CreemGateway/Gateway.php:186
+#: includes/Modules/PaddleGateway/Gateway.php:181
 #: includes/Modules/PolarGateway/Gateway.php:171
 #: includes/Modules/StripeGateway/Managed/Gateway.php:130
 msgid "Add tax on top of my prices"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:182
+#: includes/Modules/CreemGateway/Gateway.php:187
 #: includes/Modules/DodoGateway/Gateway.php:173
-#: includes/Modules/PaddleGateway/Gateway.php:179
+#: includes/Modules/PaddleGateway/Gateway.php:182
 #: includes/Modules/PolarGateway/Gateway.php:172
 #: includes/Modules/StripeGateway/Managed/Gateway.php:131
 msgid "My prices already include tax"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:184
+#: includes/Modules/CreemGateway/Gateway.php:189
 msgid "Creem is the merchant of record and calculates sales tax and VAT itself. Turn off WooCommerce tax for products sold through Creem so buyers are not taxed twice."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:187
+#: includes/Modules/CreemGateway/Gateway.php:192
 #: includes/Modules/DodoGateway/Gateway.php:178
-#: includes/Modules/PaddleGateway/Gateway.php:184
+#: includes/Modules/PaddleGateway/Gateway.php:187
 msgid "Tax category"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:191
+#: includes/Modules/CreemGateway/Gateway.php:196
 #: includes/Modules/DodoGateway/Gateway.php:183
-#: includes/Modules/PaddleGateway/Gateway.php:193
+#: includes/Modules/PaddleGateway/Gateway.php:196
 msgid "Software as a service"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:192
+#: includes/Modules/CreemGateway/Gateway.php:197
 msgid "Digital goods or services"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:193
+#: includes/Modules/CreemGateway/Gateway.php:198
 #: includes/Modules/DodoGateway/Gateway.php:184
 msgid "E-books"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:195
+#: includes/Modules/CreemGateway/Gateway.php:200
 msgid "Creem uses this category to pick the tax rate for each buyer’s country."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:198
+#: includes/Modules/CreemGateway/Gateway.php:203
 #: includes/Modules/DodoGateway/Gateway.php:190
 #: includes/Modules/FlutterwaveGateway/Gateway.php:137
 #: includes/Modules/MercadoPagoGateway/Gateway.php:135
 #: includes/Modules/MollieGateway/Gateway.php:168
-#: includes/Modules/PaddleGateway/Gateway.php:201
+#: includes/Modules/PaddleGateway/Gateway.php:204
 #: includes/Modules/PaystackGateway/Gateway.php:137
 #: includes/Modules/PolarGateway/Gateway.php:177
 #: includes/Modules/StripeGateway/Managed/Gateway.php:136
 msgid "Good to know"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:200
+#: includes/Modules/CreemGateway/Gateway.php:205
 msgid "Creem charges in US dollars and euros, from 1.00. It bills the same amount every cycle, so subscriptions with a signup fee or a different first payment cannot use Creem; free trials work. A subscription must be the only item in the cart. One-time carts of any size work and show in Creem as one store order. Products are created in your Creem catalog automatically. Creem runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders. Refunds from WooCommerce refund the whole payment; make partial refunds in the Creem dashboard and they appear here."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:206
+#: includes/Modules/CreemGateway/Gateway.php:211
 #: includes/Modules/DodoGateway/Gateway.php:198
-#: includes/Modules/PaddleGateway/Gateway.php:206
+#: includes/Modules/PaddleGateway/Gateway.php:209
 #: includes/Modules/PolarGateway/Gateway.php:182
 msgid "Copies"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:212
+#: includes/Modules/CreemGateway/Gateway.php:217
 #: includes/Modules/DodoGateway/Gateway.php:204
 #: includes/Modules/FlutterwaveGateway/Gateway.php:142
 #: includes/Modules/MercadoPagoGateway/Gateway.php:140
 #: includes/Modules/MollieGateway/Gateway.php:162
-#: includes/Modules/PaddleGateway/Gateway.php:211
+#: includes/Modules/PaddleGateway/Gateway.php:214
 #: includes/Modules/PayPalGateway/Gateway.php:266
 #: includes/Modules/PaystackGateway/Gateway.php:142
 #: includes/Modules/PolarGateway/Gateway.php:187
@@ -2477,58 +2564,52 @@ msgstr ""
 msgid "Debug log"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:214
+#: includes/Modules/CreemGateway/Gateway.php:219
 msgid "Log Creem activity to WooCommerce → Status → Logs (stackless-creem_gateway). Keys are never logged."
 msgstr ""
 
 #. translators: 1: webhook URL, 2: event names
-#: includes/Modules/CreemGateway/Gateway.php:229
+#: includes/Modules/CreemGateway/Gateway.php:234
 #, php-format
 msgid "On a public HTTPS site, saving a key creates this webhook in Creem and stores its secret. To add it by hand, open Developers → Webhooks in Creem (switch to test mode first for the test endpoint), add this URL: %1$s Select these events, then paste the webhook secret into the field for the same mode: %2$s Webhooks confirm payments when a buyer closes the tab before returning, record renewals and failed renewals, and bring refunds and cancellations made in Creem into WooCommerce."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:260
+#: includes/Modules/CreemGateway/Gateway.php:265
 msgid "The Creem test API key field holds a live key. Paste the key that starts with creem_test."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:261
+#: includes/Modules/CreemGateway/Gateway.php:266
 msgid "The Creem live API key field holds a test key. Paste a live key from the dashboard with test mode off."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:284
+#: includes/Modules/CreemGateway/Gateway.php:289
 msgid "Creem is enabled but has no API key for the selected mode."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:287
+#: includes/Modules/CreemGateway/Gateway.php:292
 msgid "Add the Creem webhook secret. Payments, renewals and refunds stay in sync through the webhook."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:315
-#: includes/Modules/StripeGateway/Health.php:74
-msgid "test"
-msgstr ""
-
-#: includes/Modules/CreemGateway/Gateway.php:315
-#: includes/Modules/PaddleGateway/Gateway.php:297
-#: includes/Modules/PayPalGateway/Gateway.php:336
-#: includes/Modules/StripeGateway/Health.php:74
-msgid "live"
+#. translators: 1: test or live, 2: Creem error message
+#: includes/Modules/CreemGateway/Gateway.php:330
+#, php-format
+msgid "Reading the %1$s Creem webhooks failed, so none was created: %2$s Save again to retry."
 msgstr ""
 
 #. translators: 1: test or live, 2: Creem error message
-#: includes/Modules/CreemGateway/Gateway.php:336
+#: includes/Modules/CreemGateway/Gateway.php:352
 #, php-format
 msgid "Creating the %1$s Creem webhook failed: %2$s Add it by hand (see Webhook below), or give the API key the webhook permissions."
 msgstr ""
 
 #. translators: %s: test or live
-#: includes/Modules/CreemGateway/Gateway.php:352
+#: includes/Modules/CreemGateway/Gateway.php:368
 #, php-format
 msgid "Creem %s webhook connected and its secret saved."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:486
-#: includes/Modules/CreemGateway/Gateway.php:525
+#: includes/Modules/CreemGateway/Gateway.php:502
+#: includes/Modules/CreemGateway/Gateway.php:541
 #: includes/Modules/DodoGateway/Gateway.php:451
 #: includes/Modules/DodoGateway/Gateway.php:489
 #: includes/Modules/FlutterwaveGateway/Gateway.php:309
@@ -2537,8 +2618,8 @@ msgstr ""
 #: includes/Modules/MercadoPagoGateway/Gateway.php:391
 #: includes/Modules/MollieGateway/Gateway.php:380
 #: includes/Modules/MollieGateway/Gateway.php:564
-#: includes/Modules/PaddleGateway/Gateway.php:468
-#: includes/Modules/PaddleGateway/Gateway.php:507
+#: includes/Modules/PaddleGateway/Gateway.php:471
+#: includes/Modules/PaddleGateway/Gateway.php:510
 #: includes/Modules/PayPalGateway/Ajax.php:138
 #: includes/Modules/PayPalGateway/Gateway.php:593
 #: includes/Modules/PayPalGateway/Gateway.php:641
@@ -2563,47 +2644,47 @@ msgstr ""
 msgid "Order not found."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:497
+#: includes/Modules/CreemGateway/Gateway.php:513
 msgid "Creem could not start the checkout. Please try again or choose another payment method."
 msgstr ""
 
 #. translators: %s: error
-#: includes/Modules/CreemGateway/Gateway.php:501
+#: includes/Modules/CreemGateway/Gateway.php:517
 #, php-format
 msgid "Creem checkout could not start: %s"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:530
+#: includes/Modules/CreemGateway/Gateway.php:546
 msgid "This order has no Creem payment to refund."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:533
+#: includes/Modules/CreemGateway/Gateway.php:549
 msgid "Creem refunds the whole payment from WooCommerce. Refund the full order total here, or make a partial refund in the Creem dashboard; it appears on this order automatically."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:543
+#: includes/Modules/CreemGateway/Gateway.php:559
 msgid "Creem could not process this refund. Check the payment in your Creem dashboard."
 msgstr ""
 
 #. translators: 1: amount, 2: Creem transaction id, 3: status
-#: includes/Modules/CreemGateway/Gateway.php:547
+#: includes/Modules/CreemGateway/Gateway.php:563
 #, php-format
 msgid "Refunded %1$s through Creem (transaction %2$s, %3$s)."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:579
+#: includes/Modules/CreemGateway/Gateway.php:595
 msgid "Creem bills this subscription itself. This order is marked paid when Creem reports the renewal charge."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:580
+#: includes/Modules/CreemGateway/Gateway.php:596
 msgid "Waiting for Creem to charge the renewal."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:613
+#: includes/Modules/CreemGateway/Gateway.php:629
 msgid "Creem subscription set to stop at the end of the paid period."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:614
+#: includes/Modules/CreemGateway/Gateway.php:630
 msgid "Creem subscription cancelled immediately."
 msgstr ""
 
@@ -2679,11 +2760,11 @@ msgstr ""
 msgid "WooCommerce → Settings → Payments → Creem"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Module.php:119
+#: includes/Modules/CreemGateway/Module.php:120
 msgid "Whether Creem can take this cart."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Module.php:125
+#: includes/Modules/CreemGateway/Module.php:126
 msgid "Why Creem cannot take this cart, when it cannot."
 msgstr ""
 
@@ -2699,72 +2780,76 @@ msgstr ""
 msgid "Creem has not completed this checkout yet. It will be confirmed automatically."
 msgstr ""
 
+#: includes/Modules/CreemGateway/Sync.php:122
+msgid "This Creem payment was refunded."
+msgstr ""
+
 #. translators: 1: expected currency, 2: charged currency
-#: includes/Modules/CreemGateway/Sync.php:208
+#: includes/Modules/CreemGateway/Sync.php:363
 #, php-format
 msgid "Creem charged in %2$s but the order is in %1$s. Check the payment in Creem before fulfilling."
 msgstr ""
 
 #. translators: 1: amount Creem charged, 2: order total
-#: includes/Modules/CreemGateway/Sync.php:222
+#: includes/Modules/CreemGateway/Sync.php:378
 #, php-format
 msgid "Creem charged %1$s but the order total is %2$s. Check the payment in Creem before fulfilling."
 msgstr ""
 
 #. translators: 1: Creem transaction id, 2: total charged including tax
-#: includes/Modules/CreemGateway/Sync.php:238
+#: includes/Modules/CreemGateway/Sync.php:394
 #, php-format
 msgid "Creem payment %1$s succeeded (%2$s charged including tax)."
 msgstr ""
 
 #. translators: %s: Creem subscription id
-#: includes/Modules/CreemGateway/Sync.php:270
+#: includes/Modules/CreemGateway/Sync.php:434
 #, php-format
 msgid "Creem subscription %s started its free trial."
 msgstr ""
 
 #. translators: 1: renewal currency, 2: charged currency
-#: includes/Modules/CreemGateway/Sync.php:408
+#: includes/Modules/CreemGateway/Sync.php:576
 #, php-format
 msgid "Creem charged this renewal in %2$s but the subscription bills in %1$s. Check it in Creem."
 msgstr ""
 
 #. translators: 1: amount Creem charged, 2: renewal total
-#: includes/Modules/CreemGateway/Sync.php:418
+#: includes/Modules/CreemGateway/Sync.php:586
 #, php-format
 msgid "Creem charged %1$s including tax for this renewal; the WooCommerce renewal total is %2$s."
 msgstr ""
 
 #. translators: %s: Creem transaction id
-#: includes/Modules/CreemGateway/Sync.php:424
+#: includes/Modules/CreemGateway/Sync.php:592
 #, php-format
 msgid "Creem charged this renewal (transaction %s)."
 msgstr ""
 
 #. translators: %s: Creem status such as past_due
-#: includes/Modules/CreemGateway/Sync.php:491
+#: includes/Modules/CreemGateway/Sync.php:659
 #, php-format
 msgid "Creem could not take this renewal payment (%s). Creem retries the card on its own schedule; this order is paid when a retry succeeds."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Sync.php:549
+#: includes/Modules/CreemGateway/Sync.php:717
 msgid "Creem reported a refund in a different currency. Record it manually."
 msgstr ""
 
 #. translators: %s: Creem refund id
-#: includes/Modules/CreemGateway/Sync.php:562
+#: includes/Modules/CreemGateway/Sync.php:730
 #, php-format
 msgid "Refunded in Creem (%s)"
 msgstr ""
 
 #. translators: %s: Creem dispute id
-#: includes/Modules/CreemGateway/Sync.php:580
+#: includes/Modules/CreemGateway/Sync.php:748
 #, php-format
 msgid "Creem reported a dispute (%s). Review it in the Creem dashboard."
 msgstr ""
 
 #. translators: %s: Creem subscription status
-#: includes/Modules/CreemGateway/Sync.php:647
+#: includes/Modules/CreemGateway/Sync.php:828
 #, php-format
 msgid "Creem subscription is now %s."
 msgstr ""
@@ -3803,7 +3888,7 @@ msgid "Flutterwave payment %1$s failed: %2$s"
 msgstr ""
 
 #: includes/Modules/FlutterwaveGateway/Sync.php:130
-#: includes/Modules/PaddleGateway/Sync.php:288
+#: includes/Modules/PaddleGateway/Sync.php:385
 #: includes/Modules/PayPalGateway/Payments.php:425
 msgid "no reason given"
 msgstr ""
@@ -4981,40 +5066,90 @@ msgstr ""
 msgid "Could not reach Paddle: %s"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Api.php:123
+#: includes/Modules/PaddleGateway/Api.php:130
 msgid "Paddle rejected the API key. Check that it belongs to this environment (live or sandbox) and has not been revoked."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Api.php:126
+#: includes/Modules/PaddleGateway/Api.php:133
 msgid "The Paddle API key is missing a required permission."
 msgstr ""
 
 #. translators: %s: Paddle error message
-#: includes/Modules/PaddleGateway/Api.php:130
+#: includes/Modules/PaddleGateway/Api.php:137
 #, php-format
 msgid "Paddle: %s"
 msgstr ""
 
 #. translators: %d: HTTP status code
-#: includes/Modules/PaddleGateway/Api.php:132
+#: includes/Modules/PaddleGateway/Api.php:139
 #, php-format
 msgid "Paddle returned an unexpected error (HTTP %d)."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Api.php:141
+#: includes/Modules/PaddleGateway/Api.php:148
 msgid "The live Paddle API key field holds a sandbox key."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Api.php:142
+#: includes/Modules/PaddleGateway/Api.php:149
 msgid "The sandbox Paddle API key field holds a live key."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Api.php:146
+#: includes/Modules/PaddleGateway/Api.php:153
 msgid "The live Paddle client-side token field holds a sandbox token."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Api.php:147
+#: includes/Modules/PaddleGateway/Api.php:154
 msgid "The sandbox Paddle client-side token field holds a live token."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Attempts.php:43
+msgid "We couldn’t check the earlier Paddle payment for this order, so you weren’t charged again. Please try again in a moment, or contact us if this keeps happening."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Attempts.php:125
+msgid "Paddle’s answer could not be read"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Attempts.php:159
+msgid "it was created on another site address"
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Attempts.php:166
+msgid "Paddle did not confirm it was canceled"
+msgstr ""
+
+#. translators: 1: Paddle transaction id, 2: reason
+#: includes/Modules/PaddleGateway/Attempts.php:188
+#, php-format
+msgid "Stackless didn’t start another Paddle payment, because it couldn’t confirm that transaction %1$s is unpaid: %2$s. If this persists, check the transaction in Paddle. If it wasn’t paid, choose “Allow a new Paddle payment” under Order actions."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Attempts.php:232
+msgid "Allow a new Paddle payment (checked unpaid in Paddle)"
+msgstr ""
+
+#. translators: %s: Paddle transaction id
+#: includes/Modules/PaddleGateway/Attempts.php:252
+#, php-format
+msgid "A new Paddle payment may now start: the merchant confirmed transaction %s is unpaid."
+msgstr ""
+
+#. translators: 1: amount, 2: Paddle transaction id, 3: sandbox or live
+#: includes/Modules/PaddleGateway/Attempts.php:294
+#, php-format
+msgid "Paddle took %1$s in %3$s transaction %2$s, which this order was not waiting for. If the customer paid twice or the order won’t be fulfilled, refund it in Paddle."
+msgstr ""
+
+#: includes/Modules/PaddleGateway/Attempts.php:297
+#: includes/Modules/PaddleGateway/Gateway.php:300
+#: includes/Modules/PayPalGateway/Gateway.php:336
+msgid "sandbox"
+msgstr ""
+
+#. translators: %s: Paddle subscription id
+#: includes/Modules/PaddleGateway/Attempts.php:301
+#, php-format
+msgid "Also cancel Paddle subscription %s there, or it keeps billing."
 msgstr ""
 
 #: includes/Modules/PaddleGateway/BlocksSupport.php:57
@@ -5060,24 +5195,24 @@ msgid "Subscription"
 msgstr ""
 
 #. translators: %s: currency code
-#: includes/Modules/PaddleGateway/Checkout.php:140
+#: includes/Modules/PaddleGateway/Checkout.php:169
 #, php-format
 msgid "Paddle cannot charge in %s. Choose another payment method."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Checkout.php:157
+#: includes/Modules/PaddleGateway/Checkout.php:197
 msgid "Paddle did not return a transaction."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Checkout.php:285
+#: includes/Modules/PaddleGateway/Checkout.php:315
 msgid "Paddle could not open the payment method update. Please try again later."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Checkout.php:304
+#: includes/Modules/PaddleGateway/Checkout.php:334
 msgid "Paddle is missing its client-side token. Please choose another payment method."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Checkout.php:310
+#: includes/Modules/PaddleGateway/Checkout.php:340
 msgid "Paddle checkout could not load. Check your connection and try again."
 msgstr ""
 
@@ -5091,30 +5226,30 @@ msgstr ""
 msgid "Paddle can bill one subscription schedule per checkout. Buy subscriptions with different billing schedules separately or choose another payment method."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:75
+#: includes/Modules/PaddleGateway/Gateway.php:78
 msgid "Paddle (Stackless)"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:76
+#: includes/Modules/PaddleGateway/Gateway.php:79
 msgid "Sell digital products and subscriptions through Paddle Billing, a merchant of record that handles sales tax and VAT for you. Buyers pay by card, PayPal, Apple Pay or Google Pay in Paddle’s secure checkout."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:99
+#: includes/Modules/PaddleGateway/Gateway.php:102
 msgid "Accept payments with Paddle"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:105
+#: includes/Modules/PaddleGateway/Gateway.php:108
 msgid "Card, PayPal, Apple Pay or Google Pay (Paddle)"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:110
+#: includes/Modules/PaddleGateway/Gateway.php:113
 msgid "You’ll finish paying in Paddle’s secure checkout. Paddle adds any sales tax or VAT for your location before you pay."
 msgstr ""
 
 #. translators: 1: Sandbox or Production, 2: error
 #. translators: %s: Sandbox or Production
-#: includes/Modules/PaddleGateway/Gateway.php:113
-#: includes/Modules/PaddleGateway/Gateway.php:144
+#: includes/Modules/PaddleGateway/Gateway.php:116
+#: includes/Modules/PaddleGateway/Gateway.php:147
 #: includes/Modules/PayPalGateway/Gateway.php:95
 #: includes/Modules/PolarGateway/Gateway.php:118
 #: includes/Modules/PolarGateway/Gateway.php:143
@@ -5125,167 +5260,162 @@ msgstr ""
 msgid "Sandbox"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:115
+#: includes/Modules/PaddleGateway/Gateway.php:118
 msgid "Use the Paddle sandbox (no real money moves)"
 msgstr ""
 
 #. translators: %s: list of API key permissions
-#: includes/Modules/PaddleGateway/Gateway.php:122
+#: includes/Modules/PaddleGateway/Gateway.php:125
 #: includes/Modules/StripeGateway/Module.php:238
 msgid "Get live keys"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:123
+#: includes/Modules/PaddleGateway/Gateway.php:126
 #, php-format
 msgid "Create an API key with these permissions: %s. Then create a client-side token on the same screen. With the notification permissions, the webhook and its secret key are set up for you when you save."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:132
+#: includes/Modules/PaddleGateway/Gateway.php:135
 msgid "Live client-side token"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:138
+#: includes/Modules/PaddleGateway/Gateway.php:141
 msgid "Live webhook secret key"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:146
+#: includes/Modules/PaddleGateway/Gateway.php:149
 msgid "Get sandbox keys"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:147
+#: includes/Modules/PaddleGateway/Gateway.php:150
 msgid "Same permissions, created in the Paddle sandbox."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:150
+#: includes/Modules/PaddleGateway/Gateway.php:153
 msgid "Sandbox API key"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:156
+#: includes/Modules/PaddleGateway/Gateway.php:159
 msgid "Sandbox client-side token"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:162
+#: includes/Modules/PaddleGateway/Gateway.php:165
 msgid "Sandbox webhook secret key"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:168
+#: includes/Modules/PaddleGateway/Gateway.php:171
 msgid "Checkout page and webhook"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:177
+#: includes/Modules/PaddleGateway/Gateway.php:180
 msgid "Use my Paddle account setting"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:181
+#: includes/Modules/PaddleGateway/Gateway.php:184
 msgid "Paddle is the merchant of record and calculates sales tax and VAT itself. Turn off WooCommerce tax for products sold through Paddle so buyers are not taxed twice."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:188
+#: includes/Modules/PaddleGateway/Gateway.php:191
 msgid "Standard digital goods (approved for every account)"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:189
+#: includes/Modules/PaddleGateway/Gateway.php:192
 msgid "Digital goods"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:190
+#: includes/Modules/PaddleGateway/Gateway.php:193
 msgid "Ebooks"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:191
+#: includes/Modules/PaddleGateway/Gateway.php:194
 msgid "Implementation services"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:192
+#: includes/Modules/PaddleGateway/Gateway.php:195
 msgid "Professional services"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:194
+#: includes/Modules/PaddleGateway/Gateway.php:197
 msgid "Software programming services"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:195
+#: includes/Modules/PaddleGateway/Gateway.php:198
 msgid "Training services"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:196
+#: includes/Modules/PaddleGateway/Gateway.php:199
 msgid "Website hosting"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:198
+#: includes/Modules/PaddleGateway/Gateway.php:201
 msgid "Paddle uses the tax category to pick tax rates. Any category other than Standard must be approved for your Paddle account first, or checkouts fail."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:203
+#: includes/Modules/PaddleGateway/Gateway.php:206
 msgid "Paddle bills one subscription schedule per checkout. One-time items, a signup fee or first shipping can share the checkout with it; Paddle charges them once. Free trials work when the first payment is zero. A first payment smaller than a full cycle (a first-payment discount) cannot use Paddle. Paddle runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:213
+#: includes/Modules/PaddleGateway/Gateway.php:216
 msgid "Log Paddle activity to WooCommerce → Status → Logs (stackless-paddle_gateway). Keys are never logged."
 msgstr ""
 
 #. translators: 1: store domain, 2: store URL, 3: webhook URL, 4: event names
-#: includes/Modules/PaddleGateway/Gateway.php:236
+#: includes/Modules/PaddleGateway/Gateway.php:239
 #, php-format
 msgid "1. In Paddle → Settings → Website approval, add %1$s and wait for approval. 2. In Paddle → Checkout → Checkout configuration, set the default payment link to %2$s (Stackless sends its own checkout page with every payment; Paddle only needs an approved default). 3. Saving an API key with the notification permissions adds the webhook for you. Otherwise, in Paddle → Developer tools → Notifications, add a destination with this URL: %3$s Select these events, then copy the secret key into the matching webhook secret field above: %4$s Webhooks confirm payments when a buyer closes the tab before returning, record renewals, and bring refunds and cancellations made in Paddle into WooCommerce."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:278
+#: includes/Modules/PaddleGateway/Gateway.php:281
 msgid "Paddle is enabled but the selected environment needs both an API key and a client-side token."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:281
+#: includes/Modules/PaddleGateway/Gateway.php:284
 msgid "Add the Paddle webhook secret key. Payments, renewals and refunds stay in sync through the webhook."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:297
-#: includes/Modules/PayPalGateway/Gateway.php:336
-msgid "sandbox"
-msgstr ""
-
 #. translators: 1: sandbox or live, 2: Paddle error message
-#: includes/Modules/PaddleGateway/Gateway.php:319
+#: includes/Modules/PaddleGateway/Gateway.php:322
 #, php-format
 msgid "Creating the %1$s Paddle webhook failed: %2$s Add it by hand (see Checkout page and webhook below), or give the API key the notification permissions."
 msgstr ""
 
 #. translators: %s: sandbox or live
-#: includes/Modules/PaddleGateway/Gateway.php:329
+#: includes/Modules/PaddleGateway/Gateway.php:332
 #, php-format
 msgid "Paddle %s webhook connected and its secret key saved."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:480
+#: includes/Modules/PaddleGateway/Gateway.php:483
 msgid "Paddle could not start the checkout. Please try again or choose another payment method."
 msgstr ""
 
 #. translators: %s: error
-#: includes/Modules/PaddleGateway/Gateway.php:484
+#: includes/Modules/PaddleGateway/Gateway.php:487
 #, php-format
 msgid "Paddle checkout could not start: %s"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:536
+#: includes/Modules/PaddleGateway/Gateway.php:539
 msgid "Paddle bills this subscription itself. This order is marked paid when Paddle reports the renewal charge."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:537
+#: includes/Modules/PaddleGateway/Gateway.php:540
 msgid "Waiting for Paddle to charge the renewal."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:574
+#: includes/Modules/PaddleGateway/Gateway.php:577
 msgid "Paddle subscription set to end at the close of the paid period."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:575
+#: includes/Modules/PaddleGateway/Gateway.php:578
 msgid "Paddle subscription canceled immediately."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:615
+#: includes/Modules/PaddleGateway/Gateway.php:618
 msgid "Paddle subscription paused."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Gateway.php:649
+#: includes/Modules/PaddleGateway/Gateway.php:652
 msgid "Paddle subscription resumed."
 msgstr ""
 
@@ -5310,15 +5440,15 @@ msgstr ""
 msgid "WooCommerce → Settings → Payments → Paddle"
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Module.php:118
+#: includes/Modules/PaddleGateway/Module.php:119
 msgid "Whether Paddle can take this cart."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Module.php:124
+#: includes/Modules/PaddleGateway/Module.php:125
 msgid "Why Paddle cannot take this cart, when it cannot."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Module.php:184
+#: includes/Modules/PaddleGateway/Module.php:185
 #: includes/Modules/StripeGateway/Module.php:187
 msgid "Update payment method"
 msgstr ""
@@ -5385,67 +5515,71 @@ msgstr ""
 msgid "This Paddle transaction belongs to a different order."
 msgstr ""
 
+#: includes/Modules/PaddleGateway/Sync.php:97
+msgid "This Paddle transaction was refunded in full."
+msgstr ""
+
 #. translators: %s: Paddle transaction status
-#: includes/Modules/PaddleGateway/Sync.php:98
+#: includes/Modules/PaddleGateway/Sync.php:101
 #, php-format
 msgid "The Paddle transaction is %s, not paid yet. It will be confirmed automatically."
 msgstr ""
 
 #. translators: 1: expected currency, 2: charged currency
-#: includes/Modules/PaddleGateway/Sync.php:163
+#: includes/Modules/PaddleGateway/Sync.php:260
 #, php-format
 msgid "Paddle charged in %2$s but the order is in %1$s. Check the payment in Paddle."
 msgstr ""
 
 #. translators: 1: amount Paddle charged, 2: order total
-#: includes/Modules/PaddleGateway/Sync.php:176
+#: includes/Modules/PaddleGateway/Sync.php:273
 #, php-format
 msgid "Paddle charged %1$s but the order total is %2$s. Check the payment in Paddle before fulfilling."
 msgstr ""
 
 #. translators: 1: Paddle transaction id, 2: total charged including tax
-#: includes/Modules/PaddleGateway/Sync.php:192
+#: includes/Modules/PaddleGateway/Sync.php:289
 #, php-format
 msgid "Paddle transaction %1$s paid (%2$s charged including tax)."
 msgstr ""
 
 #. translators: %s: Paddle subscription id
-#: includes/Modules/PaddleGateway/Sync.php:216
+#: includes/Modules/PaddleGateway/Sync.php:313
 #, php-format
 msgid "Paddle subscription %s started its free trial."
 msgstr ""
 
 #. translators: 1: Paddle transaction id, 2: decline reason code
-#: includes/Modules/PaddleGateway/Sync.php:286
+#: includes/Modules/PaddleGateway/Sync.php:383
 #, php-format
 msgid "Paddle could not take a payment for transaction %1$s (%2$s)."
 msgstr ""
 
 #. translators: 1: renewal currency, 2: charged currency
-#: includes/Modules/PaddleGateway/Sync.php:361
+#: includes/Modules/PaddleGateway/Sync.php:462
 #, php-format
 msgid "Paddle charged this renewal in %2$s but the subscription bills in %1$s. Check it in Paddle."
 msgstr ""
 
 #. translators: 1: amount Paddle charged, 2: renewal total
-#: includes/Modules/PaddleGateway/Sync.php:371
+#: includes/Modules/PaddleGateway/Sync.php:472
 #, php-format
 msgid "Paddle charged %1$s for this renewal; the WooCommerce renewal total is %2$s."
 msgstr ""
 
 #. translators: %s: Paddle transaction id
-#: includes/Modules/PaddleGateway/Sync.php:377
+#: includes/Modules/PaddleGateway/Sync.php:478
 #, php-format
 msgid "Paddle charged this renewal (transaction %s)."
 msgstr ""
 
 #. translators: %s: Paddle subscription status
-#: includes/Modules/PaddleGateway/Sync.php:451
+#: includes/Modules/PaddleGateway/Sync.php:555
 #, php-format
 msgid "Paddle subscription is now %s."
 msgstr ""
 
-#: includes/Modules/PaddleGateway/Sync.php:453
+#: includes/Modules/PaddleGateway/Sync.php:557
 msgid "Paddle subscription is set to end at the close of the paid period."
 msgstr ""
 
