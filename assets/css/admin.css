@@ -104,7 +104,7 @@
 @media (max-width: 960px) {
   .stackless-layout { grid-template-columns: 1fr; }
   .stackless-sidebar { position: static; max-height: none; }
-  .stackless-header__nav { margin-left: 0; }
+  .stackless-header__nav { margin-left: 0; flex-wrap: wrap; max-width: 100%; }
 }
 @media (max-width: 600px) {
   .stackless-search input[type="search"] { min-width: 0; width: 100%; }

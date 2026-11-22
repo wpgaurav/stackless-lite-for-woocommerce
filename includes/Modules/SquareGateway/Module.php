@@ -55,7 +55,7 @@ final class Module extends BaseModule
                     /* translators: 1: link to the gateway settings, 2: webhook URL */
                     __('Application IDs, access tokens and wallets live with the other payment methods: %1$s. The webhook (%2$s) is created for you when you save there.', 'stackless-lite'),
                     '<a href="' . esc_url(admin_url('admin.php?page=wc-settings&tab=checkout&section=' . Gateway::ID)) . '">' . esc_html__('WooCommerce → Settings → Payments → Square', 'stackless-lite') . '</a>',
-                    '<code>' . esc_html(rest_url('stackless/v1/square/webhook')) . '</code>'
+                    '<code>' . esc_html(Gateway::displayedWebhookUrl()) . '</code>'
                 ),
             ],
             ['id' => 'stackless_square_gateway_about', 'type' => 'sectionend'],

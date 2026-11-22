@@ -6,15 +6,15 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 2.0.4
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-30 free WooCommerce modules: Stripe, PayPal, Paddle, Razorpay, Mollie, Square and six more payment providers, wishlists, saved carts and more.
+33 free WooCommerce modules: Stripe, PayPal, Paddle, Razorpay, Mollie, Square and nine more payment providers, wishlists, saved carts and more.
 
 == Description ==
 
-Most WooCommerce stores collect a small plugin for every little job: one for the wishlist, one for back-in-stock emails, one for min/max quantities, one for the "Only 3 left" label. Stackless Lite puts those jobs, and payment gateways for 12 providers, into one plugin that runs on core WooCommerce alone.
+Most WooCommerce stores collect a small plugin for every little job: one for the wishlist, one for back-in-stock emails, one for min/max quantities, one for the "Only 3 left" label. Stackless Lite puts those jobs, and payment gateways for 15 providers, into one plugin that runs on core WooCommerce alone.
 
 Switch on only what you use from Stackless → Dashboard. A switched-off module loads no code.
 
@@ -57,6 +57,9 @@ Every module that touches the cart or checkout works with the Cart and Checkout 
 * **Razorpay:** UPI, cards, netbanking and wallets through Razorpay Checkout, with refunds both ways.
 * **Mollie:** cards, iDEAL, Bancontact, PayPal, Apple Pay and every other method on your Mollie account, on Mollie's hosted checkout, with refunds both ways.
 * **Square:** cards, Apple Pay and Google Pay with Square's own payment form, in your Square location's currency, with refunds both ways.
+* **Revolut:** cards, Revolut Pay and the other methods in your Revolut Merchant account on Revolut's hosted checkout, with cards saved for subscription renewals and refunds both ways.
+* **Braintree:** cards with 3-D Secure in Braintree's fields on your checkout, saved cards, refunds and voids, and a merchant account per currency.
+* **Airwallex (beta):** cards, wallets and the local methods switched on in your Airwallex account, on Airwallex's hosted payment page, with refunds both ways. Beta because Airwallex's Checkout Session API is in beta.
 * **Paystack:** cards, bank transfer, USSD, mobile money and Apple Pay on Paystack's hosted checkout, for stores in Nigeria, Ghana, South Africa, Kenya and Côte d'Ivoire.
 * **Flutterwave:** cards, bank transfer, mobile money and USSD on Flutterwave's hosted checkout, with refunds both ways.
 * **Mercado Pago:** Checkout Pro for stores in Argentina, Brazil, Chile, Colombia, Mexico, Peru and Uruguay, with cards, Pix, boleto, OXXO and local methods in the account's currency.
@@ -126,6 +129,18 @@ When a customer pays with Flutterwave, your site creates a payment link through 
 
 When a customer pays with Mercado Pago, your site creates a Checkout Pro preference through the Mercado Pago API (api.mercadopago.com), sending the order total, currency, order ID and number, and the customer's email and name, and sends the customer to Mercado Pago's checkout. Your site also reads the account's country from the API when you save the access token. Mercado Pago sends payment notifications back to your site's webhook. Mercado Pago's terms and privacy policy for your account's country apply, for example in [Argentina](https://www.mercadopago.com.ar/ayuda/terminos-y-politicas_194) ([privacy](https://www.mercadopago.com.ar/privacidad)), [Brazil](https://www.mercadopago.com.br/ajuda/termos-e-politicas_194) ([privacy](https://www.mercadopago.com.br/privacidade)) and [Mexico](https://www.mercadopago.com.mx/ayuda/terminos-y-politicas_194) ([privacy](https://www.mercadopago.com.mx/privacidad)).
 
+= Revolut =
+
+When a customer pays with Revolut, your site creates an order through the Revolut Merchant API (merchant.revolut.com, or sandbox-merchant.revolut.com in test mode), sending the amount, currency, order ID and number, your site's name, item names and quantities, the customer's name and email, the shipping address, and the return address. The customer pays on checkout.revolut.com, or, to save a card, in Revolut's window loaded from the API host, which also receives the billing address. Card details go straight to Revolut and never reach your server. Revolut sends payment, refund and dispute events back to your site's webhook. Revolut's [Business Acquiring Terms](https://www.revolut.com/legal/business-acquiring/) and [Privacy Notice](https://www.revolut.com/legal/privacy/) apply.
+
+= Airwallex (beta) =
+
+When a customer pays with Airwallex, your site creates a Checkout Session through the Airwallex API (api.airwallex.com, or api.sandbox.airwallex.com in test mode), sending the amount, currency, order number and reference, the customer's name, email and country, the return addresses, and the plugin's version, and sends the customer to Airwallex's hosted checkout on airwallex.com. For saved cards and refunds it also sends the saved card's IDs and the refund reason. Card details go straight to Airwallex and never reach your server. Airwallex sends payment, refund and dispute events back to your site's webhook. Checkout Session is an API Airwallex labels beta. Airwallex's [Terms](https://www.airwallex.com/terms/sign-up-terms) and [Privacy Policy](https://www.airwallex.com/terms/privacy-policy) apply.
+
+= Braintree =
+
+When a customer pays with Braintree, the checkout loads Braintree's SDK from js.braintreegateway.com and its card fields from assets.braintreegateway.com, so card details go straight to Braintree and never reach your server. For 3-D Secure the browser sends Braintree the amount and the customer's name, email and billing address, and Braintree shows the bank's check. Your site creates the payment through the Braintree API (payments.braintree-api.com and api.braintreegateway.com, or their sandbox hosts), sending the amount, currency, an order reference, the customer's email, the billing name and address, for saved cards a Braintree customer (name and email), refund amounts, and the plugin's version. The order reference carries a hashed marker of your site. Braintree's SDK also sends browser and usage data to Braintree and www.paypal.com, and 3-D Secure contacts CardinalCommerce and the card's issuer. If you turn on Fraud tools, the checkout also loads PayPal's device scripts from c.paypal.com and b.stats.paypal.com and passes their device data to Braintree. Braintree sends dispute and settlement events back to your site's webhook. Braintree's [agreements and policies](https://www.braintreepayments.com/legal) and PayPal's [Privacy Statement](https://www.paypal.com/us/legalhub/privacy-full) apply.
+
 = Links =
 
 * [Product page and free download](https://gauravtiwari.org/product/stackless-lite-for-woocommerce/)
@@ -180,6 +195,18 @@ Yes. Every module that touches the cart or checkout supports the Cart and Checko
 Through the normal WordPress update screens, from gauravtiwari.org. No license key or account is needed.
 
 == Changelog ==
+
+= 2.1.0 =
+* New: Revolut gateway, with Revolut's hosted checkout, refunds both ways and a signed webhook.
+* New: Airwallex gateway (beta), with hosted checkout for cards and local methods, refunds and disputes. Airwallex's Checkout Session API is itself in beta.
+* New: Braintree gateway, with card fields and 3-D Secure on your checkout, refunds, voids and disputes.
+* Fixed: Square takes new cards on classic checkout again. The card was never tokenized there, so checkout asked for card details the buyer had already entered.
+* Fixed: Square shows one card form and one set of wallet listeners, and a declined card no longer leaves pay-for-order or Add payment method blocked.
+* Fixed: paying with Google Pay or Apple Pay through Square charges the wallet. With a saved card selected, that card was charged instead.
+* Fixed: a Google Pay or Apple Pay result that returns after the buyer picked another method on block checkout charges nothing, and a repeated click no longer pays twice.
+* Fixed: after a saved card is declined by Square another saved card can be used. While a payment's outcome is unknown, no second charge is started.
+* Fixed: Place order with a typed card charges that card, never a wallet token left from an earlier attempt.
+* Fixed: Square's settings no longer cause a fatal error when another plugin loads payment gateways early.
 
 = 2.0.4 =
 * Fixed: one-time checkout with Creem no longer sends a billing field that Creem rejects, and a product archived in Creem no longer blocks checkout.

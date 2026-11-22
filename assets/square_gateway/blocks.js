@@ -50,6 +50,7 @@
 	function Content(props) {
 		var cardRef = useRef(null);
 		var walletToken = useRef(null);
+		var active = useRef(false);
 		var statusState = useState('');
 		var status = statusState[0];
 		var setStatus = statusState[1];
@@ -66,9 +67,31 @@
 		var onSubmit = props.onSubmit;
 		var shouldSave = !!props.shouldSavePayment;
 
+		// A wallet answers whenever the buyer finishes in its sheet. Submitting then would charge whatever
+		// is selected by that time, or charge again if a payment is already running.
+		function payWithWallet(wallet, method) {
+			S.tokenize(wallet, null).then(function (token) {
+				if (!window.wp.data.select('wc/store/checkout').isIdle()) {
+					return; // The payment that is running has the say.
+				}
+				if (!active.current) {
+					// This component is gone, so say it in the payment step. Picking a method clears this notice.
+					window.wp.data.dispatch('core/notices').createNotice('info', data.i18n.walletNotCharged, {
+						id: 'wc-payment-error',
+						context: emitResponse.noticeContexts.PAYMENTS,
+						isDismissible: true
+					});
+					return;
+				}
+				walletToken.current = { token: token, method: method };
+				onSubmit();
+			}).catch(function (error) { setStatus(error && error.message ? error.message : data.i18n.invalid); });
+		}
+
 		useEffect(function () {
 			var cancelled = false;
 			var card = null;
+			active.current = true;
 			setStatus(data.i18n.loading);
 			S.payments(data).then(function (payments) {
 				return payments.card().then(function (instance) {
@@ -86,15 +109,15 @@
 					var request = S.paymentRequest(payments, data, amount);
 					if (data.wallets.indexOf('google_pay') !== -1) {
 						payments.googlePay(request).then(function (googlePay) {
+							if (cancelled) {
+								return; // the button with this id now belongs to the next component
+							}
 							return googlePay.attach('#' + googleId).then(function () {
 								var button = document.getElementById(googleId);
-								if (button) {
+								if (button && !cancelled) {
 									button.addEventListener('click', function (event) {
 										event.preventDefault();
-										S.tokenize(googlePay, null).then(function (token) {
-											walletToken.current = { token: token, method: 'google_pay' };
-											onSubmit();
-										}).catch(function (error) { setStatus(error && error.message ? error.message : data.i18n.invalid); });
+										payWithWallet(googlePay, 'google_pay');
 									});
 								}
 							});
@@ -114,6 +137,7 @@
 			});
 			return function () {
 				cancelled = true;
+				active.current = false;
 				if (card && card.destroy) {
 					card.destroy();
 				}
@@ -159,10 +183,7 @@
 						if (!appleRef.current) {
 							return;
 						}
-						S.tokenize(appleRef.current, null).then(function (token) {
-							walletToken.current = { token: token, method: 'apple_pay' };
-							onSubmit();
-						}).catch(function (error) { setStatus(error && error.message ? error.message : data.i18n.invalid); });
+						payWithWallet(appleRef.current, 'apple_pay');
 					}
 				}) : null,
 				data.wallets.indexOf('google_pay') !== -1 ? el('div', { id: googleId, className: 'stackless-square__google-pay' }) : null

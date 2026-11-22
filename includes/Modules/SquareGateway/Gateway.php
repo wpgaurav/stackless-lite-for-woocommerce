@@ -63,6 +63,10 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
         $this->supports = ['products', 'refunds', 'tokenization', 'add_payment_method', 'stackless_subscriptions'];
 
         $this->init_form_fields();
+        if (!did_action('init')) {
+            // WooCommerce keeps these fields for the whole request: show the full webhook address once it can be built.
+            add_action('init', [$this, 'refreshWebhookDescription'], 0);
+        }
         $this->init_settings();
         $this->title = (string) $this->get_option('title');
         $this->description = (string) $this->get_option('description');
@@ -150,15 +154,27 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
             'webhook_section' => [
                 'title' => __('Webhook', 'stackless-lite'),
                 'type' => 'title',
-                'description' => sprintf(
-                    /* translators: 1: webhook URL, 2: event names */
-                    __('Created automatically when the signature key is empty. To add it by hand, open Webhooks → Subscriptions in your application, add this URL: %1$s with these events, and paste its signature key above: %2$s', 'stackless-lite'),
-                    '<br><code>' . esc_html($this->webhookUrl()) . '</code><br>',
-                    '<br><code>' . implode('</code> <code>', array_map('esc_html', EventMap::EVENTS)) . '</code>'
-                ),
+                'description' => $this->webhookDescription(),
             ],
         ];
         $this->form_fields = $fields;
+    }
+
+    public function refreshWebhookDescription(): void
+    {
+        if (isset($this->form_fields['webhook_section'])) {
+            $this->form_fields['webhook_section']['description'] = $this->webhookDescription();
+        }
+    }
+
+    private function webhookDescription(): string
+    {
+        return sprintf(
+            /* translators: 1: webhook URL, 2: event names */
+            __('Created automatically when the signature key is empty. To add it by hand, open Webhooks → Subscriptions in your application, add this URL: %1$s with these events, and paste its signature key above: %2$s', 'stackless-lite'),
+            '<br><code>' . esc_html(self::displayedWebhookUrl()) . '</code><br>',
+            '<br><code>' . implode('</code> <code>', array_map('esc_html', EventMap::EVENTS)) . '</code>'
+        );
     }
 
     private function locationLine(): string
@@ -304,6 +320,13 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
         return rest_url('stackless/v1/square/webhook');
     }
 
+    /** For settings text only: rest_url() fatals before $wp_rewrite exists, so the bare route until init. */
+    public static function displayedWebhookUrl(): string
+    {
+        $route = 'stackless/v1' . Webhook::ROUTE;
+        return did_action('init') ? rest_url($route) : $route;
+    }
+
     /** @return string[] google_pay and/or apple_pay */
     public function wallets(): array
     {
@@ -422,6 +445,7 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
                 'failed' => __('Square could not load the card form. Reload the page or choose another payment method.', 'stackless-lite'),
                 'invalid' => __('Check your card details and try again.', 'stackless-lite'),
                 'verify' => __('Your bank could not verify the card. Try again or use another card.', 'stackless-lite'),
+                'walletNotCharged' => __('Your wallet was not charged, because the payment method changed while it was open. Press Place order to pay with the selected method, or use the wallet again.', 'stackless-lite'),
                 'testmode' => __('Sandbox: use Square’s test cards; no real payment will be taken.', 'stackless-lite'),
                 'total' => __('Total', 'stackless-lite'),
             ],
@@ -475,6 +499,11 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
         $payments = new Payments($this);
         $tokenId = $this->postedTokenId();
         if ($tokenId > 0) {
+            // classic.js sends one or the other. An outdated copy sends both, whether the buyer pressed
+            // the wallet or left its values behind and chose the saved card, so charge neither.
+            if ($this->postedWallet()) {
+                return $this->failure(__('You were not charged, because a saved card and a wallet were sent together. Reload the page and try again. To pay with Google Pay or Apple Pay, choose “Use a new card” first.', 'stackless-lite'));
+            }
             $token = Tokens::getOwned($tokenId, (int) $order->get_customer_id());
             if (!$token || Tokens::mode($token) !== $this->mode()) {
                 return $this->failure(__('That saved card is not available. Choose another one.', 'stackless-lite'));
@@ -548,6 +577,12 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
     {
         $value = isset($_POST[self::FIELD_METHOD]) ? sanitize_key(wp_unslash((string) $_POST[self::FIELD_METHOD])) : 'card'; // phpcs:ignore WordPress.Security.NonceVerification.Missing
         return in_array($value, ['card', 'google_pay', 'apple_pay'], true) ? $value : 'card';
+    }
+
+    /** A wallet's token was posted, even one postedSource() would reject. */
+    private function postedWallet(): bool
+    {
+        return $this->postedMethod() !== 'card' && !empty($_POST[self::FIELD_TOKEN]); // phpcs:ignore WordPress.Security.NonceVerification.Missing
     }
 
     private function postedSaveRequest(): bool

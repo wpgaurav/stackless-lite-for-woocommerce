@@ -3,6 +3,7 @@
 namespace Stackless\Modules\SquareGateway;
 
 use Stackless\Contracts\SubscriptionData;
+use Stackless\Core\FreshOrder;
 use Stackless\Core\LiveStore;
 
 defined('ABSPATH') || exit;
@@ -12,6 +13,8 @@ defined('ABSPATH') || exit;
  * card at checkout, renewals and saved-card charges without the buyer (merchant-initiated), and
  * webhook updates. Square answers card payments at once, so outcomes are success or failed,
  * except a transient error on a renewal, which is retried with the same idempotency key.
+ *
+ * Buyer-present charges of one order run one at a time (see CheckoutAttempt for their keys).
  */
 final class Payments
 {
@@ -48,6 +51,18 @@ final class Payments
      */
     public function chargeNew(\WC_Order $order, string $source, bool $save): array
     {
+        return $this->oneAtATime($order, function (\WC_Order $fresh) use ($source, $save) {
+            return $this->payWithNewCard($fresh, $source, $save);
+        });
+    }
+
+    /** @return array{result:string, message?:string} */
+    private function payWithNewCard(\WC_Order $order, string $source, bool $save): array
+    {
+        $attempt = CheckoutAttempt::of($order);
+        if ($attempt->open) {
+            return ['result' => 'failed', 'message' => self::unconfirmedSavedCard()];
+        }
         $mode = $this->gateway->mode();
         $currency = strtoupper($order->get_currency());
         if ($this->gateway->currency($mode) !== '' && $currency !== $this->gateway->currency($mode)) {
@@ -61,6 +76,11 @@ final class Payments
             if (is_wp_error($customer)) {
                 return ['result' => 'failed', 'message' => $customer->get_error_message()];
             }
+        }
+        $wasUnknown = $attempt->newUnknown;
+        if ((float) $order->get_total() > 0) {
+            $attempt->newUnknown = true; // until Square answers
+            $attempt->write($order);
         }
         $order->update_meta_data(Gateway::META_MODE, $mode);
         $order->save();
@@ -90,6 +110,11 @@ final class Payments
             'source_id' => $source,
             'customer_id' => $customer !== '' ? $customer : null,
         ], Api::key('o' . $order->get_id(), substr(hash('sha256', $source), 0, 16)));
+        if (!$wasUnknown && CheckoutAttempt::answered($payment, false)) {
+            $attempt->newUnknown = false;
+            $attempt->write($order);
+            $order->save();
+        }
         if (is_wp_error($payment)) {
             return $this->checkoutError($order, $payment);
         }
@@ -106,14 +131,7 @@ final class Payments
                 $order->add_order_note(sprintf(__('The payment went through, but Square could not save the card for renewals: %s Renewals will be invoiced.', 'stackless-lite'), is_wp_error($token) ? $token->get_error_message() : ''));
             }
         }
-        $outcome = $this->applyPayment($order, $payment, $mode);
-        if ($outcome === 'busy' && ($payment['status'] ?? '') === 'COMPLETED') {
-            $outcome = 'paid'; // The webhook is recording this same payment right now.
-        }
-        if ($outcome !== 'paid' && $outcome !== 'pending') {
-            return ['result' => 'failed', 'message' => Declines::message((string) (Declines::fromPayment($payment)['code']))];
-        }
-        return ['result' => 'success'];
+        return $this->checkoutResult($order, $payment, $mode);
     }
 
     /**
@@ -131,6 +149,11 @@ final class Payments
         if ($this->gateway->currency($mode) !== '' && $currency !== $this->gateway->currency($mode)) {
             /* translators: %s: currency code */
             return $this->fail($order, ['category' => SubscriptionData::DECLINE_HARD, 'code' => 'CURRENCY_MISMATCH'], sprintf(__('Square takes payments in %s only.', 'stackless-lite'), $this->gateway->currency($mode)), $flow);
+        }
+        if ($flow === 'checkout') {
+            return $this->oneAtATime($order, function (\WC_Order $fresh) use ($token, $mode) {
+                return $this->payWithSavedCard($fresh, $token, $mode);
+            });
         }
         Gateway::attachToken($order, $token);
         $order->update_meta_data(Gateway::META_MODE, $mode);
@@ -157,9 +180,6 @@ final class Payments
             'customer_details' => ['customer_initiated' => $onSession, 'seller_keyed_in' => false],
         ], Api::key(substr($flow, 0, 1) . $order->get_id(), (string) $attempt));
         if (is_wp_error($payment)) {
-            if ($flow === 'checkout') {
-                return $this->checkoutError($order, $payment);
-            }
             return $this->offSessionError($order, $payment, $flow);
         }
         $outcome = $this->applyPayment($order, $payment, $mode);
@@ -172,9 +192,123 @@ final class Payments
             return ['result' => 'pending'];
         }
         $decline = Declines::fromPayment($payment);
-        return $flow === 'checkout'
-            ? ['result' => 'failed', 'message' => Declines::message($decline['code'])]
-            : $this->fail($order, $decline, Declines::message($decline['code']), $flow);
+        return $this->fail($order, $decline, Declines::message($decline['code']), $flow);
+    }
+
+    /**
+     * A saved card at checkout or on the pay page. A definite decline moves on to a new key; an
+     * unknown outcome keeps the request, and only that same card may send it again.
+     *
+     * @return array{result:string, message?:string}
+     */
+    private function payWithSavedCard(\WC_Order $order, \WC_Payment_Token $token, string $mode): array
+    {
+        $attempt = CheckoutAttempt::of($order);
+        $resend = $attempt->open;
+        if ($resend) {
+            if (($resend['source_id'] ?? '') !== $token->get_token()) {
+                return ['result' => 'failed', 'message' => self::unconfirmedSavedCard()];
+            }
+            if (!Money::matches($resend['amount_money'] ?? null, $order->get_total(), $order->get_currency())) {
+                return ['result' => 'failed', 'message' => self::unconfirmedPayment()];
+            }
+        }
+        if ((float) $order->get_total() <= 0) {
+            $order->update_meta_data(Gateway::META_MODE, $mode);
+            Gateway::attachToken($order, $token);
+            $order->payment_complete();
+            return ['result' => 'success'];
+        }
+
+        // A charge that already went through for this order is reported, not repeated.
+        $previous = (string) $order->get_meta(Gateway::META_PAYMENT_ID);
+        $previousUnknown = false;
+        if ($previous !== '') {
+            $existing = $this->gateway->api($mode)->request('GET', 'payments/' . rawurlencode($previous));
+            $status = is_array($existing) && is_array($existing['payment'] ?? null) ? (string) ($existing['payment']['status'] ?? '') : '';
+            if (in_array($status, ['COMPLETED', 'APPROVED', 'PENDING'], true)) {
+                return $this->checkoutResult($order, $existing['payment'], $mode);
+            }
+            $previousUnknown = !in_array($status, ['FAILED', 'CANCELED'], true);
+        }
+        // A second key is a second possible payment, so it needs everything before it to be settled.
+        if (!$resend && $attempt->declines > 0 && ($previousUnknown || $attempt->newUnknown || (int) $order->get_meta(self::META_TRANSIENT) > 0)) {
+            return ['result' => 'failed', 'message' => self::unconfirmedPayment()];
+        }
+
+        $body = $resend ?: $this->paymentBody($order, $mode, [
+            'source_id' => $token->get_token(),
+            'customer_id' => Tokens::customer($token),
+            'customer_details' => ['customer_initiated' => true, 'seller_keyed_in' => false],
+        ], $attempt->key($order));
+        $attempt->open = $body; // saved before it is sent, in case this request dies
+        $attempt->write($order);
+        $order->update_meta_data(Gateway::META_MODE, $mode);
+        Gateway::attachToken($order, $token); // saves the order
+
+        $payment = $this->sendPayment($order, $mode, $body);
+        if (CheckoutAttempt::answered($payment, (bool) $resend)) {
+            $attempt->open = [];
+            // Not for a renewal order: an automatic retry can charge it meanwhile, with a key of its own.
+            if (CheckoutAttempt::declined($payment, (bool) $resend) && !stackless_is_renewal_order($order)) {
+                $attempt->declines++;
+            }
+            $attempt->write($order);
+            $order->save();
+        }
+        if (!is_wp_error($payment)) {
+            return $this->checkoutResult($order, $payment, $mode);
+        }
+        $result = $this->checkoutError($order, $payment);
+        if ($attempt->open || Api::code($payment) === 'IDEMPOTENCY_KEY_REUSED') {
+            $result['message'] = self::unconfirmedSavedCard();
+        }
+        return $result;
+    }
+
+    /**
+     * One buyer-present charge per order at a time, each starting from what the last one saved.
+     *
+     * @param callable(\WC_Order): array{result:string, message?:string} $charge
+     * @return array{result:string, message?:string}
+     */
+    private function oneAtATime(\WC_Order $order, callable $charge): array
+    {
+        $id = (int) $order->get_id();
+        $result = Lock::run('charge-' . $id, static function () use ($id, $charge) {
+            $fresh = FreshOrder::get($id);
+            if (!$fresh) {
+                return ['result' => 'failed', 'message' => __('Order not found.', 'stackless-lite')];
+            }
+            if ($fresh->is_paid() || ($fresh->has_status('on-hold') && (string) $fresh->get_meta(Gateway::META_PAYMENT_ID) !== '')) {
+                return ['result' => 'success']; // the submit before this one paid
+            }
+            return $charge($fresh);
+        });
+        return is_array($result) ? $result : ['result' => 'failed', 'message' => __('A payment for this order is already being processed. Wait a moment and check your orders before you pay again.', 'stackless-lite')];
+    }
+
+    /** @return array{result:string, message?:string} */
+    private function checkoutResult(\WC_Order $order, array $payment, string $mode): array
+    {
+        $outcome = $this->applyPayment($order, $payment, $mode);
+        if ($outcome === 'busy' && ($payment['status'] ?? '') === 'COMPLETED') {
+            $outcome = 'paid'; // The webhook is recording this same payment right now.
+        }
+        if ($outcome !== 'paid' && $outcome !== 'pending') {
+            return ['result' => 'failed', 'message' => Declines::message((string) (Declines::fromPayment($payment)['code']))];
+        }
+        return ['result' => 'success'];
+    }
+
+    private static function unconfirmedSavedCard(): string
+    {
+        return __('An earlier saved-card payment for this order has not been confirmed, so nothing else was charged. To avoid paying twice, select the saved card you used first and place the order again. If that does not work, contact the store before paying another way.', 'stackless-lite');
+    }
+
+    private static function unconfirmedPayment(): string
+    {
+        return __('An earlier payment for this order has not been confirmed, so this card was not charged. Contact the store before paying again, so you are not charged twice.', 'stackless-lite');
     }
 
     /**
@@ -264,7 +398,13 @@ final class Payments
     /** @return array|\WP_Error The payment object. */
     private function createPayment(\WC_Order $order, string $mode, array $source, string $idempotencyKey)
     {
-        $body = array_filter(array_merge($source, [
+        return $this->sendPayment($order, $mode, $this->paymentBody($order, $mode, $source, $idempotencyKey));
+    }
+
+    /** @return array<string,mixed> */
+    private function paymentBody(\WC_Order $order, string $mode, array $source, string $idempotencyKey): array
+    {
+        return array_filter(array_merge($source, [
             'idempotency_key' => $idempotencyKey,
             'amount_money' => Money::money($order->get_total(), $order->get_currency()),
             'location_id' => $this->gateway->locationId($mode),
@@ -277,6 +417,11 @@ final class Payments
         ]), static function ($value) {
             return $value !== null && $value !== '';
         });
+    }
+
+    /** @return array|\WP_Error The payment object. */
+    private function sendPayment(\WC_Order $order, string $mode, array $body)
+    {
         $response = $this->gateway->api($mode)->request('POST', 'payments', $body);
         if (is_wp_error($response)) {
             return $response;

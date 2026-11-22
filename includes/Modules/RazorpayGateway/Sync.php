@@ -203,7 +203,14 @@ final class Sync
 
         $flow = (string) $order->get_meta(Gateway::META_FLOW);
         if ($flow === 'auth') {
-            $token = $this->saveToken($payment, (int) $order->get_customer_id(), $mode);
+            $refused = null;
+            $token = $this->saveToken($payment, (int) $order->get_customer_id(), $mode, $refused);
+            $orderMinor = Money::toMinor($order->get_total(), $order->get_currency());
+            // An eNACH authorization takes ₹0, so by itself it never pays an order that costs money.
+            $nothingTaken = $expected <= 0 && $orderMinor > 0;
+            if (!$token && $nothingTaken) {
+                return $this->withoutMandate($order, $paymentId, $refused);
+            }
             if (!$token) {
                 $order->add_order_note(__('Razorpay did not return a recurring token for this payment, so renewals will be invoiced.', 'stackless-lite'));
             } else {
@@ -211,8 +218,7 @@ final class Sync
                 $order->update_meta_data(SubscriptionData::META_GATEWAY_CUSTOMER, Tokens::customer($token));
                 /* translators: %s: saved method */
                 $order->add_order_note(sprintf(__('Saved %s for renewals.', 'stackless-lite'), wp_strip_all_tags($token->get_display_name())));
-                $orderMinor = Money::toMinor($order->get_total(), $order->get_currency());
-                if (Mandate::needsFirstDebit(Tokens::method($token), $orderMinor)) {
+                if ($nothingTaken || Mandate::needsFirstDebit(Tokens::method($token), $orderMinor)) {
                     // eNACH authorizes ₹0: the order's own amount is a separate debit.
                     $order->update_meta_data(Gateway::META_FIRST_DEBIT, $token->get_token());
                     $order->save();
@@ -260,6 +266,33 @@ final class Sync
     }
 
     /** Refund the ₹1 authorization of a free (all-trial) order. */
+    /**
+     * A ₹0 authorization with no mandate to debit. A refused mandate fails the order, so it can be paid
+     * again. With no clear answer the order waits on hold and the delivery is retried.
+     *
+     * @param string|null $refused rejected|cancelled, or null when Razorpay gave no clear answer.
+     */
+    private function withoutMandate(\WC_Order $order, string $paymentId, ?string $refused): string
+    {
+        if ($order->get_date_paid()) {
+            return 'ignored: order already settled';
+        }
+        if ($refused !== null) {
+            if (!$order->has_status('failed')) {
+                Declines::record($order, ['category' => SubscriptionData::DECLINE_HARD, 'code' => 'mandate_' . $refused]);
+                /* translators: %s: rejected or cancelled */
+                $order->update_status('failed', sprintf(__('The bank %s the eNACH mandate, so the first payment was not debited.', 'stackless-lite'), $refused === 'rejected' ? __('rejected', 'stackless-lite') : __('cancelled', 'stackless-lite')));
+            }
+            return 'failed';
+        }
+        if (!$order->has_status('on-hold')) {
+            wc_maybe_reduce_stock_levels($order->get_id());
+            /* translators: %s: Razorpay payment id */
+            $order->update_status('on-hold', sprintf(__('Razorpay registered %s for ₹0 and the eNACH mandate could not be read, so nothing has been paid. Do not ship this order until its first payment is debited. If it stays on hold, check the mandate in Razorpay.', 'stackless-lite'), $paymentId));
+        }
+        return 'busy'; // Razorpay retries the event, and the retry reads the mandate again.
+    }
+
     private function refundVerification(\WC_Order $order, array $payment, string $mode): void
     {
         $refund = $this->gateway->api($mode)->request('POST', 'payments/' . rawurlencode((string) $payment['id']) . '/refund', [
@@ -276,7 +309,7 @@ final class Sync
     }
 
     /** Save the token an authorization payment created. */
-    private function saveToken(array $payment, int $userId, string $mode): ?\WC_Payment_Token
+    private function saveToken(array $payment, int $userId, string $mode, ?string &$refused = null): ?\WC_Payment_Token
     {
         $tokenId = (string) ($payment['token_id'] ?? '');
         $customerId = (string) ($payment['customer_id'] ?? '');
@@ -289,6 +322,7 @@ final class Sync
             return null;
         }
         if (in_array(Tokens::statusOf($entity), ['rejected', 'cancelled'], true)) {
+            $refused = Tokens::statusOf($entity);
             return null;
         }
         return Tokens::saveFromEntity($entity, $userId, $customerId, $mode, $payment);

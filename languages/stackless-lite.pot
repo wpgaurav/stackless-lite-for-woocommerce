@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stackless Lite for WooCommerce 2.0.4\n"
+"Project-Id-Version: Stackless Lite for WooCommerce 2.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/wpgaurav/stackless-lite-for-woocommerce/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-22T04:26:32+00:00\n"
+"POT-Creation-Date: 2026-11-22T18:14:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: stackless-lite\n"
@@ -117,6 +117,7 @@ msgstr ""
 
 #: includes/Admin/SettingsPage.php:144
 #: includes/Admin/SettingsPage.php:315
+#: includes/Modules/BraintreeGateway/Gateway.php:162
 msgid "Off"
 msgstr ""
 
@@ -165,12 +166,13 @@ msgstr ""
 
 #: includes/Admin/SettingsPage.php:214
 #: includes/Lite/ProCatalog.php:21
+#: includes/Modules/BraintreeGateway/Gateway.php:151
 #: includes/Modules/BuyLinks/Admin.php:75
 #: includes/Modules/BuyLinks/Module.php:59
 #: includes/Modules/ExtraEnhancements/Module.php:68
 #: includes/Modules/ExtraEnhancements/ProductCheckout.php:212
 #: includes/Modules/MollieGateway/Gateway.php:135
-#: includes/Modules/SquareGateway/Gateway.php:126
+#: includes/Modules/SquareGateway/Gateway.php:130
 #: includes/Modules/StripeGateway/Admin.php:253
 #: includes/Modules/StripeGateway/Module.php:254
 #: includes/Modules/StripeGateway/Module.php:299
@@ -473,468 +475,576 @@ msgid "Why customers cancelled lately"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:78
-msgid "Checkout Builder"
+msgid "Subscription Save Offers"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:81
-msgid "Five ready-made checkout layouts in your colours, previewed and switched on without an editor."
+msgid "Ask why customers cancel and make 1 offer that fits the reason, before the subscription ends."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:83
-msgid "Five layouts for the Checkout block and the classic checkout"
+msgid "A renewal discount, a pause, a skipped payment, a cheaper or yearly plan, or your own message"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:84
-msgid "Your brand colours, with a live preview before you switch"
+msgid "Declining cancels with no more questions; every attempt is logged with the save rate by reason"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:89
-msgid "On-page Checkout"
+#: includes/Lite/ProCatalog.php:85
+msgid "1 optional win-back email after a subscription ends, with a one-click unsubscribe"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:92
-msgid "Plan cards and your checkout on any page, so buyers choose and pay without leaving it."
+#: includes/Lite/ProCatalog.php:90
+msgid "Checkout Builder"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:94
-msgid "A block and a shortcode for any page"
+#: includes/Lite/ProCatalog.php:93
+msgid "Five ready-made checkout layouts in your colours, previewed and switched on without an editor."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:95
-msgid "Each plan gets its own cart, so the store cart is left alone"
+msgid "Five layouts for the Checkout block and the classic checkout"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:96
-msgid "After payment the whole page moves to the receipt"
+msgid "Your brand colours, with a live preview before you switch"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:101
-msgid "Modal Checkout"
+msgid "On-page Checkout"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:104
-msgid "Buy buttons and checkout links open your checkout in a modal on the same page."
+msgid "Plan cards and your checkout on any page, so buyers choose and pay without leaving it."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:106
-msgid "Turn it on with a class, a link hash, or for every Add to cart and checkout link"
+msgid "A block and a shortcode for any page"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:107
-msgid "Classes that limit the payment methods a modal offers, enforced on the server"
+msgid "Each plan gets its own cart, so the store cart is left alone"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:112
-msgid "Checkout Recovery"
+#: includes/Lite/ProCatalog.php:108
+msgid "After payment the whole page moves to the receipt"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:115
-msgid "Emails that bring shoppers back to a checkout they left, with their cart restored."
+#: includes/Lite/ProCatalog.php:113
+msgid "Modal Checkout"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:117
-msgid "Up to three reminders, with an optional coupon in the last one"
+#: includes/Lite/ProCatalog.php:116
+msgid "Buy buttons and checkout links open your checkout in a modal on the same page."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:118
-msgid "Only with consent, with one-click unsubscribe"
+msgid "Turn it on with a class, a link hash, or for every Add to cart and checkout link"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:119
-msgid "Recovered revenue in the admin and FluentCRM triggers"
+msgid "Classes that limit the payment methods a modal offers, enforced on the server"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:124
-msgid "VAT Numbers"
+msgid "Checkout Recovery"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:127
-msgid "A VAT number field with EU VIES checks and reverse charge for business buyers."
+msgid "Emails that bring shoppers back to a checkout they left, with their cart restored."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:129
-#: includes/Lite/ProCatalog.php:144
-#: includes/Lite/ProCatalog.php:279
-msgid "Works on the Checkout block and the classic checkout"
+msgid "Up to three reminders, with an optional coupon in the last one"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:130
-msgid "Validated numbers and their proof are kept on the order"
+msgid "Only with consent, with one-click unsubscribe"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:131
-msgid "Reverse charge for valid business buyers in other EU countries"
+msgid "Recovered revenue in the admin and FluentCRM triggers"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:136
-msgid "Order Bumps"
+msgid "VAT Numbers"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:139
-msgid "One-click add-on offers at checkout."
+msgid "A VAT number field with EU VIES checks and reverse charge for business buyers."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:141
-msgid "Shown by cart rules such as products, categories and cart total"
+#: includes/Lite/ProCatalog.php:168
+#: includes/Lite/ProCatalog.php:329
+msgid "Works on the Checkout block and the classic checkout"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:142
-msgid "Discounted prices calculated on the server"
+msgid "Validated numbers and their proof are kept on the order"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:143
-msgid "Take rates per bump"
+msgid "Reverse charge for valid business buyers in other EU countries"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:149
-msgid "Post-purchase Offers"
+#: includes/Lite/ProCatalog.php:148
+msgid "Cart Goals"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:152
-msgid "One-click offers on the thank-you page, charged to the payment method the customer just used."
+#: includes/Lite/ProCatalog.php:151
+msgid "A progress bar toward spend goals in the cart and checkout."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:153
+msgid "Up to 3 goals with free shipping or a discount as the reward"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:154
-msgid "Offers shown by rules, priced on the server, with take rates"
+msgid "Rewards added and removed automatically, checked on the server"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:155
-msgid "Charged only on the customer's click, never twice"
+msgid "Works on the Cart and Checkout blocks and the classic cart, mini cart and checkout"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:156
-msgid "Falls back to a pay link when a one-click charge isn't possible"
+#: includes/Lite/ProCatalog.php:160
+msgid "Order Bumps"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:161
-msgid "Gift Cards and Store Credit"
+#: includes/Lite/ProCatalog.php:163
+msgid "One-click add-on offers at checkout."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:164
-msgid "Sell gift cards and keep store credit for customers."
+#: includes/Lite/ProCatalog.php:165
+msgid "Shown by cart rules such as products, categories and cart total"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:166
-msgid "Gift card products that email a code to the recipient"
+msgid "Discounted prices calculated on the server"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:167
-msgid "Store credit balances with a full history"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:168
-msgid "Refunds to store credit, and partial redemption at checkout"
+msgid "Take rates per bump"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:173
-msgid "Custom Invoices"
+msgid "Post-purchase Offers"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:176
-msgid "Invoice customers for products or custom items with a branded invoice and a secure pay link."
+msgid "One-click offers on the thank-you page, charged to the payment method the customer just used."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:178
-msgid "Numbered, printable invoices in six layouts"
+msgid "Offers shown by rules, priced on the server, with take rates"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:179
-msgid "Recurring invoices, deposits with automatic balance invoices and due-date reminders"
+msgid "Charged only on the customer's click, never twice"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:180
-msgid "A library of reusable invoice-only items and remembered customer details"
+msgid "Falls back to a pay link when a one-click charge isn't possible"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:181
-msgid "VAT and company registration numbers on the invoice"
+#: includes/Lite/ProCatalog.php:185
+msgid "Sale Campaigns"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:186
-msgid "Request a Quote"
+#: includes/Lite/ProCatalog.php:188
+msgid "Scheduled sales that start and end by themselves, with sale prices, a badge and a countdown to the real end."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:189
-msgid "Customers ask for a quote from any page or product, and accept your proposal online."
+#: includes/Lite/ProCatalog.php:190
+msgid "A percentage or fixed amount off the whole store, chosen categories or chosen products"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:191
-msgid "A quote form for any page or product"
+msgid "Regular prices back on time, because product prices are never changed"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:192
-msgid "Reply with a proposal the customer accepts online"
+msgid "A countdown block and shortcode, and an optional announcement bar"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:193
-msgid "Accepting issues the invoice and takes the customer to payment"
+msgid "Works with the Cart and Checkout blocks, the classic checkout and Multi-Currency"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:198
-msgid "Coupon Affiliates"
+msgid "Gift Cards and Store Credit"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:201
-msgid "Customers and partners earn a commission on every paid order that uses their coupon."
+msgid "Sell gift cards and keep store credit for customers."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:203
-msgid "Personal codes from My Account, or any coupon you assign"
+msgid "Gift card products that email a code to the recipient"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:204
-msgid "A refund hold and automatic reversal on refunds and cancellations"
+msgid "Store credit balances with a full history"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:205
-msgid "Manual payouts with CSV export"
+msgid "Refunds to store credit, and partial redemption at checkout"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:210
-msgid "Multi-Currency Checkout"
+msgid "Custom Invoices"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:213
-msgid "Sell in several currencies with one settlement currency per cart and order."
+msgid "Invoice customers for products or custom items with a branded invoice and a secure pay link."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:215
-msgid "Exact prices per product and per variation in each currency"
+msgid "Numbered, printable invoices in six layouts"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:216
-msgid "Manual or Frankfurter exchange rates, with markup and rounding"
+msgid "Recurring invoices, deposits with automatic balance invoices and due-date reminders"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:217
-msgid "Rules for products without a price in the shopper’s currency"
+msgid "A library of reusable invoice-only items and remembered customer details"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:218
-msgid "Subscription renewals keep the currency they started in"
+msgid "VAT and company registration numbers on the invoice"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:223
-msgid "Storefront Currency Selector"
+msgid "Request a Quote"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:226
-msgid "Let shoppers pick their currency."
+msgid "Customers ask for a quote from any page or product, and accept your proposal online."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:228
-msgid "A shortcode, a block, or a selector above the checkout payment methods"
+msgid "A quote form for any page or product"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:229
-msgid "Switching reprices the cart on the server"
+msgid "Reply with a proposal the customer accepts online"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:234
-msgid "Currency-Aware Payment Gateways"
+#: includes/Lite/ProCatalog.php:230
+msgid "Accepting issues the invoice and takes the customer to payment"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:237
-msgid "Choose which payment gateways handle each currency."
+#: includes/Lite/ProCatalog.php:235
+msgid "Coupon Affiliates"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:239
-msgid "Pick the gateways, and the one shown first, per currency"
+#: includes/Lite/ProCatalog.php:238
+msgid "Customers and partners earn a commission on every paid order that uses their coupon."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:240
-msgid "Unsupported gateways are removed at checkout and rejected on the server"
+msgid "Personal codes from My Account, or any coupon you assign"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:245
-msgid "Software Licensing"
+#: includes/Lite/ProCatalog.php:241
+msgid "A refund hold and automatic reversal on refunds and cancellations"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:248
-msgid "Sell plugins and themes with license keys and automatic updates from your own store."
+#: includes/Lite/ProCatalog.php:242
+msgid "Manual payouts with CSV export"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:247
+msgid "Multi-Currency Checkout"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:250
-msgid "License keys per order item or subscription"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:251
-msgid "Site activation limits that customers manage from My Account"
+msgid "Sell in several currencies with one settlement currency per cart and order."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:252
-msgid "A license API to validate, activate and deactivate"
+msgid "Exact prices per product and per variation in each currency"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:253
-msgid "An update server for your plugins and themes"
+msgid "Manual or Frankfurter exchange rates, with markup and rounding"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:258
-msgid "Page Access"
+#: includes/Lite/ProCatalog.php:254
+msgid "Rules for products without a price in the shopper’s currency"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:261
-msgid "Unlock chosen pages for customers who buy a product."
+#: includes/Lite/ProCatalog.php:255
+msgid "Subscription renewals keep the currency they started in"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:260
+msgid "Storefront Currency Selector"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:263
-msgid "Published pages show an access notice to everyone else"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:264
-msgid "Private pages stay hidden from everyone except buyers"
+msgid "Let shoppers pick their currency."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:265
-msgid "Subscriptions keep access while they are active"
+msgid "A shortcode, a block, or a selector above the checkout payment methods"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:266
-msgid "A My pages tab in My Account"
+msgid "Switching reprices the cart on the server"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:271
-msgid "Fields & Paid Add-ons"
+msgid "Currency-Aware Payment Gateways"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:274
-msgid "Product add-ons with prices, and checkout fields with optional fees."
+msgid "Choose which payment gateways handle each currency."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:276
-msgid "Checkbox, dropdown, text and number add-ons"
+msgid "Pick the gateways, and the one shown first, per currency"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:277
-msgid "Per-item or one-off add-on prices"
+msgid "Unsupported gateways are removed at checkout and rejected on the server"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:278
-msgid "Collapsible checkout fields with optional fees"
+#: includes/Lite/ProCatalog.php:282
+msgid "Software Licensing"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:284
-msgid "Wholesale Pricing"
+#: includes/Lite/ProCatalog.php:285
+msgid "Sell plugins and themes with license keys and automatic updates from your own store."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:287
-msgid "Prices by customer role and quantity tiers."
+msgid "License keys per order item or subscription"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:288
+msgid "Site activation limits that customers manage from My Account"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:289
-msgid "Role prices and quantity breaks per product, variation or category"
+msgid "A license API to validate, activate and deactivate"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:290
-msgid "A tier table on the product page"
+msgid "An update server for your plugins and themes"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:291
-msgid "Works with Hide Price Until Login and multi-currency"
+#: includes/Lite/ProCatalog.php:295
+msgid "Page Access"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:296
-msgid "Delivery & Pickup Slots"
+#: includes/Lite/ProCatalog.php:298
+msgid "Unlock chosen pages for customers who buy a product."
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:299
-msgid "Customers pick a delivery or pickup time at checkout."
+#: includes/Lite/ProCatalog.php:300
+msgid "Published pages show an access notice to everyone else"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:301
-msgid "Weekly time windows with a capacity per slot"
+msgid "Private pages stay hidden from everyone except buyers"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:302
-msgid "Lead time and closed dates"
+msgid "Subscriptions keep access while they are active"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:303
-msgid "Availability per shipping method"
+msgid "A My pages tab in My Account"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:308
-msgid "Webhooks and REST API"
+msgid "Purchase Rules"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:311
-msgid "Connect your store to Zapier, Make, n8n or your own code."
+msgid "Choose who can buy a product, and from which countries."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:313
-msgid "Subscription and license events in WooCommerce webhooks"
+msgid "Limit buyers by role, FluentCRM tag or WP Fusion tag, or to one purchase each"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:314
-msgid "A subscriptions REST API that works with WooCommerce REST API keys"
+msgid "Country lock by visitor location from Cloudflare and other CDN headers"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:319
-msgid "FluentCRM"
+#: includes/Lite/ProCatalog.php:315
+msgid "Country lock by billing or shipping country, with checkout lists trimmed to match"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:322
-msgid "Connect subscriptions, licenses, invoices and quotes to FluentCRM."
+#: includes/Lite/ProCatalog.php:316
+msgid "Store-wide rule with per-product and per-variation overrides"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:321
+msgid "Fields & Paid Add-ons"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:324
-msgid "Automation triggers for subscriptions, renewals, licenses, invoices and quotes"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:325
-msgid "Tags and lists that follow subscription status"
+msgid "Product add-ons with prices, and checkout fields with optional fees."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:326
-msgid "Smart codes for emails"
+msgid "Checkbox, dropdown, text and number add-ons"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:327
-msgid "Subscriptions and licenses on each contact’s profile"
+msgid "Per-item or one-off add-on prices"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:332
-msgid "AI Agents"
+#: includes/Lite/ProCatalog.php:328
+msgid "Collapsible checkout fields with optional fees"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:335
-msgid "Let Claude, ChatGPT, Cursor and other agents run your store through the free Site Agent plugin."
+#: includes/Lite/ProCatalog.php:334
+msgid "Frequently Bought Together"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:337
-msgid "Sales reports, orders, invoices, quotes, subscriptions and license keys"
-msgstr ""
-
-#: includes/Lite/ProCatalog.php:338
-msgid "Stock alerts, product details and page access"
+msgid "The product with up to 3 companions, a combined total and one button that adds the checked items."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:339
-msgid "Agents work as a WordPress user you choose"
+msgid "Your picks per product first, then products from paid order history"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:340
-msgid "They ask you before anything reaches a customer"
+msgid "An optional set discount that comes off when an item leaves the cart"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:345
-msgid "Woo Redesign"
+#: includes/Lite/ProCatalog.php:341
+msgid "Automatic placement on the product page, a block and a shortcode"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:348
-msgid "A cleaner WooCommerce admin in the same look as the Stackless screens."
+#: includes/Lite/ProCatalog.php:346
+msgid "Wholesale Pricing"
 msgstr ""
 
-#: includes/Lite/ProCatalog.php:350
-msgid "Orders, products, coupons, settings, status and analytics restyled"
+#: includes/Lite/ProCatalog.php:349
+msgid "Prices by customer role and quantity tiers."
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:351
-msgid "Pick the areas, the accent colour and the table density"
+msgid "Role prices and quantity breaks per product, variation or category"
 msgstr ""
 
 #: includes/Lite/ProCatalog.php:352
+msgid "A tier table on the product page"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:353
+msgid "Works with Hide Price Until Login and multi-currency"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:358
+msgid "Delivery & Pickup Slots"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:361
+msgid "Customers pick a delivery or pickup time at checkout."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:363
+msgid "Weekly time windows with a capacity per slot"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:364
+msgid "Lead time and closed dates"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:365
+msgid "Availability per shipping method"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:370
+msgid "Webhooks and REST API"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:373
+msgid "Connect your store to Zapier, Make, n8n or your own code."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:375
+msgid "Subscription and license events in WooCommerce webhooks"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:376
+msgid "A subscriptions REST API that works with WooCommerce REST API keys"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:381
+msgid "FluentCRM"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:384
+msgid "Connect subscriptions, licenses, invoices and quotes to FluentCRM."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:386
+msgid "Automation triggers for subscriptions, renewals, licenses, invoices and quotes"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:387
+msgid "Tags and lists that follow subscription status"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:388
+msgid "Smart codes for emails"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:389
+msgid "Subscriptions and licenses on each contact’s profile"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:394
+msgid "AI Agents"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:397
+msgid "Let Claude, ChatGPT, Cursor and other agents run your store through the free Site Agent plugin."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:399
+msgid "Sales reports, orders, invoices, quotes, subscriptions and license keys"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:400
+msgid "Stock alerts, product details and page access"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:401
+msgid "Agents work as a WordPress user you choose"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:402
+msgid "They ask you before anything reaches a customer"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:407
+msgid "Woo Redesign"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:410
+msgid "A cleaner WooCommerce admin in the same look as the Stackless screens."
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:412
+msgid "Orders, products, coupons, settings, status and analytics restyled"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:413
+msgid "Pick the areas, the accent colour and the table density"
+msgstr ""
+
+#: includes/Lite/ProCatalog.php:414
 msgid "Nothing changes on your storefront"
 msgstr ""
 
@@ -985,6 +1095,841 @@ msgstr ""
 
 #: includes/Lite/Upgrade.php:157
 msgid "Read the docs"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Api.php:101
+msgid "Airwallex is not connected for sandbox mode. Add the client ID, API key and account ID."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Api.php:102
+msgid "Airwallex is not connected. Add the live client ID, API key and account ID."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Api.php:147
+msgid "Airwallex rejected the client ID or API key for this mode."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Api.php:154
+msgid "Airwallex did not return an access token."
+msgstr ""
+
+#. translators: %s: transport error
+#: includes/Modules/AirwallexGateway/Api.php:195
+#, php-format
+msgid "Could not reach Airwallex: %s"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Api.php:231
+msgid "Airwallex rejected the access token. Check the client ID and API key."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Api.php:234
+msgid "This Airwallex API key is not allowed to do that. Check its permissions and account."
+msgstr ""
+
+#. translators: %s: Airwallex error message
+#: includes/Modules/AirwallexGateway/Api.php:239
+#, php-format
+msgid "Airwallex: %s"
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: includes/Modules/AirwallexGateway/Api.php:241
+#, php-format
+msgid "Airwallex returned an unexpected error (HTTP %d)."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/BlocksSupport.php:46
+#: includes/Modules/CreemGateway/BlocksSupport.php:56
+#: includes/Modules/DodoGateway/BlocksSupport.php:56
+#: includes/Modules/FlutterwaveGateway/BlocksSupport.php:54
+#: includes/Modules/MercadoPagoGateway/BlocksSupport.php:55
+#: includes/Modules/MollieGateway/BlocksSupport.php:59
+#: includes/Modules/PaystackGateway/BlocksSupport.php:54
+#: includes/Modules/RazorpayGateway/BlocksSupport.php:59
+#: includes/Modules/RevolutGateway/BlocksSupport.php:47
+#: includes/Modules/StripeGateway/Managed/BlocksSupport.php:51
+#: includes/Modules/StripeGateway/Managed/Gateway.php:262
+#: templates/airwallex_gateway/payment-fields.php:25
+#: templates/creem_gateway/payment-fields.php:21
+#: templates/dodo_gateway/payment-fields.php:21
+#: templates/flutterwave_gateway/payment-fields.php:21
+#: templates/mercadopago_gateway/payment-fields.php:21
+#: templates/mollie_gateway/payment-fields.php:38
+#: templates/paystack_gateway/payment-fields.php:21
+#: templates/razorpay_gateway/authorize-page.php:57
+#: templates/razorpay_gateway/checkout.php:29
+#: templates/razorpay_gateway/payment-fields.php:37
+#: templates/revolut_gateway/pay-page.php:65
+#: templates/revolut_gateway/payment-fields.php:24
+msgid "Test mode: no real payment will be taken."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/BlocksSupport.php:47
+#: templates/airwallex_gateway/payment-fields.php:22
+msgid "Your card is saved with Airwallex and charged automatically for renewals."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:39
+msgid "An earlier Airwallex payment for this order is still being checked. Please try again in a minute, and do not pay again another way."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:47
+#: includes/Modules/AirwallexGateway/Gateway.php:240
+#: includes/Modules/AirwallexGateway/Gateway.php:318
+#: includes/Modules/AirwallexGateway/Renewals.php:66
+#: includes/Modules/BraintreeGateway/Checkout.php:50
+#: includes/Modules/BraintreeGateway/Gateway.php:433
+#: includes/Modules/BraintreeGateway/Gateway.php:515
+#: includes/Modules/BraintreeGateway/Payments.php:55
+#: includes/Modules/BraintreeGateway/Payments.php:92
+#: includes/Modules/BraintreeGateway/Payments.php:174
+#: includes/Modules/BraintreeGateway/Payments.php:195
+#: includes/Modules/BraintreeGateway/Reversals.php:38
+#: includes/Modules/CreemGateway/Gateway.php:502
+#: includes/Modules/CreemGateway/Gateway.php:541
+#: includes/Modules/DodoGateway/Gateway.php:451
+#: includes/Modules/DodoGateway/Gateway.php:489
+#: includes/Modules/FlutterwaveGateway/Gateway.php:309
+#: includes/Modules/FlutterwaveGateway/Gateway.php:342
+#: includes/Modules/MercadoPagoGateway/Gateway.php:354
+#: includes/Modules/MercadoPagoGateway/Gateway.php:391
+#: includes/Modules/MollieGateway/Gateway.php:380
+#: includes/Modules/MollieGateway/Gateway.php:564
+#: includes/Modules/PaddleGateway/Gateway.php:471
+#: includes/Modules/PaddleGateway/Gateway.php:510
+#: includes/Modules/PayPalGateway/Ajax.php:138
+#: includes/Modules/PayPalGateway/Gateway.php:593
+#: includes/Modules/PayPalGateway/Gateway.php:641
+#: includes/Modules/PayPalGateway/Payments.php:256
+#: includes/Modules/PayPalGateway/Payments.php:582
+#: includes/Modules/PayPalGateway/Payments.php:669
+#: includes/Modules/PayPalGateway/Payments.php:803
+#: includes/Modules/PayPalGateway/SavedCharges.php:49
+#: includes/Modules/PaystackGateway/Gateway.php:318
+#: includes/Modules/PaystackGateway/Gateway.php:356
+#: includes/Modules/PolarGateway/Gateway.php:438
+#: includes/Modules/PolarGateway/Gateway.php:477
+#: includes/Modules/RazorpayGateway/Gateway.php:427
+#: includes/Modules/RazorpayGateway/Gateway.php:548
+#: includes/Modules/RazorpayGateway/Renewals.php:81
+#: includes/Modules/RevolutGateway/Charges.php:52
+#: includes/Modules/RevolutGateway/Checkout.php:36
+#: includes/Modules/RevolutGateway/Gateway.php:204
+#: includes/Modules/RevolutGateway/Gateway.php:284
+#: includes/Modules/SquareGateway/Gateway.php:494
+#: includes/Modules/SquareGateway/Gateway.php:652
+#: includes/Modules/SquareGateway/Payments.php:281
+#: includes/Modules/StripeGateway/Gateway.php:200
+#: includes/Modules/StripeGateway/Gateway.php:507
+#: includes/Modules/StripeGateway/Managed/Gateway.php:272
+#: includes/Modules/StripeGateway/Managed/Gateway.php:327
+msgid "Order not found."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:53
+#: includes/Modules/RevolutGateway/Checkout.php:42
+msgid "This order cannot be paid in its current status."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:61
+msgid "A payment for this order is being reviewed. Please contact us instead of paying again."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:74
+msgid "Airwallex is not connected. Choose another payment method."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/AirwallexGateway/Checkout.php:78
+#: includes/Modules/AirwallexGateway/Renewals.php:116
+#, php-format
+msgid "Airwallex does not take payments in %s."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:139
+msgid "Airwallex did not return a payment page for this order."
+msgstr ""
+
+#. translators: %s: order number
+#: includes/Modules/AirwallexGateway/Checkout.php:181
+#: includes/Modules/FlutterwaveGateway/Checkout.php:109
+#: includes/Modules/RazorpayGateway/Checkout.php:192
+#: includes/Modules/RazorpayGateway/Renewals.php:163
+#: includes/Modules/RevolutGateway/Checkout.php:228
+#, php-format
+msgid "Order %s"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:297
+msgid "Airwallex did not create a customer."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:312
+msgid "Airwallex cannot save a payment method right now."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Checkout.php:342
+msgid "Airwallex did not return a page to save the card on."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Connection.php:28
+#: includes/Modules/CreemGateway/Gateway.php:145
+#: includes/Modules/DodoGateway/Gateway.php:131
+#: includes/Modules/FlutterwaveGateway/Gateway.php:98
+#: includes/Modules/PaddleGateway/Gateway.php:122
+#: includes/Modules/PaystackGateway/Gateway.php:98
+#: includes/Modules/PolarGateway/Gateway.php:124
+#: includes/Modules/RazorpayGateway/Gateway.php:127
+#: includes/Modules/RevolutGateway/Connection.php:21
+#: includes/Modules/StripeGateway/Admin.php:45
+msgid "Live"
+msgstr ""
+
+#. translators: 1: Sandbox or Production, 2: error
+#. translators: %s: Sandbox or Production
+#: includes/Modules/AirwallexGateway/Connection.php:28
+#: includes/Modules/BraintreeGateway/Connection.php:206
+#: includes/Modules/BraintreeGateway/Gateway.php:116
+#: includes/Modules/BraintreeGateway/Gateway.php:132
+#: includes/Modules/PaddleGateway/Gateway.php:116
+#: includes/Modules/PaddleGateway/Gateway.php:147
+#: includes/Modules/PayPalGateway/Gateway.php:95
+#: includes/Modules/PolarGateway/Gateway.php:118
+#: includes/Modules/PolarGateway/Gateway.php:143
+#: includes/Modules/RevolutGateway/Connection.php:21
+#: includes/Modules/SquareGateway/Gateway.php:101
+#: includes/Modules/SquareGateway/Gateway.php:114
+#: includes/Modules/SquareGateway/Setup.php:101
+#: includes/Modules/SquareGateway/Setup.php:111
+msgid "Sandbox"
+msgstr ""
+
+#. translators: %s: Live or Sandbox
+#: includes/Modules/AirwallexGateway/Connection.php:31
+#, php-format
+msgid "%s: Airwallex needs the client ID, the API key and the account ID."
+msgstr ""
+
+#. translators: %s: Live or Sandbox
+#: includes/Modules/AirwallexGateway/Connection.php:39
+#, php-format
+msgid "%s: add the webhook secret. Without it every webhook is refused."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Connection.php:51
+msgid "Payment Acceptance (write)"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Connection.php:56
+msgid "Checkout Sessions (write)"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Connection.php:57
+msgid "Also check the account ID, and ask Airwallex whether Checkout Session is available for this account."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Connection.php:61
+msgid "Payment Disputes (read)"
+msgstr ""
+
+#. translators: %s: API key permission
+#: includes/Modules/AirwallexGateway/Connection.php:70
+#, php-format
+msgid "Airwallex refused access. The API key needs %s for this account; if it covers several accounts, tick that option."
+msgstr ""
+
+#. translators: 1: dispute id, 2: stage, 3: status, 4: amount
+#: includes/Modules/AirwallexGateway/Disputes.php:45
+#, php-format
+msgid "Airwallex dispute %1$s: %2$s, %3$s %4$s. Respond in Airwallex."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:54
+msgid "Airwallex Beta (Stackless)"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:55
+msgid "Cards, wallets and the local methods switched on in your Airwallex account, on Airwallex’s hosted payment page. Saves cards for automatic subscription renewals."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:82
+#: includes/Modules/BraintreeGateway/Gateway.php:100
+#: includes/Modules/CreemGateway/Gateway.php:123
+#: includes/Modules/DodoGateway/Gateway.php:109
+#: includes/Modules/FlutterwaveGateway/Gateway.php:76
+#: includes/Modules/MercadoPagoGateway/Gateway.php:76
+#: includes/Modules/MollieGateway/Gateway.php:95
+#: includes/Modules/PaddleGateway/Gateway.php:100
+#: includes/Modules/PayPalGateway/Gateway.php:77
+#: includes/Modules/PaystackGateway/Gateway.php:76
+#: includes/Modules/PolarGateway/Gateway.php:102
+#: includes/Modules/RazorpayGateway/Gateway.php:98
+#: includes/Modules/RevolutGateway/Gateway.php:61
+#: includes/Modules/SquareGateway/Gateway.php:85
+#: includes/Modules/StripeGateway/Managed/Gateway.php:103
+msgid "Enable"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:84
+msgid "Accept payments with Airwallex (beta)"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:88
+#: includes/Modules/BraintreeGateway/Gateway.php:106
+#: includes/Modules/CreemGateway/Gateway.php:129
+#: includes/Modules/DodoGateway/Gateway.php:115
+#: includes/Modules/FlutterwaveGateway/Gateway.php:82
+#: includes/Modules/MercadoPagoGateway/Gateway.php:82
+#: includes/Modules/MollieGateway/Gateway.php:101
+#: includes/Modules/PaddleGateway/Gateway.php:106
+#: includes/Modules/PayPalGateway/Gateway.php:83
+#: includes/Modules/PaystackGateway/Gateway.php:82
+#: includes/Modules/PolarGateway/Gateway.php:108
+#: includes/Modules/RazorpayGateway/Gateway.php:104
+#: includes/Modules/RevolutGateway/Gateway.php:67
+#: includes/Modules/SquareGateway/Gateway.php:91
+#: includes/Modules/StripeGateway/Managed/Gateway.php:109
+#: includes/Modules/StripeGateway/Module.php:255
+msgid "Title"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:90
+msgid "Card and more payment methods"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:93
+#: includes/Modules/BraintreeGateway/Gateway.php:111
+#: includes/Modules/CreemGateway/Gateway.php:134
+#: includes/Modules/DodoGateway/Gateway.php:120
+#: includes/Modules/FlutterwaveGateway/Gateway.php:87
+#: includes/Modules/MercadoPagoGateway/Gateway.php:87
+#: includes/Modules/MollieGateway/Gateway.php:106
+#: includes/Modules/PaddleGateway/Gateway.php:111
+#: includes/Modules/PayPalGateway/Gateway.php:90
+#: includes/Modules/PaystackGateway/Gateway.php:87
+#: includes/Modules/PolarGateway/Gateway.php:113
+#: includes/Modules/RazorpayGateway/Gateway.php:109
+#: includes/Modules/RevolutGateway/Gateway.php:72
+#: includes/Modules/SquareGateway/Gateway.php:96
+#: includes/Modules/StripeGateway/Managed/Gateway.php:114
+#: includes/Modules/StripeGateway/Module.php:256
+msgid "Description"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:95
+msgid "You’ll finish paying on Airwallex’s secure payment page."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:98
+#: includes/Modules/CreemGateway/Gateway.php:139
+#: includes/Modules/CreemGateway/Gateway.php:154
+#: includes/Modules/DodoGateway/Gateway.php:125
+#: includes/Modules/DodoGateway/Gateway.php:140
+#: includes/Modules/FlutterwaveGateway/Gateway.php:92
+#: includes/Modules/FlutterwaveGateway/Gateway.php:109
+#: includes/Modules/MercadoPagoGateway/Gateway.php:92
+#: includes/Modules/MercadoPagoGateway/Gateway.php:108
+#: includes/Modules/MollieGateway/Gateway.php:111
+#: includes/Modules/PaystackGateway/Gateway.php:92
+#: includes/Modules/PaystackGateway/Gateway.php:109
+#: includes/Modules/RazorpayGateway/Gateway.php:114
+#: includes/Modules/RevolutGateway/Gateway.php:77
+#: includes/Modules/StripeGateway/Module.php:245
+msgid "Test mode"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:100
+msgid "Use the Airwallex sandbox (no real money moves)"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:105
+#: includes/Modules/StripeGateway/Admin.php:262
+msgid "Live account"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:105
+msgid "Open Airwallex"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:106
+msgid "Sandbox account"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:106
+msgid "Open the Airwallex sandbox"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:113
+msgid "In Developer → API keys create a scoped key with Payment Acceptance (write), Checkout Sessions (write) and Payment Disputes (read). The account ID is under Settings → Account details."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:116
+#: includes/Modules/PayPalGateway/Gateway.php:107
+msgid "Client ID"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:117
+msgid "API key"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:118
+msgid "Account ID"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:119
+msgid "Webhook secret"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:127
+msgid "Several accounts"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:129
+msgid "This API key covers more than one account (sign in as the account ID above)"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:135
+#: includes/Modules/BraintreeGateway/Gateway.php:185
+#: includes/Modules/CreemGateway/Gateway.php:177
+#: includes/Modules/DodoGateway/Gateway.php:163
+#: includes/Modules/FlutterwaveGateway/Gateway.php:132
+#: includes/Modules/MercadoPagoGateway/Gateway.php:130
+#: includes/Modules/PayPalGateway/Gateway.php:144
+#: includes/Modules/PaystackGateway/Gateway.php:132
+#: includes/Modules/PolarGateway/Gateway.php:161
+#: includes/Modules/RazorpayGateway/Gateway.php:142
+#: includes/Modules/SquareGateway/Gateway.php:155
+msgid "Webhook"
+msgstr ""
+
+#. translators: 1: webhook URL, 2: API version, 3: event names
+#: includes/Modules/AirwallexGateway/Gateway.php:139
+#, php-format
+msgid "In Developer → Webhooks, in the sandbox and in the live account, add %1$s with API version %2$s and these events: %3$s. Each webhook has its own secret. Test events sent from Airwallex use another secret, so this site refuses them."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:147
+#: includes/Modules/BraintreeGateway/Gateway.php:179
+#: includes/Modules/CreemGateway/Gateway.php:217
+#: includes/Modules/DodoGateway/Gateway.php:204
+#: includes/Modules/FlutterwaveGateway/Gateway.php:142
+#: includes/Modules/MercadoPagoGateway/Gateway.php:140
+#: includes/Modules/MollieGateway/Gateway.php:162
+#: includes/Modules/PaddleGateway/Gateway.php:214
+#: includes/Modules/PayPalGateway/Gateway.php:266
+#: includes/Modules/PaystackGateway/Gateway.php:142
+#: includes/Modules/PolarGateway/Gateway.php:187
+#: includes/Modules/RazorpayGateway/Gateway.php:180
+#: includes/Modules/RevolutGateway/Gateway.php:117
+#: includes/Modules/SquareGateway/Gateway.php:149
+#: includes/Modules/StripeGateway/Module.php:318
+msgid "Debug log"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:149
+msgid "Log Airwallex activity to WooCommerce → Status → Logs (stackless-airwallex_gateway). Keys are never logged."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:153
+#: includes/Modules/BraintreeGateway/Gateway.php:195
+#: includes/Modules/CreemGateway/Gateway.php:203
+#: includes/Modules/DodoGateway/Gateway.php:190
+#: includes/Modules/FlutterwaveGateway/Gateway.php:137
+#: includes/Modules/MercadoPagoGateway/Gateway.php:135
+#: includes/Modules/MollieGateway/Gateway.php:168
+#: includes/Modules/PaddleGateway/Gateway.php:204
+#: includes/Modules/PaystackGateway/Gateway.php:137
+#: includes/Modules/PolarGateway/Gateway.php:177
+#: includes/Modules/RevolutGateway/Gateway.php:123
+#: includes/Modules/StripeGateway/Managed/Gateway.php:136
+msgid "Good to know"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:155
+msgid "Subscriptions offer cards only, and a free trial saves the card without a charge. Turn Automatic Currency Conversion off in Airwallex → Payments → Settings: a payment in another currency cannot match its order and is held for review. Airwallex labels the Checkout Session API as beta."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:170
+msgid "Airwallex cannot send webhooks to this site until it is on public HTTPS."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:243
+#: includes/Modules/BraintreeGateway/Gateway.php:436
+#: includes/Modules/MollieGateway/Gateway.php:383
+#: includes/Modules/RazorpayGateway/Gateway.php:430
+#: includes/Modules/RevolutGateway/Gateway.php:207
+#: includes/Modules/SquareGateway/Gateway.php:497
+msgid "Change the payment method from My Account → Payment methods."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:247
+msgid "Saved cards are used for automatic payments only. Choose a new payment method."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:253
+msgid "Airwallex could not start the payment. Please try again or choose another payment method."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/AirwallexGateway/Gateway.php:257
+#, php-format
+msgid "Airwallex payment could not start: %s"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Gateway.php:268
+#: includes/Modules/BraintreeGateway/Checkout.php:40
+#: includes/Modules/MollieGateway/Gateway.php:445
+#: includes/Modules/RazorpayGateway/Gateway.php:457
+#: includes/Modules/RevolutGateway/Checkout.php:243
+msgid "Sign in to save a payment method."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Health.php:57
+msgid "Airwallex is not connected for the selected mode"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Health.php:58
+msgid "Checkout hides Airwallex and renewals wait until the client ID, API key and account ID are added."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Health.php:64
+msgid "Airwallex has no webhook secret"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Health.php:65
+msgid "Webhooks are refused, so delayed payments, refunds and disputes are not recorded on time."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Health.php:72
+msgid "Airwallex is in sandbox mode"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Health.php:73
+#: includes/Modules/BraintreeGateway/Health.php:117
+#: includes/Modules/MollieGateway/Health.php:68
+#: includes/Modules/RazorpayGateway/Health.php:75
+#: includes/Modules/SquareGateway/Health.php:82
+msgid "Payments and renewals use test money only."
+msgstr ""
+
+#. translators: %d: number of orders
+#: includes/Modules/AirwallexGateway/Health.php:83
+#, php-format
+msgid "%d order has an Airwallex payment to review"
+msgid_plural "%d orders have an Airwallex payment to review"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: order numbers
+#: includes/Modules/AirwallexGateway/Health.php:85
+#, php-format
+msgid "A second, mismatched or late payment arrived. Refund it in Airwallex or complete the order by hand: %s"
+msgstr ""
+
+#. translators: %d: number of orders
+#: includes/Modules/AirwallexGateway/Health.php:94
+#, php-format
+msgid "%d Airwallex charge has had no result for over two days"
+msgid_plural "%d Airwallex charges have had no result for over two days"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: order numbers
+#: includes/Modules/AirwallexGateway/Health.php:96
+#, php-format
+msgid "Check these in Airwallex before charging again: %s"
+msgstr ""
+
+#. translators: %d: number of events
+#: includes/Modules/AirwallexGateway/Health.php:105
+#, php-format
+msgid "%d Airwallex webhook failed recently"
+msgid_plural "%d Airwallex webhooks failed recently"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/AirwallexGateway/Health.php:106
+msgid "Airwallex retries for about three days. The Stackless Airwallex log has the reason."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Module.php:21
+#: includes/Modules/AirwallexGateway/Module.php:50
+msgid "Airwallex (beta)"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Module.php:26
+msgid "Take cards, wallets and local payment methods on Airwallex’s hosted payment page, save cards, and renew subscriptions automatically. Refunds, disputes and payment updates sync from Airwallex."
+msgstr ""
+
+#. translators: %s: link to the gateway settings
+#: includes/Modules/AirwallexGateway/Module.php:53
+#, php-format
+msgid "API keys, the webhook and checkout options live with the other payment methods: %s."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Module.php:54
+msgid "WooCommerce → Settings → Payments → Airwallex"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Privacy.php:20
+msgid "Stackless for WooCommerce: Airwallex"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Privacy.php:21
+msgid "When you pay with Airwallex we send Airwallex the order total and number, and your name, email address and country, and you enter your payment details on Airwallex’s page. For payments that renew, Airwallex stores your card. We keep only its brand, last four digits, expiry date and Airwallex’s references, until you remove it."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Privacy.php:34
+msgid "Airwallex customer references"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Refunds.php:27
+msgid "This order is being updated. Try the refund again in a moment."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Refunds.php:40
+msgid "This order has no Airwallex payment to refund."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Refunds.php:45
+#: includes/Modules/DodoGateway/Gateway.php:493
+#: includes/Modules/FlutterwaveGateway/Gateway.php:346
+#: includes/Modules/MercadoPagoGateway/Gateway.php:395
+#: includes/Modules/MollieGateway/Gateway.php:568
+#: includes/Modules/PaddleGateway/Refunds.php:37
+#: includes/Modules/PayPalGateway/Payments.php:922
+#: includes/Modules/PaystackGateway/Gateway.php:360
+#: includes/Modules/PolarGateway/Gateway.php:481
+#: includes/Modules/RazorpayGateway/Gateway.php:552
+#: includes/Modules/RevolutGateway/RefundService.php:39
+#: includes/Modules/SquareGateway/Gateway.php:656
+msgid "Enter a refund amount above zero."
+msgstr ""
+
+#. translators: %s: amount
+#: includes/Modules/AirwallexGateway/Refunds.php:73
+#, php-format
+msgid "An earlier refund of %s has no confirmed result here. Refund that amount again to finish it: it is not sent twice."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Refunds.php:100
+msgid "Airwallex did not confirm this refund. Do not refund another way. Try the same amount again: it is not sent twice."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Refunds.php:114
+msgid "Airwallex could not process this refund. Check the payment and your balance in Airwallex."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Refunds.php:119
+msgid "Airwallex’s answer did not match this refund. Check it in Airwallex before trying again."
+msgstr ""
+
+#. translators: %s: Airwallex refund id
+#: includes/Modules/AirwallexGateway/Refunds.php:126
+#, php-format
+msgid "Airwallex refund %s was already made for this amount, so no more money was sent."
+msgstr ""
+
+#. translators: 1: amount, 2: Airwallex refund id, 3: status
+#: includes/Modules/AirwallexGateway/Refunds.php:131
+#, php-format
+msgid "Refunded %1$s through Airwallex (refund %2$s, %3$s)."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Refunds.php:153
+msgid "Airwallex returned an unreadable list of refunds."
+msgstr ""
+
+#. translators: %s: Airwallex refund id
+#: includes/Modules/AirwallexGateway/Refunds.php:217
+#, php-format
+msgid "Airwallex could not complete refund %s, which is recorded on this order. The customer did not get that money back: check it in Airwallex."
+msgstr ""
+
+#. translators: %s: Airwallex refund id
+#: includes/Modules/AirwallexGateway/Refunds.php:241
+#, php-format
+msgid "Airwallex refund %s could not be added to this order (other currency, or nothing left to refund here)."
+msgstr ""
+
+#. translators: %s: Airwallex refund id
+#: includes/Modules/AirwallexGateway/Refunds.php:245
+#, php-format
+msgid "Refunded in Airwallex (%s)"
+msgstr ""
+
+#. translators: %s: Airwallex payment id
+#: includes/Modules/AirwallexGateway/Refunds.php:275
+#, php-format
+msgid "Airwallex payment %s, which needed review, was refunded in full."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:49
+#: includes/Modules/BraintreeGateway/Payments.php:88
+#: includes/Modules/BraintreeGateway/Payments.php:109
+#: includes/Modules/MollieGateway/Renewals.php:42
+#: includes/Modules/MollieGateway/Renewals.php:55
+#: includes/Modules/PayPalGateway/SavedCharges.php:32
+#: includes/Modules/RazorpayGateway/Renewals.php:47
+#: includes/Modules/RazorpayGateway/Renewals.php:60
+#: includes/Modules/RazorpayGateway/Renewals.php:77
+#: includes/Modules/RevolutGateway/Charges.php:31
+#: includes/Modules/SquareGateway/Payments.php:322
+#: includes/Modules/SquareGateway/Payments.php:342
+#: includes/Modules/StripeGateway/Renewals.php:37
+#: includes/Modules/StripeGateway/SavedCharges.php:28
+msgid "This site is a copy of the live store, so it does not charge saved payment methods."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:56
+msgid "Another request is checking this payment."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:76
+msgid "The order is not set to pay with Airwallex."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:81
+#: includes/Modules/BraintreeGateway/Payments.php:199
+#: includes/Modules/MollieGateway/Renewals.php:77
+#: includes/Modules/PayPalGateway/SavedCharges.php:116
+#: includes/Modules/RazorpayGateway/Renewals.php:93
+#: includes/Modules/RevolutGateway/Charges.php:60
+#: includes/Modules/StripeGateway/SavedCharges.php:99
+msgid "The order cannot be paid in its current status."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:103
+msgid "No saved Airwallex card of this customer is attached to this subscription."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:106
+msgid "The saved card belongs to another Airwallex mode, or that mode is not connected. The charge waits until it is."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:110
+msgid "The saved card belongs to another Airwallex account."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:295
+msgid "Airwallex declined the payment."
+msgstr ""
+
+#. translators: %s: reason
+#: includes/Modules/AirwallexGateway/Renewals.php:309
+#, php-format
+msgid "The Airwallex charge has no final result yet (%s). Checking again automatically; no second charge is started."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Renewals.php:310
+msgid "The Airwallex charge has no final result yet. Checking again automatically; no second charge is started."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Returns.php:52
+#: includes/Modules/CreemGateway/Checkout.php:297
+#: includes/Modules/DodoGateway/Checkout.php:300
+#: includes/Modules/DodoGateway/Sync.php:114
+#: includes/Modules/FlutterwaveGateway/Checkout.php:205
+#: includes/Modules/FlutterwaveGateway/Sync.php:84
+#: includes/Modules/MercadoPagoGateway/Checkout.php:188
+#: includes/Modules/PaystackGateway/Checkout.php:211
+#: includes/Modules/PaystackGateway/Sync.php:72
+msgid "Your payment did not go through. Please try again or choose another payment method."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Returns.php:53
+#: includes/Modules/MollieGateway/Checkout.php:259
+#: includes/Modules/RevolutGateway/Pages.php:256
+msgid "The payment was not completed. You can try again below."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Returns.php:72
+#: includes/Modules/MollieGateway/Checkout.php:280
+#: includes/Modules/RazorpayGateway/Sync.php:124
+#: includes/Modules/RevolutGateway/Pages.php:265
+#: includes/Modules/StripeGateway/Endpoints.php:157
+msgid "Payment method successfully added."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Returns.php:74
+msgid "Airwallex is still confirming your card. It appears here once confirmed."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Returns.php:76
+#: includes/Modules/MollieGateway/Checkout.php:285
+#: includes/Modules/RazorpayGateway/Sync.php:127
+#: includes/Modules/RevolutGateway/Pages.php:269
+msgid "Unable to add payment method to your account."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/SavedMethod.php:51
+msgid "Saved card"
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Sync.php:40
+msgid "This order has no Airwallex mode."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Sync.php:44
+msgid "The Airwallex account this order used is not connected any more."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Sync.php:204
+msgid "Airwallex is processing the payment. The order updates when Airwallex confirms it."
+msgstr ""
+
+#. translators: %s: reason code
+#: includes/Modules/AirwallexGateway/Sync.php:220
+#, php-format
+msgid "The Airwallex payment did not go through (%s)."
+msgstr ""
+
+#. translators: %s: Airwallex payment id
+#: includes/Modules/AirwallexGateway/Sync.php:254
+#, php-format
+msgid "Airwallex took payment %s for this order, which was already paid. It did not complete the order again: refund it in Airwallex if the customer paid twice."
+msgstr ""
+
+#. translators: %s: Airwallex payment id
+#: includes/Modules/AirwallexGateway/Sync.php:274
+#, php-format
+msgid "Airwallex payment %s does not match the order’s amount and currency, so it did not complete the order. Check it in Airwallex. Automatic Currency Conversion must be off for this gateway."
+msgstr ""
+
+#. translators: %s: Airwallex payment id
+#: includes/Modules/AirwallexGateway/Sync.php:278
+#, php-format
+msgid "Airwallex payment %s was refunded before it could complete the order."
+msgstr ""
+
+#. translators: %s: Airwallex payment id
+#: includes/Modules/AirwallexGateway/Sync.php:282
+#, php-format
+msgid "Airwallex payment %s arrived after the order moved to another payment method. Refund it in Airwallex, or check that no other payment was taken and complete the order."
+msgstr ""
+
+#. translators: %s: Airwallex payment id
+#: includes/Modules/AirwallexGateway/Sync.php:286
+#, php-format
+msgid "Airwallex took payment %s for an order that is no longer waiting for payment. Refund it in Airwallex or complete the order."
+msgstr ""
+
+#. translators: %s: saved method, e.g. "Visa ending in 4242"
+#: includes/Modules/AirwallexGateway/Sync.php:315
+#: includes/Modules/AirwallexGateway/Sync.php:364
+#, php-format
+msgid "Saved %s for automatic payments."
+msgstr ""
+
+#: includes/Modules/AirwallexGateway/Sync.php:317
+msgid "Airwallex did not leave a card that this store may charge later, so renewals need a new payment method."
+msgstr ""
+
+#. translators: %s: reason code
+#: includes/Modules/AirwallexGateway/Sync.php:491
+#, php-format
+msgid "Airwallex charge failed (%s)."
 msgstr ""
 
 #: includes/Modules/BackInStock/AdminScreen.php:25
@@ -1303,6 +2248,726 @@ msgstr ""
 
 #: includes/Modules/BackInStock/Module.php:599
 msgid "Signed up"
+msgstr ""
+
+#. translators: %s: transport error
+#: includes/Modules/BraintreeGateway/Api.php:99
+#: includes/Modules/BraintreeGateway/Api.php:278
+#, php-format
+msgid "Could not reach Braintree: %s"
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: includes/Modules/BraintreeGateway/Api.php:113
+#: includes/Modules/BraintreeGateway/Api.php:283
+#, php-format
+msgid "Braintree returned an unexpected response (HTTP %d)."
+msgstr ""
+
+#. translators: %s: Braintree error message
+#: includes/Modules/BraintreeGateway/Api.php:158
+#, php-format
+msgid "Braintree: %s"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:160
+msgid "Braintree could not complete the request."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:174
+msgid "Braintree is not connected for the sandbox. Add the sandbox Merchant ID, public key and private key."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:175
+msgid "Braintree is not connected. Add the production Merchant ID, public key and private key."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:182
+msgid "Braintree rejected the sandbox keys. Copy the public and private key from your sandbox Control Panel (API)."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:183
+msgid "Braintree rejected the production keys. Copy the public and private key from your production Control Panel (API)."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:226
+msgid "That saved card cannot be used."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:235
+msgid "Braintree did not return a verification token for this card."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:252
+msgid "The sandbox Merchant ID could not be confirmed with these keys. Copy all three from the same API key screen."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Api.php:253
+msgid "The production Merchant ID could not be confirmed with these keys. Copy all three from the same API key screen."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:54
+#: includes/Modules/BraintreeGateway/Declines.php:154
+msgid "Braintree does not take payments in this currency here. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:65
+#: includes/Modules/BraintreeGateway/Browser.php:102
+msgid "Braintree could not load the card form. Reload the page or choose another payment method."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:79
+#: includes/Modules/BraintreeGateway/Declines.php:156
+#: includes/Modules/BraintreeGateway/Payments.php:62
+#: includes/Modules/SquareGateway/Gateway.php:509
+msgid "That saved card is not available. Choose another one."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:101
+#: includes/Modules/SquareGateway/Gateway.php:444
+msgid "Loading the card form…"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:103
+#: includes/Modules/PayPalGateway/Module.php:227
+#: includes/Modules/SquareGateway/Gateway.php:446
+msgid "Check your card details and try again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:104
+#: includes/Modules/BraintreeGateway/Declines.php:170
+msgid "Your card could not be verified with your bank. Try again or use another card."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:105
+msgid "The currency changed. Reload the page before paying."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:106
+msgid "The checkout was updated. Check the total, then pay again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Browser.php:107
+msgid "This page expired. Reload it and try again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Card.php:110
+#: includes/Modules/MollieGateway/Methods.php:49
+#: includes/Modules/RazorpayGateway/Mandate.php:38
+#: includes/Modules/StripeGateway/Tokens.php:289
+msgid "Card"
+msgstr ""
+
+#. translators: 1: card brand, 2: last four digits
+#. translators: 1: payment method name, 2: last four digits
+#: includes/Modules/BraintreeGateway/Card.php:117
+#: includes/Modules/StripeGateway/Tokens.php:281
+#, php-format
+msgid "%1$s ending in %2$s"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Connection.php:97
+msgid "Braintree did not return this account’s merchant accounts. The API key’s user needs permission to view them."
+msgstr ""
+
+#. translators: 1: Sandbox or Production, 2: error
+#. translators: %s: Sandbox or Production
+#: includes/Modules/BraintreeGateway/Connection.php:206
+#: includes/Modules/BraintreeGateway/Gateway.php:132
+#: includes/Modules/MercadoPagoGateway/Gateway.php:98
+#: includes/Modules/SquareGateway/Gateway.php:114
+#: includes/Modules/SquareGateway/Setup.php:101
+#: includes/Modules/SquareGateway/Setup.php:111
+msgid "Production"
+msgstr ""
+
+#. translators: 1: Production or Sandbox, 2: error
+#: includes/Modules/BraintreeGateway/Connection.php:210
+#, php-format
+msgid "%1$s connection failed: %2$s"
+msgstr ""
+
+#. translators: 1: Production or Sandbox, 2: merchant account id, 3: currency code
+#: includes/Modules/BraintreeGateway/Connection.php:228
+#, php-format
+msgid "%1$s: %2$s is not an active merchant account in %3$s, so Braintree is hidden for that currency."
+msgstr ""
+
+#. translators: %s: Production or Sandbox
+#: includes/Modules/BraintreeGateway/Connection.php:234
+#, php-format
+msgid "%s: no merchant account can take payments. Each currency needs one active account; choose one under “Merchant accounts” when a currency has several and none is the default."
+msgstr ""
+
+#. translators: 1: Production or Sandbox, 2: merchant account id
+#: includes/Modules/BraintreeGateway/Connection.php:241
+#, php-format
+msgid "%1$s: 3-D Secure is required, but Braintree reports none for merchant account %2$s. Ask Braintree to switch it on, or card payments there will fail."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:146
+msgid "The order total or currency changed after your card was verified. Check the total and pay again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:150
+msgid "Your card details expired or were already used. Enter your card again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:152
+msgid "This total cannot be charged exactly in this currency. Please contact the store."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:158
+#: includes/Modules/BraintreeGateway/Gateway.php:419
+#: includes/Modules/BraintreeGateway/Vault.php:144
+#: includes/Modules/SquareGateway/Gateway.php:480
+#: includes/Modules/SquareGateway/Gateway.php:515
+#: includes/Modules/SquareGateway/Gateway.php:536
+msgid "Enter your card details to continue."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:161
+msgid "The security code did not match. Check it and try again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:164
+msgid "The billing address or security code did not match your card. Check both and try again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:168
+msgid "The card does not have enough funds or is over its limit. Try another card."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:172
+msgid "The payment could not be processed right now, and your card was not charged. Try again in a moment."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Declines.php:174
+msgid "Your card was declined. Try another card or contact your bank."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:76
+msgid "Braintree (Stackless)"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:77
+msgid "Cards through Braintree Hosted Fields with 3-D Secure, saved cards and automatic subscription renewals."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:89
+#: includes/Modules/SquareGateway/Gateway.php:74
+msgid "Use a new card"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:102
+msgid "Accept cards with Braintree"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:108
+msgid "Credit or debit card"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:113
+msgid "Pay securely with your card through Braintree."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:118
+msgid "Use the Braintree sandbox (no real money moves)"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:122
+msgid "Braintree account"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:125
+msgid "Open the production Control Panel"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:126
+msgid "Open the sandbox Control Panel"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:128
+msgid "In the Control Panel open the gear icon, then API, and copy the Merchant ID, public key and private key. Saving checks the connection and reads your merchant accounts."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:134
+msgid "Merchant ID"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:135
+msgid "public key"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:136
+msgid "private key"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:137
+msgid "merchant accounts"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:145
+msgid "Optional. A merchant account takes one currency. Name one per currency only where you have several; otherwise the account in the order’s currency is used."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:156
+#: includes/Modules/PayPalGateway/Gateway.php:232
+msgid "3-D Secure"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:160
+msgid "Required (recommended): refuse failed or skipped bank checks"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:161
+msgid "Strict: accept only payments with a liability shift"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:164
+msgid "Checked on the server with Braintree, so it cannot be skipped from the browser. Braintree must switch on 3-D Secure for your account. European and UK cards need it."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:167
+#: includes/Modules/SquareGateway/Gateway.php:143
+msgid "Saved cards"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:169
+msgid "Let signed-in customers save cards with Braintree. Subscription orders always save the card for renewals."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:173
+msgid "Fraud tools"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:175
+msgid "Send device data for Braintree’s fraud tools. Turn this on if your account uses Advanced Fraud Tools or Fraud Protection; it loads PayPal’s device script at checkout."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:181
+msgid "Log Braintree activity to WooCommerce → Status → Logs (stackless-braintree_gateway). Keys, tokens and card data are never logged."
+msgstr ""
+
+#. translators: 1: webhook URL, 2: event names
+#: includes/Modules/BraintreeGateway/Gateway.php:189
+#, php-format
+msgid "In the Control Panel open API, then Webhooks, and create one with this URL: %1$s and these notifications: %2$s Card payments, refunds and voids send no webhook, so Stackless also asks Braintree for those every six hours."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:197
+msgid "A payment that has not settled (usually within a day or two) can only be refunded whole, which voids it. A part can be refunded once it settles. When Braintree does not answer a charge, the order waits and Stackless looks the charge up before anything is charged again."
+msgstr ""
+
+#. translators: %s: currency codes
+#: includes/Modules/BraintreeGateway/Gateway.php:210
+#, php-format
+msgid "Braintree shows for carts in %s, the currencies of your active merchant accounts, and hides for the rest."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:227
+msgid "Saved. Leave empty to keep it, or type \"clear\" to remove it."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:270
+msgid "Braintree is enabled but the selected mode needs a Merchant ID, a public key and a private key."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:386
+#: includes/Modules/PayPalGateway/Module.php:224
+msgid "Card number"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:387
+#: includes/Modules/PayPalGateway/Module.php:225
+msgid "Expiry date"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:388
+#: includes/Modules/PayPalGateway/Module.php:226
+msgid "Security code"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:389
+msgid "Sandbox: use Braintree’s test cards; no real payment will be taken."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:452
+#: includes/Modules/SquareGateway/Declines.php:122
+#: includes/Modules/SquareGateway/Gateway.php:527
+msgid "Your card was declined. Try another card."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Gateway.php:566
+#: includes/Modules/BraintreeGateway/Payments.php:117
+#: includes/Modules/SquareGateway/Payments.php:345
+msgid "That saved card does not belong to this customer."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Guard.php:35
+msgid "An earlier card payment for this order is still being confirmed. Wait a little before paying another way, so you are not charged twice."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:62
+msgid "Braintree is missing its Merchant ID or keys"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:63
+msgid "Checkout hides Braintree and renewals cannot be charged until the Merchant ID, public key and private key are set for the selected mode."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:72
+msgid "Braintree has not confirmed these keys"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:73
+msgid "Save the Braintree settings to check the connection and read your merchant accounts."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/BraintreeGateway/Health.php:82
+#, php-format
+msgid "Braintree has no merchant account for %s"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:83
+msgid "A merchant account takes one currency, so Braintree hides for carts in currencies without one. Ask Braintree for an account in this currency, or choose one in the settings when there are several."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:89
+msgid "3-D Secure is required but not switched on at Braintree"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:90
+msgid "Card payments fail until Braintree enables 3-D Secure for this merchant account."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/BraintreeGateway/Health.php:98
+#, php-format
+msgid "Braintree takes %s without decimals"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:99
+msgid "The store uses decimals, and a total with a fraction cannot be charged exactly. Set the number of decimals to 0."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:107
+msgid "No Braintree webhook has arrived yet"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:108
+msgid "Create the webhook in the Control Panel and use Check URL there. Without it, disputes reach WooCommerce within six hours instead of at once."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Health.php:116
+msgid "Braintree is in sandbox mode"
+msgstr ""
+
+#. translators: %d: number of orders
+#: includes/Modules/BraintreeGateway/Health.php:134
+#, php-format
+msgid "%d Braintree charge needs a look"
+msgid_plural "%d Braintree charges need a look"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: order numbers
+#: includes/Modules/BraintreeGateway/Health.php:136
+#, php-format
+msgid "These orders wait on a charge with no known result or a payment that does not match, so they are not charged again: %s"
+msgstr ""
+
+#. translators: %d: number of orders
+#: includes/Modules/BraintreeGateway/Health.php:147
+#, php-format
+msgid "%d order has an extra Braintree payment"
+msgid_plural "%d orders have extra Braintree payments"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: order numbers
+#: includes/Modules/BraintreeGateway/Health.php:149
+#, php-format
+msgid "The order notes name the transaction to refund in the Control Panel: %s"
+msgstr ""
+
+#. translators: %d: number of events
+#: includes/Modules/BraintreeGateway/Health.php:159
+#, php-format
+msgid "%d Braintree webhook failed recently"
+msgid_plural "%d Braintree webhooks failed recently"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/BraintreeGateway/Health.php:160
+msgid "Braintree retries every hour for 24 hours. Look in WooCommerce → Status → Logs (stackless-braintree_gateway) for the reason."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Module.php:18
+#: includes/Modules/BraintreeGateway/Module.php:51
+msgid "Braintree"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Module.php:23
+msgid "Take cards with Braintree’s Hosted Fields and 3-D Secure on classic and block checkout, save cards, and renew subscriptions automatically. Charges each currency through its own merchant account; refunds, voids and disputes sync from Braintree."
+msgstr ""
+
+#. translators: 1: link to the gateway settings, 2: webhook URL
+#: includes/Modules/BraintreeGateway/Module.php:54
+#, php-format
+msgid "The Merchant ID, keys, merchant accounts and 3-D Secure live with the other payment methods: %1$s. Add the webhook (%2$s) in the Braintree Control Panel."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Module.php:55
+msgid "WooCommerce → Settings → Payments → Braintree"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Payments.php:113
+msgid "The order is not set to pay with Braintree."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Payments.php:120
+msgid "That saved card was saved in the other Braintree mode."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Payments.php:163
+msgid "This payment is already being processed. Wait a moment before trying again."
+msgstr ""
+
+#. translators: %s: card, e.g. "Visa ending in 1111"
+#: includes/Modules/BraintreeGateway/Payments.php:241
+#, php-format
+msgid "%s attached for future Braintree payments."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Payments.php:252
+msgid "Confirm this payment with your bank to finish it."
+msgstr ""
+
+#. translators: %s: card, e.g. "Visa ending in 1111"
+#: includes/Modules/BraintreeGateway/Payments.php:290
+#: includes/Modules/BraintreeGateway/Payments.php:688
+#, php-format
+msgid "Saved %s with Braintree for future payments."
+msgstr ""
+
+#. translators: 1: Braintree transaction id, 2: amount and currency
+#: includes/Modules/BraintreeGateway/Payments.php:670
+#, php-format
+msgid "Braintree transaction %1$s (%2$s) was already refunded, in whole or in part, so it did not complete this order. Check it before fulfilling the order. It will not be charged again."
+msgstr ""
+
+#. translators: 1: Braintree transaction id, 2: amount and currency
+#: includes/Modules/BraintreeGateway/Payments.php:672
+#, php-format
+msgid "Braintree transaction %1$s took %2$s, which does not match this order. Check it, then refund it or complete the order. It will not be charged again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Payments.php:690
+msgid "The payment went through, but Braintree returned no saved card, so renewals will be invoiced."
+msgstr ""
+
+#. translators: 1: Braintree transaction id, 2: reason code
+#: includes/Modules/BraintreeGateway/Payments.php:720
+#, php-format
+msgid "Braintree transaction %1$s was not paid (%2$s)."
+msgstr ""
+
+#. translators: %s: reason code
+#: includes/Modules/BraintreeGateway/Payments.php:722
+#, php-format
+msgid "The Braintree charge did not go through (%s)."
+msgstr ""
+
+#. translators: 1: Braintree transaction id, 2: amount and currency
+#: includes/Modules/BraintreeGateway/Payments.php:749
+#, php-format
+msgid "Braintree transaction %1$s (%2$s) is an extra payment for this order or arrived too late for it. It did not complete the order: refund it in the Braintree Control Panel."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Payments.php:759
+msgid "Braintree has not confirmed this payment yet. Stackless checks it automatically and will not charge the card again meanwhile."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Payments.php:761
+msgid "Braintree has not confirmed this payment yet."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Privacy.php:25
+#: includes/Modules/BraintreeGateway/Privacy.php:34
+msgid "Stackless: Braintree"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Privacy.php:26
+msgid "When you pay by card, your card details go straight to Braintree, a PayPal service, which processes the payment. We send Braintree the amount, your name, email and billing address, and, when fraud checks are on, data about your device. We keep Braintree’s payment and customer references and, if you save a card, its brand, last four digits and expiry date."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Privacy.php:55
+msgid "The customer record and payment history at Braintree are kept there. Remove the customer in the Braintree Control Panel if needed."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:30
+msgid "The order is being updated by another request. Try the refund again in a moment."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:42
+msgid "This order has no Braintree payment to refund."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/BraintreeGateway/Reversals.php:48
+#, php-format
+msgid "Enter a refund above zero that Braintree can take exactly in %s."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:59
+msgid "This order does not record which Braintree mode took the payment. Refund it in the Control Panel."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:62
+msgid "This payment was made with other Braintree credentials. Connect that account again, or refund it in its Control Panel."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:75
+msgid "Braintree did not return this payment, so nothing was refunded."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:79
+msgid "The Braintree payment is in another currency than the order. Refund it in the Control Panel."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:95
+msgid "Braintree had already completed the earlier refund of this amount, and it is recorded on the order now. Nothing more was sent. To refund that amount again, repeat the refund."
+msgstr ""
+
+#. translators: %s: amount and currency
+#: includes/Modules/BraintreeGateway/Reversals.php:107
+#, php-format
+msgid "An earlier refund of %s has no confirmed result yet. Refund that same amount to finish it, or wait half an hour."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:123
+#: includes/Modules/BraintreeGateway/Reversals.php:267
+msgid "Braintree has less than that left to refund on this payment."
+msgstr ""
+
+#. translators: %s: amount and currency
+#: includes/Modules/BraintreeGateway/Reversals.php:130
+#, php-format
+msgid "This payment has not settled yet, so Braintree cannot refund part of it. Refund the whole %s now to cancel it, or wait until it settles (usually within a day or two) and refund the part."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:136
+msgid "This payment was already voided in Braintree, so there is nothing to send back."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:138
+msgid "Braintree did not collect this payment, so there is nothing to refund."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:140
+msgid "Braintree is still processing this payment. Try the refund again once it has settled."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:145
+msgid "The refund could not be recorded, so it was not sent to Braintree."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:168
+msgid "Braintree declined this refund. Check the payment in the Control Panel."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:181
+msgid "Braintree did not confirm the refund, so it may or may not have gone through. Refund the same amount again: Stackless repeats the same request, so the customer is refunded once."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:196
+msgid "The Braintree payment had not settled, so it was voided. The customer is not charged."
+msgstr ""
+
+#. translators: %s: refund id
+#: includes/Modules/BraintreeGateway/Reversals.php:198
+#, php-format
+msgid "Refunded through Braintree (refund %s)."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:261
+msgid "This payment has not finished settling, so Braintree cannot refund it yet. Try again after it settles."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:263
+msgid "This payment can no longer be voided. Try again: it will be refunded instead."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Reversals.php:265
+msgid "Braintree already refunded this payment in full."
+msgstr ""
+
+#. translators: %s: refund id
+#: includes/Modules/BraintreeGateway/Sync.php:241
+#, php-format
+msgid "Braintree could not complete refund %s. The customer has not received it: check it in the Control Panel."
+msgstr ""
+
+#. translators: 1: refund id, 2: amount and currency
+#: includes/Modules/BraintreeGateway/Sync.php:252
+#, php-format
+msgid "Braintree refund %1$s (%2$s) is in another currency and was not recorded here."
+msgstr ""
+
+#. translators: 1: refund id, 2: amount and currency
+#: includes/Modules/BraintreeGateway/Sync.php:259
+#, php-format
+msgid "Braintree refund %1$s of %2$s returned a payment that never completed this order, so the order total is unchanged."
+msgstr ""
+
+#. translators: %s: refund id
+#: includes/Modules/BraintreeGateway/Sync.php:264
+#, php-format
+msgid "Refunded in Braintree (%s)"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Sync.php:272
+msgid "Voided in Braintree"
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Sync.php:280
+msgid "Braintree reports that settlement of this payment was declined: the money was not collected."
+msgstr ""
+
+#. translators: 1: refund id, 2: amount and currency, 3: error
+#: includes/Modules/BraintreeGateway/Sync.php:300
+#, php-format
+msgid "Braintree refund %1$s of %2$s could not be recorded automatically (%3$s). Record it by hand, without refunding through Braintree again."
+msgstr ""
+
+#. translators: 1: dispute status, 2: amount and currency
+#: includes/Modules/BraintreeGateway/Sync.php:329
+#, php-format
+msgid "Braintree reports a dispute (%1$s) for %2$s on this payment. Answer it in the Control Panel."
+msgstr ""
+
+#. translators: 1: dispute status, 2: amount and currency
+#: includes/Modules/BraintreeGateway/Sync.php:332
+#, php-format
+msgid "The Braintree dispute for %2$s is now: %1$s."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Vault.php:91
+msgid "Braintree did not create a customer."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Vault.php:150
+msgid "Too many cards were tried. Wait an hour, then try again."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Vault.php:157
+msgid "Cards cannot be saved with Braintree right now."
+msgstr ""
+
+#: includes/Modules/BraintreeGateway/Vault.php:177
+msgid "Your card is already being saved. Wait a moment, then reload the page."
 msgstr ""
 
 #: includes/Modules/BuyLinks/Admin.php:22
@@ -2204,27 +3869,6 @@ msgstr ""
 msgid "Also cancel Creem subscription %s there, or it keeps billing."
 msgstr ""
 
-#: includes/Modules/CreemGateway/BlocksSupport.php:56
-#: includes/Modules/DodoGateway/BlocksSupport.php:56
-#: includes/Modules/FlutterwaveGateway/BlocksSupport.php:54
-#: includes/Modules/MercadoPagoGateway/BlocksSupport.php:55
-#: includes/Modules/MollieGateway/BlocksSupport.php:59
-#: includes/Modules/PaystackGateway/BlocksSupport.php:54
-#: includes/Modules/RazorpayGateway/BlocksSupport.php:59
-#: includes/Modules/StripeGateway/Managed/BlocksSupport.php:51
-#: includes/Modules/StripeGateway/Managed/Gateway.php:262
-#: templates/creem_gateway/payment-fields.php:21
-#: templates/dodo_gateway/payment-fields.php:21
-#: templates/flutterwave_gateway/payment-fields.php:21
-#: templates/mercadopago_gateway/payment-fields.php:21
-#: templates/mollie_gateway/payment-fields.php:38
-#: templates/paystack_gateway/payment-fields.php:21
-#: templates/razorpay_gateway/authorize-page.php:57
-#: templates/razorpay_gateway/checkout.php:29
-#: templates/razorpay_gateway/payment-fields.php:37
-msgid "Test mode: no real payment will be taken."
-msgstr ""
-
 #. translators: %s: store name
 #: includes/Modules/CreemGateway/Catalog.php:73
 #: includes/Modules/DodoGateway/Catalog.php:70
@@ -2286,17 +3930,6 @@ msgstr ""
 msgid "Creem did not return a checkout page."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Checkout.php:297
-#: includes/Modules/DodoGateway/Checkout.php:300
-#: includes/Modules/DodoGateway/Sync.php:114
-#: includes/Modules/FlutterwaveGateway/Checkout.php:205
-#: includes/Modules/FlutterwaveGateway/Sync.php:84
-#: includes/Modules/MercadoPagoGateway/Checkout.php:188
-#: includes/Modules/PaystackGateway/Checkout.php:211
-#: includes/Modules/PaystackGateway/Sync.php:72
-msgid "Your payment did not go through. Please try again or choose another payment method."
-msgstr ""
-
 #. translators: %d: copy number, starting at 2
 #: includes/Modules/CreemGateway/Copies.php:60
 #: includes/Modules/DodoGateway/Copies.php:60
@@ -2333,94 +3966,20 @@ msgstr ""
 msgid "Sell software, digital products and subscriptions through Creem, a merchant of record that handles sales tax and VAT for you. Buyers pay by card, Apple Pay or Google Pay on Creem’s secure checkout."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:123
-#: includes/Modules/DodoGateway/Gateway.php:109
-#: includes/Modules/FlutterwaveGateway/Gateway.php:76
-#: includes/Modules/MercadoPagoGateway/Gateway.php:76
-#: includes/Modules/MollieGateway/Gateway.php:95
-#: includes/Modules/PaddleGateway/Gateway.php:100
-#: includes/Modules/PayPalGateway/Gateway.php:77
-#: includes/Modules/PaystackGateway/Gateway.php:76
-#: includes/Modules/PolarGateway/Gateway.php:102
-#: includes/Modules/RazorpayGateway/Gateway.php:98
-#: includes/Modules/SquareGateway/Gateway.php:81
-#: includes/Modules/StripeGateway/Managed/Gateway.php:103
-msgid "Enable"
-msgstr ""
-
 #: includes/Modules/CreemGateway/Gateway.php:125
 msgid "Accept payments with Creem"
-msgstr ""
-
-#: includes/Modules/CreemGateway/Gateway.php:129
-#: includes/Modules/DodoGateway/Gateway.php:115
-#: includes/Modules/FlutterwaveGateway/Gateway.php:82
-#: includes/Modules/MercadoPagoGateway/Gateway.php:82
-#: includes/Modules/MollieGateway/Gateway.php:101
-#: includes/Modules/PaddleGateway/Gateway.php:106
-#: includes/Modules/PayPalGateway/Gateway.php:83
-#: includes/Modules/PaystackGateway/Gateway.php:82
-#: includes/Modules/PolarGateway/Gateway.php:108
-#: includes/Modules/RazorpayGateway/Gateway.php:104
-#: includes/Modules/SquareGateway/Gateway.php:87
-#: includes/Modules/StripeGateway/Managed/Gateway.php:109
-#: includes/Modules/StripeGateway/Module.php:255
-msgid "Title"
 msgstr ""
 
 #: includes/Modules/CreemGateway/Gateway.php:131
 msgid "Card, Apple Pay or Google Pay (Creem)"
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:134
-#: includes/Modules/DodoGateway/Gateway.php:120
-#: includes/Modules/FlutterwaveGateway/Gateway.php:87
-#: includes/Modules/MercadoPagoGateway/Gateway.php:87
-#: includes/Modules/MollieGateway/Gateway.php:106
-#: includes/Modules/PaddleGateway/Gateway.php:111
-#: includes/Modules/PayPalGateway/Gateway.php:90
-#: includes/Modules/PaystackGateway/Gateway.php:87
-#: includes/Modules/PolarGateway/Gateway.php:113
-#: includes/Modules/RazorpayGateway/Gateway.php:109
-#: includes/Modules/SquareGateway/Gateway.php:92
-#: includes/Modules/StripeGateway/Managed/Gateway.php:114
-#: includes/Modules/StripeGateway/Module.php:256
-msgid "Description"
-msgstr ""
-
 #: includes/Modules/CreemGateway/Gateway.php:136
 msgid "You’ll finish paying on Creem’s secure checkout. Creem adds any sales tax or VAT for your location before you pay."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:139
-#: includes/Modules/CreemGateway/Gateway.php:154
-#: includes/Modules/DodoGateway/Gateway.php:125
-#: includes/Modules/DodoGateway/Gateway.php:140
-#: includes/Modules/FlutterwaveGateway/Gateway.php:92
-#: includes/Modules/FlutterwaveGateway/Gateway.php:109
-#: includes/Modules/MercadoPagoGateway/Gateway.php:92
-#: includes/Modules/MercadoPagoGateway/Gateway.php:108
-#: includes/Modules/MollieGateway/Gateway.php:111
-#: includes/Modules/PaystackGateway/Gateway.php:92
-#: includes/Modules/PaystackGateway/Gateway.php:109
-#: includes/Modules/RazorpayGateway/Gateway.php:114
-#: includes/Modules/StripeGateway/Module.php:245
-msgid "Test mode"
-msgstr ""
-
 #: includes/Modules/CreemGateway/Gateway.php:141
 msgid "Use Creem test mode (no real money moves)"
-msgstr ""
-
-#: includes/Modules/CreemGateway/Gateway.php:145
-#: includes/Modules/DodoGateway/Gateway.php:131
-#: includes/Modules/FlutterwaveGateway/Gateway.php:98
-#: includes/Modules/PaddleGateway/Gateway.php:122
-#: includes/Modules/PaystackGateway/Gateway.php:98
-#: includes/Modules/PolarGateway/Gateway.php:124
-#: includes/Modules/RazorpayGateway/Gateway.php:127
-#: includes/Modules/StripeGateway/Admin.php:45
-msgid "Live"
 msgstr ""
 
 #: includes/Modules/CreemGateway/Gateway.php:147
@@ -2460,18 +4019,6 @@ msgstr ""
 #: includes/Modules/DodoGateway/Gateway.php:154
 #: includes/Modules/PolarGateway/Gateway.php:137
 msgid "Live webhook secret"
-msgstr ""
-
-#: includes/Modules/CreemGateway/Gateway.php:177
-#: includes/Modules/DodoGateway/Gateway.php:163
-#: includes/Modules/FlutterwaveGateway/Gateway.php:132
-#: includes/Modules/MercadoPagoGateway/Gateway.php:130
-#: includes/Modules/PayPalGateway/Gateway.php:144
-#: includes/Modules/PaystackGateway/Gateway.php:132
-#: includes/Modules/PolarGateway/Gateway.php:161
-#: includes/Modules/RazorpayGateway/Gateway.php:142
-#: includes/Modules/SquareGateway/Gateway.php:151
-msgid "Webhook"
 msgstr ""
 
 #: includes/Modules/CreemGateway/Gateway.php:182
@@ -2526,18 +4073,6 @@ msgstr ""
 msgid "Creem uses this category to pick the tax rate for each buyer’s country."
 msgstr ""
 
-#: includes/Modules/CreemGateway/Gateway.php:203
-#: includes/Modules/DodoGateway/Gateway.php:190
-#: includes/Modules/FlutterwaveGateway/Gateway.php:137
-#: includes/Modules/MercadoPagoGateway/Gateway.php:135
-#: includes/Modules/MollieGateway/Gateway.php:168
-#: includes/Modules/PaddleGateway/Gateway.php:204
-#: includes/Modules/PaystackGateway/Gateway.php:137
-#: includes/Modules/PolarGateway/Gateway.php:177
-#: includes/Modules/StripeGateway/Managed/Gateway.php:136
-msgid "Good to know"
-msgstr ""
-
 #: includes/Modules/CreemGateway/Gateway.php:205
 msgid "Creem charges in US dollars and euros, from 1.00. It bills the same amount every cycle, so subscriptions with a signup fee or a different first payment cannot use Creem; free trials work. A subscription must be the only item in the cart. One-time carts of any size work and show in Creem as one store order. Products are created in your Creem catalog automatically. Creem runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders. Refunds from WooCommerce refund the whole payment; make partial refunds in the Creem dashboard and they appear here."
 msgstr ""
@@ -2547,21 +4082,6 @@ msgstr ""
 #: includes/Modules/PaddleGateway/Gateway.php:209
 #: includes/Modules/PolarGateway/Gateway.php:182
 msgid "Copies"
-msgstr ""
-
-#: includes/Modules/CreemGateway/Gateway.php:217
-#: includes/Modules/DodoGateway/Gateway.php:204
-#: includes/Modules/FlutterwaveGateway/Gateway.php:142
-#: includes/Modules/MercadoPagoGateway/Gateway.php:140
-#: includes/Modules/MollieGateway/Gateway.php:162
-#: includes/Modules/PaddleGateway/Gateway.php:214
-#: includes/Modules/PayPalGateway/Gateway.php:266
-#: includes/Modules/PaystackGateway/Gateway.php:142
-#: includes/Modules/PolarGateway/Gateway.php:187
-#: includes/Modules/RazorpayGateway/Gateway.php:180
-#: includes/Modules/SquareGateway/Gateway.php:145
-#: includes/Modules/StripeGateway/Module.php:318
-msgid "Debug log"
 msgstr ""
 
 #: includes/Modules/CreemGateway/Gateway.php:219
@@ -2606,42 +4126,6 @@ msgstr ""
 #: includes/Modules/CreemGateway/Gateway.php:368
 #, php-format
 msgid "Creem %s webhook connected and its secret saved."
-msgstr ""
-
-#: includes/Modules/CreemGateway/Gateway.php:502
-#: includes/Modules/CreemGateway/Gateway.php:541
-#: includes/Modules/DodoGateway/Gateway.php:451
-#: includes/Modules/DodoGateway/Gateway.php:489
-#: includes/Modules/FlutterwaveGateway/Gateway.php:309
-#: includes/Modules/FlutterwaveGateway/Gateway.php:342
-#: includes/Modules/MercadoPagoGateway/Gateway.php:354
-#: includes/Modules/MercadoPagoGateway/Gateway.php:391
-#: includes/Modules/MollieGateway/Gateway.php:380
-#: includes/Modules/MollieGateway/Gateway.php:564
-#: includes/Modules/PaddleGateway/Gateway.php:471
-#: includes/Modules/PaddleGateway/Gateway.php:510
-#: includes/Modules/PayPalGateway/Ajax.php:138
-#: includes/Modules/PayPalGateway/Gateway.php:593
-#: includes/Modules/PayPalGateway/Gateway.php:641
-#: includes/Modules/PayPalGateway/Payments.php:256
-#: includes/Modules/PayPalGateway/Payments.php:582
-#: includes/Modules/PayPalGateway/Payments.php:669
-#: includes/Modules/PayPalGateway/Payments.php:803
-#: includes/Modules/PayPalGateway/SavedCharges.php:49
-#: includes/Modules/PaystackGateway/Gateway.php:318
-#: includes/Modules/PaystackGateway/Gateway.php:356
-#: includes/Modules/PolarGateway/Gateway.php:438
-#: includes/Modules/PolarGateway/Gateway.php:477
-#: includes/Modules/RazorpayGateway/Gateway.php:427
-#: includes/Modules/RazorpayGateway/Gateway.php:548
-#: includes/Modules/RazorpayGateway/Renewals.php:81
-#: includes/Modules/SquareGateway/Gateway.php:470
-#: includes/Modules/SquareGateway/Gateway.php:617
-#: includes/Modules/StripeGateway/Gateway.php:200
-#: includes/Modules/StripeGateway/Gateway.php:507
-#: includes/Modules/StripeGateway/Managed/Gateway.php:272
-#: includes/Modules/StripeGateway/Managed/Gateway.php:327
-msgid "Order not found."
 msgstr ""
 
 #: includes/Modules/CreemGateway/Gateway.php:513
@@ -2955,7 +4439,7 @@ msgid "Add to cart button text"
 msgstr ""
 
 #: includes/Modules/CustomCartText/Module.php:240
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:248
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:266
 msgid "Product setting"
 msgstr ""
 
@@ -3139,19 +4623,6 @@ msgstr ""
 #: includes/Modules/DodoGateway/Gateway.php:466
 #, php-format
 msgid "Dodo Payments checkout could not start: %s"
-msgstr ""
-
-#: includes/Modules/DodoGateway/Gateway.php:493
-#: includes/Modules/FlutterwaveGateway/Gateway.php:346
-#: includes/Modules/MercadoPagoGateway/Gateway.php:395
-#: includes/Modules/MollieGateway/Gateway.php:568
-#: includes/Modules/PaddleGateway/Refunds.php:37
-#: includes/Modules/PayPalGateway/Payments.php:922
-#: includes/Modules/PaystackGateway/Gateway.php:360
-#: includes/Modules/PolarGateway/Gateway.php:481
-#: includes/Modules/RazorpayGateway/Gateway.php:552
-#: includes/Modules/SquareGateway/Gateway.php:621
-msgid "Enter a refund amount above zero."
 msgstr ""
 
 #: includes/Modules/DodoGateway/Gateway.php:497
@@ -3685,14 +5156,6 @@ msgstr ""
 msgid "Flutterwave did not return a checkout page."
 msgstr ""
 
-#. translators: %s: order number
-#: includes/Modules/FlutterwaveGateway/Checkout.php:109
-#: includes/Modules/RazorpayGateway/Checkout.php:192
-#: includes/Modules/RazorpayGateway/Renewals.php:163
-#, php-format
-msgid "Order %s"
-msgstr ""
-
 #: includes/Modules/FlutterwaveGateway/Gateway.php:56
 msgid "Flutterwave (Stackless)"
 msgstr ""
@@ -3737,6 +5200,7 @@ msgstr ""
 
 #: includes/Modules/FlutterwaveGateway/Gateway.php:116
 #: includes/Modules/PaystackGateway/Gateway.php:116
+#: includes/Modules/RevolutGateway/Gateway.php:94
 #: includes/Modules/StripeGateway/Module.php:250
 msgid "Live secret key"
 msgstr ""
@@ -4297,15 +5761,6 @@ msgstr ""
 msgid "Use Mercado Pago test credentials (no real money moves)"
 msgstr ""
 
-#. translators: 1: Sandbox or Production, 2: error
-#. translators: %s: Sandbox or Production
-#: includes/Modules/MercadoPagoGateway/Gateway.php:98
-#: includes/Modules/SquareGateway/Gateway.php:110
-#: includes/Modules/SquareGateway/Setup.php:101
-#: includes/Modules/SquareGateway/Setup.php:111
-msgid "Production"
-msgstr ""
-
 #: includes/Modules/MercadoPagoGateway/Gateway.php:101
 msgid "Open Your integrations"
 msgstr ""
@@ -4551,7 +6006,7 @@ msgstr ""
 #. translators: 1: order number, 2: site name
 #: includes/Modules/MollieGateway/Checkout.php:70
 #: includes/Modules/MollieGateway/Renewals.php:116
-#: includes/Modules/SquareGateway/Payments.php:274
+#: includes/Modules/SquareGateway/Payments.php:414
 #, php-format
 msgid "Order %1$s – %2$s"
 msgstr ""
@@ -4572,26 +6027,12 @@ msgid "Save a payment method – %s"
 msgstr ""
 
 #: includes/Modules/MollieGateway/Checkout.php:258
+#: includes/Modules/RevolutGateway/Pages.php:253
 msgid "Your payment was declined. Please try again or choose another payment method."
-msgstr ""
-
-#: includes/Modules/MollieGateway/Checkout.php:259
-msgid "The payment was not completed. You can try again below."
-msgstr ""
-
-#: includes/Modules/MollieGateway/Checkout.php:280
-#: includes/Modules/RazorpayGateway/Sync.php:124
-#: includes/Modules/StripeGateway/Endpoints.php:157
-msgid "Payment method successfully added."
 msgstr ""
 
 #: includes/Modules/MollieGateway/Checkout.php:282
 msgid "Mollie is still confirming your payment method. It appears here once confirmed."
-msgstr ""
-
-#: includes/Modules/MollieGateway/Checkout.php:285
-#: includes/Modules/RazorpayGateway/Sync.php:127
-msgid "Unable to add payment method to your account."
 msgstr ""
 
 #: includes/Modules/MollieGateway/Gateway.php:70
@@ -4625,6 +6066,7 @@ msgstr ""
 
 #: includes/Modules/MollieGateway/Gateway.php:117
 #: includes/Modules/RazorpayGateway/Gateway.php:120
+#: includes/Modules/RevolutGateway/Gateway.php:83
 msgid "API keys"
 msgstr ""
 
@@ -4677,12 +6119,6 @@ msgstr ""
 msgid "Mollie is enabled but has no API key for the selected mode."
 msgstr ""
 
-#: includes/Modules/MollieGateway/Gateway.php:383
-#: includes/Modules/RazorpayGateway/Gateway.php:430
-#: includes/Modules/SquareGateway/Gateway.php:473
-msgid "Change the payment method from My Account → Payment methods."
-msgstr ""
-
 #: includes/Modules/MollieGateway/Gateway.php:402
 msgid "Mollie could not start the payment. Please try again or choose another payment method."
 msgstr ""
@@ -4706,11 +6142,6 @@ msgstr ""
 #: includes/Modules/MollieGateway/Gateway.php:435
 #: includes/Modules/MollieGateway/Renewals.php:151
 msgid "Mollie declined the payment."
-msgstr ""
-
-#: includes/Modules/MollieGateway/Gateway.php:445
-#: includes/Modules/RazorpayGateway/Gateway.php:457
-msgid "Sign in to save a payment method."
 msgstr ""
 
 #: includes/Modules/MollieGateway/Gateway.php:539
@@ -4743,12 +6174,6 @@ msgstr ""
 msgid "Mollie is in test mode"
 msgstr ""
 
-#: includes/Modules/MollieGateway/Health.php:68
-#: includes/Modules/RazorpayGateway/Health.php:75
-#: includes/Modules/SquareGateway/Health.php:82
-msgid "Payments and renewals use test money only."
-msgstr ""
-
 #. translators: %d: number of orders
 #: includes/Modules/MollieGateway/Health.php:78
 #, php-format
@@ -4775,21 +6200,15 @@ msgstr[1] ""
 msgid "Mollie retries for about a day. Look in WooCommerce → Status → Logs (stackless-mollie_gateway) for the reason."
 msgstr ""
 
-#: includes/Modules/MollieGateway/Methods.php:49
-#: includes/Modules/RazorpayGateway/Mandate.php:38
-#: includes/Modules/StripeGateway/Tokens.php:289
-msgid "Card"
-msgstr ""
-
 #: includes/Modules/MollieGateway/Methods.php:50
 #: includes/Modules/PayPalGateway/Gateway.php:248
-#: includes/Modules/SquareGateway/Gateway.php:134
+#: includes/Modules/SquareGateway/Gateway.php:138
 msgid "Apple Pay"
 msgstr ""
 
 #: includes/Modules/MollieGateway/Methods.php:51
 #: includes/Modules/PayPalGateway/Gateway.php:259
-#: includes/Modules/SquareGateway/Gateway.php:134
+#: includes/Modules/SquareGateway/Gateway.php:138
 msgid "Google Pay"
 msgstr ""
 
@@ -4918,19 +6337,6 @@ msgstr ""
 msgid "Saved payment method"
 msgstr ""
 
-#: includes/Modules/MollieGateway/Renewals.php:42
-#: includes/Modules/MollieGateway/Renewals.php:55
-#: includes/Modules/PayPalGateway/SavedCharges.php:32
-#: includes/Modules/RazorpayGateway/Renewals.php:47
-#: includes/Modules/RazorpayGateway/Renewals.php:60
-#: includes/Modules/RazorpayGateway/Renewals.php:77
-#: includes/Modules/SquareGateway/Payments.php:188
-#: includes/Modules/SquareGateway/Payments.php:208
-#: includes/Modules/StripeGateway/Renewals.php:37
-#: includes/Modules/StripeGateway/SavedCharges.php:28
-msgid "This site is a copy of the live store, so it does not charge saved payment methods."
-msgstr ""
-
 #: includes/Modules/MollieGateway/Renewals.php:46
 msgid "No saved Mollie payment method is attached to this subscription."
 msgstr ""
@@ -4944,13 +6350,6 @@ msgstr ""
 
 #: includes/Modules/MollieGateway/Renewals.php:61
 msgid "The order is not set to pay with Mollie."
-msgstr ""
-
-#: includes/Modules/MollieGateway/Renewals.php:77
-#: includes/Modules/PayPalGateway/SavedCharges.php:116
-#: includes/Modules/RazorpayGateway/Renewals.php:93
-#: includes/Modules/StripeGateway/SavedCharges.php:99
-msgid "The order cannot be paid in its current status."
 msgstr ""
 
 #. translators: 1: payment method, 2: currency code
@@ -4998,7 +6397,9 @@ msgid "Mollie payment %1$s was for %2$s, which does not match the order total. C
 msgstr ""
 
 #. translators: %s: saved method, e.g. "Visa ending in 4242"
+#. translators: %s: saved card, e.g. "Visa ending in 4242"
 #: includes/Modules/MollieGateway/Sync.php:185
+#: includes/Modules/RevolutGateway/Sync.php:184
 #, php-format
 msgid "Saved %s for future payments."
 msgstr ""
@@ -5244,20 +6645,6 @@ msgstr ""
 
 #: includes/Modules/PaddleGateway/Gateway.php:113
 msgid "You’ll finish paying in Paddle’s secure checkout. Paddle adds any sales tax or VAT for your location before you pay."
-msgstr ""
-
-#. translators: 1: Sandbox or Production, 2: error
-#. translators: %s: Sandbox or Production
-#: includes/Modules/PaddleGateway/Gateway.php:116
-#: includes/Modules/PaddleGateway/Gateway.php:147
-#: includes/Modules/PayPalGateway/Gateway.php:95
-#: includes/Modules/PolarGateway/Gateway.php:118
-#: includes/Modules/PolarGateway/Gateway.php:143
-#: includes/Modules/SquareGateway/Gateway.php:97
-#: includes/Modules/SquareGateway/Gateway.php:110
-#: includes/Modules/SquareGateway/Setup.php:101
-#: includes/Modules/SquareGateway/Setup.php:111
-msgid "Sandbox"
 msgstr ""
 
 #: includes/Modules/PaddleGateway/Gateway.php:118
@@ -5721,10 +7108,6 @@ msgstr ""
 msgid "Open your app (or create one) and copy its Client ID and Secret. Turn on the Vault feature for subscriptions. The webhook is created for you when you save."
 msgstr ""
 
-#: includes/Modules/PayPalGateway/Gateway.php:107
-msgid "Client ID"
-msgstr ""
-
 #: includes/Modules/PayPalGateway/Gateway.php:112
 msgid "Secret"
 msgstr ""
@@ -5891,10 +7274,6 @@ msgstr ""
 
 #: includes/Modules/PayPalGateway/Gateway.php:229
 msgid "Card number, expiry and security code fields hosted by PayPal, with 3-D Secure. Cards are saved at PayPal for subscription renewals."
-msgstr ""
-
-#: includes/Modules/PayPalGateway/Gateway.php:232
-msgid "3-D Secure"
 msgstr ""
 
 #: includes/Modules/PayPalGateway/Gateway.php:236
@@ -6065,23 +7444,6 @@ msgstr ""
 
 #: includes/Modules/PayPalGateway/Module.php:223
 msgid "Name on card"
-msgstr ""
-
-#: includes/Modules/PayPalGateway/Module.php:224
-msgid "Card number"
-msgstr ""
-
-#: includes/Modules/PayPalGateway/Module.php:225
-msgid "Expiry date"
-msgstr ""
-
-#: includes/Modules/PayPalGateway/Module.php:226
-msgid "Security code"
-msgstr ""
-
-#: includes/Modules/PayPalGateway/Module.php:227
-#: includes/Modules/SquareGateway/Gateway.php:423
-msgid "Check your card details and try again."
 msgstr ""
 
 #: includes/Modules/PayPalGateway/Module.php:228
@@ -6587,6 +7949,7 @@ msgid "Test webhook signing secret"
 msgstr ""
 
 #: includes/Modules/PaystackGateway/Gateway.php:123
+#: includes/Modules/RevolutGateway/Gateway.php:102
 #: includes/Modules/StripeGateway/Module.php:251
 msgid "Live webhook signing secret"
 msgstr ""
@@ -6841,8 +8204,8 @@ msgstr ""
 
 #: includes/Modules/PayWhatYouLike/Cart.php:600
 #: includes/Modules/PayWhatYouLike/Module.php:58
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:107
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:127
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:125
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:145
 msgid "Pay what you like"
 msgstr ""
 
@@ -6903,120 +8266,120 @@ msgstr ""
 msgid "Show \"Pay what you like: this price or more\" (or \"Free, or pay what you like\") under prices"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:128
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:146
 msgid "Let buyers choose what to pay"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:132
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:150
 msgid "The product's price is the minimum unless you set one below, so a price of 0 makes it \"free, or pay what you like\". Subscription products keep their set price."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:135
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:153
 msgid "Minimum"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:135
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:153
 msgid "Leave empty to use the product's price as the minimum."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:136
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:236
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:154
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:254
 msgid "Suggested amount"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:136
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:154
 msgid "Filled in for the buyer. Leave empty to start at the product's price."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:137
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:237
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:155
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:255
 msgid "Maximum"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:137
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:155
 msgid "Leave empty to allow up to 1,000,000."
 msgstr ""
 
 #. translators: 1: field label, 2: currency symbol
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:143
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:245
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:161
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:263
 #, php-format
 msgid "%1$s (%2$s)"
 msgstr ""
 
 #. translators: 1: quick amount number (1-4), 2: currency symbol
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:156
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:174
 #, php-format
 msgid "Quick amount %1$d (%2$s)"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:160
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:178
 msgid "One-tap amounts shown with the amount field, for example 0, 5 and 10. Amounts below a product's minimum are left out, so 0 only shows when the minimum is 0."
 msgstr ""
 
 #. translators: %s: store currency code
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:165
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:183
 #, php-format
 msgid "Amounts are in %s. Other currencies are converted at checkout. Variations can override the minimum, suggested amount and maximum, or opt out."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:228
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:246
 msgid "Fixed price"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:229
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:247
 msgid "No pay what you like for this variation (when the product has it on)"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:235
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:253
 msgid "Pay what you like minimum"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:251
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:269
 msgid "Leave empty to use the product's Pay what you like setting."
 msgstr ""
 
 #. translators: 1: variation ID, 2: error message
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:276
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:294
 #, php-format
 msgid "Variation #%1$d: %2$s"
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:294
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:312
 msgid "Pay what you like: the minimum is not a valid amount and was not saved."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:296
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:314
 msgid "Pay what you like: the suggested amount is not a valid amount and was not saved."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:298
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:316
 msgid "Pay what you like: the maximum is not a valid amount and was not saved."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:300
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:318
 msgid "Pay what you like: a quick amount is not a valid amount and was left out."
 msgstr ""
 
 #. translators: %d: the number of quick amounts allowed
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:303
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:321
 #, php-format
 msgid "Pay what you like: add up to %d quick amounts."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:305
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:323
 msgid "Pay what you like: the minimum is above the maximum, so the maximum was not saved."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:307
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:325
 msgid "Pay what you like: the suggested amount can't be above the maximum and was not saved."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:309
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:327
 msgid "Pay what you like: quick amounts above the maximum were left out."
 msgstr ""
 
-#: includes/Modules/PayWhatYouLike/ProductSettings.php:311
+#: includes/Modules/PayWhatYouLike/ProductSettings.php:329
 msgid "Pay what you like: some settings could not be saved."
 msgstr ""
 
@@ -8092,11 +9455,13 @@ msgid "No Razorpay renewal method is switched on."
 msgstr ""
 
 #: includes/Modules/RazorpayGateway/Checkout.php:220
+#: includes/Modules/RevolutGateway/Pages.php:151
 #: templates/razorpay_gateway/checkout.php:25
 msgid "Pay now"
 msgstr ""
 
 #: includes/Modules/RazorpayGateway/Checkout.php:221
+#: includes/Modules/RevolutGateway/Pages.php:216
 msgid "The payment did not go through. You can try again."
 msgstr ""
 
@@ -8380,68 +9745,77 @@ msgstr ""
 msgid "Razorpay payment %s does not match the amount this order asked for. Check it before shipping."
 msgstr ""
 
-#: includes/Modules/RazorpayGateway/Sync.php:208
+#: includes/Modules/RazorpayGateway/Sync.php:215
 msgid "Razorpay did not return a recurring token for this payment, so renewals will be invoiced."
 msgstr ""
 
 #. translators: %s: saved method
-#: includes/Modules/RazorpayGateway/Sync.php:213
+#: includes/Modules/RazorpayGateway/Sync.php:220
 #, php-format
 msgid "Saved %s for renewals."
 msgstr ""
 
-#: includes/Modules/RazorpayGateway/Sync.php:220
+#: includes/Modules/RazorpayGateway/Sync.php:226
 msgid "eNACH mandate registered. The first payment is debited once the bank confirms the mandate, usually within two working days."
 msgstr ""
 
 #. translators: 1: Razorpay payment id, 2: reason
-#: includes/Modules/RazorpayGateway/Sync.php:248
+#: includes/Modules/RazorpayGateway/Sync.php:254
 #, php-format
 msgid "Razorpay debit %1$s failed (%2$s)."
 msgstr ""
 
 #. translators: 1: Razorpay payment id, 2: reason
-#: includes/Modules/RazorpayGateway/Sync.php:258
+#: includes/Modules/RazorpayGateway/Sync.php:264
 #, php-format
 msgid "Razorpay payment attempt %1$s failed (%2$s)."
 msgstr ""
 
-#. translators: %s: error
-#: includes/Modules/RazorpayGateway/Sync.php:271
-#, php-format
-msgid "The ₹1 authorization could not be refunded automatically: %s Refund it in Razorpay."
-msgstr ""
-
-#: includes/Modules/RazorpayGateway/Sync.php:275
-msgid "The ₹1 authorization was refunded through Razorpay."
-msgstr ""
-
-#. translators: %s: Razorpay refund id
-#: includes/Modules/RazorpayGateway/Sync.php:381
-#, php-format
-msgid "Razorpay could not complete refund %s. Check it in the Razorpay dashboard."
-msgstr ""
-
-#. translators: %s: Razorpay refund id
-#: includes/Modules/RazorpayGateway/Sync.php:398
-#, php-format
-msgid "Refunded in Razorpay (%s)"
-msgstr ""
-
 #. translators: %s: rejected or cancelled
-#: includes/Modules/RazorpayGateway/Sync.php:447
+#: includes/Modules/RazorpayGateway/Sync.php:284
+#: includes/Modules/RazorpayGateway/Sync.php:481
 #, php-format
 msgid "The bank %s the eNACH mandate, so the first payment was not debited."
 msgstr ""
 
 #. translators: %s: rejected or cancelled
-#: includes/Modules/RazorpayGateway/Sync.php:447
+#: includes/Modules/RazorpayGateway/Sync.php:284
+#: includes/Modules/RazorpayGateway/Sync.php:481
 msgid "rejected"
 msgstr ""
 
 #. translators: %s: rejected or cancelled
-#: includes/Modules/RazorpayGateway/Sync.php:447
+#: includes/Modules/RazorpayGateway/Sync.php:284
+#: includes/Modules/RazorpayGateway/Sync.php:481
 msgid "cancelled"
+msgstr ""
+
+#. translators: %s: Razorpay payment id
+#: includes/Modules/RazorpayGateway/Sync.php:291
+#, php-format
+msgid "Razorpay registered %s for ₹0 and the eNACH mandate could not be read, so nothing has been paid. Do not ship this order until its first payment is debited. If it stays on hold, check the mandate in Razorpay."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/RazorpayGateway/Sync.php:304
+#, php-format
+msgid "The ₹1 authorization could not be refunded automatically: %s Refund it in Razorpay."
+msgstr ""
+
+#: includes/Modules/RazorpayGateway/Sync.php:308
+msgid "The ₹1 authorization was refunded through Razorpay."
+msgstr ""
+
+#. translators: %s: Razorpay refund id
+#: includes/Modules/RazorpayGateway/Sync.php:415
+#, php-format
+msgid "Razorpay could not complete refund %s. Check it in the Razorpay dashboard."
+msgstr ""
+
+#. translators: %s: Razorpay refund id
+#: includes/Modules/RazorpayGateway/Sync.php:432
+#, php-format
+msgid "Refunded in Razorpay (%s)"
 msgstr ""
 
 #: includes/Modules/RazorpayGateway/Tokens.php:224
@@ -8450,6 +9824,543 @@ msgstr ""
 
 #: includes/Modules/RazorpayGateway/Tokens.php:224
 msgid "(awaiting bank confirmation)"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Api.php:68
+msgid "Revolut is not connected for test mode. Add a sandbox secret key in the Revolut settings."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Api.php:69
+msgid "Revolut is not connected. Add a live secret key in the Revolut settings."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Api.php:72
+msgid "That is a Revolut public key. Paste the secret key, which starts with sk_."
+msgstr ""
+
+#. translators: %s: transport error
+#: includes/Modules/RevolutGateway/Api.php:103
+#, php-format
+msgid "Could not reach Revolut: %s"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Api.php:119
+#: includes/Modules/RevolutGateway/Remote.php:151
+msgid "Revolut sent an answer that could not be read."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Api.php:133
+msgid "Revolut rejected the sandbox secret key. Keys from the live account do not work in the sandbox."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Api.php:134
+msgid "Revolut rejected the live secret key. Check the key, and that it was created without request signing, which Stackless does not support."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Api.php:137
+msgid "Revolut refused the request. The secret key needs read and write access to orders, payments, customers and webhooks, and read access to disputes, and must not require request signing."
+msgstr ""
+
+#. translators: %s: Revolut error message
+#: includes/Modules/RevolutGateway/Api.php:142
+#, php-format
+msgid "Revolut: %s"
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: includes/Modules/RevolutGateway/Api.php:144
+#, php-format
+msgid "Revolut returned an unexpected error (HTTP %d)."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/BlocksSupport.php:40
+#: includes/Modules/RevolutGateway/Gateway.php:69
+msgid "Card or Revolut Pay"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/BlocksSupport.php:41
+#: includes/Modules/RevolutGateway/Gateway.php:74
+msgid "You’ll finish paying on Revolut’s secure checkout."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/BlocksSupport.php:48
+#: templates/revolut_gateway/payment-fields.php:21
+msgid "You enter your card in Revolut’s window on the next page. It is saved with Revolut for future payments."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Charges.php:103
+msgid "No saved Revolut card of this customer is attached to this subscription."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Charges.php:106
+msgid "The card was saved in the Revolut sandbox and cannot pay on a live store."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/RevolutGateway/Charges.php:110
+#, php-format
+msgid "Saved Revolut cards cannot be charged in %s."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Charges.php:125
+msgid "Revolut has no such saved card for this customer in the connected account."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Charges.php:129
+msgid "The saved card may no longer be charged without the customer."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/RevolutGateway/Charges.php:169
+#, php-format
+msgid "The outcome of the Revolut charge is not known yet (%s). It is checked again before anything else is charged."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/RevolutGateway/Charges.php:184
+#, php-format
+msgid "Revolut could not take this charge yet (%s). Nothing was charged. Retrying automatically."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Charges.php:198
+msgid "Revolut declined the payment."
+msgstr ""
+
+#. translators: 1: reason, 2: reason code
+#: includes/Modules/RevolutGateway/Charges.php:206
+#, php-format
+msgid "Revolut charge failed: %1$s (%2$s)"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Checkout.php:28
+msgid "This payment is already being processed. Try again in a moment."
+msgstr ""
+
+#. translators: %s: currency code
+#: includes/Modules/RevolutGateway/Checkout.php:48
+#, php-format
+msgid "Revolut does not take payments in %s here. Choose another payment method."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Checkout.php:53
+msgid "There is nothing to pay with Revolut."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Checkout.php:92
+msgid "An earlier payment for this order is still being processed. Wait a few minutes before paying again."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Checkout.php:123
+msgid "Revolut did not return a checkout page for this payment."
+msgstr ""
+
+#. translators: 1: order number, 2: site name
+#: includes/Modules/RevolutGateway/Checkout.php:156
+#, php-format
+msgid "Order %1$s, %2$s"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Checkout.php:187
+#: includes/Modules/RevolutGateway/Checkout.php:268
+msgid "Revolut did not create the order as requested."
+msgstr ""
+
+#. translators: %s: site name
+#: includes/Modules/RevolutGateway/Checkout.php:259
+#, php-format
+msgid "Save a card for %s"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Connection.php:27
+msgid "Revolut is enabled but has no secret key for the selected mode."
+msgstr ""
+
+#. translators: %s: webhook URL
+#: includes/Modules/RevolutGateway/Connection.php:62
+#, php-format
+msgid "The key works. The webhook was not set up automatically, because this site is not reachable over public HTTPS or is not confirmed as the live store. Add %s in Revolut and save its signing secret here."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/RevolutGateway/Connection.php:71
+#, php-format
+msgid "The key works, but the webhook could not be set up: %s"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Connection.php:84
+msgid "The webhook signing secret in wp-config.php is not the one Revolut uses for this site."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Connection.php:87
+msgid "Save the webhook signing secret from Revolut."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Customers.php:63
+msgid "An email address is needed to save a card with Revolut."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Customers.php:74
+msgid "Revolut did not create a customer."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:30
+msgid "Revolut (Stackless)"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:31
+msgid "Cards, Revolut Pay and the other methods switched on in your Revolut merchant account, on Revolut’s hosted page. Subscriptions save the card in Revolut’s checkout window for automatic renewals."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:63
+msgid "Accept payments with Revolut"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:79
+msgid "Use the Revolut sandbox (a separate sandbox account and key; no real money moves)"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:86
+msgid "Open Revolut Business"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:87
+msgid "Open Revolut sandbox"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:88
+msgid "Create a Merchant API secret key without request signing, with read and write access to orders, payments, customers and webhooks, and read access to disputes. Saving checks the key and sets the webhook up."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:94
+msgid "Sandbox secret key"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:102
+msgid "Sandbox webhook signing secret"
+msgstr ""
+
+#. translators: %s: webhook URL
+#: includes/Modules/RevolutGateway/Gateway.php:108
+#, php-format
+msgid "Filled in when you save. For a webhook made by hand, use the URL %s and paste its signing secret."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:119
+msgid "Log Revolut activity to WooCommerce → Status → Logs (stackless-revolut_gateway). Keys are never logged."
+msgstr ""
+
+#. translators: %s: currency codes
+#: includes/Modules/RevolutGateway/Gateway.php:127
+#, php-format
+msgid "One-time payments use Revolut’s hosted page. A subscription or free trial takes a card in Revolut’s checkout window and saves it for renewals; a free trial checks the card for 0.00. Only cards can renew. Currencies: %s."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:211
+msgid "Saved Revolut cards are only used for renewals. Enter a card to pay now."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Gateway.php:224
+msgid "Revolut could not start the payment. Please try again or choose another payment method."
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/RevolutGateway/Gateway.php:228
+#, php-format
+msgid "Revolut payment could not start: %s"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Health.php:44
+msgid "Revolut has no secret key for the selected mode"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Health.php:45
+msgid "Checkout hides Revolut and renewals cannot be charged until a key is added."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Health.php:51
+msgid "Revolut has no webhook signing secret"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Health.php:52
+msgid "Payments that finish after the customer leaves, refunds made in Revolut and disputes do not reach the store. Save the settings again to set the webhook up."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Health.php:59
+msgid "Revolut is in test mode"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Health.php:60
+msgid "Payments and renewals use the Revolut sandbox."
+msgstr ""
+
+#. translators: %d: number of orders
+#: includes/Modules/RevolutGateway/Health.php:70
+#, php-format
+msgid "%d Revolut charge has been unresolved for over two days"
+msgid_plural "%d Revolut charges have been unresolved for over two days"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: order numbers
+#: includes/Modules/RevolutGateway/Health.php:72
+#, php-format
+msgid "Check these orders in Revolut Business before charging them another way: %s"
+msgstr ""
+
+#. translators: %d: number of orders
+#: includes/Modules/RevolutGateway/Health.php:81
+#, php-format
+msgid "%d Revolut payment needs a look"
+msgid_plural "%d Revolut payments need a look"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: order numbers
+#: includes/Modules/RevolutGateway/Health.php:83
+#, php-format
+msgid "A second payment, a wrong amount or a failed refund. Read the notes on: %s"
+msgstr ""
+
+#. translators: %d: number of events
+#: includes/Modules/RevolutGateway/Health.php:92
+#, php-format
+msgid "%d Revolut webhook failed recently"
+msgid_plural "%d Revolut webhooks failed recently"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Modules/RevolutGateway/Health.php:93
+msgid "Revolut retries three times, ten minutes apart. The Revolut log has the reason."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Module.php:18
+#: includes/Modules/RevolutGateway/Module.php:47
+msgid "Revolut"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Module.php:23
+msgid "Take cards, Revolut Pay and the other methods switched on in your Revolut merchant account on Revolut’s hosted page, save cards for subscriptions and renew them automatically. Refunds, payment updates and disputes sync from Revolut."
+msgstr ""
+
+#. translators: %s: link to the gateway settings
+#: includes/Modules/RevolutGateway/Module.php:50
+#, php-format
+msgid "Keys, test mode and checkout options live with the other payment methods: %s. Saving there checks the key and sets the webhook up."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Module.php:51
+msgid "WooCommerce → Settings → Payments → Revolut"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Module.php:129
+msgid "Stackless: Revolut"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Module.php:130
+msgid "When you pay with Revolut, we send Revolut your name, email address, shipping address, and the items and amount of the order. Card details are entered on Revolut’s page or checkout window and never reach our servers. For subscriptions, Revolut saves the card so we can charge renewals; we keep its brand, last four digits and expiry date."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:132
+#: includes/Modules/RevolutGateway/Pages.php:168
+msgid "Revolut could not be reached. Reload the page to try again."
+msgstr ""
+
+#. translators: %s: order number
+#: includes/Modules/RevolutGateway/Pages.php:142
+#, php-format
+msgid "Pay for order %s"
+msgstr ""
+
+#. translators: %s: amount
+#: includes/Modules/RevolutGateway/Pages.php:146
+#, php-format
+msgid "Enter your card in the Revolut window to pay %s."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:147
+msgid "Enter your card in the Revolut window. Nothing is charged now."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:148
+msgid "Your card is saved with Revolut so this store can charge it for your future payments, such as renewals."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:151
+#: includes/Modules/RevolutGateway/Pages.php:180
+msgid "Save card"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:153
+#: templates/razorpay_gateway/checkout.php:26
+#: templates/stripe_gateway/managed-pay-page.php:148
+msgid "Choose another payment method"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:177
+msgid "Save a card"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:178
+msgid "Enter your card in the Revolut window. Nothing is charged now. The card is saved with Revolut so this store can charge it for your future payments, such as renewals."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:182
+#: templates/razorpay_gateway/authorize-page.php:54
+msgid "Cancel"
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:217
+msgid "Card window closed. Use the button to open it again."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:218
+msgid "Revolut could not load. Check your connection and reload the page."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:255
+msgid "Your card could not be saved for renewals. Please try again with another card."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Pages.php:267
+msgid "Revolut is still confirming your card. It appears here once confirmed."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/RefundService.php:30
+msgid "This order has no Revolut payment to refund."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/RefundService.php:34
+msgid "This site is a copy of the live store, so it does not refund live payments."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/RefundService.php:45
+msgid "Revolut is updating this order. Try the refund again in a moment."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/RefundService.php:72
+msgid "That refund already went through and is recorded on this order. Reload the order before refunding again."
+msgstr ""
+
+#. translators: 1: amount, 2: Revolut refund id
+#: includes/Modules/RevolutGateway/RefundService.php:76
+#, php-format
+msgid "An earlier refund of %1$s (%2$s) reached Revolut. Refund that amount here to record it, or wait for Revolut to confirm it."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/RefundService.php:83
+msgid "An earlier refund is still being sent to Revolut. Wait two minutes and try again."
+msgstr ""
+
+#. translators: %s: order number
+#: includes/Modules/RevolutGateway/RefundService.php:103
+#, php-format
+msgid "Refund for order %s"
+msgstr ""
+
+#. translators: %s: error
+#: includes/Modules/RevolutGateway/RefundService.php:117
+#, php-format
+msgid "It is not known whether Revolut took the refund (%s). Refund the same amount again: it cannot be refunded twice."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/RefundService.php:128
+msgid "Revolut answered with a refund that does not match. Check the payment in Revolut Business before refunding again."
+msgstr ""
+
+#. translators: %s: reason code
+#: includes/Modules/RevolutGateway/RefundService.php:134
+#, php-format
+msgid "Revolut could not process this refund (%s). Check the payment in Revolut Business."
+msgstr ""
+
+#. translators: 1: amount, 2: Revolut refund id, 3: status
+#: includes/Modules/RevolutGateway/RefundService.php:146
+#, php-format
+msgid "Refunded %1$s through Revolut (refund %2$s, %3$s)."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Remote.php:127
+msgid "That is not a Revolut order id."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Remote.php:134
+msgid "Revolut answered with a different order."
+msgstr ""
+
+#. translators: 1: amount, 2: Revolut order id
+#: includes/Modules/RevolutGateway/Sync.php:120
+#, php-format
+msgid "A second payment of %1$s arrived through Revolut (order %2$s) for this already paid order. It did not complete the order again. Refund it in Revolut Business."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Sync.php:130
+msgid "A Revolut sandbox payment was ignored: the store takes live payments."
+msgstr ""
+
+#. translators: 1: Revolut order id, 2: amount paid, 3: amount expected
+#: includes/Modules/RevolutGateway/Sync.php:144
+#, php-format
+msgid "Revolut payment %1$s was for %2$s, but this order is for %3$s. The order was not completed. Check the payment before fulfilling it."
+msgstr ""
+
+#. translators: 1: amount refunded, 2: Revolut order id
+#: includes/Modules/RevolutGateway/Sync.php:161
+#, php-format
+msgid "%1$s of Revolut payment %2$s was already refunded, so the order was not completed. Check the payment before fulfilling it."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Sync.php:190
+msgid "Revolut did not save the card for merchant use, so this free order was not completed. The customer can try again."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Sync.php:194
+msgid "Revolut did not save the card for merchant use, so renewals will be invoiced."
+msgstr ""
+
+#. translators: %s: Revolut order id
+#: includes/Modules/RevolutGateway/Sync.php:204
+#, php-format
+msgid "Revolut payment %s arrived, but the order could not be completed yet."
+msgstr ""
+
+#. translators: 1: amount, 2: Revolut order id
+#: includes/Modules/RevolutGateway/Sync.php:313
+#, php-format
+msgid "Revolut refunded %1$s of the extra payment %2$s."
+msgstr ""
+
+#. translators: 1: amount, 2: Revolut refund id
+#: includes/Modules/RevolutGateway/Sync.php:327
+#, php-format
+msgid "Revolut could not complete the refund of %1$s (%2$s). The customer has not received it. Check it in Revolut Business."
+msgstr ""
+
+#. translators: %s: Revolut refund id
+#: includes/Modules/RevolutGateway/Sync.php:346
+#, php-format
+msgid "Refunded in Revolut (%s)."
+msgstr ""
+
+#. translators: %s: amount
+#: includes/Modules/RevolutGateway/Sync.php:372
+#, php-format
+msgid "The Revolut dispute of %s was won."
+msgstr ""
+
+#. translators: %s: amount
+#: includes/Modules/RevolutGateway/Sync.php:376
+#, php-format
+msgid "The Revolut dispute of %s was lost."
+msgstr ""
+
+#. translators: %s: amount
+#: includes/Modules/RevolutGateway/Sync.php:378
+#, php-format
+msgid "Revolut reports a dispute of %s on this payment. Answer it in Revolut Business."
+msgstr ""
+
+#: includes/Modules/RevolutGateway/Tokens.php:82
+msgid "a card"
 msgstr ""
 
 #: includes/Modules/SavedCarts/Module.php:27
@@ -8820,11 +10731,6 @@ msgstr ""
 msgid "The card details expired. Enter them again."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Declines.php:122
-#: includes/Modules/SquareGateway/Gateway.php:498
-msgid "Your card was declined. Try another card."
-msgstr ""
-
 #: includes/Modules/SquareGateway/Gateway.php:61
 msgid "Square (Stackless)"
 msgstr ""
@@ -8833,143 +10739,129 @@ msgstr ""
 msgid "Cards, Apple Pay and Google Pay through Square’s Web Payments SDK, with cards on file for saved cards and automatic subscription renewals."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:70
-msgid "Use a new card"
-msgstr ""
-
-#: includes/Modules/SquareGateway/Gateway.php:83
+#: includes/Modules/SquareGateway/Gateway.php:87
 msgid "Accept payments with Square"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:89
+#: includes/Modules/SquareGateway/Gateway.php:93
 msgid "Card, Apple Pay or Google Pay"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:94
+#: includes/Modules/SquareGateway/Gateway.php:98
 msgid "Pay securely with your card through Square."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:99
+#: includes/Modules/SquareGateway/Gateway.php:103
 msgid "Use the Square sandbox (no real money moves)"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:103
+#: includes/Modules/SquareGateway/Gateway.php:107
 msgid "Square application"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:105
+#: includes/Modules/SquareGateway/Gateway.php:109
 msgid "Open the Square Developer Console"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:106
+#: includes/Modules/SquareGateway/Gateway.php:110
 msgid "Open your application, then copy its Application ID and access token for Production and for Sandbox. The location is filled in with your main location when left empty, and the webhook is created for you on save (it needs a personal access token, which these are)."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:112
+#: includes/Modules/SquareGateway/Gateway.php:116
 msgid "application ID"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:113
+#: includes/Modules/SquareGateway/Gateway.php:117
 msgid "access token"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:114
+#: includes/Modules/SquareGateway/Gateway.php:118
 msgid "location ID"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:115
+#: includes/Modules/SquareGateway/Gateway.php:119
 msgid "webhook signature key"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:131
+#: includes/Modules/SquareGateway/Gateway.php:135
 msgid "Wallets"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:136
+#: includes/Modules/SquareGateway/Gateway.php:140
 msgid "Shown above the card form for one-time orders. Wallet payments cannot be saved, so subscription checkouts show the card form only. Apple Pay also needs your domain registered in the Square Developer Console (Apple Pay tab)."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:139
-msgid "Saved cards"
-msgstr ""
-
-#: includes/Modules/SquareGateway/Gateway.php:141
+#: includes/Modules/SquareGateway/Gateway.php:145
 msgid "Let signed-in customers save cards with Square. Subscription orders always save the card for renewals."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:147
+#: includes/Modules/SquareGateway/Gateway.php:151
 msgid "Log Square activity to WooCommerce → Status → Logs (stackless-square_gateway). Tokens and card data are never logged."
 msgstr ""
 
 #. translators: 1: webhook URL, 2: event names
-#: includes/Modules/SquareGateway/Gateway.php:155
+#: includes/Modules/SquareGateway/Gateway.php:174
 #, php-format
 msgid "Created automatically when the signature key is empty. To add it by hand, open Webhooks → Subscriptions in your application, add this URL: %1$s with these events, and paste its signature key above: %2$s"
 msgstr ""
 
 #. translators: 1: location name, 2: currency code
-#: includes/Modules/SquareGateway/Gateway.php:172
+#: includes/Modules/SquareGateway/Gateway.php:188
 #, php-format
 msgid "Charging through %1$s in %2$s. Square takes payments in the location’s currency only, so Square is hidden when a cart is in another currency."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:206
+#: includes/Modules/SquareGateway/Gateway.php:222
 msgid "Square is enabled but the selected mode needs both an application ID and an access token."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:209
+#: includes/Modules/SquareGateway/Gateway.php:225
 msgid "Add the Square webhook signature key so refunds and card changes made in Square reach WooCommerce."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:421
-msgid "Loading the card form…"
-msgstr ""
-
-#: includes/Modules/SquareGateway/Gateway.php:422
+#: includes/Modules/SquareGateway/Gateway.php:445
 msgid "Square could not load the card form. Reload the page or choose another payment method."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:424
+#: includes/Modules/SquareGateway/Gateway.php:447
 msgid "Your bank could not verify the card. Try again or use another card."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:425
+#: includes/Modules/SquareGateway/Gateway.php:448
+msgid "Your wallet was not charged, because the payment method changed while it was open. Press Place order to pay with the selected method, or use the wallet again."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Gateway.php:449
 #: templates/square_gateway/payment-fields.php:38
 msgid "Sandbox: use Square’s test cards; no real payment will be taken."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:426
+#: includes/Modules/SquareGateway/Gateway.php:450
 msgid "Total"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:456
-#: includes/Modules/SquareGateway/Gateway.php:486
-#: includes/Modules/SquareGateway/Gateway.php:507
-msgid "Enter your card details to continue."
+#: includes/Modules/SquareGateway/Gateway.php:505
+msgid "You were not charged, because a saved card and a wallet were sent together. Reload the page and try again. To pay with Google Pay or Apple Pay, choose “Use a new card” first."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:480
-msgid "That saved card is not available. Choose another one."
-msgstr ""
-
-#: includes/Modules/SquareGateway/Gateway.php:490
+#: includes/Modules/SquareGateway/Gateway.php:519
 msgid "Wallet payments cannot be saved for renewals. Pay with a card for this subscription."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:592
+#: includes/Modules/SquareGateway/Gateway.php:627
 msgid "Square did not create a customer."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:625
+#: includes/Modules/SquareGateway/Gateway.php:660
 msgid "This order has no Square payment to refund."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:644
+#: includes/Modules/SquareGateway/Gateway.php:679
 msgid "Square could not process this refund. Check the payment in your Square Dashboard."
 msgstr ""
 
 #. translators: 1: amount, 2: Square refund id, 3: status
-#: includes/Modules/SquareGateway/Gateway.php:649
+#: includes/Modules/SquareGateway/Gateway.php:684
 #, php-format
 msgid "Refunded %1$s through Square (refund %2$s, %3$s)."
 msgstr ""
@@ -9036,100 +10928,108 @@ msgid "WooCommerce → Settings → Payments → Square"
 msgstr ""
 
 #. translators: %s: currency code
-#: includes/Modules/SquareGateway/Payments.php:55
-#: includes/Modules/SquareGateway/Payments.php:133
+#: includes/Modules/SquareGateway/Payments.php:70
+#: includes/Modules/SquareGateway/Payments.php:151
 #, php-format
 msgid "Square takes payments in %s only."
 msgstr ""
 
 #. translators: %s: error
-#: includes/Modules/SquareGateway/Payments.php:77
+#: includes/Modules/SquareGateway/Payments.php:97
 #, php-format
 msgid "Square could not save the card: %s"
 msgstr ""
 
 #. translators: %s: card, e.g. "Visa ending in 4242"
-#: includes/Modules/SquareGateway/Payments.php:84
-#: includes/Modules/SquareGateway/Payments.php:103
+#: includes/Modules/SquareGateway/Payments.php:104
+#: includes/Modules/SquareGateway/Payments.php:128
 #, php-format
 msgid "Saved %s with Square for future payments."
 msgstr ""
 
 #. translators: %s: error
-#: includes/Modules/SquareGateway/Payments.php:106
+#: includes/Modules/SquareGateway/Payments.php:131
 #, php-format
 msgid "The payment went through, but Square could not save the card for renewals: %s Renewals will be invoiced."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:192
+#: includes/Modules/SquareGateway/Payments.php:288
+msgid "A payment for this order is already being processed. Wait a moment and check your orders before you pay again."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Payments.php:306
+msgid "An earlier saved-card payment for this order has not been confirmed, so nothing else was charged. To avoid paying twice, select the saved card you used first and place the order again. If that does not work, contact the store before paying another way."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Payments.php:311
+msgid "An earlier payment for this order has not been confirmed, so this card was not charged. Contact the store before paying again, so you are not charged twice."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Payments.php:326
 msgid "No saved Square card is attached to this subscription."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:195
+#: includes/Modules/SquareGateway/Payments.php:329
 #: includes/Modules/StripeGateway/Renewals.php:44
 msgid "The renewal order cannot be paid in its current status."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:211
-msgid "That saved card does not belong to this customer."
-msgstr ""
-
-#: includes/Modules/SquareGateway/Payments.php:214
+#: includes/Modules/SquareGateway/Payments.php:348
 msgid "The order is not waiting for a Square payment."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:261
+#: includes/Modules/SquareGateway/Payments.php:395
 msgid "Square saved the card, but it could not be stored here."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:286
+#: includes/Modules/SquareGateway/Payments.php:431
 msgid "Square did not return a payment."
 msgstr ""
 
 #. translators: %s: Square payment id
-#: includes/Modules/SquareGateway/Payments.php:318
+#: includes/Modules/SquareGateway/Payments.php:463
 #, php-format
 msgid "Square payment %s does not match the order total. Check it before shipping."
 msgstr ""
 
 #. translators: %s: Square payment id
-#: includes/Modules/SquareGateway/Payments.php:329
+#: includes/Modules/SquareGateway/Payments.php:474
 #, php-format
 msgid "Square is processing payment %s."
 msgstr ""
 
 #. translators: 1: Square payment id, 2: error code
-#: includes/Modules/SquareGateway/Payments.php:339
+#: includes/Modules/SquareGateway/Payments.php:484
 #, php-format
 msgid "Square payment %1$s failed (%2$s)."
 msgstr ""
 
 #. translators: 1: error code, 2: message
-#: includes/Modules/SquareGateway/Payments.php:353
+#: includes/Modules/SquareGateway/Payments.php:498
 #, php-format
 msgid "Square payment attempt failed: %1$s (%2$s)"
 msgstr ""
 
 #. translators: %s: error
-#: includes/Modules/SquareGateway/Payments.php:368
+#: includes/Modules/SquareGateway/Payments.php:513
 #, php-format
 msgid "Square could not be reached for this charge (%s). Retrying automatically with the same idempotency key."
 msgstr ""
 
 #. translators: 1: reason, 2: error code
-#: includes/Modules/SquareGateway/Payments.php:391
+#: includes/Modules/SquareGateway/Payments.php:536
 #, php-format
 msgid "Square charge failed: %1$s (%2$s)"
 msgstr ""
 
 #. translators: %s: Square refund id
-#: includes/Modules/SquareGateway/Payments.php:482
+#: includes/Modules/SquareGateway/Payments.php:627
 #, php-format
 msgid "Square could not complete refund %s. Check it in the Square Dashboard."
 msgstr ""
 
 #. translators: %s: Square refund id
-#: includes/Modules/SquareGateway/Payments.php:499
+#: includes/Modules/SquareGateway/Payments.php:644
 #, php-format
 msgid "Refunded in Square (%s)"
 msgstr ""
@@ -9361,10 +11261,6 @@ msgstr ""
 
 #: includes/Modules/StripeGateway/Admin.php:257
 msgid "Turn on or off in WooCommerce → Settings → Payments"
-msgstr ""
-
-#: includes/Modules/StripeGateway/Admin.php:262
-msgid "Live account"
 msgstr ""
 
 #: includes/Modules/StripeGateway/Admin.php:262
@@ -10357,12 +12253,6 @@ msgstr ""
 msgid "Stripe is not configured: the secret key is missing."
 msgstr ""
 
-#. translators: 1: payment method name, 2: last four digits
-#: includes/Modules/StripeGateway/Tokens.php:281
-#, php-format
-msgid "%1$s ending in %2$s"
-msgstr ""
-
 #: includes/Modules/StripeGateway/Tokens.php:290
 msgid "Link"
 msgstr ""
@@ -10832,21 +12722,12 @@ msgstr ""
 msgid "Open Razorpay"
 msgstr ""
 
-#: templates/razorpay_gateway/authorize-page.php:54
-msgid "Cancel"
-msgstr ""
-
 #: templates/razorpay_gateway/checkout.php:19
 msgid "Complete your payment in the Razorpay window. If it did not open, use the button below."
 msgstr ""
 
 #: templates/razorpay_gateway/checkout.php:21
 msgid "You are setting up an eNACH mandate. Your first payment is debited once your bank confirms it, usually within two working days."
-msgstr ""
-
-#: templates/razorpay_gateway/checkout.php:26
-#: templates/stripe_gateway/managed-pay-page.php:148
-msgid "Choose another payment method"
 msgstr ""
 
 #: templates/razorpay_gateway/payment-fields.php:33

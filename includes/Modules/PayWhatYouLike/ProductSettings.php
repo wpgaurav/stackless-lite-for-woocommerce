@@ -26,6 +26,24 @@ final class ProductSettings
         add_action('woocommerce_admin_process_product_object', [$this, 'save']);
         add_action('woocommerce_product_after_variable_attributes', [$this, 'variationFields'], 20, 3);
         add_action('woocommerce_admin_process_variation_object', [$this, 'saveVariation'], 20, 2);
+        // Sale and pricing rules (Sale Campaigns) leave a product whose buyer picks the price alone.
+        add_filter('stackless_product_has_buyer_price', [$this, 'hasBuyerPrice'], 10, 2);
+    }
+
+    /**
+     * stackless_product_has_buyer_price: true for a product or variation that takes a chosen
+     * amount, so its own price stays its price and its minimum.
+     *
+     * @param mixed $has
+     * @param mixed $product
+     * @return mixed
+     */
+    public function hasBuyerPrice($has, $product = null)
+    {
+        if ($has || !$product instanceof \WC_Product) {
+            return $has;
+        }
+        return $this->settingsFor($product) !== null;
     }
 
     private static function decimals(): int

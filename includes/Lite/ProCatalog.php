@@ -74,6 +74,18 @@ final class ProCatalog
                 ],
                 'docs' => 'subscriptions/billing-health/',
             ],
+            'subscription-save-offers' => [
+                'title' => __('Subscription Save Offers', 'stackless-lite'),
+                'group' => 'recurring',
+                'icon' => 'heart',
+                'summary' => __('Ask why customers cancel and make 1 offer that fits the reason, before the subscription ends.', 'stackless-lite'),
+                'features' => [
+                    __('A renewal discount, a pause, a skipped payment, a cheaper or yearly plan, or your own message', 'stackless-lite'),
+                    __('Declining cancels with no more questions; every attempt is logged with the save rate by reason', 'stackless-lite'),
+                    __('1 optional win-back email after a subscription ends, with a one-click unsubscribe', 'stackless-lite'),
+                ],
+                'docs' => 'subscriptions/save-offers/',
+            ],
             'checkout-builder' => [
                 'title' => __('Checkout Builder', 'stackless-lite'),
                 'group' => 'checkout',
@@ -132,6 +144,18 @@ final class ProCatalog
                 ],
                 'docs' => 'checkout-and-sales/vat-numbers/',
             ],
+            'cart-goals' => [
+                'title' => __('Cart Goals', 'stackless-lite'),
+                'group' => 'checkout',
+                'icon' => 'truck-delivery',
+                'summary' => __('A progress bar toward spend goals in the cart and checkout.', 'stackless-lite'),
+                'features' => [
+                    __('Up to 3 goals with free shipping or a discount as the reward', 'stackless-lite'),
+                    __('Rewards added and removed automatically, checked on the server', 'stackless-lite'),
+                    __('Works on the Cart and Checkout blocks and the classic cart, mini cart and checkout', 'stackless-lite'),
+                ],
+                'docs' => 'checkout-and-sales/cart-goals/',
+            ],
             'order-bumps' => [
                 'title' => __('Order Bumps', 'stackless-lite'),
                 'group' => 'sales',
@@ -156,6 +180,19 @@ final class ProCatalog
                     __('Falls back to a pay link when a one-click charge isn\'t possible', 'stackless-lite'),
                 ],
                 'docs' => 'checkout-and-sales/post-purchase-offers/',
+            ],
+            'sale-campaigns' => [
+                'title' => __('Sale Campaigns', 'stackless-lite'),
+                'group' => 'sales',
+                'icon' => 'tag',
+                'summary' => __('Scheduled sales that start and end by themselves, with sale prices, a badge and a countdown to the real end.', 'stackless-lite'),
+                'features' => [
+                    __('A percentage or fixed amount off the whole store, chosen categories or chosen products', 'stackless-lite'),
+                    __('Regular prices back on time, because product prices are never changed', 'stackless-lite'),
+                    __('A countdown block and shortcode, and an optional announcement bar', 'stackless-lite'),
+                    __('Works with the Cart and Checkout blocks, the classic checkout and Multi-Currency', 'stackless-lite'),
+                ],
+                'docs' => 'checkout-and-sales/sale-campaigns/',
             ],
             'gift-cards' => [
                 'title' => __('Gift Cards and Store Credit', 'stackless-lite'),
@@ -267,6 +304,19 @@ final class ProCatalog
                 ],
                 'docs' => 'software-and-access/page-access/',
             ],
+            'purchase-rules' => [
+                'title' => __('Purchase Rules', 'stackless-lite'),
+                'group' => 'access',
+                'icon' => 'shield-lock',
+                'summary' => __('Choose who can buy a product, and from which countries.', 'stackless-lite'),
+                'features' => [
+                    __('Limit buyers by role, FluentCRM tag or WP Fusion tag, or to one purchase each', 'stackless-lite'),
+                    __('Country lock by visitor location from Cloudflare and other CDN headers', 'stackless-lite'),
+                    __('Country lock by billing or shipping country, with checkout lists trimmed to match', 'stackless-lite'),
+                    __('Store-wide rule with per-product and per-variation overrides', 'stackless-lite'),
+                ],
+                'docs' => 'software-and-access/purchase-rules/',
+            ],
             'product-addons' => [
                 'title' => __('Fields & Paid Add-ons', 'stackless-lite'),
                 'group' => 'store',
@@ -279,6 +329,18 @@ final class ProCatalog
                     __('Works on the Checkout block and the classic checkout', 'stackless-lite'),
                 ],
                 'docs' => 'store-tools/product-addons/',
+            ],
+            'frequently-bought-together' => [
+                'title' => __('Frequently Bought Together', 'stackless-lite'),
+                'group' => 'store',
+                'icon' => 'shopping-cart-plus',
+                'summary' => __('The product with up to 3 companions, a combined total and one button that adds the checked items.', 'stackless-lite'),
+                'features' => [
+                    __('Your picks per product first, then products from paid order history', 'stackless-lite'),
+                    __('An optional set discount that comes off when an item leaves the cart', 'stackless-lite'),
+                    __('Automatic placement on the product page, a block and a shortcode', 'stackless-lite'),
+                ],
+                'docs' => 'catalog/frequently-bought-together/',
             ],
             'wholesale-pricing' => [
                 'title' => __('Wholesale Pricing', 'stackless-lite'),

@@ -31,7 +31,7 @@ final class BlocksSupport extends AbstractPaymentMethodType
         wp_enqueue_style(Assets::STYLE);
         $handle = 'stackless-square_gateway-blocks';
         if (!wp_script_is($handle, 'registered')) {
-            wp_register_script($handle, STACKLESS_PLUGIN_URL . 'assets/square_gateway/blocks.js', ['wc-blocks-registry', 'wc-settings', 'wp-element', 'wp-html-entities', Assets::COMMON], STACKLESS_VERSION, true);
+            wp_register_script($handle, STACKLESS_PLUGIN_URL . 'assets/square_gateway/blocks.js', ['wc-blocks-registry', 'wc-settings', 'wp-data', 'wp-element', 'wp-html-entities', Assets::COMMON], STACKLESS_VERSION, true);
         }
         return [$handle];
     }
