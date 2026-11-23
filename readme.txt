@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -195,6 +195,9 @@ Yes. Every module that touches the cart or checkout supports the Cart and Checko
 Through the normal WordPress update screens, from gauravtiwari.org. No license key or account is needed.
 
 == Changelog ==
+
+= 2.1.2 =
+* Fixed: the Lite updater checks the downloaded ZIP against its published SHA-256 even if the release feed is temporarily unavailable. It can use a previously fetched checksum and pauses the update if it has no valid checksum.
 
 = 2.1.1 =
 * Fixed: Google Pay and Apple Pay through Square on block checkout show the current order total after a coupon, shipping or quantity change. A wallet payment for any other total, or from a checkout page opened before this update, is refused, and nothing is charged.

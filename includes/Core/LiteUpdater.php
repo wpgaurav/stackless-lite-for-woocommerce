@@ -58,7 +58,7 @@ final class LiteUpdater
             return is_scalar($body[$key] ?? null) ? substr(trim((string) $body[$key]), 0, $max) : '';
         };
         $url = $text('url', 500);
-        $sha = strtolower($text('sha256', 64));
+        $sha = isset($body['sha256']) && is_string($body['sha256']) ? strtolower(trim($body['sha256'])) : '';
         return [
             'version' => $version,
             'name' => $text('name') !== '' ? $text('name') : 'Stackless Lite for WooCommerce',
@@ -85,14 +85,18 @@ final class LiteUpdater
     /** The release, from cache (12 hours, 30 minutes after a failure) or the store. */
     public static function release(bool $fresh = false): ?array
     {
-        $cached = $fresh ? false : get_site_transient(self::CACHE);
-        if (is_array($cached)) {
+        $cached = get_site_transient(self::CACHE);
+        if (!$fresh && is_array($cached)) {
             return isset($cached['version']) ? $cached : null;
         }
         $response = wp_remote_get(self::API, ['timeout' => 10, 'headers' => ['Accept' => 'application/json']]);
         $release = null;
         if (!is_wp_error($response) && (int) wp_remote_retrieve_response_code($response) === 200) {
             $release = self::parse((string) wp_remote_retrieve_body($response));
+        }
+        if ($fresh && !$release && is_array($cached) && !empty($cached['version']) && !empty($cached['sha256'])) {
+            // Use the previously published digest for this download without extending its cache lifetime.
+            return $cached;
         }
         // A 404 (no release yet), an error or a bad document are cached briefly as "nothing".
         set_site_transient(self::CACHE, $release ?: ['none' => time()], $release ? self::TTL : self::FAILURE_TTL);
@@ -206,8 +210,8 @@ final class LiteUpdater
             return $reply;
         }
         $release = self::release(true);
-        if (!$release || $release['sha256'] === '') {
-            return $reply;
+        if (!$release || empty($release['sha256'])) {
+            return new \WP_Error('stackless_lite_checksum_missing', __('The update checksum is unavailable. Please try again in a few minutes.', 'stackless-lite'));
         }
         if (!function_exists('download_url')) {
             require_once ABSPATH . 'wp-admin/includes/file.php';
