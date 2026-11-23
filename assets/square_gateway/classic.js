@@ -67,7 +67,25 @@
 		if (methodField) {
 			methodField.value = 'card';
 		}
+		var amountField = walletAmountField(cfg, false);
+		if (amountField) {
+			amountField.value = '';
+		}
 		state.submitting = false;
+	}
+
+	// The total a wallet's sheet showed, sent with its token: the server refuses any other total.
+	function walletAmountField(cfg, create) {
+		var name = cfg && cfg.fields ? cfg.fields.amount : '';
+		var input = name ? field(name) : null;
+		var box = document.getElementById('stackless-square-form');
+		if (!input && create && name && box) {
+			input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = name;
+			box.appendChild(input);
+		}
+		return input;
 	}
 
 	// A saved card pays by itself: drop what an unfinished wallet or card attempt left in the fields.
@@ -212,7 +230,7 @@
 					}
 					googleButton.addEventListener('click', function (event) {
 						event.preventDefault();
-						payWithWallet(googlePay, 'google_pay');
+						payWithWallet(googlePay, 'google_pay', cfg.amount);
 					});
 				});
 			}).catch(function () { /* Google Pay is not available on this device. */ });
@@ -223,15 +241,15 @@
 				appleButton.hidden = false;
 				appleButton.addEventListener('click', function (event) {
 					event.preventDefault();
-					payWithWallet(applePay, 'apple_pay');
+					payWithWallet(applePay, 'apple_pay', cfg.amount);
 				});
 			}).catch(function () { /* Apple Pay is not available here. */ });
 		}
 	}
 
-	function payWithWallet(wallet, method) {
+	function payWithWallet(wallet, method, shown) {
 		S.tokenize(wallet, null).then(function (token) {
-			submitWith(token, method);
+			submitWith(token, method, shown);
 		}).catch(function (error) {
 			status(error && error.message ? error.message : state.config.i18n.invalid);
 		});
@@ -241,7 +259,7 @@
 		return $(FORMS).first();
 	}
 
-	function submitWith(token, method) {
+	function submitWith(token, method, shown) {
 		var tokenField = field(state.config.fields.token);
 		var methodField = field(state.config.fields.method);
 		if (!tokenField) {
@@ -262,6 +280,10 @@
 		tokenField.value = token;
 		if (methodField) {
 			methodField.value = method;
+		}
+		var amountField = walletAmountField(state.config, true);
+		if (amountField) {
+			amountField.value = shown;
 		}
 		state.submitting = true;
 		$form.trigger('submit');

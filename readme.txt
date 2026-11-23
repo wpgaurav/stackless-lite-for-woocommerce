@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -196,6 +196,13 @@ Through the normal WordPress update screens, from gauravtiwari.org. No license k
 
 == Changelog ==
 
+= 2.1.1 =
+* Fixed: Google Pay and Apple Pay through Square on block checkout show the current order total after a coupon, shipping or quantity change. A wallet payment for any other total, or from a checkout page opened before this update, is refused, and nothing is charged.
+* Fixed: when Square doesn't answer a payment request, that payment may still go through, so the order is now held until Square shows the result. While it is held, nothing else can pay for that purchase: no other card, saved card or wallet, no other payment method, no changed cart or new order from the same cart, and no pay link. The buyer is told that payment may still go through and not to pay again, and later attempts charge nothing. In 2.1.0 this covered only a different saved card on the same order.
+* Fixed: a held order settles from the Square payment webhook, from checks of Square that start a few minutes later, when the buyer tries again, or from "Check Square for the held payment" under Order actions. If Square shows no payment after about 30 minutes, the hold is released and the order can be paid. "Release the Square hold" under Order actions frees it sooner. Held orders aren't canceled as unpaid.
+* Fixed: two tabs or windows placing the same first order at once are charged once. The second is told the cart was just paid.
+* Fixed: a held Square payment no longer keeps the buyer's email or billing address on the order. Data that 2.1.0 kept this way is removed when the order settles and by the WooCommerce personal data eraser.
+
 = 2.1.0 =
 * New: Revolut gateway, with Revolut's hosted checkout, refunds both ways and a signed webhook.
 * New: Airwallex gateway (beta), with hosted checkout for cards and local methods, refunds and disputes. Airwallex's Checkout Session API is itself in beta.
@@ -204,7 +211,7 @@ Through the normal WordPress update screens, from gauravtiwari.org. No license k
 * Fixed: Square shows one card form and one set of wallet listeners, and a declined card no longer leaves pay-for-order or Add payment method blocked.
 * Fixed: paying with Google Pay or Apple Pay through Square charges the wallet. With a saved card selected, that card was charged instead.
 * Fixed: a Google Pay or Apple Pay result that returns after the buyer picked another method on block checkout charges nothing, and a repeated click no longer pays twice.
-* Fixed: after a saved card is declined by Square another saved card can be used. While a payment's outcome is unknown, no second charge is started.
+* Fixed: after Square declines a saved card at checkout, another saved card can be used. If the result of a saved-card payment is unknown, that order refuses a different Square card until the result is known.
 * Fixed: Place order with a typed card charges that card, never a wallet token left from an earlier attempt.
 * Fixed: Square's settings no longer cause a fatal error when another plugin loads payment gateways early.
 

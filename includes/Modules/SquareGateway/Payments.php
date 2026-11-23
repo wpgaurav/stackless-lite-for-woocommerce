@@ -59,9 +59,9 @@ final class Payments
     /** @return array{result:string, message?:string} */
     private function payWithNewCard(\WC_Order $order, string $source, bool $save): array
     {
-        $attempt = CheckoutAttempt::of($order);
-        if ($attempt->open) {
-            return ['result' => 'failed', 'message' => self::unconfirmedSavedCard()];
+        $held = $this->whileHeld($order, null, '');
+        if ($held) {
+            return $held;
         }
         $mode = $this->gateway->mode();
         $currency = strtoupper($order->get_currency());
@@ -76,11 +76,6 @@ final class Payments
             if (is_wp_error($customer)) {
                 return ['result' => 'failed', 'message' => $customer->get_error_message()];
             }
-        }
-        $wasUnknown = $attempt->newUnknown;
-        if ((float) $order->get_total() > 0) {
-            $attempt->newUnknown = true; // until Square answers
-            $attempt->write($order);
         }
         $order->update_meta_data(Gateway::META_MODE, $mode);
         $order->save();
@@ -106,17 +101,15 @@ final class Payments
             return ['result' => 'success'];
         }
 
-        $payment = $this->createPayment($order, $mode, [
+        $body = $this->paymentBody($order, $mode, [
             'source_id' => $source,
             'customer_id' => $customer !== '' ? $customer : null,
         ], Api::key('o' . $order->get_id(), substr(hash('sha256', $source), 0, 16)));
-        if (!$wasUnknown && CheckoutAttempt::answered($payment, false)) {
-            $attempt->newUnknown = false;
-            $attempt->write($order);
-            $order->save();
-        }
+        $payment = $this->sendHeld($order, $mode, $body, CheckoutAttempt::KIND_NEW, false);
         if (is_wp_error($payment)) {
-            return $this->checkoutError($order, $payment);
+            $result = $this->checkoutError($order, $payment);
+            // Held now means this request started the hold: whileHeld() refused before sending otherwise.
+            return CheckoutAttempt::of($order)->hold ? ['result' => 'failed', 'message' => Hold::pendingMessage()] : $result;
         }
         // Save the card before the order is marked paid: Subscriptions copies the token from the
         // parent order when payment completes (Contracts\SubscriptionGateway).
@@ -155,6 +148,35 @@ final class Payments
                 return $this->payWithSavedCard($fresh, $token, $mode);
             });
         }
+        // Off session: never alongside a buyer's payment of the same order, nor while one is held.
+        $id = (int) $order->get_id();
+        $result = Lock::run('charge-' . $id, function () use ($id, $order, $token, $mode, $flow, $onSession) {
+            $fresh = FreshOrder::get($id) ?: $order;
+            if ($fresh->is_paid()) {
+                return ['result' => 'success'];
+            }
+            $attempt = CheckoutAttempt::of($fresh);
+            if ($attempt->hold) {
+                $attempt->hold['renewal_waiting'] = true; // charged when the hold is released
+                $attempt->write($fresh);
+                $fresh->save();
+                return ['result' => 'pending', 'message' => Hold::message()];
+            }
+            return $this->chargeOffSession($fresh, $token, $mode, $flow, $onSession);
+        });
+        if (is_array($result)) {
+            return $result;
+        }
+        // The buyer is paying this order right now: try again shortly, as for a network error.
+        if (function_exists('as_schedule_single_action')) {
+            as_schedule_single_action(time() + 300, self::RETRY_HOOK, ['order_id' => $id], self::GROUP);
+        }
+        return ['result' => 'pending'];
+    }
+
+    /** @return array{result:string, message?:string} */
+    private function chargeOffSession(\WC_Order $order, \WC_Payment_Token $token, string $mode, string $flow, bool $onSession): array
+    {
         Gateway::attachToken($order, $token);
         $order->update_meta_data(Gateway::META_MODE, $mode);
         $order->save();
@@ -197,21 +219,15 @@ final class Payments
 
     /**
      * A saved card at checkout or on the pay page. A definite decline moves on to a new key; an
-     * unknown outcome keeps the request, and only that same card may send it again.
+     * unknown outcome holds the order (see Hold).
      *
      * @return array{result:string, message?:string}
      */
     private function payWithSavedCard(\WC_Order $order, \WC_Payment_Token $token, string $mode): array
     {
-        $attempt = CheckoutAttempt::of($order);
-        $resend = $attempt->open;
-        if ($resend) {
-            if (($resend['source_id'] ?? '') !== $token->get_token()) {
-                return ['result' => 'failed', 'message' => self::unconfirmedSavedCard()];
-            }
-            if (!Money::matches($resend['amount_money'] ?? null, $order->get_total(), $order->get_currency())) {
-                return ['result' => 'failed', 'message' => self::unconfirmedPayment()];
-            }
+        $held = $this->whileHeld($order, $token, $mode);
+        if ($held) {
+            return $held;
         }
         if ((float) $order->get_total() <= 0) {
             $order->update_meta_data(Gateway::META_MODE, $mode);
@@ -219,6 +235,7 @@ final class Payments
             $order->payment_complete();
             return ['result' => 'success'];
         }
+        $attempt = CheckoutAttempt::of($order);
 
         // A charge that already went through for this order is reported, not repeated.
         $previous = (string) $order->get_meta(Gateway::META_PAYMENT_ID);
@@ -232,27 +249,30 @@ final class Payments
             $previousUnknown = !in_array($status, ['FAILED', 'CANCELED'], true);
         }
         // A second key is a second possible payment, so it needs everything before it to be settled.
-        if (!$resend && $attempt->declines > 0 && ($previousUnknown || $attempt->newUnknown || (int) $order->get_meta(self::META_TRANSIENT) > 0)) {
-            return ['result' => 'failed', 'message' => self::unconfirmedPayment()];
+        if ($attempt->declines > 0 && ($previousUnknown || (int) $order->get_meta(self::META_TRANSIENT) > 0)) {
+            return ['result' => 'failed', 'message' => Hold::message()];
         }
 
-        $body = $resend ?: $this->paymentBody($order, $mode, [
+        $body = $this->paymentBody($order, $mode, [
             'source_id' => $token->get_token(),
             'customer_id' => Tokens::customer($token),
             'customer_details' => ['customer_initiated' => true, 'seller_keyed_in' => false],
         ], $attempt->key($order));
-        $attempt->open = $body; // saved before it is sent, in case this request dies
-        $attempt->write($order);
         $order->update_meta_data(Gateway::META_MODE, $mode);
         Gateway::attachToken($order, $token); // saves the order
+        return $this->savedCardResult($order, $mode, $this->sendHeld($order, $mode, $body, CheckoutAttempt::KIND_SAVED, false), false);
+    }
 
-        $payment = $this->sendPayment($order, $mode, $body);
-        if (CheckoutAttempt::answered($payment, (bool) $resend)) {
-            $attempt->open = [];
+    /**
+     * @param array<string,mixed>|\WP_Error $payment
+     * @return array{result:string, message?:string}
+     */
+    private function savedCardResult(\WC_Order $order, string $mode, $payment, bool $resent): array
+    {
+        if (CheckoutAttempt::declined($payment, $resent) && !stackless_is_renewal_order($order)) {
             // Not for a renewal order: an automatic retry can charge it meanwhile, with a key of its own.
-            if (CheckoutAttempt::declined($payment, (bool) $resend) && !stackless_is_renewal_order($order)) {
-                $attempt->declines++;
-            }
+            $attempt = CheckoutAttempt::of($order);
+            $attempt->declines++;
             $attempt->write($order);
             $order->save();
         }
@@ -260,14 +280,207 @@ final class Payments
             return $this->checkoutResult($order, $payment, $mode);
         }
         $result = $this->checkoutError($order, $payment);
-        if ($attempt->open || Api::code($payment) === 'IDEMPOTENCY_KEY_REUSED') {
-            $result['message'] = self::unconfirmedSavedCard();
+        if (CheckoutAttempt::of($order)->hold || Api::code($payment) === 'IDEMPOTENCY_KEY_REUSED') {
+            // A first send with no answer may have charged; a resend under the same key charges nothing new.
+            $result['message'] = !$resent && CheckoutAttempt::of($order)->hold ? Hold::pendingMessage() : Hold::message();
         }
         return $result;
     }
 
     /**
-     * One buyer-present charge per order at a time, each starting from what the last one saved.
+     * Send a buyer-present request with the order held until Square answers: the hold is saved
+     * first, so a request that dies with this process still holds the order.
+     *
+     * @param array<string,mixed> $body
+     * @return array<string,mixed>|\WP_Error
+     */
+    private function sendHeld(\WC_Order $order, string $mode, array $body, string $kind, bool $resent)
+    {
+        $attempt = CheckoutAttempt::of($order);
+        if (!$resent) {
+            $attempt->hold = CheckoutAttempt::holdFor($body, $kind, $mode);
+            $attempt->write($order);
+            $order->save();
+        }
+        $payment = $this->sendPayment($order, $mode, $body);
+        $attempt = CheckoutAttempt::of($order);
+        if (CheckoutAttempt::answered($payment, $resent)) {
+            $attempt->hold = [];
+            $attempt->write($order);
+            $order->save();
+        } else {
+            Hold::started($order);
+        }
+        return $payment;
+    }
+
+    /**
+     * The order is held: ask Square first. Settled paid, the buyer goes to the receipt; released,
+     * the payment goes ahead (null). Still held, only the same saved card may resend the very same
+     * request; anything else is refused.
+     *
+     * @return array{result:string, message?:string}|null
+     */
+    private function whileHeld(\WC_Order $order, ?\WC_Payment_Token $token, string $mode): ?array
+    {
+        if (!CheckoutAttempt::of($order)->hold) {
+            return null;
+        }
+        $state = $this->settleHold($order);
+        if ($state === 'paid' || $state === 'pending') {
+            return ['result' => 'success'];
+        }
+        $order = FreshOrder::get((int) $order->get_id()) ?: $order;
+        $hold = CheckoutAttempt::of($order)->hold;
+        if (!$hold) {
+            return null; // released: Square shows no payment
+        }
+        if ($token && ($hold['kind'] ?? '') === CheckoutAttempt::KIND_SAVED && ($hold['source'] ?? '') === $token->get_token()
+            && (int) ($hold['minor'] ?? -1) === Money::toMinor($order->get_total(), $order->get_currency())) {
+            $body = $this->paymentBody($order, $mode, [
+                'source_id' => $token->get_token(),
+                'customer_id' => Tokens::customer($token),
+                'customer_details' => ['customer_initiated' => true, 'seller_keyed_in' => false],
+            ], (string) $hold['key']);
+            if (($hold['hash'] ?? '') !== '' && hash_equals((string) $hold['hash'], CheckoutAttempt::hash($body))) {
+                return $this->savedCardResult($order, $mode, $this->sendHeld($order, $mode, $body, CheckoutAttempt::KIND_SAVED, true), true);
+            }
+        }
+        return ['result' => 'failed', 'message' => Hold::message()];
+    }
+
+    /**
+     * Settle the order's hold from what Square shows. Call while holding the order's charge lock.
+     *
+     * @return string paid|pending|released|held|none
+     */
+    public function settleHold(\WC_Order $order): string
+    {
+        $attempt = CheckoutAttempt::of($order);
+        $hold = $attempt->hold;
+        if (!$hold) {
+            return 'none';
+        }
+        $found = $this->findHeldPayment($order, $hold);
+        if ($found['state'] === 'paid') {
+            return $this->settleWith($order, $found['payment'], (string) $hold['mode']);
+        }
+        if ($found['state'] === 'unclear') {
+            if (empty($hold['unclear'])) {
+                $attempt->hold['unclear'] = $found['ids'];
+                $attempt->write($order);
+                $order->save();
+                /* translators: %s: Square payment ids */
+                $order->add_order_note(sprintf(__('Square shows a payment for this order number that this store can\'t confirm as its own (%s). The order stays held: check the Square Dashboard, then mark the order paid or release the Square hold.', 'stackless-lite'), implode(', ', $found['ids'])));
+            }
+            return 'held';
+        }
+        if ($found['state'] !== 'none') {
+            return 'held'; // Square could not be asked: try later
+        }
+        $now = time();
+        if ($now - (int) $hold['sent'] >= Hold::ABSENT_AFTER && (int) $hold['empty_since'] > 0 && $now - (int) $hold['empty_since'] >= Hold::EMPTY_GAP) {
+            Hold::release($order, sprintf(
+                /* translators: %d: minutes */
+                __('Square shows no payment for the held request after %d minutes, so the hold is released and the order can be paid.', 'stackless-lite'),
+                (int) floor(($now - (int) $hold['sent']) / 60)
+            ));
+            return 'released';
+        }
+        if ((int) $hold['empty_since'] === 0) {
+            $attempt->hold['empty_since'] = $now;
+            $attempt->write($order);
+            $order->save();
+        }
+        return 'held';
+    }
+
+    /**
+     * The held request's payment as Square lists it: the order's reference, this location, the
+     * held amount, sent no earlier than the request, and the same note (which names this store).
+     *
+     * @param array<string,mixed> $hold
+     * @return array{state:string, payment?:array<string,mixed>, ids?:string[]}
+     */
+    private function findHeldPayment(\WC_Order $order, array $hold): array
+    {
+        $mode = (string) $hold['mode'];
+        $location = (string) $hold['location'] !== '' ? (string) $hold['location'] : $this->gateway->locationId($mode);
+        $query = [
+            'begin_time' => gmdate('Y-m-d\TH:i:s\Z', (int) $hold['sent'] - 600),
+            'end_time' => gmdate('Y-m-d\TH:i:s\Z', time() + 300),
+            'location_id' => $location,
+            'total' => (int) $hold['minor'],
+            'sort_order' => 'ASC',
+            'limit' => 100,
+        ];
+        $mine = [];
+        $others = [];
+        for ($page = 0; $page < 5; $page++) {
+            $list = $this->gateway->api($mode)->request('GET', 'payments', $query);
+            if (is_wp_error($list)) {
+                return ['state' => 'error'];
+            }
+            foreach ((array) ($list['payments'] ?? []) as $payment) {
+                if (!is_array($payment) || !self::isHeldPayment($order, $hold, $payment, $location)) {
+                    continue;
+                }
+                if ((string) $hold['note'] === '' || hash_equals((string) $hold['note'], hash('sha256', (string) ($payment['note'] ?? '')))) {
+                    $mine[] = $payment;
+                } else {
+                    $others[] = (string) ($payment['id'] ?? '');
+                }
+            }
+            $cursor = (string) ($list['cursor'] ?? '');
+            if ($cursor === '') {
+                if ($mine) {
+                    return ['state' => 'paid', 'payment' => $mine[0]];
+                }
+                return $others ? ['state' => 'unclear', 'ids' => $others] : ['state' => 'none'];
+            }
+            $query = ['cursor' => $cursor];
+        }
+        return $mine ? ['state' => 'paid', 'payment' => $mine[0]] : ['state' => 'error'];
+    }
+
+    /**
+     * @param array<string,mixed> $hold
+     * @param array<string,mixed> $payment
+     */
+    private static function isHeldPayment(\WC_Order $order, array $hold, array $payment, string $location): bool
+    {
+        $created = strtotime((string) ($payment['created_at'] ?? '')) ?: 0;
+        return (string) ($payment['reference_id'] ?? '') === substr((string) $order->get_id(), 0, 40)
+            && ($location === '' || (string) ($payment['location_id'] ?? '') === $location)
+            && (int) ($payment['amount_money']['amount'] ?? -1) === (int) $hold['minor']
+            && strtoupper((string) ($payment['amount_money']['currency'] ?? '')) === strtoupper((string) $hold['currency'])
+            && in_array($payment['status'] ?? '', ['COMPLETED', 'APPROVED', 'PENDING'], true)
+            && $created >= (int) $hold['sent'] - 600;
+    }
+
+    /**
+     * Record Square's payment for the held request and complete the order with it.
+     *
+     * @param array<string,mixed> $payment
+     */
+    private function settleWith(\WC_Order $order, array $payment, string $mode): string
+    {
+        $attempt = CheckoutAttempt::of($order);
+        $attempt->hold = [];
+        $attempt->write($order);
+        $order->update_meta_data(Gateway::META_PAYMENT_ID, (string) $payment['id']);
+        $order->save();
+        Hold::forget($order);
+        /* translators: %s: Square payment id */
+        $order->add_order_note(sprintf(__('Square shows payment %s for the held request, so the hold is settled.', 'stackless-lite'), (string) $payment['id']));
+        $outcome = $this->applyPayment($order, $payment, $mode);
+        return $outcome === 'paid' || $outcome === 'pending' ? $outcome : 'held';
+    }
+
+    /**
+     * One buyer-present charge per order at a time, each starting from what the last one saved, and
+     * one per shopper at a time: a second tab or a changed cart can't pay while a payment is held,
+     * nor pay again for a cart another tab just paid.
      *
      * @param callable(\WC_Order): array{result:string, message?:string} $charge
      * @return array{result:string, message?:string}
@@ -275,16 +488,31 @@ final class Payments
     private function oneAtATime(\WC_Order $order, callable $charge): array
     {
         $id = (int) $order->get_id();
-        $result = Lock::run('charge-' . $id, static function () use ($id, $charge) {
-            $fresh = FreshOrder::get($id);
-            if (!$fresh) {
-                return ['result' => 'failed', 'message' => __('Order not found.', 'stackless-lite')];
-            }
-            if ($fresh->is_paid() || ($fresh->has_status('on-hold') && (string) $fresh->get_meta(Gateway::META_PAYMENT_ID) !== '')) {
-                return ['result' => 'success']; // the submit before this one paid
-            }
-            return $charge($fresh);
-        });
+        $run = static function () use ($id, $charge) {
+            return Lock::run('charge-' . $id, static function () use ($id, $charge) {
+                $fresh = FreshOrder::get($id);
+                if (!$fresh) {
+                    return ['result' => 'failed', 'message' => __('Order not found.', 'stackless-lite')];
+                }
+                if ($fresh->is_paid() || ($fresh->has_status('on-hold') && (string) $fresh->get_meta(Gateway::META_PAYMENT_ID) !== '')) {
+                    return ['result' => 'success']; // the submit before this one paid
+                }
+                // Another order of this shopper is held, or an automatic charge of this one is waiting to be sent again.
+                if (Hold::heldFor($fresh) || ((int) $fresh->get_meta(self::META_TRANSIENT) > 0 && !CheckoutAttempt::of($fresh)->hold)) {
+                    return ['result' => 'failed', 'message' => Hold::message()];
+                }
+                if (Hold::paidElsewhere($fresh)) {
+                    return ['result' => 'failed', 'message' => Hold::paidElsewhereMessage()];
+                }
+                $result = $charge($fresh);
+                if (($result['result'] ?? '') === 'success') {
+                    Hold::rememberPaid($fresh);
+                }
+                return $result;
+            });
+        };
+        $purchase = Hold::purchaseKey();
+        $result = $purchase !== '' ? Lock::run('purchase-' . $purchase, $run) : $run();
         return is_array($result) ? $result : ['result' => 'failed', 'message' => __('A payment for this order is already being processed. Wait a moment and check your orders before you pay again.', 'stackless-lite')];
     }
 
@@ -299,16 +527,6 @@ final class Payments
             return ['result' => 'failed', 'message' => Declines::message((string) (Declines::fromPayment($payment)['code']))];
         }
         return ['result' => 'success'];
-    }
-
-    private static function unconfirmedSavedCard(): string
-    {
-        return __('An earlier saved-card payment for this order has not been confirmed, so nothing else was charged. To avoid paying twice, select the saved card you used first and place the order again. If that does not work, contact the store before paying another way.', 'stackless-lite');
-    }
-
-    private static function unconfirmedPayment(): string
-    {
-        return __('An earlier payment for this order has not been confirmed, so this card was not charged. Contact the store before paying again, so you are not charged twice.', 'stackless-lite');
     }
 
     /**
@@ -600,9 +818,38 @@ final class Payments
     {
         $order = $this->findOrder((string) ($payment['id'] ?? ''));
         if (!$order) {
-            return 'ignored: no matching order';
+            return $this->webhookForHold($payment);
         }
         return $this->applyPayment($order, $payment, $mode);
+    }
+
+    /**
+     * A payment for a held request: Square answered nobody, so its id was never stored. It settles
+     * the hold only if it matches the held request (see findHeldPayment).
+     *
+     * @param array<string,mixed> $payment
+     */
+    private function webhookForHold(array $payment): string
+    {
+        $id = absint((string) ($payment['reference_id'] ?? ''));
+        $order = $id > 0 ? wc_get_order($id) : null;
+        if (!$order instanceof \WC_Order || $order->get_payment_method() !== Gateway::ID || !CheckoutAttempt::of($order)->hold) {
+            return 'ignored: no matching order';
+        }
+        $settled = Lock::run('charge-' . $id, function () use ($id, $payment) {
+            $fresh = FreshOrder::get($id);
+            $hold = $fresh ? CheckoutAttempt::of($fresh)->hold : [];
+            if (!$fresh || !$hold) {
+                return 'ignored: no held request';
+            }
+            $location = (string) $hold['location'] !== '' ? (string) $hold['location'] : $this->gateway->locationId((string) $hold['mode']);
+            if (!self::isHeldPayment($fresh, $hold, $payment, $location)
+                || ((string) $hold['note'] !== '' && !hash_equals((string) $hold['note'], hash('sha256', (string) ($payment['note'] ?? ''))))) {
+                return 'ignored: not the held request';
+            }
+            return 'held request ' . $this->settleWith($fresh, $payment, (string) $hold['mode']);
+        }, 'busy');
+        return (string) $settled;
     }
 
     /** refund.created / refund.updated: refunds made in Square, and failures of ours. */

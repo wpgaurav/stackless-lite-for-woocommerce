@@ -58,6 +58,9 @@
 		var showApple = appleState[0];
 		var setShowApple = appleState[1];
 		var appleRef = useRef(null);
+		var paymentsState = useState(null);
+		var squarePayments = paymentsState[0];
+		var setSquarePayments = paymentsState[1];
 		var googleId = 'stackless-square-google-pay-blocks';
 		var cardId = 'stackless-square-card-blocks';
 		var billing = props.billing;
@@ -69,7 +72,7 @@
 
 		// A wallet answers whenever the buyer finishes in its sheet. Submitting then would charge whatever
 		// is selected by that time, or charge again if a payment is already running.
-		function payWithWallet(wallet, method) {
+		function payWithWallet(wallet, method, shown) {
 			S.tokenize(wallet, null).then(function (token) {
 				if (!window.wp.data.select('wc/store/checkout').isIdle()) {
 					return; // The payment that is running has the say.
@@ -83,7 +86,7 @@
 					});
 					return;
 				}
-				walletToken.current = { token: token, method: method };
+				walletToken.current = { token: token, method: method, amount: shown };
 				onSubmit();
 			}).catch(function (error) { setStatus(error && error.message ? error.message : data.i18n.invalid); });
 		}
@@ -103,32 +106,7 @@
 					}
 					cardRef.current = card;
 					setStatus('');
-					if (!data.wallets || !data.wallets.length || Number(amount) <= 0) {
-						return;
-					}
-					var request = S.paymentRequest(payments, data, amount);
-					if (data.wallets.indexOf('google_pay') !== -1) {
-						payments.googlePay(request).then(function (googlePay) {
-							if (cancelled) {
-								return; // the button with this id now belongs to the next component
-							}
-							return googlePay.attach('#' + googleId).then(function () {
-								var button = document.getElementById(googleId);
-								if (button && !cancelled) {
-									button.addEventListener('click', function (event) {
-										event.preventDefault();
-										payWithWallet(googlePay, 'google_pay');
-									});
-								}
-							});
-						}).catch(function () { /* not available */ });
-					}
-					if (data.wallets.indexOf('apple_pay') !== -1) {
-						payments.applePay(request).then(function (applePay) {
-							appleRef.current = applePay;
-							setShowApple(true);
-						}).catch(function () { /* not available */ });
-					}
+					setSquarePayments(payments);
 				});
 			}).catch(function () {
 				if (!cancelled) {
@@ -146,12 +124,66 @@
 		// Mount once; amounts are read again at submit time.
 		}, []);
 
+		// Google Pay and Apple Pay show the total they were made with, so make them again whenever the
+		// cart total changes (coupon, shipping, quantity). The server refuses a total that differs.
+		useEffect(function () {
+			if (!squarePayments || !data.wallets || !data.wallets.length || Number(amount) <= 0) {
+				return undefined;
+			}
+			var cancelled = false;
+			var googlePay = null;
+			var button = null;
+			var onClick = null;
+			var request = S.paymentRequest(squarePayments, data, amount);
+			if (data.wallets.indexOf('google_pay') !== -1) {
+				squarePayments.googlePay(request).then(function (instance) {
+					if (cancelled) {
+						return; // the button with this id now belongs to the next component or total
+					}
+					googlePay = instance;
+					return instance.attach('#' + googleId).then(function () {
+						button = document.getElementById(googleId);
+						if (button && !cancelled) {
+							onClick = function (event) {
+								event.preventDefault();
+								payWithWallet(instance, 'google_pay', amount);
+							};
+							button.addEventListener('click', onClick);
+						}
+					});
+				}).catch(function () { /* not available */ });
+			}
+			if (data.wallets.indexOf('apple_pay') !== -1) {
+				squarePayments.applePay(request).then(function (applePay) {
+					if (!cancelled) {
+						appleRef.current = { wallet: applePay, amount: amount };
+						setShowApple(true);
+					}
+				}).catch(function () { /* not available */ });
+			}
+			return function () {
+				cancelled = true;
+				appleRef.current = null;
+				if (button && onClick) {
+					button.removeEventListener('click', onClick);
+				}
+				if (googlePay && googlePay.destroy) {
+					Promise.resolve().then(function () {
+						return googlePay.destroy();
+					}).catch(function () { /* already gone */ });
+				}
+			};
+		}, [squarePayments, amount]);
+
 		useEffect(function () {
 			return eventRegistration.onPaymentSetup(function () {
 				var fields = {};
 				if (walletToken.current) {
 					fields[data.fields.token] = walletToken.current.token;
 					fields[data.fields.method] = walletToken.current.method;
+					if (data.fields.amount) {
+						fields[data.fields.amount] = walletToken.current.amount;
+					}
 					walletToken.current = null;
 					return { type: emitResponse.responseTypes.SUCCESS, meta: { paymentMethodData: fields } };
 				}
@@ -183,7 +215,7 @@
 						if (!appleRef.current) {
 							return;
 						}
-						payWithWallet(appleRef.current, 'apple_pay');
+						payWithWallet(appleRef.current.wallet, 'apple_pay', appleRef.current.amount);
 					}
 				}) : null,
 				data.wallets.indexOf('google_pay') !== -1 ? el('div', { id: googleId, className: 'stackless-square__google-pay' }) : null

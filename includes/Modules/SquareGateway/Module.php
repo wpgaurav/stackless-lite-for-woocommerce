@@ -68,6 +68,7 @@ final class Module extends BaseModule
         add_action('woocommerce_blocks_payment_method_type_registration', [$this, 'registerBlocks']);
         add_action('rest_api_init', [Webhook::class, 'register']);
         add_action(Payments::RETRY_HOOK, [Payments::class, 'retry']);
+        Hold::registerHooks();
         Assets::registerHooks();
         Tokens::registerHooks();
         Health::registerHooks();

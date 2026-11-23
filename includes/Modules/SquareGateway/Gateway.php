@@ -29,6 +29,8 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
 
     public const FIELD_TOKEN = 'stackless_square_token';
     public const FIELD_METHOD = 'stackless_square_method';
+    /** The total a wallet's sheet showed the buyer, sent with the wallet's token. */
+    public const FIELD_WALLET_AMOUNT = 'stackless_square_wallet_amount';
 
     public const STACKLESS_FEATURES = ['auto_renewal', 'multiple_subscriptions', 'zero_total_setup', 'payment_method_change', 'amount_change', 'date_change'];
 
@@ -438,7 +440,7 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
             'requiresSave' => $requiresSave,
             'canSave' => $this->savedCardsEnabled() && is_user_logged_in() && $flow !== 'add',
             'wallets' => $requiresSave || $flow === 'add' ? [] : $this->wallets(),
-            'fields' => ['token' => self::FIELD_TOKEN, 'method' => self::FIELD_METHOD],
+            'fields' => ['token' => self::FIELD_TOKEN, 'method' => self::FIELD_METHOD, 'amount' => self::FIELD_WALLET_AMOUNT],
             'storeName' => wp_specialchars_decode(get_bloginfo('name'), ENT_QUOTES),
             'i18n' => [
                 'loading' => __('Loading the card form…', 'stackless-lite'),
@@ -514,6 +516,16 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
             if ($source === '') {
                 return $this->failure(__('Enter your card details to continue.', 'stackless-lite'));
             }
+            if ($this->postedMethod() !== 'card') {
+                // Google Pay and Apple Pay show the buyer a total; never charge another one.
+                $shown = $this->postedWalletAmount();
+                if ($shown === null) {
+                    return $this->failure(__('Nothing was charged. Reload the page, then pay with Google Pay or Apple Pay again.', 'stackless-lite'));
+                }
+                if (Money::toMinor($shown, $order->get_currency()) !== Money::toMinor($order->get_total(), $order->get_currency())) {
+                    return $this->failure(__('The order total changed while Google Pay or Apple Pay was open, so nothing was charged. Check the total and pay again.', 'stackless-lite'));
+                }
+            }
             $requiresSave = stackless_order_requires_saved_payment_method($order);
             if ($requiresSave && $this->postedMethod() !== 'card') {
                 return $this->failure(__('Wallet payments cannot be saved for renewals. Pay with a card for this subscription.', 'stackless-lite'));
@@ -577,6 +589,13 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway, SavedM
     {
         $value = isset($_POST[self::FIELD_METHOD]) ? sanitize_key(wp_unslash((string) $_POST[self::FIELD_METHOD])) : 'card'; // phpcs:ignore WordPress.Security.NonceVerification.Missing
         return in_array($value, ['card', 'google_pay', 'apple_pay'], true) ? $value : 'card';
+    }
+
+    /** The total the wallet showed, as a decimal string, or null. */
+    private function postedWalletAmount(): ?string
+    {
+        $value = isset($_POST[self::FIELD_WALLET_AMOUNT]) ? trim(sanitize_text_field(wp_unslash((string) $_POST[self::FIELD_WALLET_AMOUNT]))) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        return preg_match('/^\d{1,12}(\.\d{1,4})?$/', $value) ? $value : null;
     }
 
     /** A wallet's token was posted, even one postedSource() would reject. */

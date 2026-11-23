@@ -5,9 +5,13 @@ namespace Stackless\Modules\SquareGateway;
 defined('ABSPATH') || exit;
 
 /**
- * What an order's checkout charges left behind. Every charge with one idempotency key is at most
- * one payment, so a saved card gets the next key only once the last key's payment is known to
- * have failed. Until then its request is kept, to be sent again unchanged and never replaced.
+ * What an order's buyer-present charges left behind. Every charge with one idempotency key is at
+ * most one payment, so a saved card gets the next key only once the last key's payment is known
+ * to have failed.
+ *
+ * A request Square has not answered is the order's hold (see Hold): written before the request is
+ * sent and kept until Square shows its result. It names the key, amount, location and card, never
+ * the buyer's email or address; a saved card's request is matched by its hash to be sent again.
  *
  * Renewals and other off-session charges keep their own keys and counter (Payments::META_ATTEMPT).
  */
@@ -15,33 +19,81 @@ final class CheckoutAttempt
 {
     public const META = '_stackless_square_checkout_attempt';
 
+    public const KIND_SAVED = 'saved';
+    public const KIND_NEW = 'new';
+
     /** @var int Saved-card declines at checkout: the key's suffix. */
     public $declines = 0;
 
-    /** @var array<string,mixed> The saved-card request Square has not answered, or empty. */
-    public $open = [];
-
-    /** @var bool A typed card or wallet was sent and its outcome is not known. */
-    public $newUnknown = false;
+    /**
+     * The request Square has not answered, or empty: key, kind, minor, currency, location, mode,
+     * source (the saved card's Square id, else empty), hash (of the whole request, saved cards
+     * only), note (hash of the payment note), sent, empty_since, checks, renewal_waiting.
+     *
+     * @var array<string,mixed>
+     */
+    public $hold = [];
 
     public static function of(\WC_Order $order): self
     {
         $attempt = new self();
         $saved = json_decode((string) $order->get_meta(self::META), true);
-        if (is_array($saved)) {
-            $attempt->declines = max(0, (int) ($saved['declines'] ?? 0));
-            $attempt->open = is_array($saved['open'] ?? null) ? $saved['open'] : [];
-            $attempt->newUnknown = !empty($saved['new_unknown']);
+        if (!is_array($saved)) {
+            return $attempt;
+        }
+        $attempt->declines = max(0, (int) ($saved['declines'] ?? 0));
+        if (is_array($saved['hold'] ?? null) && $saved['hold']) {
+            $attempt->hold = $saved['hold'];
+        } elseif (is_array($saved['open'] ?? null) && $saved['open']) {
+            // Stackless 2.1.0 kept the whole unanswered request, email and address included.
+            $attempt->hold = self::holdFor($saved['open'], self::KIND_SAVED, (string) $order->get_meta(Gateway::META_MODE));
+        } elseif (!empty($saved['new_unknown'])) {
+            // 2.1.0: a new card or wallet had no answer; its key and request were not kept.
+            $attempt->hold = self::holdFor([
+                'amount_money' => Money::money($order->get_total(), $order->get_currency()),
+                'location_id' => '',
+            ], self::KIND_NEW, (string) $order->get_meta(Gateway::META_MODE));
         }
         return $attempt;
+    }
+
+    /**
+     * The hold for a request that is about to be sent.
+     *
+     * @param array<string,mixed> $body The CreatePayment request.
+     * @return array<string,mixed>
+     */
+    public static function holdFor(array $body, string $kind, string $mode): array
+    {
+        $saved = $kind === self::KIND_SAVED;
+        return [
+            'key' => (string) ($body['idempotency_key'] ?? ''),
+            'kind' => $kind,
+            'minor' => (int) ($body['amount_money']['amount'] ?? 0),
+            'currency' => (string) ($body['amount_money']['currency'] ?? ''),
+            'location' => (string) ($body['location_id'] ?? ''),
+            'mode' => $mode === 'live' ? 'live' : 'test',
+            'source' => $saved ? (string) ($body['source_id'] ?? '') : '',
+            'hash' => $saved && isset($body['idempotency_key']) ? self::hash($body) : '',
+            'note' => isset($body['note']) ? hash('sha256', (string) $body['note']) : '',
+            'sent' => time(),
+            'empty_since' => 0,
+            'checks' => 0,
+            'renewal_waiting' => false,
+        ];
+    }
+
+    /** @param array<string,mixed> $body */
+    public static function hash(array $body): string
+    {
+        return hash('sha256', (string) wp_json_encode($body));
     }
 
     /** Sets the order meta; the caller saves the order. */
     public function write(\WC_Order $order): void
     {
-        $value = array_filter(['declines' => $this->declines, 'open' => $this->open, 'new_unknown' => $this->newUnknown]);
+        $value = array_filter(['declines' => $this->declines, 'hold' => $this->hold]);
         if ($value) {
-            // JSON: WordPress strips backslashes from strings inside array meta, and a request is resent byte for byte.
             $order->update_meta_data(self::META, (string) wp_json_encode($value));
         } else {
             $order->delete_meta_data(self::META);

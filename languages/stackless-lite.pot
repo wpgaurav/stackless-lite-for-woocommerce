@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stackless Lite for WooCommerce 2.1.0\n"
+"Project-Id-Version: Stackless Lite for WooCommerce 2.1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/wpgaurav/stackless-lite-for-woocommerce/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-22T18:14:03+00:00\n"
+"POT-Creation-Date: 2026-11-23T04:52:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: stackless-lite\n"
@@ -172,7 +172,7 @@ msgstr ""
 #: includes/Modules/ExtraEnhancements/Module.php:68
 #: includes/Modules/ExtraEnhancements/ProductCheckout.php:212
 #: includes/Modules/MollieGateway/Gateway.php:135
-#: includes/Modules/SquareGateway/Gateway.php:130
+#: includes/Modules/SquareGateway/Gateway.php:132
 #: includes/Modules/StripeGateway/Admin.php:253
 #: includes/Modules/StripeGateway/Module.php:254
 #: includes/Modules/StripeGateway/Module.php:299
@@ -1217,9 +1217,9 @@ msgstr ""
 #: includes/Modules/RevolutGateway/Checkout.php:36
 #: includes/Modules/RevolutGateway/Gateway.php:204
 #: includes/Modules/RevolutGateway/Gateway.php:284
-#: includes/Modules/SquareGateway/Gateway.php:494
-#: includes/Modules/SquareGateway/Gateway.php:652
-#: includes/Modules/SquareGateway/Payments.php:281
+#: includes/Modules/SquareGateway/Gateway.php:496
+#: includes/Modules/SquareGateway/Gateway.php:671
+#: includes/Modules/SquareGateway/Payments.php:495
 #: includes/Modules/StripeGateway/Gateway.php:200
 #: includes/Modules/StripeGateway/Gateway.php:507
 #: includes/Modules/StripeGateway/Managed/Gateway.php:272
@@ -1298,8 +1298,8 @@ msgstr ""
 #: includes/Modules/PolarGateway/Gateway.php:118
 #: includes/Modules/PolarGateway/Gateway.php:143
 #: includes/Modules/RevolutGateway/Connection.php:21
-#: includes/Modules/SquareGateway/Gateway.php:101
-#: includes/Modules/SquareGateway/Gateway.php:114
+#: includes/Modules/SquareGateway/Gateway.php:103
+#: includes/Modules/SquareGateway/Gateway.php:116
 #: includes/Modules/SquareGateway/Setup.php:101
 #: includes/Modules/SquareGateway/Setup.php:111
 msgid "Sandbox"
@@ -1366,7 +1366,7 @@ msgstr ""
 #: includes/Modules/PolarGateway/Gateway.php:102
 #: includes/Modules/RazorpayGateway/Gateway.php:98
 #: includes/Modules/RevolutGateway/Gateway.php:61
-#: includes/Modules/SquareGateway/Gateway.php:85
+#: includes/Modules/SquareGateway/Gateway.php:87
 #: includes/Modules/StripeGateway/Managed/Gateway.php:103
 msgid "Enable"
 msgstr ""
@@ -1388,7 +1388,7 @@ msgstr ""
 #: includes/Modules/PolarGateway/Gateway.php:108
 #: includes/Modules/RazorpayGateway/Gateway.php:104
 #: includes/Modules/RevolutGateway/Gateway.php:67
-#: includes/Modules/SquareGateway/Gateway.php:91
+#: includes/Modules/SquareGateway/Gateway.php:93
 #: includes/Modules/StripeGateway/Managed/Gateway.php:109
 #: includes/Modules/StripeGateway/Module.php:255
 msgid "Title"
@@ -1411,7 +1411,7 @@ msgstr ""
 #: includes/Modules/PolarGateway/Gateway.php:113
 #: includes/Modules/RazorpayGateway/Gateway.php:109
 #: includes/Modules/RevolutGateway/Gateway.php:72
-#: includes/Modules/SquareGateway/Gateway.php:96
+#: includes/Modules/SquareGateway/Gateway.php:98
 #: includes/Modules/StripeGateway/Managed/Gateway.php:114
 #: includes/Modules/StripeGateway/Module.php:256
 msgid "Description"
@@ -1499,7 +1499,7 @@ msgstr ""
 #: includes/Modules/PaystackGateway/Gateway.php:132
 #: includes/Modules/PolarGateway/Gateway.php:161
 #: includes/Modules/RazorpayGateway/Gateway.php:142
-#: includes/Modules/SquareGateway/Gateway.php:155
+#: includes/Modules/SquareGateway/Gateway.php:157
 msgid "Webhook"
 msgstr ""
 
@@ -1522,7 +1522,7 @@ msgstr ""
 #: includes/Modules/PolarGateway/Gateway.php:187
 #: includes/Modules/RazorpayGateway/Gateway.php:180
 #: includes/Modules/RevolutGateway/Gateway.php:117
-#: includes/Modules/SquareGateway/Gateway.php:149
+#: includes/Modules/SquareGateway/Gateway.php:151
 #: includes/Modules/StripeGateway/Module.php:318
 msgid "Debug log"
 msgstr ""
@@ -1559,7 +1559,7 @@ msgstr ""
 #: includes/Modules/MollieGateway/Gateway.php:383
 #: includes/Modules/RazorpayGateway/Gateway.php:430
 #: includes/Modules/RevolutGateway/Gateway.php:207
-#: includes/Modules/SquareGateway/Gateway.php:497
+#: includes/Modules/SquareGateway/Gateway.php:499
 msgid "Change the payment method from My Account → Payment methods."
 msgstr ""
 
@@ -1703,7 +1703,7 @@ msgstr ""
 #: includes/Modules/PolarGateway/Gateway.php:481
 #: includes/Modules/RazorpayGateway/Gateway.php:552
 #: includes/Modules/RevolutGateway/RefundService.php:39
-#: includes/Modules/SquareGateway/Gateway.php:656
+#: includes/Modules/SquareGateway/Gateway.php:675
 msgid "Enter a refund amount above zero."
 msgstr ""
 
@@ -1775,8 +1775,8 @@ msgstr ""
 #: includes/Modules/RazorpayGateway/Renewals.php:60
 #: includes/Modules/RazorpayGateway/Renewals.php:77
 #: includes/Modules/RevolutGateway/Charges.php:31
-#: includes/Modules/SquareGateway/Payments.php:322
-#: includes/Modules/SquareGateway/Payments.php:342
+#: includes/Modules/SquareGateway/Payments.php:540
+#: includes/Modules/SquareGateway/Payments.php:560
 #: includes/Modules/StripeGateway/Renewals.php:37
 #: includes/Modules/StripeGateway/SavedCharges.php:28
 msgid "This site is a copy of the live store, so it does not charge saved payment methods."
@@ -2319,18 +2319,18 @@ msgstr ""
 #: includes/Modules/BraintreeGateway/Browser.php:79
 #: includes/Modules/BraintreeGateway/Declines.php:156
 #: includes/Modules/BraintreeGateway/Payments.php:62
-#: includes/Modules/SquareGateway/Gateway.php:509
+#: includes/Modules/SquareGateway/Gateway.php:511
 msgid "That saved card is not available. Choose another one."
 msgstr ""
 
 #: includes/Modules/BraintreeGateway/Browser.php:101
-#: includes/Modules/SquareGateway/Gateway.php:444
+#: includes/Modules/SquareGateway/Gateway.php:446
 msgid "Loading the card form…"
 msgstr ""
 
 #: includes/Modules/BraintreeGateway/Browser.php:103
 #: includes/Modules/PayPalGateway/Module.php:227
-#: includes/Modules/SquareGateway/Gateway.php:446
+#: includes/Modules/SquareGateway/Gateway.php:448
 msgid "Check your card details and try again."
 msgstr ""
 
@@ -2375,7 +2375,7 @@ msgstr ""
 #: includes/Modules/BraintreeGateway/Connection.php:206
 #: includes/Modules/BraintreeGateway/Gateway.php:132
 #: includes/Modules/MercadoPagoGateway/Gateway.php:98
-#: includes/Modules/SquareGateway/Gateway.php:114
+#: includes/Modules/SquareGateway/Gateway.php:116
 #: includes/Modules/SquareGateway/Setup.php:101
 #: includes/Modules/SquareGateway/Setup.php:111
 msgid "Production"
@@ -2420,9 +2420,9 @@ msgstr ""
 #: includes/Modules/BraintreeGateway/Declines.php:158
 #: includes/Modules/BraintreeGateway/Gateway.php:419
 #: includes/Modules/BraintreeGateway/Vault.php:144
-#: includes/Modules/SquareGateway/Gateway.php:480
-#: includes/Modules/SquareGateway/Gateway.php:515
-#: includes/Modules/SquareGateway/Gateway.php:536
+#: includes/Modules/SquareGateway/Gateway.php:482
+#: includes/Modules/SquareGateway/Gateway.php:517
+#: includes/Modules/SquareGateway/Gateway.php:548
 msgid "Enter your card details to continue."
 msgstr ""
 
@@ -2455,7 +2455,7 @@ msgid "Cards through Braintree Hosted Fields with 3-D Secure, saved cards and au
 msgstr ""
 
 #: includes/Modules/BraintreeGateway/Gateway.php:89
-#: includes/Modules/SquareGateway/Gateway.php:74
+#: includes/Modules/SquareGateway/Gateway.php:76
 msgid "Use a new card"
 msgstr ""
 
@@ -2529,7 +2529,7 @@ msgid "Checked on the server with Braintree, so it cannot be skipped from the br
 msgstr ""
 
 #: includes/Modules/BraintreeGateway/Gateway.php:167
-#: includes/Modules/SquareGateway/Gateway.php:143
+#: includes/Modules/SquareGateway/Gateway.php:145
 msgid "Saved cards"
 msgstr ""
 
@@ -2594,13 +2594,13 @@ msgstr ""
 
 #: includes/Modules/BraintreeGateway/Gateway.php:452
 #: includes/Modules/SquareGateway/Declines.php:122
-#: includes/Modules/SquareGateway/Gateway.php:527
+#: includes/Modules/SquareGateway/Gateway.php:539
 msgid "Your card was declined. Try another card."
 msgstr ""
 
 #: includes/Modules/BraintreeGateway/Gateway.php:566
 #: includes/Modules/BraintreeGateway/Payments.php:117
-#: includes/Modules/SquareGateway/Payments.php:345
+#: includes/Modules/SquareGateway/Payments.php:563
 msgid "That saved card does not belong to this customer."
 msgstr ""
 
@@ -6006,7 +6006,7 @@ msgstr ""
 #. translators: 1: order number, 2: site name
 #: includes/Modules/MollieGateway/Checkout.php:70
 #: includes/Modules/MollieGateway/Renewals.php:116
-#: includes/Modules/SquareGateway/Payments.php:414
+#: includes/Modules/SquareGateway/Payments.php:632
 #, php-format
 msgid "Order %1$s – %2$s"
 msgstr ""
@@ -6202,13 +6202,13 @@ msgstr ""
 
 #: includes/Modules/MollieGateway/Methods.php:50
 #: includes/Modules/PayPalGateway/Gateway.php:248
-#: includes/Modules/SquareGateway/Gateway.php:138
+#: includes/Modules/SquareGateway/Gateway.php:140
 msgid "Apple Pay"
 msgstr ""
 
 #: includes/Modules/MollieGateway/Methods.php:51
 #: includes/Modules/PayPalGateway/Gateway.php:259
-#: includes/Modules/SquareGateway/Gateway.php:138
+#: includes/Modules/SquareGateway/Gateway.php:140
 msgid "Google Pay"
 msgstr ""
 
@@ -10731,137 +10731,145 @@ msgstr ""
 msgid "The card details expired. Enter them again."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:61
+#: includes/Modules/SquareGateway/Gateway.php:63
 msgid "Square (Stackless)"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:62
+#: includes/Modules/SquareGateway/Gateway.php:64
 msgid "Cards, Apple Pay and Google Pay through Square’s Web Payments SDK, with cards on file for saved cards and automatic subscription renewals."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:87
+#: includes/Modules/SquareGateway/Gateway.php:89
 msgid "Accept payments with Square"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:93
+#: includes/Modules/SquareGateway/Gateway.php:95
 msgid "Card, Apple Pay or Google Pay"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:98
+#: includes/Modules/SquareGateway/Gateway.php:100
 msgid "Pay securely with your card through Square."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:103
+#: includes/Modules/SquareGateway/Gateway.php:105
 msgid "Use the Square sandbox (no real money moves)"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:107
+#: includes/Modules/SquareGateway/Gateway.php:109
 msgid "Square application"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:109
+#: includes/Modules/SquareGateway/Gateway.php:111
 msgid "Open the Square Developer Console"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:110
+#: includes/Modules/SquareGateway/Gateway.php:112
 msgid "Open your application, then copy its Application ID and access token for Production and for Sandbox. The location is filled in with your main location when left empty, and the webhook is created for you on save (it needs a personal access token, which these are)."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:116
+#: includes/Modules/SquareGateway/Gateway.php:118
 msgid "application ID"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:117
+#: includes/Modules/SquareGateway/Gateway.php:119
 msgid "access token"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:118
+#: includes/Modules/SquareGateway/Gateway.php:120
 msgid "location ID"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:119
+#: includes/Modules/SquareGateway/Gateway.php:121
 msgid "webhook signature key"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:135
+#: includes/Modules/SquareGateway/Gateway.php:137
 msgid "Wallets"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:140
+#: includes/Modules/SquareGateway/Gateway.php:142
 msgid "Shown above the card form for one-time orders. Wallet payments cannot be saved, so subscription checkouts show the card form only. Apple Pay also needs your domain registered in the Square Developer Console (Apple Pay tab)."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:145
+#: includes/Modules/SquareGateway/Gateway.php:147
 msgid "Let signed-in customers save cards with Square. Subscription orders always save the card for renewals."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:151
+#: includes/Modules/SquareGateway/Gateway.php:153
 msgid "Log Square activity to WooCommerce → Status → Logs (stackless-square_gateway). Tokens and card data are never logged."
 msgstr ""
 
 #. translators: 1: webhook URL, 2: event names
-#: includes/Modules/SquareGateway/Gateway.php:174
+#: includes/Modules/SquareGateway/Gateway.php:176
 #, php-format
 msgid "Created automatically when the signature key is empty. To add it by hand, open Webhooks → Subscriptions in your application, add this URL: %1$s with these events, and paste its signature key above: %2$s"
 msgstr ""
 
 #. translators: 1: location name, 2: currency code
-#: includes/Modules/SquareGateway/Gateway.php:188
+#: includes/Modules/SquareGateway/Gateway.php:190
 #, php-format
 msgid "Charging through %1$s in %2$s. Square takes payments in the location’s currency only, so Square is hidden when a cart is in another currency."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:222
+#: includes/Modules/SquareGateway/Gateway.php:224
 msgid "Square is enabled but the selected mode needs both an application ID and an access token."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:225
+#: includes/Modules/SquareGateway/Gateway.php:227
 msgid "Add the Square webhook signature key so refunds and card changes made in Square reach WooCommerce."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:445
+#: includes/Modules/SquareGateway/Gateway.php:447
 msgid "Square could not load the card form. Reload the page or choose another payment method."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:447
+#: includes/Modules/SquareGateway/Gateway.php:449
 msgid "Your bank could not verify the card. Try again or use another card."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:448
+#: includes/Modules/SquareGateway/Gateway.php:450
 msgid "Your wallet was not charged, because the payment method changed while it was open. Press Place order to pay with the selected method, or use the wallet again."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:449
+#: includes/Modules/SquareGateway/Gateway.php:451
 #: templates/square_gateway/payment-fields.php:38
 msgid "Sandbox: use Square’s test cards; no real payment will be taken."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:450
+#: includes/Modules/SquareGateway/Gateway.php:452
 msgid "Total"
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:505
+#: includes/Modules/SquareGateway/Gateway.php:507
 msgid "You were not charged, because a saved card and a wallet were sent together. Reload the page and try again. To pay with Google Pay or Apple Pay, choose “Use a new card” first."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:519
+#: includes/Modules/SquareGateway/Gateway.php:523
+msgid "Nothing was charged. Reload the page, then pay with Google Pay or Apple Pay again."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Gateway.php:526
+msgid "The order total changed while Google Pay or Apple Pay was open, so nothing was charged. Check the total and pay again."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Gateway.php:531
 msgid "Wallet payments cannot be saved for renewals. Pay with a card for this subscription."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:627
+#: includes/Modules/SquareGateway/Gateway.php:646
 msgid "Square did not create a customer."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:660
+#: includes/Modules/SquareGateway/Gateway.php:679
 msgid "This order has no Square payment to refund."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Gateway.php:679
+#: includes/Modules/SquareGateway/Gateway.php:698
 msgid "Square could not process this refund. Check the payment in your Square Dashboard."
 msgstr ""
 
 #. translators: 1: amount, 2: Square refund id, 3: status
-#: includes/Modules/SquareGateway/Gateway.php:684
+#: includes/Modules/SquareGateway/Gateway.php:703
 #, php-format
 msgid "Refunded %1$s through Square (refund %2$s, %3$s)."
 msgstr ""
@@ -10908,6 +10916,46 @@ msgstr[1] ""
 msgid "Square retries for 24 hours. Look in WooCommerce → Status → Logs (stackless-square_gateway) for the reason."
 msgstr ""
 
+#: includes/Modules/SquareGateway/Hold.php:58
+msgid "We are still confirming an earlier payment for this order with Square, so nothing was charged now. This usually takes a few minutes, and you will get an email when it is confirmed. Check your orders before you pay again. If Square shows no payment, you can pay after about 30 minutes, or contact the store."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Hold.php:64
+msgid "Square hasn't confirmed this payment yet, and it may still go through, so don't pay again. We are checking with Square, and you will get an email when it is confirmed. If Square shows no payment, you can pay after about 30 minutes, or contact the store."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Hold.php:69
+msgid "This cart was just paid in another window or tab, so nothing was charged now. Check your orders or your email for the confirmation."
+msgstr ""
+
+#. translators: 1: amount, 2: Square idempotency key
+#: includes/Modules/SquareGateway/Hold.php:218
+#, php-format
+msgid "Square did not answer the request to charge %1$s (idempotency key %2$s), so the order is held: nothing else can pay it until Square shows the result. Stackless checks Square every few minutes and releases the hold if Square shows no payment after 30 minutes. To release it sooner, check the Square Dashboard first, then use the order action \"Release the Square hold\"."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Hold.php:447
+msgid "Check Square for the held payment"
+msgstr ""
+
+#: includes/Modules/SquareGateway/Hold.php:448
+msgid "Release the Square hold (check the Square Dashboard first)"
+msgstr ""
+
+#: includes/Modules/SquareGateway/Hold.php:462
+msgid "Checked Square for the held payment: no result yet. The hold stays."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Hold.php:473
+msgid "the store"
+msgstr ""
+
+#. translators: %s: user name
+#: includes/Modules/SquareGateway/Hold.php:478
+#, php-format
+msgid "The Square hold was released by %s. The order can be paid again."
+msgstr ""
+
 #: includes/Modules/SquareGateway/Module.php:18
 #: includes/Modules/SquareGateway/Module.php:53
 msgid "Square"
@@ -10929,107 +10977,117 @@ msgstr ""
 
 #. translators: %s: currency code
 #: includes/Modules/SquareGateway/Payments.php:70
-#: includes/Modules/SquareGateway/Payments.php:151
+#: includes/Modules/SquareGateway/Payments.php:144
 #, php-format
 msgid "Square takes payments in %s only."
 msgstr ""
 
 #. translators: %s: error
-#: includes/Modules/SquareGateway/Payments.php:97
+#: includes/Modules/SquareGateway/Payments.php:92
 #, php-format
 msgid "Square could not save the card: %s"
 msgstr ""
 
 #. translators: %s: card, e.g. "Visa ending in 4242"
-#: includes/Modules/SquareGateway/Payments.php:104
-#: includes/Modules/SquareGateway/Payments.php:128
+#: includes/Modules/SquareGateway/Payments.php:99
+#: includes/Modules/SquareGateway/Payments.php:121
 #, php-format
 msgid "Saved %s with Square for future payments."
 msgstr ""
 
 #. translators: %s: error
-#: includes/Modules/SquareGateway/Payments.php:131
+#: includes/Modules/SquareGateway/Payments.php:124
 #, php-format
 msgid "The payment went through, but Square could not save the card for renewals: %s Renewals will be invoiced."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:288
+#. translators: %s: Square payment ids
+#: includes/Modules/SquareGateway/Payments.php:374
+#, php-format
+msgid "Square shows a payment for this order number that this store can't confirm as its own (%s). The order stays held: check the Square Dashboard, then mark the order paid or release the Square hold."
+msgstr ""
+
+#. translators: %d: minutes
+#: includes/Modules/SquareGateway/Payments.php:385
+#, php-format
+msgid "Square shows no payment for the held request after %d minutes, so the hold is released and the order can be paid."
+msgstr ""
+
+#. translators: %s: Square payment id
+#: includes/Modules/SquareGateway/Payments.php:475
+#, php-format
+msgid "Square shows payment %s for the held request, so the hold is settled."
+msgstr ""
+
+#: includes/Modules/SquareGateway/Payments.php:516
 msgid "A payment for this order is already being processed. Wait a moment and check your orders before you pay again."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:306
-msgid "An earlier saved-card payment for this order has not been confirmed, so nothing else was charged. To avoid paying twice, select the saved card you used first and place the order again. If that does not work, contact the store before paying another way."
-msgstr ""
-
-#: includes/Modules/SquareGateway/Payments.php:311
-msgid "An earlier payment for this order has not been confirmed, so this card was not charged. Contact the store before paying again, so you are not charged twice."
-msgstr ""
-
-#: includes/Modules/SquareGateway/Payments.php:326
+#: includes/Modules/SquareGateway/Payments.php:544
 msgid "No saved Square card is attached to this subscription."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:329
+#: includes/Modules/SquareGateway/Payments.php:547
 #: includes/Modules/StripeGateway/Renewals.php:44
 msgid "The renewal order cannot be paid in its current status."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:348
+#: includes/Modules/SquareGateway/Payments.php:566
 msgid "The order is not waiting for a Square payment."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:395
+#: includes/Modules/SquareGateway/Payments.php:613
 msgid "Square saved the card, but it could not be stored here."
 msgstr ""
 
-#: includes/Modules/SquareGateway/Payments.php:431
+#: includes/Modules/SquareGateway/Payments.php:649
 msgid "Square did not return a payment."
 msgstr ""
 
 #. translators: %s: Square payment id
-#: includes/Modules/SquareGateway/Payments.php:463
+#: includes/Modules/SquareGateway/Payments.php:681
 #, php-format
 msgid "Square payment %s does not match the order total. Check it before shipping."
 msgstr ""
 
 #. translators: %s: Square payment id
-#: includes/Modules/SquareGateway/Payments.php:474
+#: includes/Modules/SquareGateway/Payments.php:692
 #, php-format
 msgid "Square is processing payment %s."
 msgstr ""
 
 #. translators: 1: Square payment id, 2: error code
-#: includes/Modules/SquareGateway/Payments.php:484
+#: includes/Modules/SquareGateway/Payments.php:702
 #, php-format
 msgid "Square payment %1$s failed (%2$s)."
 msgstr ""
 
 #. translators: 1: error code, 2: message
-#: includes/Modules/SquareGateway/Payments.php:498
+#: includes/Modules/SquareGateway/Payments.php:716
 #, php-format
 msgid "Square payment attempt failed: %1$s (%2$s)"
 msgstr ""
 
 #. translators: %s: error
-#: includes/Modules/SquareGateway/Payments.php:513
+#: includes/Modules/SquareGateway/Payments.php:731
 #, php-format
 msgid "Square could not be reached for this charge (%s). Retrying automatically with the same idempotency key."
 msgstr ""
 
 #. translators: 1: reason, 2: error code
-#: includes/Modules/SquareGateway/Payments.php:536
+#: includes/Modules/SquareGateway/Payments.php:754
 #, php-format
 msgid "Square charge failed: %1$s (%2$s)"
 msgstr ""
 
 #. translators: %s: Square refund id
-#: includes/Modules/SquareGateway/Payments.php:627
+#: includes/Modules/SquareGateway/Payments.php:874
 #, php-format
 msgid "Square could not complete refund %s. Check it in the Square Dashboard."
 msgstr ""
 
 #. translators: %s: Square refund id
-#: includes/Modules/SquareGateway/Payments.php:644
+#: includes/Modules/SquareGateway/Payments.php:891
 #, php-format
 msgid "Refunded in Square (%s)"
 msgstr ""
