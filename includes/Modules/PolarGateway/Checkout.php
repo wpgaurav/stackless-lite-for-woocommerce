@@ -3,6 +3,7 @@
 namespace Stackless\Modules\PolarGateway;
 
 use Stackless\Contracts\SubscriptionData;
+use Stackless\Modules\GatewayTools\FirstPayment;
 
 defined('ABSPATH') || exit;
 
@@ -23,11 +24,13 @@ class Checkout
     /**
      * What Polar should bill for an order.
      *
-     * @return array{recurring:?array,amount:float,trial_days:int,subscription:?\WC_Order}|\WP_Error
+     * discount is what a one-time Polar discount takes off the first charge, in minor units.
+     *
+     * @return array{recurring:?array,amount:float,trial_days:int,subscription:?\WC_Order,discount:int}|\WP_Error
      */
     public function plan(\WC_Order $order)
     {
-        $oneTime = ['recurring' => null, 'amount' => (float) $order->get_total(), 'trial_days' => 0, 'subscription' => null];
+        $oneTime = ['recurring' => null, 'amount' => (float) $order->get_total(), 'trial_days' => 0, 'subscription' => null, 'discount' => 0];
 
         if (stackless_is_renewal_order($order) || !stackless_order_contains_subscription($order)) {
             return $oneTime;
@@ -58,12 +61,17 @@ class Checkout
         }
 
         $trialDays = self::trialDays($subscription->get_trial_end_date(), time());
-        $expectedFirst = $trialDays > 0 ? 0.0 : $amount;
-        if (!Money::equals($order->get_total(), $expectedFirst, $order->get_currency())) {
-            return new \WP_Error('stackless_polar_first_payment', __('Polar charges the same amount on every billing cycle, so it cannot take a signup fee or a different first payment. Remove the signup fee or first-payment discount, or choose another payment method.', 'stackless-lite'));
+        $currency = $order->get_currency();
+        // Polar bills one price every cycle: a lower first payment (a first-payment coupon)
+        // becomes a one-time discount; a higher one (a signup fee) cannot.
+        $discount = $trialDays > 0
+            ? (Money::equals($order->get_total(), 0, $currency) ? 0 : null)
+            : FirstPayment::discount(Money::toMinor($order->get_total(), $currency), Money::toMinor($amount, $currency));
+        if ($discount === null) {
+            return new \WP_Error('stackless_polar_first_payment', __('Polar charges the same amount on every billing cycle, so it cannot take a signup fee or a first payment above the renewal price. Remove the signup fee, or choose another payment method.', 'stackless-lite'));
         }
 
-        return ['recurring' => $recurring, 'amount' => $amount, 'trial_days' => $trialDays, 'subscription' => $subscription];
+        return ['recurring' => $recurring, 'amount' => $amount, 'trial_days' => $trialDays, 'subscription' => $subscription, 'discount' => $discount];
     }
 
     /** Whole days left in a trial (0 when none). Polar trials run 1–1000 days. */
@@ -99,7 +107,8 @@ class Checkout
         }
 
         $minor = Money::toMinor($plan['amount'], $currency);
-        $reused = $this->reusable($order, $mode, $minor, $currency);
+        $discount = (int) $plan['discount'];
+        $reused = $this->reusable($order, $mode, $minor, $currency, $discount);
         if ($reused !== '') {
             return $reused;
         }
@@ -112,7 +121,11 @@ class Checkout
         }
 
         $api = $this->gateway->api($mode);
-        $checkout = $api->request('POST', 'checkouts/', $this->body($order, $productId, $minor, $currency, $plan, $defaultPrice));
+        $discountId = $this->firstPaymentDiscount($order, $api, $productId, $currency, $discount, $minor, $defaultPrice, $mode);
+        if (is_wp_error($discountId)) {
+            return $discountId;
+        }
+        $checkout = $api->request('POST', 'checkouts/', $this->body($order, $productId, $minor, $currency, $plan, $defaultPrice, $discountId));
 
         // A product archived or deleted in Polar is recreated once.
         if (is_wp_error($checkout) && Api::isProductError($checkout)) {
@@ -121,7 +134,12 @@ class Checkout
             if (is_wp_error($productId)) {
                 return $productId;
             }
-            $checkout = $api->request('POST', 'checkouts/', $this->body($order, $productId, $minor, $currency, $plan, $defaultPrice));
+            // The discount is limited to the old product, so the new one gets its own.
+            $discountId = $this->firstPaymentDiscount($order, $api, $productId, $currency, $discount, $minor, $defaultPrice, $mode, true);
+            if (is_wp_error($discountId)) {
+                return $discountId;
+            }
+            $checkout = $api->request('POST', 'checkouts/', $this->body($order, $productId, $minor, $currency, $plan, $defaultPrice, $discountId));
         }
         if (is_wp_error($checkout)) {
             $this->gateway->log('Checkout for order ' . $order->get_id() . ' failed: ' . $checkout->get_error_message(), 'error');
@@ -136,6 +154,9 @@ class Checkout
         $order->update_meta_data(Gateway::META_CHECKOUT_ID, (string) $checkout['id']);
         $order->update_meta_data(Gateway::META_MODE, $mode);
         $order->update_meta_data(Gateway::META_AMOUNT, (string) $minor);
+        $order->update_meta_data(Gateway::META_DISCOUNT, (string) $discount);
+        $order->update_meta_data(Gateway::META_DISCOUNT_ID, $discountId);
+        $order->update_meta_data(Gateway::META_DISCOUNT_PRODUCT, $discountId !== '' ? $productId : '');
         $order->save();
         $this->gateway->log('Started Polar checkout ' . $checkout['id'] . ' for order ' . $order->get_id() . '.');
         return (string) $checkout['url'];
@@ -151,7 +172,68 @@ class Checkout
         return $url . (strpos($url, '?') === false ? '?' : '&') . 'checkout_id={CHECKOUT_ID}';
     }
 
-    private function body(\WC_Order $order, string $productId, int $minor, string $currency, array $plan, ?array $defaultPrice): array
+    /**
+     * A one-time Polar discount for a first payment below the renewal price, reused while the
+     * order is retried for the same amount and product. '' when nothing is discounted.
+     *
+     * @return string|\WP_Error Polar discount ID.
+     */
+    private function firstPaymentDiscount(\WC_Order $order, Api $api, string $productId, string $currency, int $discount, int $recurringMinor, ?array $defaultPrice, string $mode, bool $refresh = false)
+    {
+        if ($discount <= 0) {
+            return '';
+        }
+        $known = (string) $order->get_meta(Gateway::META_DISCOUNT_ID);
+        if (!$refresh && $known !== '' && (int) $order->get_meta(Gateway::META_DISCOUNT) === $discount
+            && (string) $order->get_meta(Gateway::META_DISCOUNT_PRODUCT) === $productId && (string) $order->get_meta(Gateway::META_MODE) === $mode) {
+            return $known;
+        }
+
+        $created = $api->request('POST', 'discounts/', self::discountBody($order->get_id(), $productId, $currency, $discount, $recurringMinor, $defaultPrice));
+        if (is_wp_error($created)) {
+            $this->gateway->log('First-payment discount for order ' . $order->get_id() . ' failed: ' . $created->get_error_message(), 'error');
+            return $created;
+        }
+        if (empty($created['id'])) {
+            return new \WP_Error('stackless_polar_discount', __('Polar did not create the first-payment discount.', 'stackless-lite'));
+        }
+        $order->add_order_note(sprintf(
+            /* translators: 1: discount amount, 2: Polar discount ID */
+            __('First payment discounted by %1$s in Polar (one-time discount %2$s); renewals bill the full price.', 'stackless-lite'),
+            wp_strip_all_tags(wc_price(Money::fromMinor($discount, $currency), ['currency' => strtoupper($currency)])),
+            (string) $created['id']
+        ));
+        return (string) $created['id'];
+    }
+
+    /**
+     * Fixed, first invoice only, one redemption, this product only. When the checkout also
+     * carries a price in Polar's default currency, the discount gets an amount there too,
+     * the same share of that price.
+     *
+     * @param array{currency:string,amount:int}|null $defaultPrice
+     */
+    public static function discountBody(int $orderId, string $productId, string $currency, int $discount, int $recurringMinor, ?array $defaultPrice): array
+    {
+        $amounts = [strtolower($currency) => $discount];
+        if ($defaultPrice && strtolower($defaultPrice['currency']) !== strtolower($currency)) {
+            $amounts[strtolower($defaultPrice['currency'])] = FirstPayment::scale($discount, $recurringMinor, (int) $defaultPrice['amount']);
+        }
+        return [
+            'name' => FirstPayment::label($orderId),
+            'type' => 'fixed',
+            'duration' => 'once',
+            'amounts' => $amounts,
+            'max_redemptions' => 1,
+            'products' => [$productId],
+            'metadata' => array_filter([
+                'wc_order_id' => (string) $orderId,
+                'wc_site' => Catalog::siteHost(),
+            ]),
+        ];
+    }
+
+    private function body(\WC_Order $order, string $productId, int $minor, string $currency, array $plan, ?array $defaultPrice, string $discountId = ''): array
     {
         $price = ['amount_type' => 'fixed', 'price_amount' => $minor, 'price_currency' => $currency];
         if ($this->gateway->taxBehavior() !== 'location') {
@@ -177,6 +259,10 @@ class Checkout
                 'wc_site' => Catalog::siteHost(),
             ]),
         ];
+        if ($discountId !== '') {
+            // Applied by Polar even with discount codes off; the buyer cannot change it.
+            $body['discount_id'] = $discountId;
+        }
         if ($plan['recurring'] !== null && $plan['trial_days'] > 0) {
             $body['trial_interval'] = 'day';
             $body['trial_interval_count'] = $plan['trial_days'];
@@ -202,11 +288,12 @@ class Checkout
         return (array) apply_filters('stackless_polar_gateway_checkout_args', $body, $order, $subscription);
     }
 
-    /** Reuse an open checkout for the same order and amount (double submits, back button). */
-    private function reusable(\WC_Order $order, string $mode, int $minor, string $currency): string
+    /** Reuse an open checkout for the same order, amount and discount (double submits, back button). */
+    private function reusable(\WC_Order $order, string $mode, int $minor, string $currency, int $discount): string
     {
         $checkoutId = (string) $order->get_meta(Gateway::META_CHECKOUT_ID);
-        if ($checkoutId === '' || (string) $order->get_meta(Gateway::META_MODE) !== $mode || (int) $order->get_meta(Gateway::META_AMOUNT) !== $minor) {
+        if ($checkoutId === '' || (string) $order->get_meta(Gateway::META_MODE) !== $mode || (int) $order->get_meta(Gateway::META_AMOUNT) !== $minor
+            || (int) $order->get_meta(Gateway::META_DISCOUNT) !== $discount) {
             return '';
         }
         $checkout = $this->gateway->api($mode)->request('GET', 'checkouts/' . rawurlencode($checkoutId));

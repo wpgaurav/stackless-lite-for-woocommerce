@@ -3,6 +3,7 @@
 namespace Stackless\Modules\DodoGateway;
 
 use Stackless\Contracts\SubscriptionData;
+use Stackless\Modules\GatewayTools\FirstPayment;
 
 defined('ABSPATH') || exit;
 
@@ -23,11 +24,13 @@ class Checkout
     /**
      * What Dodo should bill for an order.
      *
-     * @return array{recurring:?array,amount:float,trial_days:int,subscription:?\WC_Order}|\WP_Error
+     * discount is what a one-cycle Dodo discount takes off the first charge, in minor units.
+     *
+     * @return array{recurring:?array,amount:float,trial_days:int,subscription:?\WC_Order,discount:int}|\WP_Error
      */
     public function plan(\WC_Order $order)
     {
-        $oneTime = ['recurring' => null, 'amount' => (float) $order->get_total(), 'trial_days' => 0, 'subscription' => null];
+        $oneTime = ['recurring' => null, 'amount' => (float) $order->get_total(), 'trial_days' => 0, 'subscription' => null, 'discount' => 0];
 
         if (stackless_is_renewal_order($order) || !stackless_order_contains_subscription($order)) {
             return $oneTime;
@@ -58,14 +61,17 @@ class Checkout
         }
 
         $trialDays = self::trialDays($subscription->get_trial_end_date(), time());
-        $expectedFirst = $trialDays > 0 ? 0.0 : $amount;
-        // A Dodo subscription product bills one price every cycle, so a first payment
-        // that differs from the renewal cannot be represented.
-        if (!Money::equals($order->get_total(), $expectedFirst, $order->get_currency())) {
-            return new \WP_Error('stackless_dodo_first_payment', __('Dodo Payments charges the same amount on every billing cycle, so it cannot take a signup fee or a different first payment. Remove the signup fee or first-payment discount, or choose another payment method.', 'stackless-lite'));
+        $currency = $order->get_currency();
+        // A Dodo subscription product bills one price every cycle: a lower first payment (a
+        // first-payment coupon) becomes a one-cycle discount; a higher one (a signup fee) cannot.
+        $discount = $trialDays > 0
+            ? (Money::equals($order->get_total(), 0, $currency) ? 0 : null)
+            : FirstPayment::discount(Money::toMinor($order->get_total(), $currency), Money::toMinor($amount, $currency));
+        if ($discount === null) {
+            return new \WP_Error('stackless_dodo_first_payment', __('Dodo Payments charges the same amount on every billing cycle, so it cannot take a signup fee or a first payment above the renewal price. Remove the signup fee, or choose another payment method.', 'stackless-lite'));
         }
 
-        return ['recurring' => $recurring, 'amount' => $amount, 'trial_days' => $trialDays, 'subscription' => $subscription];
+        return ['recurring' => $recurring, 'amount' => $amount, 'trial_days' => $trialDays, 'subscription' => $subscription, 'discount' => $discount];
     }
 
     /** Whole days left in a trial (0 when none). Dodo trials run up to 10,000 days. */
@@ -101,7 +107,8 @@ class Checkout
         }
 
         $minor = Money::toMinor($plan['amount'], $currency);
-        $reused = $this->reusable($order, $mode, $minor);
+        $discount = (int) $plan['discount'];
+        $reused = $this->reusable($order, $mode, $minor, $discount);
         if ($reused !== '') {
             return $reused;
         }
@@ -114,7 +121,11 @@ class Checkout
         }
 
         $api = $this->gateway->api($mode);
-        $session = $api->request('POST', 'checkouts', $this->body($order, $productId, $minor, $currency, $plan));
+        $code = $this->firstPaymentDiscount($order, $api, $productId, $currency, $discount, $mode);
+        if (is_wp_error($code)) {
+            return $code;
+        }
+        $session = $api->request('POST', 'checkouts', $this->body($order, $productId, $minor, $currency, $plan, $code));
 
         // A product archived or deleted in Dodo is recreated once.
         if (is_wp_error($session) && Api::isProductError($session)) {
@@ -123,7 +134,12 @@ class Checkout
             if (is_wp_error($productId)) {
                 return $productId;
             }
-            $session = $api->request('POST', 'checkouts', $this->body($order, $productId, $minor, $currency, $plan));
+            // The discount is limited to the old product, so the new one gets its own.
+            $code = $this->firstPaymentDiscount($order, $api, $productId, $currency, $discount, $mode, true);
+            if (is_wp_error($code)) {
+                return $code;
+            }
+            $session = $api->request('POST', 'checkouts', $this->body($order, $productId, $minor, $currency, $plan, $code));
         }
         if (is_wp_error($session)) {
             $this->gateway->log('Checkout for order ' . $order->get_id() . ' failed: ' . $session->get_error_message(), 'error');
@@ -141,6 +157,10 @@ class Checkout
         $order->update_meta_data(Gateway::META_MODE, $mode);
         $order->update_meta_data(Gateway::META_AMOUNT, (string) $minor);
         $order->update_meta_data(Gateway::META_PRODUCT_ID, $productId);
+        $order->update_meta_data(Gateway::META_EXPECTED, (string) ($minor - $discount));
+        $order->update_meta_data(Gateway::META_DISCOUNT, (string) $discount);
+        $order->update_meta_data(Gateway::META_DISCOUNT_CODE, $code);
+        $order->update_meta_data(Gateway::META_DISCOUNT_PRODUCT, $code !== '' ? $productId : '');
         $order->update_meta_data(Gateway::META_TAX_INCLUSIVE, $this->gateway->taxInclusive() ? 'yes' : 'no');
         $order->save();
         $this->gateway->log('Started Dodo checkout ' . $session['session_id'] . ' for order ' . $order->get_id() . '.');
@@ -168,7 +188,66 @@ class Checkout
         return home_url('/');
     }
 
-    public function body(\WC_Order $order, string $productId, int $minor, string $currency, array $plan): array
+    /**
+     * A one-cycle Dodo discount code for a first payment below the renewal price, reused while
+     * the order is retried for the same amount and product. '' when nothing is discounted.
+     *
+     * @return string|\WP_Error
+     */
+    private function firstPaymentDiscount(\WC_Order $order, Api $api, string $productId, string $currency, int $discount, string $mode, bool $refresh = false)
+    {
+        if ($discount <= 0) {
+            return '';
+        }
+        $known = (string) $order->get_meta(Gateway::META_DISCOUNT_CODE);
+        if (!$refresh && $known !== '' && (int) $order->get_meta(Gateway::META_DISCOUNT) === $discount
+            && (string) $order->get_meta(Gateway::META_DISCOUNT_PRODUCT) === $productId && (string) $order->get_meta(Gateway::META_MODE) === $mode) {
+            return $known;
+        }
+
+        $created = $api->request('POST', 'discounts', self::discountBody($order->get_id(), $productId, $currency, $discount));
+        if (is_wp_error($created)) {
+            $this->gateway->log('First-payment discount for order ' . $order->get_id() . ' failed: ' . $created->get_error_message(), 'error');
+            return $created;
+        }
+        if (empty($created['code'])) {
+            return new \WP_Error('stackless_dodo_discount', __('Dodo Payments did not create the first-payment discount.', 'stackless-lite'));
+        }
+        $order->add_order_note(sprintf(
+            /* translators: 1: discount amount, 2: Dodo discount code */
+            __('First payment discounted by %1$s in Dodo Payments (one-cycle discount code %2$s); renewals bill the full price.', 'stackless-lite'),
+            wp_strip_all_tags(wc_price(Money::fromMinor($discount, $currency), ['currency' => strtoupper($currency)])),
+            (string) $created['code']
+        ));
+        return (string) $created['code'];
+    }
+
+    /**
+     * A flat deduction for one billing cycle, one redemption, this product only. Dodo reads a
+     * flat code's deduction from its default currency row.
+     */
+    public static function discountBody(int $orderId, string $productId, string $currency, int $discount): array
+    {
+        return [
+            'name' => FirstPayment::label($orderId),
+            'type' => 'flat',
+            'amount' => $discount,
+            'currency_options' => [[
+                'currency' => strtoupper($currency),
+                'is_default' => true,
+                'max_amount_possible' => $discount,
+            ]],
+            'subscription_cycles' => 1,
+            'usage_limit' => 1,
+            'restricted_to' => [$productId],
+            'metadata' => array_filter([
+                'wc_order_id' => (string) $orderId,
+                'wc_site' => Catalog::siteHost(),
+            ]),
+        ];
+    }
+
+    public function body(\WC_Order $order, string $productId, int $minor, string $currency, array $plan, string $discountCode = ''): array
     {
         $recurring = $plan['recurring'] !== null;
         $line = ['product_id' => $productId, 'quantity' => 1];
@@ -198,6 +277,10 @@ class Checkout
         if ($recurring) {
             $body['subscription_data'] = ['trial_period_days' => max(0, min(10000, (int) $plan['trial_days']))];
         }
+        if ($discountCode !== '') {
+            // Applied even with the discount field hidden; the buyer cannot change it.
+            $body['discount_codes'] = [$discountCode];
+        }
 
         $email = (string) $order->get_billing_email();
         if ($email !== '' && is_email($email)) {
@@ -223,12 +306,13 @@ class Checkout
         return (array) apply_filters('stackless_dodo_gateway_checkout_args', $body, $order, $subscription, $this->gateway);
     }
 
-    /** Reuse an unpaid session for the same order and amount (double submits, back button). */
-    private function reusable(\WC_Order $order, string $mode, int $minor): string
+    /** Reuse an unpaid session for the same order, amount and discount (double submits, back button). */
+    private function reusable(\WC_Order $order, string $mode, int $minor, int $discount): string
     {
         $sessionId = (string) $order->get_meta(Gateway::META_SESSION_ID);
         $url = (string) $order->get_meta(Gateway::META_CHECKOUT_URL);
-        if ($sessionId === '' || $url === '' || (string) $order->get_meta(Gateway::META_MODE) !== $mode || (int) $order->get_meta(Gateway::META_AMOUNT) !== $minor) {
+        if ($sessionId === '' || $url === '' || (string) $order->get_meta(Gateway::META_MODE) !== $mode || (int) $order->get_meta(Gateway::META_AMOUNT) !== $minor
+            || (int) $order->get_meta(Gateway::META_DISCOUNT) !== $discount) {
             return '';
         }
         if ((int) $order->get_meta(Gateway::META_SESSION_AT) < time() - Gateway::SESSION_TTL) {

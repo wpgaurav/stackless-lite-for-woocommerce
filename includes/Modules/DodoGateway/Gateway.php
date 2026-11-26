@@ -28,6 +28,11 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
     public const META_MODE = '_stackless_dodo_mode';
     public const META_AMOUNT = '_stackless_dodo_amount';
     public const META_PRODUCT_ID = '_stackless_dodo_product_id';
+    /** What the first charge should be: the product price less any first-payment discount. */
+    public const META_EXPECTED = '_stackless_dodo_expected';
+    public const META_DISCOUNT = '_stackless_dodo_discount_amount';
+    public const META_DISCOUNT_CODE = '_stackless_dodo_discount_code';
+    public const META_DISCOUNT_PRODUCT = '_stackless_dodo_discount_product';
     public const META_TAX_INCLUSIVE = '_stackless_dodo_tax_inclusive';
     public const META_PAYMENT_ID = '_stackless_dodo_payment_id';
     public const META_TAX = '_stackless_dodo_tax_amount';
@@ -189,7 +194,7 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
             'limits_section' => [
                 'title' => __('Good to know', 'stackless-lite'),
                 'type' => 'title',
-                'description' => __('Dodo bills the same amount every cycle, so subscriptions with a signup fee or a different first payment cannot use Dodo. Free trials work. A subscription must be the only item in the cart. One-time carts of any size work and show in Dodo as one store order. Products are created in your Dodo catalog automatically: one per product for one-time sales, one per plan and price for subscriptions. Dodo runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders.', 'stackless-lite'),
+                'description' => __('Dodo bills the same amount every cycle, so subscriptions with a signup fee cannot use Dodo. Free trials work, and a coupon that only discounts the first payment is sent to Dodo as a one-cycle discount code. A subscription must be the only item in the cart. One-time carts of any size work and show in Dodo as one store order. Products are created in your Dodo catalog automatically: one per product for one-time sales, one per plan and price for subscriptions. Dodo runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders.', 'stackless-lite'),
             ],
         ];
         $copies = (string) apply_filters('stackless_gateway_copies_panel', '', $this->id);

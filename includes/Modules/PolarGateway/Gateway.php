@@ -26,6 +26,9 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
     public const META_ORDER_ID = '_stackless_polar_order_id';
     public const META_MODE = '_stackless_polar_mode';
     public const META_AMOUNT = '_stackless_polar_amount';
+    public const META_DISCOUNT = '_stackless_polar_discount_amount';
+    public const META_DISCOUNT_ID = '_stackless_polar_discount_id';
+    public const META_DISCOUNT_PRODUCT = '_stackless_polar_discount_product';
     public const META_REFUND_IDS = '_stackless_polar_refund_ids';
     public const META_TAX = '_stackless_polar_tax_amount';
     public const META_TOTAL = '_stackless_polar_total_amount';
@@ -176,7 +179,7 @@ class Gateway extends \WC_Payment_Gateway implements SubscriptionGateway
             'limits_section' => [
                 'title' => __('Good to know', 'stackless-lite'),
                 'type' => 'title',
-                'description' => __('Polar sells one product per checkout. One-time carts of any size work and show in Polar as one store order. A subscription must be the only item in the cart, and Polar bills the same amount every cycle, so subscriptions with a signup fee or a different first payment cannot use Polar. Free trials work. Polar runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders.', 'stackless-lite'),
+                'description' => __('Polar sells one product per checkout. One-time carts of any size work and show in Polar as one store order. A subscription must be the only item in the cart, and Polar bills the same amount every cycle, so subscriptions with a signup fee cannot use Polar. Free trials work, and a coupon that only discounts the first payment is sent to Polar as a one-time discount. Polar runs the renewal schedule; renewals it charges become paid WooCommerce renewal orders.', 'stackless-lite'),
             ],
             'copies_section' => [
                 'title' => __('Copies', 'stackless-lite'),

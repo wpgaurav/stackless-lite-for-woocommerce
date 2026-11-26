@@ -219,7 +219,7 @@ class Sync
             $currency = $currency !== '' ? $currency : strtoupper($order->get_currency());
             $this->storeAmounts($order, $payment, $currency, $mode);
 
-            $expected = (int) $order->get_meta(Gateway::META_AMOUNT) ?: Money::toMinor($order->get_total(), $currency);
+            $expected = (int) $order->get_meta(Gateway::META_EXPECTED) ?: (int) $order->get_meta(Gateway::META_AMOUNT) ?: Money::toMinor($order->get_total(), $currency);
             if (!Money::paidMatches($payment, $expected)) {
                 $order->save();
                 $order->update_status('on-hold', sprintf(

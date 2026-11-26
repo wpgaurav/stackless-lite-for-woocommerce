@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 9.9
 WC tested up to: 11.2
-Stable tag: 2.1.2
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -195,6 +195,9 @@ Yes. Every module that touches the cart or checkout supports the Cart and Checko
 Through the normal WordPress update screens, from gauravtiwari.org. No license key or account is needed.
 
 == Changelog ==
+
+= 2.2.1 =
+* Fixed: subscription coupons that only discount the first payment now work with Polar and Dodo Payments. The difference is sent as a one-time discount on the first charge, limited to that product and one use, so renewals return to the full price. Signup fees are still refused, since both providers bill one price every cycle.
 
 = 2.1.2 =
 * Fixed: the Lite updater checks the downloaded ZIP against its published SHA-256 even if the release feed is temporarily unavailable. It can use a previously fetched checksum and pauses the update if it has no valid checksum.

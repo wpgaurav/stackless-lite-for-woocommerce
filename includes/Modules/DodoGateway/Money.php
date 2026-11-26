@@ -57,8 +57,8 @@ final class Money
     }
 
     /**
-     * Whether a Dodo payment carries the price we set. Discount codes are off, so the
-     * buyer pays our price; Dodo's total includes any tax, either added on top of the
+     * Whether a Dodo payment carries the price we set. Buyers cannot enter discount codes,
+     * so they pay our price less any first-payment discount we set; Dodo's total includes any tax, either added on top of the
      * price (tax exclusive) or contained in it (tax inclusive).
      */
     public static function paidMatches(array $payment, int $expectedMinor): bool

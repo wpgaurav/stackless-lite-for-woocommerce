@@ -53,9 +53,10 @@ final class Money
     }
 
     /**
-     * What Polar actually charged for the checkout price we set. Discount codes
-     * are off, so the buyer pays our price; depending on the tax behavior Polar
-     * reports it as the net amount (tax added on top) or the total (tax included).
+     * What Polar actually charged for the checkout price we set. Buyers cannot enter
+     * discount codes, so they pay our price less any first-payment discount we set
+     * (the order total); depending on the tax behavior Polar reports it as the net
+     * amount (tax added on top) or the total (tax included).
      *
      * @return bool True when the Polar order carries the expected price.
      */
